@@ -1,12 +1,19 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * InterfaceGrafica.java
+ * This file is part of Lewin, a compositional calculator.
+ * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
+ * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Created on 21/10/2009, 23:21:52
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package GUI;
@@ -43,29 +50,29 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private JLabel[] rotulosDasLinhas, rotulosDasColunas;
     private ArrayList<JButton> botoesEntrada = new ArrayList<JButton>();
     private TipoTabela guiEscolherTabela = new TipoTabela();
-    
+
     private Controlador controlador = new Controlador();
-    
-    public static final int SAIDA_DERIVACAO_SERIAL = 1, MATRIZ_DODECAFONICA = 2, 
+
+    public static final int SAIDA_DERIVACAO_SERIAL = 1, MATRIZ_DODECAFONICA = 2,
                             SAIDA_FORMA_COMPACTA = 3, SAIDA_PALETA = 4,
-                            SAIDA_ROTACAO_STRAVINSKYANA = 5, MATRIZ_TABELA_ADICAO = 6, SAIDA_VETOR_INTERVALAR = 7, 
-                            SAIDA_SUBCONJUNTOS = 8, SAIDA_SIMILARIDADE = 9, SAIDA_INVARIANCIA_DERIVATIVA = 10, 
+                            SAIDA_ROTACAO_STRAVINSKYANA = 5, MATRIZ_TABELA_ADICAO = 6, SAIDA_VETOR_INTERVALAR = 7,
+                            SAIDA_SUBCONJUNTOS = 8, SAIDA_SIMILARIDADE = 9, SAIDA_INVARIANCIA_DERIVATIVA = 10,
                             SAIDA_MULTIPLICACAO = 11, SAIDA_INVARIANCIA = 15;
     private int[] modosAtuais = {-1, -1};
     private boolean midiDisponivel = true;
-    
+
     private Sequencer sequenciador = null;
     private Synthesizer sintetizador = null;
 
     /** Creates new form InterfaceGrafica */
     public InterfaceGrafica() {
         initComponents();
-        
+
         botoesEntrada.addAll(new CopyOnWriteArrayList<JButton>(
-               new JButton[] {botaoValor0, botaoValor1, botaoValor2, botaoValor3, 
-                                       botaoValor4, botaoValor5, botaoValor6, botaoValor7, 
+               new JButton[] {botaoValor0, botaoValor1, botaoValor2, botaoValor3,
+                                       botaoValor4, botaoValor5, botaoValor6, botaoValor7,
                                        botaoValor8, botaoValor9, botaoValor10, botaoValor11}));
-        
+
         for (JButton botao : botoesEntrada) {
             botao.addActionListener(buttonListenerEntrada);
         }
@@ -120,16 +127,16 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                           campoTexto_11_6_Matriz, campoTexto_11_7_Matriz, campoTexto_11_8_Matriz,
                           campoTexto_11_9_Matriz, campoTexto_11_10_Matriz, campoTexto_11_11_Matriz}
         };
-        
-        rotulosDasLinhas = new JLabel[] {rotuloLinha_0, rotuloLinha_1, rotuloLinha_2, 
-                                         rotuloLinha_3, rotuloLinha_4, rotuloLinha_5, 
-                                         rotuloLinha_6, rotuloLinha_7, rotuloLinha_8, 
+
+        rotulosDasLinhas = new JLabel[] {rotuloLinha_0, rotuloLinha_1, rotuloLinha_2,
+                                         rotuloLinha_3, rotuloLinha_4, rotuloLinha_5,
+                                         rotuloLinha_6, rotuloLinha_7, rotuloLinha_8,
                                          rotuloLinha_9, rotuloLinha_10, rotuloLinha_11};
-        rotulosDasColunas = new JLabel[] {rotuloColuna_0, rotuloColuna_1, rotuloColuna_2, 
-                                         rotuloColuna_3, rotuloColuna_4, rotuloColuna_5, 
-                                         rotuloColuna_6, rotuloColuna_7, rotuloColuna_8, 
+        rotulosDasColunas = new JLabel[] {rotuloColuna_0, rotuloColuna_1, rotuloColuna_2,
+                                         rotuloColuna_3, rotuloColuna_4, rotuloColuna_5,
+                                         rotuloColuna_6, rotuloColuna_7, rotuloColuna_8,
                                          rotuloColuna_9, rotuloColuna_10, rotuloColuna_11};
-        
+
         try {
             if ((sequenciador = MidiSystem.getSequencer()) == null) {
                 throw new SequenciadorNulo("N\u00e3o foi poss\u00edvel "
@@ -139,7 +146,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             if (!(sequenciador instanceof Synthesizer)) {
                 sintetizador = MidiSystem.getSynthesizer();
             }
-            
+
             sequenciador.addMetaEventListener(new MetaEventListener() {
                 public void meta(MetaMessage event) {
                     if (event.getType() == 47) {
@@ -147,7 +154,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     }
                 }
             });
-            
+
             tocarClasseInformada(78);
         }
         catch(SequenciadorNulo sn) {
@@ -158,9 +165,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "N\u00e3o ser\u00e1 poss\u00edvel reproduzir os conjuntos");
             midiDisponivel = false;
         }
-        
+
         this.setResizable(false);
-        
+
         KeyListener l = new KeyListener() {
 
             @Override
@@ -283,11 +290,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         areaTextoEntrada.requestFocus();
         relacionarListenerTeclado(l);
     }
-    
+
     private void relacionarListenerTeclado(KeyListener listener) {
-        botaoLimpar.addKeyListener(listener);        
+        botaoLimpar.addKeyListener(listener);
         botaoAlternarNumeroNotas.addKeyListener(listener);
-        
+
         botaoGerarFormaNormalStraus.addKeyListener(listener);
         botaoGerarFormaPrimaForte.addKeyListener(listener);
         botaoGerarFormaPrimaStraus.addKeyListener(listener);
@@ -298,21 +305,21 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoInvarianciaTranspositiva.addKeyListener(listener);
         botaoInvarianciaInversiva.addKeyListener(listener);
         botaoPaleta.addKeyListener(listener);
-        
+
         botaoInserirSegundoFator.addKeyListener(listener);
         botaoMultiplicacaoBoulez.addKeyListener(listener);
         botaoMultiplicacaoRahn.addKeyListener(listener);
         botaoMultiplicacaoRahnEstendido.addKeyListener(listener);
         botaoGerarSimilaridade.addKeyListener(listener);
-        
+
         botaoGerarDerivacaoSerial.addKeyListener(listener);
         botaoGerarMatrizDodecafonica.addKeyListener(listener);
         botaoCombinatoriedade.addKeyListener(listener);
         botaoInvariancia.addKeyListener(listener);
-        
+
         botaoExportarHTML.addKeyListener(listener);
         botaoTabelasCordais.addKeyListener(listener);
-        
+
         botaoValor0.addKeyListener(listener);
         botaoValor1.addKeyListener(listener);
         botaoValor2.addKeyListener(listener);
@@ -325,17 +332,17 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoValor9.addKeyListener(listener);
         botaoValor10.addKeyListener(listener);
         botaoValor11.addKeyListener(listener);
-        
+
         botaoRemover.addKeyListener(listener);
         botaoReproduzir.addKeyListener(listener);
         botaoSubstituirEntrada.addKeyListener(listener);
-        
+
         areaTextoEntrada.addKeyListener(listener);
         areaTextoResultados.addKeyListener(listener);
         painelEntrada.addKeyListener(listener);
         painelMatriz.addKeyListener(listener);
     }
-    
+
     private void tocarClasseInformada(int valor) throws MidiUnavailableException {
         try {
             Sequence sequencia = new Sequence(Sequence.PPQ, 5040, 1);
@@ -364,15 +371,15 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             sequenciador.getTransmitter().setReceiver(sintetizador.getReceiver());
             sequenciador.start();
         }
-        catch(InvalidMidiDataException imde) {} 
+        catch(InvalidMidiDataException imde) {}
     }
-    
+
     private ActionListener buttonListenerEntrada = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             try {
                 int valorEscolhido = botoesEntrada.indexOf(e.getSource());
                 controlador.adicionaEntradaConjuntoPrincipal(valorEscolhido);
-                
+
                 atualizaEntrada();
                 atualizaHabilitacaoBotoesFuncionalidades();
             }
@@ -381,22 +388,22 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             }
         }
     };
-    
+
     private ActionListener buttonListenerEntradaSegundoConjunto = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             try {
                 int valorEscolhido = botoesEntrada.indexOf(e.getSource());
                 controlador.adicionaEntradaSegundoConjunto(valorEscolhido);
-                
+
                 atualizaEntrada();
                 atualizaHabilitacaoBotoesFuncionalidades();
-            } 
+            }
             catch (DadosProibidos ex) {
                 Logger.getLogger(InterfaceGrafica.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     };
-    
+
     private void atualizaEntrada() {
         String texto = "";
         if (!botaoInserirSegundoFator.isSelected()) {
@@ -436,13 +443,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         areaTextoEntrada.setText(texto);
     }
 
     private void atualizaSaida() {
         String texto = "";
-        
+
         switch(modosAtuais[0]) {
             case SAIDA_MULTIPLICACAO:
                 if (!botaoAlternarNumeroNotas.isSelected()) {
@@ -455,11 +462,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                         texto += numeroToNota(dado) + "   ";
                     }
                 }
-                
+
                 break;
             case SAIDA_DERIVACAO_SERIAL:
                 ArrayList<SerieDodecafonica> listadeFormas = controlador.getDerivacaoSerial();
-                
+
                 for (int i = 0; i < listadeFormas.size(); i++) {
                     if (!botaoAlternarNumeroNotas.isSelected()) {
                         texto += listadeFormas.get(i).toString();
@@ -490,7 +497,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 if (!botaoAlternarNumeroNotas.isSelected()) {
                     for (int i : resultadoRotacaoStravinskyana.get(0)) {
                         texto += i + " ";
-                    }        
+                    }
 
                     for (int i = 1; i < 7; i++) {
                         texto += "\n\n";
@@ -504,7 +511,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 else {
                     for (int i : resultadoRotacaoStravinskyana.get(0)) {
                         texto += numeroToNota(i) + " ";
-                    }        
+                    }
 
                     for (int i = 1; i < 7; i++) {
                         texto += "\n\n";
@@ -546,7 +553,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                         texto += "\n\n";
                     }
                 }
-                
+
                 texto = texto.substring(0, texto.length() - 1);
                 break;
             case SAIDA_INVARIANCIA:
@@ -603,16 +610,16 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             case SAIDA_SIMILARIDADE:
                 texto += controlador.getSimilaridade();
         }
-        
+
         areaTextoResultados.setText(texto);
     }
-    
+
     private void atualizaHabilitacaoBotoesFuncionalidades() {
         int tamanhoCorrenteEntrada = controlador.getConjuntoPrincipal().size();
         if (tamanhoCorrenteEntrada > 0) {
             if (!botaoInserirSegundoFator.isSelected()) {
                 botaoRemover.setEnabled(true);
-                
+
                 switch(tamanhoCorrenteEntrada) {
                     case 3:
                     case 4:
@@ -624,9 +631,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 }
 
                 botaoReproduzir.setEnabled(midiDisponivel);
-                
+
                 botaoInserirSegundoFator.setEnabled(true);
-                botaoGerarMatrizDodecafonica.setEnabled(tamanhoCorrenteEntrada == 12 || 
+                botaoGerarMatrizDodecafonica.setEnabled(tamanhoCorrenteEntrada == 12 ||
                                                         modosAtuais[0] == SAIDA_DERIVACAO_SERIAL);
                 botaoGerarRotacaoStravinskyana.setEnabled(tamanhoCorrenteEntrada == 12);
                 botaoPaleta.setEnabled((tamanhoCorrenteEntrada > 2) && (tamanhoCorrenteEntrada < 12));
@@ -639,11 +646,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 setBotoesDoisFatores(true);
                 atualizaOutrasFuncionalidades(false);
                 atualizaBotoesFormas(false);
-                
+
                 botaoGerarDerivacaoSerial.setEnabled(false);
                 botaoGerarMatrizDodecafonica.setEnabled(false);
                 botaoGerarRotacaoStravinskyana.setEnabled(false);
-                
+
                 botaoRemover.setEnabled(controlador.getSegundoConjunto().size() > 0);
             }
         }
@@ -661,18 +668,18 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             atualizaBotoesFormas(false);
         }
     }
-    
+
     private void setBotoesDoisFatores(boolean value) {
         ArrayList<Integer> segundoConjunto = controlador.getSegundoConjunto();
-        
+
         botaoMultiplicacaoRahn.setEnabled(value && segundoConjunto.size() == 1);
-        
+
         boolean habilitaBotoes = value && segundoConjunto.size() > 0;
         botaoMultiplicacaoBoulez.setEnabled(habilitaBotoes);
         botaoMultiplicacaoRahnEstendido.setEnabled(habilitaBotoes);
         botaoGerarSimilaridade.setEnabled(habilitaBotoes);
     }
-    
+
     private void atualizaBotoesFormas(boolean umFator) {
         int tamanhoEntrada = controlador.getConjuntoPrincipal().size();
         boolean habilitarFormas = umFator && (tamanhoEntrada > 2) && (tamanhoEntrada < 12);
@@ -681,7 +688,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarFormaNormalStraus.setEnabled(habilitarFormas);
         botaoGerarFormaNormalForte.setEnabled(habilitarFormas);
     }
-    
+
     private void atualizaOutrasFuncionalidades(boolean estado) {
         botaoGerarTabelaAdicao.setEnabled(estado);
         botaoGerarVetorIntervalar.setEnabled(estado);
@@ -689,7 +696,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoInvarianciaTranspositiva.setEnabled(estado);
         botaoInvarianciaInversiva.setEnabled(estado);
     }
-    
+
     private void limpaMatriz() {
         Color originalBackground = new Color(238, 238, 238);
         for (JTextField[] array : camposMatriz) {
@@ -698,28 +705,28 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 campo.setText("");
             }
         }
-        
+
         for (JLabel rotulo : rotulosDasLinhas) {
             rotulo.setText("");
         }
         for (JLabel rotulo : rotulosDasColunas) {
             rotulo.setText("");
         }
-        
+
         botaoCombinatoriedade.setEnabled(false);
         botaoInvariancia.setEnabled(false);
-        
+
         rotuloP.setText("");
         rotuloI.setText("");
         rotuloR.setText("");
         rotuloRI.setText("");
         ((TitledBorder)painelMatriz.getBorder()).setTitle("");
         painelMatriz.repaint();
-        
+
         modosAtuais[1] = -1;
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2230,10 +2237,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarMatrizDodecafonicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarMatrizDodecafonicaActionPerformed
         limpaMatriz();
-        
+
         try {
             controlador.geraMatrizDodecafonica();
-            
+
             rotuloP.setText("P");
             rotuloI.setText("I");
             rotuloR.setText("R");
@@ -2241,15 +2248,15 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
             ((TitledBorder)painelMatriz.getBorder()).setTitle("Matriz Dodecafônica");
             painelMatriz.repaint();
-            
+
             preencheMatrizInterfaceGrafica(12);
-            
+
             botaoCombinatoriedade.setEnabled(true);
             botaoInvariancia.setEnabled(true);
             botaoExportarHTML.setEnabled(true);
-            
+
             modosAtuais[1] = MATRIZ_DODECAFONICA;
-        } 
+        }
         catch(NumberFormatException dp) {
             JOptionPane.showMessageDialog(null, "H\u00e1 dados n\u00e3o permitidos. Preencha corretamente");
         }
@@ -2261,11 +2268,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoCombinatoriedade.setEnabled(false);
         botaoInvariancia.setEnabled(false);
         botaoInserirSegundoFator.setSelected(false);
-        
+
         controlador.limparDados();
         limpaMatriz();
         atualizaEntrada();
-        
+
         modosAtuais[0] = -1;
         atualizaHabilitacaoBotoesFuncionalidades();
         for (JButton botao : botoesEntrada) {
@@ -2280,7 +2287,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         else if (!controlador.removerSegundoConjunto()) {
             botaoInserirSegundoFator.setSelected(false);
         }
-        
+
         atualizaEntrada();
         atualizaHabilitacaoBotoesFuncionalidades();
 }//GEN-LAST:event_botaoRemoverActionPerformed
@@ -2288,15 +2295,15 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoGerarDerivacaoSerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarDerivacaoSerialActionPerformed
         try {
             controlador.geraDerivacaoSerial();
-            
+
             botaoGerarMatrizDodecafonica.setEnabled(true);
             botaoExportarHTML.setEnabled(true);
             botaoSubstituirEntrada.setEnabled(true);
-            
+
             modosAtuais[0] = SAIDA_DERIVACAO_SERIAL;
             atualizaSaida();
             atualizaHabilitacaoBotoesFuncionalidades();
-        } 
+        }
         catch(DadosProibidos dp) {
             JOptionPane.showMessageDialog(null, "Imposs\u00edvel gerar uma s\u00e9rie dodecaf\u00f4nica a partir deste conjunto");
         }
@@ -2304,10 +2311,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoInvarianciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInvarianciaActionPerformed
         controlador.geraInvariancia();
-        
+
         modosAtuais[0] = SAIDA_INVARIANCIA;
         atualizaSaida();
-        
+
         botaoSubstituirEntrada.setEnabled(false);
 }//GEN-LAST:event_botaoInvarianciaActionPerformed
 
@@ -2375,7 +2382,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             }
 
             pagina.append("<p></p><p></p><p></p><p></p>");
-            
+
             String texto = areaTextoResultados.getText();
             switch(modosAtuais[0]) {
                 case InterfaceGrafica.SAIDA_ROTACAO_STRAVINSKYANA:
@@ -2387,40 +2394,40 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     texto = texto.replace("\n\n", "<br>");
                     break;
             }
-            
+
             if (modosAtuais[0] != SAIDA_PALETA) {
                 pagina.append(texto.replace("\n\n", "<br>") + "</body></html>");
             }
-            
+
             pagina.close();
-        } 
+        }
         catch(Exception e) {}
-        
+
         abrirNavegadorPadrao(nomeArquivo);
     }//GEN-LAST:event_botaoExportarHTMLActionPerformed
-    
+
     public static void abrirNavegadorPadrao(String nomeArquivo) {
         try {
             String osName = System.getProperty("os.name");
             Process abrirBrowser;
-            if (osName.startsWith("Mac OS")) { 
-                Class fileMgr = Class.forName("com.apple.eio.FileManager");  
-                Method openURL = fileMgr.getDeclaredMethod("openURL",  
-                    new Class[] {String.class});  
-                openURL.invoke(null, new Object[] {nomeArquivo});  
-            }  
+            if (osName.startsWith("Mac OS")) {
+                Class fileMgr = Class.forName("com.apple.eio.FileManager");
+                Method openURL = fileMgr.getDeclaredMethod("openURL",
+                    new Class[] {String.class});
+                openURL.invoke(null, new Object[] {nomeArquivo});
+            }
             else if (osName.startsWith("Windows")) {
                 abrirBrowser = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + nomeArquivo);
                 abrirBrowser.waitFor();
             }
-            else { //assume Unix or Linux  
-                String[] browsers = {  
-                    "google-chrome", "firefox", "opera", "konqueror", "epiphany", "mozilla", "netscape" };  
-                String browser = null;  
-                for (int count = 0; count < browsers.length && browser == null; count++)  
-                    if (Runtime.getRuntime().exec(  
-                    new String[] {"which", browsers[count]}).waitFor() == 0)  
-                        browser = browsers[count];  
+            else { //assume Unix or Linux
+                String[] browsers = {
+                    "google-chrome", "firefox", "opera", "konqueror", "epiphany", "mozilla", "netscape" };
+                String browser = null;
+                for (int count = 0; count < browsers.length && browser == null; count++)
+                    if (Runtime.getRuntime().exec(
+                    new String[] {"which", browsers[count]}).waitFor() == 0)
+                        browser = browsers[count];
                 if (browser == null) {
                     throw new Exception("Navegador não encontrado!");
                 }
@@ -2432,41 +2439,41 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         }
         catch(Exception e) {}
     }
-    
+
     private void botaoGerarFormaPrimaStrausActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarFormaPrimaStrausActionPerformed
         controlador.geraFormaPrimaStraus();
-        
+
         modosAtuais[0] = SAIDA_FORMA_COMPACTA;
         atualizaSaida();
-        
+
         botaoExportarHTML.setEnabled(true);
         botaoSubstituirEntrada.setEnabled(true);
     }//GEN-LAST:event_botaoGerarFormaPrimaStrausActionPerformed
 
     private void botaoGerarFormaNormalStrausActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarFormaNormalStrausActionPerformed
         controlador.geraFormaNormalStraus();
-        
+
         modosAtuais[0] = SAIDA_FORMA_COMPACTA;
         atualizaSaida();
-        
+
         botaoExportarHTML.setEnabled(true);
         botaoSubstituirEntrada.setEnabled(true);
-        
+
     }//GEN-LAST:event_botaoGerarFormaNormalStrausActionPerformed
 
     private void botaoGerarRotacaoStravinskyanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarRotacaoStravinskyanaActionPerformed
         controlador.geraRotacaoStravinskyana();
-        
+
         modosAtuais[0] = SAIDA_ROTACAO_STRAVINSKYANA;
         atualizaSaida();
-        
+
         botaoExportarHTML.setEnabled(true);
         botaoSubstituirEntrada.setEnabled(false);
     }//GEN-LAST:event_botaoGerarRotacaoStravinskyanaActionPerformed
-    
+
     private void botaoMultiplicacaoBoulezActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMultiplicacaoBoulezActionPerformed
         controlador.geraMultiplicacaoBoulez();
-            
+
         modosAtuais[0] = SAIDA_MULTIPLICACAO;
         atualizaSaida();
 
@@ -2476,7 +2483,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoMultiplicacaoRahnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMultiplicacaoRahnActionPerformed
         controlador.geraMultiplicacaoRahn1();
-            
+
         modosAtuais[0] = SAIDA_MULTIPLICACAO;
         atualizaSaida();
         botaoExportarHTML.setEnabled(true);
@@ -2485,7 +2492,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoMultiplicacaoRahnEstendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMultiplicacaoRahnEstendidoActionPerformed
         controlador.geraMultiplicacaoRahn2();
-            
+
         modosAtuais[0] = SAIDA_MULTIPLICACAO;
         atualizaSaida();
 
@@ -2495,10 +2502,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarTabelaAdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarTabelaAdicaoActionPerformed
         limpaMatriz();
-        
+
         ArrayList<Integer> numeros = controlador.getConjuntoPrincipal();
         int tamanho = numeros.size(), numeroCorrente, i = 0, j;
-        
+
         for (; i < tamanho; i++) {
             numeroCorrente = numeros.get(i);
             if (!botaoAlternarNumeroNotas.isSelected()) {
@@ -2510,26 +2517,26 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 rotulosDasColunas[i].setText(numeroToNota(numeroCorrente));
             }
         }
-        
+
         for (; i < 12; i++) {
             rotulosDasLinhas[i].setText("");
             rotulosDasColunas[i].setText("");
         }
-        
+
         TitledBorder borda = (TitledBorder)painelMatriz.getBorder();
         borda.setTitle("Tabela de Adiçao");
         painelMatriz.repaint();
-        
+
         controlador.geraTabelaAdicao();
         modosAtuais[1] = MATRIZ_TABELA_ADICAO;
-        
+
         preencheMatrizInterfaceGrafica(tamanho);
         botaoExportarHTML.setEnabled(true);
     }//GEN-LAST:event_botaoGerarTabelaAdicaoActionPerformed
 
     private void botaoGerarVetorIntervalarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarVetorIntervalarActionPerformed
         controlador.gerarVetorIntervalar();
-        
+
         modosAtuais[0] = SAIDA_VETOR_INTERVALAR;
         atualizaSaida();
         botaoExportarHTML.setEnabled(true);
@@ -2538,7 +2545,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarSimilaridadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarSimilaridadeActionPerformed
         controlador.geraSimilaridade();
-            
+
         modosAtuais[0] = SAIDA_SIMILARIDADE;
         atualizaSaida();
         botaoExportarHTML.setEnabled(false);
@@ -2547,7 +2554,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarSubconjuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarSubconjuntosActionPerformed
         controlador.geraSubconjuntos();
-        
+
         modosAtuais[0] = SAIDA_SUBCONJUNTOS;
         atualizaSaida();
         botaoExportarHTML.setEnabled(true);
@@ -2582,7 +2589,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                         catch(NumberFormatException nfe) {}
                     }
                 }
-                
+
                 if (modosAtuais[1] == MATRIZ_TABELA_ADICAO) {
                     ArrayList<Integer> entrada = controlador.getConjuntoPrincipal();
                     for (int i = 0; i < entrada.size(); i++) {
@@ -2612,7 +2619,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                         catch(DadosProibidos dp) {}
                     }
                 }
-                
+
                 if (modosAtuais[1] == MATRIZ_TABELA_ADICAO) {
                     ArrayList<Integer> entrada = controlador.getConjuntoPrincipal();
                     try {
@@ -2646,7 +2653,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 controlador.substitui_Paleta();
                 break;
         }
-        
+
         atualizaEntrada();
         atualizaHabilitacaoBotoesFuncionalidades();
     }//GEN-LAST:event_botaoSubstituirEntradaActionPerformed
@@ -2662,28 +2669,28 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 substituiModo1Fator(botao, botao.getActionListeners()[0]);
             }
         }
-        
+
         atualizaEntrada();
         atualizaHabilitacaoBotoesFuncionalidades();
     }//GEN-LAST:event_botaoInserirSegundoFatorItemStateChanged
 
     private void botaoReproduzirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoReproduzirActionPerformed
         ArrayList<Integer> escolhido;
-        
+
         if (!botaoInserirSegundoFator.isSelected() || controlador.getSegundoConjunto().isEmpty()) {
             escolhido = controlador.getConjuntoPrincipal();
         }
         else {
             escolhido = controlador.getSegundoConjunto();
         }
-        
+
         try {
             Sequence sequencia = new Sequence(Sequence.PPQ, 5040, 1);
             Track trilha = sequencia.getTracks()[0];
             ShortMessage mensagem = new ShortMessage();
             mensagem.setMessage(ShortMessage.PROGRAM_CHANGE, 0, 0, 0);
             trilha.add(new MidiEvent(mensagem, 0));
-            
+
             mensagem = new ShortMessage();
             mensagem.setMessage(ShortMessage.CONTROL_CHANGE, 0, 7, 64);
             trilha.add(new MidiEvent(mensagem, 0));
@@ -2693,12 +2700,12 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 mensagem = new ShortMessage();
                 mensagem.setMessage(ShortMessage.NOTE_ON, 0, valor + 48, 127);
                 trilha.add(new MidiEvent(mensagem, (tickAtual += 200)));
-                
+
                 mensagem = new ShortMessage();
                 mensagem.setMessage(ShortMessage.NOTE_OFF, 0, valor + 48, 127);
                 trilha.add(new MidiEvent(mensagem, (tickAtual += 3780)));
             }
-            
+
             sequenciador.setSequence(sequencia);
             sequenciador.open();
             sintetizador.open();
@@ -2712,10 +2719,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoPaletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPaletaActionPerformed
         controlador.geraPaleta();
-        
+
         modosAtuais[0] = SAIDA_PALETA;
         atualizaSaida();
-        
+
         botaoExportarHTML.setEnabled(true);
         botaoSubstituirEntrada.setEnabled(true);
     }//GEN-LAST:event_botaoPaletaActionPerformed
@@ -2731,20 +2738,20 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarFormaPrimaForteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarFormaPrimaForteActionPerformed
         controlador.geraFormaPrimaForte();
-        
+
         modosAtuais[0] = SAIDA_FORMA_COMPACTA;
         atualizaSaida();
-        
+
         botaoExportarHTML.setEnabled(true);
         botaoSubstituirEntrada.setEnabled(true);
     }//GEN-LAST:event_botaoGerarFormaPrimaForteActionPerformed
 
     private void botaoGerarFormaNormalForteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarFormaNormalForteActionPerformed
         controlador.geraFormaNormalForte();
-        
+
         modosAtuais[0] = SAIDA_FORMA_COMPACTA;
         atualizaSaida();
-        
+
         botaoExportarHTML.setEnabled(true);
         botaoSubstituirEntrada.setEnabled(true);
     }//GEN-LAST:event_botaoGerarFormaNormalForteActionPerformed
@@ -2753,7 +2760,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botao.removeActionListener(buttonListenerEntrada);
         botao.addActionListener(listener);
     }
-    
+
     private void substituiModo1Fator(JButton botao, ActionListener listener) {
         botao.removeActionListener(listener);
         botao.addActionListener(buttonListenerEntrada);
@@ -2762,7 +2769,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void preencheMatrizInterfaceGrafica(int tamanho) {
         int valor;
         MatrizDodecafonica matriz = controlador.getMatriz();
-        
+
         if (!botaoAlternarNumeroNotas.isSelected()) {
             for(int i = 0; i < tamanho; i++) {
                 for(int j = 0; j < tamanho; j++) {
@@ -2789,7 +2796,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         botaoExportarHTML.setEnabled(true);
     }
 
@@ -2864,7 +2871,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 return " ";
         }
     }
-    
+
     public void fechaMIDI() {
         if (sintetizador != null) {
             sintetizador.close();
@@ -2888,7 +2895,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 }
                 ig.setTitle("Lewin");
                 ig.setVisible(true);
-                
+
                 ig.addWindowListener(new WindowAdapter() {
                     public void windowClosing(WindowEvent e) {
                         ig.fechaMIDI();
