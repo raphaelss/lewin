@@ -70,7 +70,7 @@ public class SerieDodecafonica {
 
     public SerieDodecafonica copia() {
         SerieDodecafonica retorno = new SerieDodecafonica();
-        retorno.formasPrimas = (ArrayList<Acorde>)this.formasPrimas.clone();
+        retorno.formasPrimas = new ArrayList<Acorde>(this.formasPrimas);
 
         return retorno;
     }

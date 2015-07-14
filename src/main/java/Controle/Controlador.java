@@ -325,16 +325,16 @@ public class Controlador {
                                       conjuntosInversos = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> conjuntoReferencia = numeros;
 
-        conjuntoDeConjuntos.add((ArrayList<Integer>)conjuntoReferencia.clone());
+        conjuntoDeConjuntos.add(new ArrayList<Integer>(conjuntoReferencia));
         conjuntosDiretos.add(conjuntoDeConjuntos.get(0));
         adicionaTransposicoes(conjuntoDeConjuntos, conjuntosDiretos, conjuntoReferencia, tamanho);
 
-        conjuntoReferencia = (ArrayList<Integer>)numeros.clone();
+        conjuntoReferencia = new ArrayList<Integer>(numeros);
         for(int i = 0; i < tamanho; i++) {
             conjuntoReferencia.set(i, (12 - conjuntoReferencia.get(i)) % 12);
         }
 
-        conjuntoDeConjuntos.add((ArrayList<Integer>)conjuntoReferencia.clone());
+        conjuntoDeConjuntos.add(new ArrayList<Integer>(conjuntoReferencia));
         conjuntosInversos.add(conjuntoDeConjuntos.get(12));
         adicionaTransposicoes(conjuntoDeConjuntos, conjuntosInversos, conjuntoReferencia, tamanho);
 
@@ -420,7 +420,7 @@ public class Controlador {
         for (; indice < numeros.size(); indice++) {
             subconjunto.add(numeros.get(indice));
             if (subconjunto.size() == tamanhoSubconjuntos) {
-                subconjuntos.add((LinkedList<Integer>)subconjunto.clone());
+                subconjuntos.add(new LinkedList<Integer>(subconjunto));
                 subconjunto.removeLast();
             }
             else {

@@ -30,7 +30,7 @@ public abstract class ConstrutorFormaCompacta {
     protected ArrayList<Integer> classes;
 
     public ConstrutorFormaCompacta(ArrayList<Integer> classe) {
-        classes = (ArrayList<Integer>)classe.clone();
+        classes = new ArrayList<Integer>(classe);
     }
 
     protected ArrayList<Integer> getInverso() {
