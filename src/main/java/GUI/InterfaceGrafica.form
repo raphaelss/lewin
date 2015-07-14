@@ -2932,7 +2932,7 @@
             <Component class="javax.swing.JButton" name="botaoRemover">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/GUI/SetaBackspace.png"/>
+                  <Image iconType="3" name="/SetaBackspace.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Remover Elemento"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -2955,7 +2955,7 @@
                   <Font name="Tahoma" size="10" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/GUI/SetaCima.png"/>
+                  <Image iconType="3" name="/SetaCima.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Substitui entrada atual pelo resultado"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -3000,7 +3000,7 @@
                   <Font name="Tahoma" size="10" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/GUI/ClaveFaTransparente.png"/>
+                  <Image iconType="3" name="/ClaveFaTransparente.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Reproduzir conjunto da entrada"/>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -3033,7 +3033,7 @@
         <Component class="javax.swing.JButton" name="botaoLimpar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/GUI/lixopequeno.png"/>
+              <Image iconType="3" name="/lixopequeno.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Limpar Tela"/>
           </Properties>

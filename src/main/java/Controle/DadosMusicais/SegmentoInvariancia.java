@@ -16,26 +16,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package Excecoes;
+package Controle.DadosMusicais;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author Administrador
+ * @author Bill's
  */
-public class SequenciadorNulo extends Exception {
+public class SegmentoInvariancia {
+    private ArrayList<Integer> segmento = new ArrayList<Integer>();
 
-    /**
-     * Creates a new instance of <code>SequenciadorNulo</code> without detail message.
-     */
-    public SequenciadorNulo() {
+    public void adicionaNumero(int numero) {
+        segmento.add(numero);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return (o instanceof SegmentoInvariancia) &&
+                segmento.equals(((SegmentoInvariancia)o).segmento);
+    }
 
-    /**
-     * Constructs an instance of <code>SequenciadorNulo</code> with the specified detail message.
-     * @param msg the detail message.
-     */
-    public SequenciadorNulo(String msg) {
-        super(msg);
+    public String toString() {
+        String resultado = "";
+        for (int i : segmento) {
+            resultado += i + " ";
+        }
+
+        return resultado;
+    }
+
+    public int tamanhoSegmento() {
+        return segmento.size();
+    }
+
+    public int get(int indice) {
+        return segmento.get(indice);
     }
 }

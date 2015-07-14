@@ -16,37 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+package Excecoes;
+
 /**
  *
- * @author Bill's
+ * @author Administrador
  */
-public class SegmentoInvariancia {
-    private ArrayList<Integer> segmento = new ArrayList<Integer>();
-
-    public void adicionaNumero(int numero) {
-        segmento.add(numero);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return (o instanceof SegmentoInvariancia) &&
-                segmento.equals(((SegmentoInvariancia)o).segmento);
-    }
-
-    public String toString() {
-        String resultado = "";
-        for (int i : segmento) {
-            resultado += i + " ";
-        }
-
-        return resultado;
-    }
-
-    public int tamanhoSegmento() {
-        return segmento.size();
-    }
-
-    public int get(int indice) {
-        return segmento.get(indice);
+public class SequenciadorNulo extends Exception {
+    /**
+     * Constructs an instance of <code>SequenciadorNulo</code> with the specified detail message.
+     * @param msg the detail message.
+     */
+    public SequenciadorNulo(String msg) {
+        super(msg);
     }
 }

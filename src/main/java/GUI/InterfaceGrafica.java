@@ -1876,7 +1876,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         painelEntrada.add(botaoValor0);
         botaoValor0.setBounds(20, 270, 50, 20);
 
-        botaoRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/SetaBackspace.png"))); // NOI18N
+        botaoRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SetaBackspace.png"))); // NOI18N
         botaoRemover.setToolTipText("Remover Elemento");
         botaoRemover.setEnabled(false);
         botaoRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -1888,7 +1888,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoRemover.setBounds(20, 310, 50, 20);
 
         botaoSubstituirEntrada.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        botaoSubstituirEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/SetaCima.png"))); // NOI18N
+        botaoSubstituirEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SetaCima.png"))); // NOI18N
         botaoSubstituirEntrada.setToolTipText("Substitui entrada atual pelo resultado");
         botaoSubstituirEntrada.setEnabled(false);
         botaoSubstituirEntrada.addActionListener(new java.awt.event.ActionListener() {
@@ -1911,7 +1911,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         scrollPaneEntrada.setBounds(20, 35, 230, 70);
 
         botaoReproduzir.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        botaoReproduzir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/ClaveFaTransparente.png"))); // NOI18N
+        botaoReproduzir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ClaveFaTransparente.png"))); // NOI18N
         botaoReproduzir.setToolTipText("Reproduzir conjunto da entrada");
         botaoReproduzir.setEnabled(false);
         botaoReproduzir.addActionListener(new java.awt.event.ActionListener() {
@@ -1930,7 +1930,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
         barraDeFerramentas.setRollover(true);
 
-        botaoLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/lixopequeno.png"))); // NOI18N
+        botaoLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lixopequeno.png"))); // NOI18N
         botaoLimpar.setToolTipText("Limpar Tela");
         botaoLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
