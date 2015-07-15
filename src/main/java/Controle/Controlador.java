@@ -320,41 +320,17 @@ public class Controlador {
 
     public void geraPaleta() {
         int tamanho = numeros.size();
-        ArrayList<ArrayList<Integer>> conjuntoDeConjuntos = new ArrayList<ArrayList<Integer>>(),
-                                      conjuntosDiretos = new ArrayList<ArrayList<Integer>>(),
+        ArrayList<ArrayList<Integer>> conjuntosDiretos = new ArrayList<ArrayList<Integer>>(),
                                       conjuntosInversos = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> conjuntoReferencia = numeros;
+        ArrayList<Integer> conjuntoReferencia = new ArrayList<Integer>(numeros);
 
-        conjuntoDeConjuntos.add(new ArrayList<Integer>(conjuntoReferencia));
-        conjuntosDiretos.add(conjuntoDeConjuntos.get(0));
-        adicionaTransposicoes(conjuntoDeConjuntos, conjuntosDiretos, conjuntoReferencia, tamanho);
+        adicionaTransposicoes(conjuntosDiretos, conjuntoReferencia);
 
-        conjuntoReferencia = new ArrayList<Integer>(numeros);
         for(int i = 0; i < tamanho; i++) {
             conjuntoReferencia.set(i, (12 - conjuntoReferencia.get(i)) % 12);
         }
 
-        conjuntoDeConjuntos.add(new ArrayList<Integer>(conjuntoReferencia));
-        conjuntosInversos.add(conjuntoDeConjuntos.get(12));
-        adicionaTransposicoes(conjuntoDeConjuntos, conjuntosInversos, conjuntoReferencia, tamanho);
-
-        int indiceInicioConjuntoInversos = 12;
-        ArrayList<Integer> conjuntoRemovido;
-        for (int i = 0; i < conjuntoDeConjuntos.size(); i++) {
-            for (int j = i + 1; j < conjuntoDeConjuntos.size(); j++) {
-                if (conjuntoDeConjuntos.get(i).containsAll(conjuntoDeConjuntos.get(j))) {
-                    conjuntoRemovido = conjuntoDeConjuntos.remove(j--);
-                    indiceInicioConjuntoInversos--;
-                    if (j + 1 < indiceInicioConjuntoInversos) {
-                        conjuntosDiretos.remove(conjuntoRemovido);
-                    }
-                    else {
-                        conjuntosInversos.remove(conjuntoRemovido);
-                    }
-                }
-            }
-        }
-
+        adicionaTransposicoes(conjuntosInversos, conjuntoReferencia);
         resultadosPaleta = new ArrayList<ArrayList<Integer[]>>(2);
 
         resultadosPaleta.add(new ArrayList<Integer[]>());
@@ -369,22 +345,38 @@ public class Controlador {
     }
 
     public ArrayList<ArrayList<Integer[]>> getPaleta() {
+        if (resultadosPaleta == null) {
+            System.out.println("resultadosPaleta is null");
+        }
+        for (int i = 0; i < resultadosPaleta.size(); ++i) {
+          if (resultadosPaleta.get(i) == null) {
+            System.out.println("is null");
+          }
+          for (int j = 0; j < resultadosPaleta.get(i).size(); ++j) {
+            if (resultadosPaleta.get(i).get(j) == null) {
+              System.out.println("inner null");
+            }
+            /*
+            for (int k = 0; k < resultadosPaleta.get(i).get(j); ++k) {
+              if (resultadosPaleta.get(i).get(j)[k] == null) {
+                System.out.println("number null");
+              }
+            }
+            */
+          }
+        }
         return resultadosPaleta;
     }
 
-    private void adicionaTransposicoes(ArrayList<ArrayList<Integer>> conjuntoDeConjuntos,
-                                       ArrayList<ArrayList<Integer>> subconjunto,
-                                       ArrayList<Integer> primeiroConjunto, int tamanho) {
-        ArrayList<Integer> atual, ultimoConjunto = primeiroConjunto;
-        for (int i = 0; i < 11; i++) {
-            atual = new ArrayList<Integer>();
-            for (int j = 0; j < tamanho; j++) {
-                atual.add((ultimoConjunto.get(j) + 1) % 12);
+    private void adicionaTransposicoes(ArrayList<ArrayList<Integer>> conjuntos,
+                                       ArrayList<Integer> primeiroConjunto) {
+        conjuntos.add(new ArrayList<Integer>(primeiroConjunto));
+        for (int i = 1; i < 11; i++) {
+            ArrayList<Integer> atual = new ArrayList<Integer>();
+            for (int j = 0; j < primeiroConjunto.size(); j++) {
+                atual.add((primeiroConjunto.get(j) + i) % 12);
             }
-
-            conjuntoDeConjuntos.add(atual);
-            subconjunto.add(atual);
-            ultimoConjunto = atual;
+            conjuntos.add(atual);
         }
     }
 
