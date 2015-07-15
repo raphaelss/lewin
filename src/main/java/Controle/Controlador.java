@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -324,13 +325,13 @@ public class Controlador {
                                       conjuntosInversos = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> conjuntoReferencia = new ArrayList<Integer>(numeros);
 
-        adicionaTransposicoes(conjuntosDiretos, conjuntoReferencia);
+        adicionaTransposicoesDistintas(conjuntosDiretos, conjuntoReferencia);
 
         for(int i = 0; i < tamanho; i++) {
             conjuntoReferencia.set(i, (12 - conjuntoReferencia.get(i)) % 12);
         }
 
-        adicionaTransposicoes(conjuntosInversos, conjuntoReferencia);
+        adicionaTransposicoesDistintas(conjuntosInversos, conjuntoReferencia);
         resultadosPaleta = new ArrayList<ArrayList<Integer[]>>(2);
 
         resultadosPaleta.add(new ArrayList<Integer[]>());
@@ -339,42 +340,34 @@ public class Controlador {
         }
 
         resultadosPaleta.add(new ArrayList<Integer[]>());
+        loop:
         for (ArrayList<Integer> conjunto : conjuntosInversos) {
+            for (ArrayList<Integer> direto : conjuntosDiretos) {
+                if (direto.containsAll(conjunto)) {
+                    continue loop;
+                }
+            }
             resultadosPaleta.get(1).add(conjunto.toArray(new Integer[tamanho]));
         }
     }
 
     public ArrayList<ArrayList<Integer[]>> getPaleta() {
-        if (resultadosPaleta == null) {
-            System.out.println("resultadosPaleta is null");
-        }
-        for (int i = 0; i < resultadosPaleta.size(); ++i) {
-          if (resultadosPaleta.get(i) == null) {
-            System.out.println("is null");
-          }
-          for (int j = 0; j < resultadosPaleta.get(i).size(); ++j) {
-            if (resultadosPaleta.get(i).get(j) == null) {
-              System.out.println("inner null");
-            }
-            /*
-            for (int k = 0; k < resultadosPaleta.get(i).get(j); ++k) {
-              if (resultadosPaleta.get(i).get(j)[k] == null) {
-                System.out.println("number null");
-              }
-            }
-            */
-          }
-        }
         return resultadosPaleta;
     }
 
-    private void adicionaTransposicoes(ArrayList<ArrayList<Integer>> conjuntos,
-                                       ArrayList<Integer> primeiroConjunto) {
+    private void adicionaTransposicoesDistintas(ArrayList<ArrayList<Integer>> conjuntos,
+                                                ArrayList<Integer> primeiroConjunto) {
         conjuntos.add(new ArrayList<Integer>(primeiroConjunto));
-        for (int i = 1; i < 11; i++) {
+        loop:
+        for (int i = 1; i < 12; i++) {
             ArrayList<Integer> atual = new ArrayList<Integer>();
             for (int j = 0; j < primeiroConjunto.size(); j++) {
                 atual.add((primeiroConjunto.get(j) + i) % 12);
+            }
+            for (ArrayList<Integer> c : conjuntos) {
+                if (c.containsAll(atual)) {
+                    continue loop;
+                }
             }
             conjuntos.add(atual);
         }
