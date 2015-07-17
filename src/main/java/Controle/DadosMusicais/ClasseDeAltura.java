@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package Base;
+package Controle.DadosMusicais;
 
 class ClasseDeAltura {
     public static ClasseDeAltura criar(int x) {
@@ -24,6 +24,10 @@ class ClasseDeAltura {
             x += 12;
         }
         return memo[x];
+    }
+
+    public int inteiro() {
+      return valor;
     }
 
     public ClasseDeAltura transpor(int n) {
