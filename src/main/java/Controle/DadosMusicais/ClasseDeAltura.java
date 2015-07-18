@@ -27,7 +27,7 @@ class ClasseDeAltura {
     }
 
     public int inteiro() {
-      return valor;
+        return valor;
     }
 
     public ClasseDeAltura transpor(int n) {
