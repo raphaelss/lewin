@@ -24,6 +24,13 @@ import java.util.ArrayList;
 public class Acorde {
     private final ClasseDeAltura[] classes;
 
+    public Acorde(ClasseDeAltura[] forma) {
+        classes = new ClasseDeAltura[forma.length];
+        for (int i = 0; i < forma.length; ++i) {
+            classes[i] = forma[i];
+        }
+    }
+
     public Acorde(ArrayList<Integer> forma) {
         classes = new ClasseDeAltura[forma.size()];
         for (int i = 0; i < classes.length; i++) {
@@ -45,12 +52,29 @@ public class Acorde {
         }
     }
 
-    public int getDado(int indice) {
-        return classes[indice].inteiro();
+    public Acorde transpor(int n) {
+        ClasseDeAltura[] classesTranspostas = new ClasseDeAltura[classes.length];
+        for (int i = 0; i < classes.length; ++i) {
+            classesTranspostas[i] = classes[i].transpor(n);
+        }
+        return new Acorde(classesTranspostas);
+    }
+
+    public ClasseDeAltura getDado(int indice) {
+        return classes[indice];
     }
 
     public int tamanho() {
         return classes.length;
+    }
+
+    public boolean contem(ClasseDeAltura x) {
+        for (int i = 0; i < classes.length; i++) {
+            if (classes[i] == x) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean contem(int nota) {

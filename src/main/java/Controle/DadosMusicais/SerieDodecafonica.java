@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -20,10 +21,6 @@ package Controle.DadosMusicais;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Bill's
- */
 public class SerieDodecafonica {
     private ArrayList<Acorde> formasPrimas = new ArrayList<Acorde>();
 
@@ -82,7 +79,7 @@ public class SerieDodecafonica {
     public int getDado(int indice) {
         int tamanho = formasPrimas.get(0).tamanho();
 
-        return formasPrimas.get(indice/tamanho).getDado(indice%tamanho);
+        return formasPrimas.get(indice/tamanho).getDado(indice%tamanho).inteiro();
     }
 
     public ArrayList<Integer> toIntegerList(int subTamanho) {
@@ -94,7 +91,7 @@ public class SerieDodecafonica {
             corrente = formasPrimas.get(i);
 
             for (int j = 0; j < corrente.tamanho() && indiceReal < subTamanho; j++, indiceReal++) {
-                integerList.add(corrente.getDado(j));
+                integerList.add(corrente.getDado(j).inteiro());
             }
         }
 

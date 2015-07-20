@@ -37,49 +37,14 @@ public class GeradorDerivacaoSerial {
     }
 
     public ArrayList<SerieDodecafonica> resultado() {
-        if (formaOriginal.tamanho() == 3) {
-            for (int i = 1; i < 12; i++) {
-                tabelaDeGrupos.add(new Acorde(new int[] {(formaOriginal.getDado(0) + i) % 12,
-                    (formaOriginal.getDado(1) + i) % 12, (formaOriginal.getDado(2) + i) % 12}));
-            }
+        for (int i = 1; i < 12; ++i) {
+            tabelaDeGrupos.add(formaOriginal.transpor(i));
         }
-        else if (formaOriginal.tamanho() == 4) {
-            for (int i = 1; i < 12; i++) {
-                tabelaDeGrupos.add(new Acorde(new int[] {(formaOriginal.getDado(0) + i) % 12,
-                    (formaOriginal.getDado(1) + i) % 12, (formaOriginal.getDado(2) + i) % 12, (formaOriginal.getDado(3) + i) % 12}));
-            }
-        }
-        else {
-            for (int i = 1; i < 12; i++) {
-                tabelaDeGrupos.add(new Acorde(new int[] {(formaOriginal.getDado(0) + i) % 12,
-                    (formaOriginal.getDado(1) + i) % 12, (formaOriginal.getDado(2) + i) % 12, (formaOriginal.getDado(3) + i) % 12,
-                    (formaOriginal.getDado(4) + i) % 12, (formaOriginal.getDado(5) + i) % 12}));
-            }
-        }
-
         Acorde espelhada = formaOriginal.espelhada();
         tabelaDeGrupos.add(espelhada);
-
-        if (espelhada.tamanho() == 3) {
-            for (int i = 1; i < 12; i++) {
-                tabelaDeGrupos.add(new Acorde(new int[] {(espelhada.getDado(0) + i) % 12,
-                    (espelhada.getDado(1) + i) % 12, (espelhada.getDado(2) + i) % 12}));
-            }
+        for (int i = 1; i < 12; ++i) {
+            tabelaDeGrupos.add(espelhada.transpor(i));
         }
-        else if (espelhada.tamanho() == 4) {
-            for (int i = 1; i < 12; i++) {
-                tabelaDeGrupos.add(new Acorde(new int[] {(espelhada.getDado(0) + i) % 12,
-                    (espelhada.getDado(1) + i) % 12, (espelhada.getDado(2) + i) % 12, (espelhada.getDado(3) + i) % 12}));
-            }
-        }
-        else {
-            for (int i = 1; i < 12; i++) {
-                tabelaDeGrupos.add(new Acorde(new int[] {(espelhada.getDado(0) + i) % 12,
-                    (espelhada.getDado(1) + i) % 12, (espelhada.getDado(2) + i) % 12, (espelhada.getDado(3) + i) % 12,
-                    (espelhada.getDado(4) + i) % 12, (espelhada.getDado(5) + i) % 12}));
-            }
-        }
-
         return encontraGruposCompativeis();
     }
 
