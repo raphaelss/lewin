@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -18,13 +19,10 @@
 
 package Controle;
 
+import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import java.util.ArrayList;
 
-/**
- *
- * @author Hildegard
- */
 public class GeradorTabelaAdicao {
     public static MatrizDodecafonica geraTabela(ArrayList<Integer> numeros) {
         int i, j, tamanho = numeros.size();
@@ -32,16 +30,16 @@ public class GeradorTabelaAdicao {
 
         for (i = 0; i < tamanho; i++) {
             for (j = 0; j < tamanho; j++) {
-                matriz.preenchePosicao(i, j, (numeros.get(i) + numeros.get(j)) % 12);
+                matriz.preenchePosicao(i, j, ClasseDeAltura.criar(numeros.get(i) + numeros.get(j)));
             }
             for (; j < 12; j++) {
-                matriz.preenchePosicao(i, j, -1);
+                matriz.preenchePosicao(i, j, null);
             }
         }
 
         for (; i < 12; i++) {
             for (j = 0; j < 12; j++) {
-                matriz.preenchePosicao(i, j, -1);
+                matriz.preenchePosicao(i, j, null);
             }
         }
 

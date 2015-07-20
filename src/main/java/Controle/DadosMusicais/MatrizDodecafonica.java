@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -18,41 +19,37 @@
 
 package Controle.DadosMusicais;
 
-/**
- *
- * @author Bill's
- */
 public class MatrizDodecafonica {
-    private int[][] matriz;
+    private ClasseDeAltura[][] matriz;
 
     public MatrizDodecafonica() {
-        matriz = new int[12][12];
+        matriz = new ClasseDeAltura[12][12];
     }
 
-    public void preenchePosicao(int linha, int coluna, int valor) {
+    public void preenchePosicao(int linha, int coluna, ClasseDeAltura valor) {
         matriz[linha][coluna] = valor;
     }
 
-    public void setLinha(int linha, int[] serie) {
+    public void setLinha(int linha, ClasseDeAltura[] serie) {
         matriz[linha] = serie;
     }
 
-    public void setColuna(int coluna, int[] serie) {
+    public void setColuna(int coluna, ClasseDeAltura[] serie) {
         for (int i = 0; i < 12; i++) {
             matriz[i][coluna] = serie[i];
         }
     }
 
-    public int getValor(int linha, int coluna) {
+    public ClasseDeAltura getValor(int linha, int coluna) {
         return matriz[linha][coluna];
     }
 
-    public int[] getP(int indice) {
+    public ClasseDeAltura[] getP(int indice) {
         return matriz[indice];
     }
 
-    public int[] getR(int indice) {
-        int[] serie = new int[12];
+    public ClasseDeAltura[] getR(int indice) {
+        ClasseDeAltura[] serie = new ClasseDeAltura[12];
 
         for (int i = 11; i >= 0; i--) {
             serie[11 - i] = matriz[indice][i];
@@ -61,8 +58,8 @@ public class MatrizDodecafonica {
         return serie;
     }
 
-    public int[] getI(int indice) {
-        int[] serie = new int[12];
+    public ClasseDeAltura[] getI(int indice) {
+        ClasseDeAltura[] serie = new ClasseDeAltura[12];
 
         for (int i = 0; i < 12; i++) {
             serie[i] = matriz[i][indice];
@@ -71,8 +68,8 @@ public class MatrizDodecafonica {
         return serie;
     }
 
-    public int[] getRI(int indice) {
-        int[] serie = new int[12];
+    public ClasseDeAltura[] getRI(int indice) {
+        ClasseDeAltura[] serie = new ClasseDeAltura[12];
 
         for (int i = 11; i >= 0; i--) {
             serie[11 - i] = matriz[i][indice];

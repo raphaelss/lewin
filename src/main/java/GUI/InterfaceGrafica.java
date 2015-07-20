@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -473,7 +474,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     }
                     else {
                         for (int j = 0; j < 12; j++) {
-                            texto += numeroToNota(listadeFormas.get(i).getDado(j)) + "   ";
+                            texto += numeroToNota(listadeFormas.get(i).getDado(j).inteiro()) + "   ";
                         }
                     }
 
@@ -2773,7 +2774,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         if (!botaoAlternarNumeroNotas.isSelected()) {
             for(int i = 0; i < tamanho; i++) {
                 for(int j = 0; j < tamanho; j++) {
-                    valor = matriz.getValor(i, j);
+                    valor = matriz.getValor(i, j).inteiro();
                     if (valor >= 0) {
                         camposMatriz[i][j].setText(String.valueOf(valor));
                     }
@@ -2786,7 +2787,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         else {
             for(int i = 0; i < tamanho; i++) {
                 for(int j = 0; j < tamanho; j++) {
-                    valor = matriz.getValor(i, j);
+                    valor = matriz.getValor(i, j).inteiro();
                     if (valor >= 0) {
                         camposMatriz[i][j].setText(numeroToNota(valor));
                     }

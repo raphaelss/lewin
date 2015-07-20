@@ -19,11 +19,12 @@
 
 package Controle;
 
+import Controle.DadosMusicais.Acorde;
+import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.MatrizDeAcordes;
 import Controle.DadosMusicais.SerieDodecafonica;
 import Controle.DadosMusicais.SegmentoInvariancia;
-import Controle.DadosMusicais.Acorde;
 import Excecoes.DadosProibidos;
 import Controle.ConstrutoresFormasCompactas.ConstrutorFormaNormalForte;
 import Controle.ConstrutoresFormasCompactas.ConstrutorFormaNormalStraus;
@@ -34,10 +35,6 @@ import java.awt.Point;
 import java.util.*;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Hildegard
- */
 public class Controlador {
     private ArrayList<Integer> numeros = new ArrayList<Integer>(),
                                segundoConjunto = new ArrayList<Integer>(),
@@ -98,7 +95,7 @@ public class Controlador {
 
         numeros.clear();
         for (int i = 0; i < 12; i++) {
-            numeros.add(listadeFormas.get(indice).getDado(i));
+            numeros.add(listadeFormas.get(indice).getDado(i).inteiro());
         }
     }
 
@@ -167,7 +164,7 @@ public class Controlador {
     public void geraMatrizDodecafonica() {
         matriz = new MatrizDodecafonica();
 
-        int[] acorde = new int[12];
+        ClasseDeAltura[] acorde = new ClasseDeAltura[12];
 
         if (numeros.size() < 12) {
             int indice = 0;
@@ -184,7 +181,7 @@ public class Controlador {
         }
         else {
             for (int i = 0; i < 12; i++) {
-                acorde[i] = numeros.get(i);
+                acorde[i] = ClasseDeAltura.criar(numeros.get(i));
             }
 
             serieEscolhida = new SerieDodecafonica();
@@ -194,24 +191,23 @@ public class Controlador {
         try {
             matriz.setLinha(0, acorde);
 
-            int[] inversoProvisorio = new int[12];
+            ClasseDeAltura[] inversoProvisorio = new ClasseDeAltura[12];
 
             for (int i = 0; i < 12; i++) {
-                inversoProvisorio[i] = 12 - serieEscolhida.getDado(i);
+                inversoProvisorio[i] = serieEscolhida.getDado(i).inverter();
             }
 
-            int diferenca = inversoProvisorio[0] - serieEscolhida.getDado(0);
+            int diferenca = inversoProvisorio[0].diferenca(serieEscolhida.getDado(0));
 
             for (int i = 0; i < 12; i++) {
-                matriz.preenchePosicao(i, 0, ((inversoProvisorio[i] - diferenca) + 12) % 12);
+                matriz.preenchePosicao(i, 0, inversoProvisorio[i].transpor(-diferenca));
             }
 
             for (int i = 1; i < 12; i++) {
-                diferenca = matriz.getValor(i, 0) - matriz.getValor(i - 1, 0);
+                diferenca = matriz.getValor(i, 0).diferenca(matriz.getValor(i - 1, 0));
 
                 for (int j = 1; j < 12; j++) {
-                    matriz.preenchePosicao(i, j,
-                            ((matriz.getValor(i - 1, j) + diferenca) + 12) % 12);
+                    matriz.preenchePosicao(i, j, (matriz.getValor(i - 1, j).transpor(diferenca)));
                 }
             }
         }
@@ -493,7 +489,7 @@ public class Controlador {
 
             for (int i = 0; i < tamanhoEntrada; i++) {
                 for (int j = 0; j < tamanhoEntrada; j++) {
-                    contadores[tabela.getValor(i, j)]++;
+                    contadores[tabela.getValor(i, j).inteiro()]++;
                 }
             }
 
@@ -566,9 +562,9 @@ public class Controlador {
         for (int i = 1; i < 12; i++) {
             hexacordeCorrente.clear();
 
-            int[] r = matriz.getP(i);
+            ClasseDeAltura[] r = matriz.getP(i);
             for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j]);
+                hexacordeCorrente.add(r[j].inteiro());
             }
 
             for (int j = 0; j < 6; j++) {
@@ -588,9 +584,9 @@ public class Controlador {
         for (int i = 0; i < 12; i++) {
             hexacordeCorrente.clear();
 
-            int[] r = matriz.getR(i);
+            ClasseDeAltura[] r = matriz.getR(i);
             for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j]);
+                hexacordeCorrente.add(r[j].inteiro());
             }
 
             for (int j = 0; j < 6; j++) {
@@ -610,9 +606,9 @@ public class Controlador {
         for (int i = 0; i < 12; i++) {
             hexacordeCorrente.clear();
 
-            int[] r = matriz.getI(i);
+            ClasseDeAltura[] r = matriz.getI(i);
             for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j]);
+                hexacordeCorrente.add(r[j].inteiro());
             }
 
             for (int j = 0; j < 6; j++) {
@@ -632,9 +628,9 @@ public class Controlador {
         for (int i = 0; i < 12; i++) {
             hexacordeCorrente.clear();
 
-            int[] r = matriz.getRI(i);
+            ClasseDeAltura[] r = matriz.getRI(i);
             for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j]);
+                hexacordeCorrente.add(r[j].inteiro());
             }
 
             for (int j = 0; j < 6; j++) {

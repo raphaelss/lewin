@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -20,10 +21,6 @@ package Controle.DadosMusicais;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Bill's
- */
 public class MatrizDeAcordes {
     private ArrayList<ArrayList<SegmentoInvariancia>> tricordesEmLinhasP = new ArrayList<ArrayList<SegmentoInvariancia>>(),
                                                   tricordesEmLinhasI = new ArrayList<ArrayList<SegmentoInvariancia>>(),
@@ -39,7 +36,7 @@ public class MatrizDeAcordes {
         }
     }
 
-    private void acrescentaLinha(int[] serie, ArrayList<ArrayList<SegmentoInvariancia>> matriz, int tamanhoAcorde) {
+    private void acrescentaLinha(ClasseDeAltura[] serie, ArrayList<ArrayList<SegmentoInvariancia>> matriz, int tamanhoAcorde) {
         ArrayList<SegmentoInvariancia> corrente = new ArrayList<SegmentoInvariancia>();
         SegmentoInvariancia passageiro;
         final int limite = 12 - tamanhoAcorde;
@@ -48,7 +45,7 @@ public class MatrizDeAcordes {
             passageiro = new SegmentoInvariancia();
 
             for (int j = indice; j < indice + tamanhoAcorde; j++) {
-                passageiro.adicionaNumero(serie[j]);
+                passageiro.adicionaNumero(serie[j].inteiro());
             }
 
             corrente.add(passageiro);

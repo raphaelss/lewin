@@ -44,13 +44,14 @@ public class Acorde {
             classes[i] = ClasseDeAltura.criar(forma[i]);
         }
     }
-
+    /*
     public Acorde(int[] forma) {
         classes = new ClasseDeAltura[forma.length];
         for (int i = 0; i < forma.length; ++i) {
             classes[i] = ClasseDeAltura.criar(forma[i]);
         }
     }
+    */
 
     public Acorde transpor(int n) {
         ClasseDeAltura[] classesTranspostas = new ClasseDeAltura[classes.length];
@@ -105,11 +106,10 @@ public class Acorde {
     }
 
     public Acorde espelhada() {
-        Acorde espelhada;
-        int[] valores = new int[classes.length];
+        ClasseDeAltura[] classesInvertidas = new ClasseDeAltura[classes.length];
         for (int i = 0; i < classes.length; ++i) {
-            valores[i] = classes[i].inverter().inteiro();
+            classesInvertidas[i] = classes[i].inverter();
         }
-        return new Acorde(valores);
+        return new Acorde(classesInvertidas);
     }
 }

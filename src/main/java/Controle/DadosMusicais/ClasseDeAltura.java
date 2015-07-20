@@ -17,7 +17,7 @@
 
 package Controle.DadosMusicais;
 
-class ClasseDeAltura {
+public class ClasseDeAltura {
     public static ClasseDeAltura criar(int x) {
         x %= 12;
         if (x < 0) {
@@ -38,8 +38,16 @@ class ClasseDeAltura {
         return criar(12 - valor);
     }
 
+    public int diferenca(ClasseDeAltura outra) {
+        return valor - outra.valor;
+    }
+
     @Override
     public String toString() {
+        return Integer.toString(valor);
+    }
+
+    public String nome() {
         return nomes[valor];
     }
 

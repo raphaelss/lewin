@@ -76,10 +76,10 @@ public class SerieDodecafonica {
         return formasPrimas.get(indice);
     }
 
-    public int getDado(int indice) {
+    public ClasseDeAltura getDado(int indice) {
         int tamanho = formasPrimas.get(0).tamanho();
 
-        return formasPrimas.get(indice/tamanho).getDado(indice%tamanho).inteiro();
+        return formasPrimas.get(indice/tamanho).getDado(indice%tamanho);
     }
 
     public ArrayList<Integer> toIntegerList(int subTamanho) {
