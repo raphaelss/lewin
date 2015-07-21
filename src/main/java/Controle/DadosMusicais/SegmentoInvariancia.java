@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -20,15 +21,11 @@ package Controle.DadosMusicais;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Bill's
- */
 public class SegmentoInvariancia {
-    private ArrayList<Integer> segmento = new ArrayList<Integer>();
+    private ArrayList<ClasseDeAltura> segmento = new ArrayList<ClasseDeAltura>();
 
-    public void adicionaNumero(int numero) {
-        segmento.add(numero);
+    public void adicionaNumero(ClasseDeAltura classe) {
+        segmento.add(classe);
     }
 
     @Override
@@ -39,10 +36,9 @@ public class SegmentoInvariancia {
 
     public String toString() {
         String resultado = "";
-        for (int i : segmento) {
-            resultado += i + " ";
+        for (ClasseDeAltura c : segmento) {
+            resultado += c.toString() + " ";
         }
-
         return resultado;
     }
 
@@ -50,7 +46,7 @@ public class SegmentoInvariancia {
         return segmento.size();
     }
 
-    public int get(int indice) {
+    public ClasseDeAltura get(int indice) {
         return segmento.get(indice);
     }
 }

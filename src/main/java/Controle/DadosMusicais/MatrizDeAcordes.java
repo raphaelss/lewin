@@ -45,7 +45,7 @@ public class MatrizDeAcordes {
             passageiro = new SegmentoInvariancia();
 
             for (int j = indice; j < indice + tamanhoAcorde; j++) {
-                passageiro.adicionaNumero(serie[j].inteiro());
+                passageiro.adicionaNumero(serie[j]);
             }
 
             corrente.add(passageiro);
