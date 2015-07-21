@@ -38,21 +38,6 @@ public class Acorde {
         }
     }
 
-    private Acorde(Integer[] forma) {
-        classes = new ClasseDeAltura[forma.length];
-        for (int i = 0; i < forma.length; i++) {
-            classes[i] = ClasseDeAltura.criar(forma[i]);
-        }
-    }
-    /*
-    public Acorde(int[] forma) {
-        classes = new ClasseDeAltura[forma.length];
-        for (int i = 0; i < forma.length; ++i) {
-            classes[i] = ClasseDeAltura.criar(forma[i]);
-        }
-    }
-    */
-
     public Acorde transpor(int n) {
         ClasseDeAltura[] classesTranspostas = new ClasseDeAltura[classes.length];
         for (int i = 0; i < classes.length; ++i) {
