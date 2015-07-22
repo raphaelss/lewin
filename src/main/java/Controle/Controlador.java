@@ -151,7 +151,11 @@ public class Controlador {
             }
         }
 
-        listadeFormas = new GeradorDerivacaoSerial(new Acorde(numeros)).resultado();
+        ArrayList<ClasseDeAltura> numerosClasses = new ArrayList<ClasseDeAltura>(numeros.size());
+        for (int i = 0; i < tamanho; ++i) {
+          numerosClasses.set(i, ClasseDeAltura.criar(numeros.get(i)));
+        }
+        listadeFormas = new GeradorDerivacaoSerial(new Acorde(numerosClasses)).resultado();
         if (listadeFormas.isEmpty()) {
             throw new DadosProibidos();
         }

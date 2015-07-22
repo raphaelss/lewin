@@ -31,11 +31,9 @@ public class Acorde {
         }
     }
 
-    public Acorde(ArrayList<Integer> forma) {
+    public Acorde(ArrayList<ClasseDeAltura> forma) {
         classes = new ClasseDeAltura[forma.size()];
-        for (int i = 0; i < classes.length; i++) {
-            classes[i] = ClasseDeAltura.criar(forma.get(i));
-        }
+        forma.toArray(classes);
     }
 
     public Acorde transpor(int n) {

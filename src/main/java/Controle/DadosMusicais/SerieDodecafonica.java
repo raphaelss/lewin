@@ -90,7 +90,8 @@ public class SerieDodecafonica {
         for (int i = 0; i < tamanho && indiceReal < subTamanho; i++) {
             corrente = formasPrimas.get(i);
 
-            for (int j = 0; j < corrente.tamanho() && indiceReal < subTamanho; j++, indiceReal++) {
+            for (int j = 0; j < corrente.tamanho() && indiceReal < subTamanho;
+                    j++, indiceReal++) {
                 integerList.add(corrente.getDado(j).inteiro());
             }
         }
