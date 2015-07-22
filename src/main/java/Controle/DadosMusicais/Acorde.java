@@ -61,15 +61,6 @@ public class Acorde {
         return false;
     }
 
-    public boolean contem(int nota) {
-        for (int i = 0; i < classes.length; i++) {
-            if (classes[i] == ClasseDeAltura.criar(nota)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean equals(Acorde forma) {
         for (int i = 0; i < classes.length; i++) {
             if (classes[i] != forma.classes[i]) {
@@ -83,7 +74,7 @@ public class Acorde {
         String resultado = "[";
 
         for (int i = 0; i < classes.length; i++) {
-            resultado += classes[i].inteiro() + " ";
+            resultado += classes[i].toString() + " ";
         }
         return resultado.substring(0, resultado.length() - 1) + "]";
     }
