@@ -82,8 +82,8 @@ public class SerieDodecafonica {
         return formasPrimas.get(indice/tamanho).getDado(indice%tamanho);
     }
 
-    public ArrayList<Integer> toIntegerList(int subTamanho) {
-        ArrayList<Integer> integerList = new ArrayList<Integer>();
+    public ArrayList<ClasseDeAltura> toClasseDeAlturaList(int subTamanho) {
+        ArrayList<ClasseDeAltura> integerList = new ArrayList<ClasseDeAltura>();
         Acorde corrente = null;
         int tamanho = formasPrimas.size(), indiceReal = 0;
 
@@ -92,7 +92,7 @@ public class SerieDodecafonica {
 
             for (int j = 0; j < corrente.tamanho() && indiceReal < subTamanho;
                     j++, indiceReal++) {
-                integerList.add(corrente.getDado(j).inteiro());
+                integerList.add(corrente.getDado(j));
             }
         }
 

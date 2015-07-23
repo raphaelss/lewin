@@ -558,8 +558,8 @@ public class Controlador {
 
     public ArrayList<Point> geraCombinatoriedade() {
         ArrayList<Point> camposColorir = new ArrayList<Point>();
-        ArrayList<Integer> hexacordeCorrente = new ArrayList<Integer>(),
-                hexacordeRejeitado = serieEscolhida.toIntegerList(6);
+        ArrayList<ClasseDeAltura> hexacordeCorrente = new ArrayList<ClasseDeAltura>(),
+                hexacordeRejeitado = serieEscolhida.toClasseDeAlturaList(6);
 
         //procura nas series P
         lacoPrincipal:
@@ -568,7 +568,7 @@ public class Controlador {
 
             ClasseDeAltura[] r = matriz.getP(i);
             for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j].inteiro());
+                hexacordeCorrente.add(r[j]);
             }
 
             for (int j = 0; j < 6; j++) {
@@ -590,7 +590,7 @@ public class Controlador {
 
             ClasseDeAltura[] r = matriz.getR(i);
             for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j].inteiro());
+                hexacordeCorrente.add(r[j]);
             }
 
             for (int j = 0; j < 6; j++) {
@@ -612,7 +612,7 @@ public class Controlador {
 
             ClasseDeAltura[] r = matriz.getI(i);
             for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j].inteiro());
+                hexacordeCorrente.add(r[j]);
             }
 
             for (int j = 0; j < 6; j++) {
@@ -634,7 +634,7 @@ public class Controlador {
 
             ClasseDeAltura[] r = matriz.getRI(i);
             for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j].inteiro());
+                hexacordeCorrente.add(r[j]);
             }
 
             for (int j = 0; j < 6; j++) {
