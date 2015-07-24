@@ -22,10 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
-/**
- *
- * @author Hildegard
- */
 public abstract class ConstrutorFormaCompactaStraus extends ConstrutorFormaCompacta {
     public ConstrutorFormaCompactaStraus(ArrayList<Integer> classes) {
         super(classes);

@@ -19,6 +19,8 @@
 
 package Controle.ConstrutoresFormasCompactas;
 
+import Controle.DadosMusicais.ClasseDeAltura;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -31,7 +33,7 @@ public abstract class ConstrutorFormaCompacta {
     }
 
     protected ArrayList<ClasseDeAltura> getInverso() {
-        ArrayList<ClasseDeAltura> inverso = new ArrayList<ClasseDeAltura();
+        ArrayList<ClasseDeAltura> inverso = new ArrayList<ClasseDeAltura>();
         //espelhamento
         //transformar a lista espelhada no modulo 12 dela mesma
         for (int j = 0; j < classes.size(); j++) {
@@ -55,8 +57,9 @@ public abstract class ConstrutorFormaCompacta {
     public final ArrayList<ClasseDeAltura> retornaForma() {
         Collections.sort(classes);
         //pega os modulos e rotaciona
-        int atual, tamanhoDoPadrao = classes.size(), minimo;
-        ArrayList<Integer> modulos = new ArrayList<Integer>(tamanhoDoPadrao);
+        ClasseDeAltura atual;
+        int tamanhoDoPadrao = classes.size(), minimo;
+        ArrayList<ClasseDeAltura> modulos = new ArrayList<ClasseDeAltura>(tamanhoDoPadrao);
         LinkedList<Integer> indicesRotacoes = new LinkedList<Integer>();
 
         for (int i = 0; i < tamanhoDoPadrao; i++) {
@@ -64,15 +67,8 @@ public abstract class ConstrutorFormaCompacta {
         }
 
         for (int j = 0; j < tamanhoDoPadrao; j++) {
-            atual = classes.get(tamanhoDoPadrao - 1) - classes.get(0);
-
-            if (atual > 0) {
-                modulos.add(atual % 12);
-            }
-            else {
-                modulos.add(12 - Math.abs(atual));
-            }
-
+            atual = classes.get(tamanhoDoPadrao - 1).transpor(-classes.get(0).inteiro());
+            modulos.add(atual);
             classes.add(classes.remove(0));
         }
 
@@ -96,15 +92,15 @@ public abstract class ConstrutorFormaCompacta {
         return classes;
     }
 
-    protected ArrayList<Integer> maisCompacto(ArrayList<Integer> forma) {
+    protected ArrayList<ClasseDeAltura> maisCompacto(ArrayList<ClasseDeAltura> forma) {
         int tamanhoPadrao = classes.size(), sub1, sub2;
         for (int i = 1; i < tamanhoPadrao; i++) {
-            sub1 = classes.get(i) - classes.get(0);
+            sub1 = classes.get(i).diferenca(classes.get(0));
             if (sub1 < 0) {
                 sub1 = 12 - Math.abs(sub1);
             }
 
-            sub2 = forma.get(i) - forma.get(0);
+            sub2 = forma.get(i).diferenca(forma.get(0));
             if (sub2 < 0) {
                 sub2 = 12 - Math.abs(sub2);
             }
@@ -119,7 +115,7 @@ public abstract class ConstrutorFormaCompacta {
         return classes;
     }
 
-    protected abstract ArrayList<Integer> procedimentoEspecifico(LinkedList<Integer> indicesRotacoes);
+    protected abstract ArrayList<ClasseDeAltura> procedimentoEspecifico(LinkedList<Integer> indicesRotacoes);
 
     protected abstract void mudaMelhorRotacao(LinkedList<Integer> indicesRotacoes);
 }

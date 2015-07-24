@@ -18,23 +18,21 @@
 
 package Controle.ConstrutoresFormasCompactas;
 
+import Controle.DadosMusicais;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
-/**
- *
- * @author Hildegard
- */
 public abstract class ConstrutorFormaCompactaForte extends ConstrutorFormaCompacta {
-    public ConstrutorFormaCompactaForte(ArrayList<Integer> classes) {
+    public ConstrutorFormaCompactaForte(ArrayList<ClasseDeAltura> classes) {
         super(classes);
     }
 
     protected void mudaMelhorRotacao(LinkedList<Integer> indicesRotacoes) {
         //pega os modulos e rotaciona
         int atual, tamanhoDoPadrao = classes.size(), indiceComparacao = 1, minimo;
-        ArrayList<Integer> modulos = new ArrayList<Integer>(tamanhoDoPadrao);
+        ArrayList<ClasseDeAltura> modulos = new ArrayList<ClasseDeAltura>(tamanhoDoPadrao);
 
         do {
             modulos.clear();
