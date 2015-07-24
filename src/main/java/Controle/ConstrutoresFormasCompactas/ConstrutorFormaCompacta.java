@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -22,43 +23,36 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
-/**
- *
- * @author Hildegard
- */
 public abstract class ConstrutorFormaCompacta {
-    protected ArrayList<Integer> classes;
+    protected ArrayList<ClasseDeAltura> classes;
 
-    public ConstrutorFormaCompacta(ArrayList<Integer> classe) {
-        classes = new ArrayList<Integer>(classe);
+    public ConstrutorFormaCompacta(ArrayList<ClasseDeAltura> classe) {
+        classes = new ArrayList<ClasseDeAltura>(classe);
     }
 
-    protected ArrayList<Integer> getInverso() {
-        ArrayList<Integer> inverso = new ArrayList<Integer>();
+    protected ArrayList<ClasseDeAltura> getInverso() {
+        ArrayList<ClasseDeAltura> inverso = new ArrayList<ClasseDeAltura();
         //espelhamento
         //transformar a lista espelhada no modulo 12 dela mesma
         for (int j = 0; j < classes.size(); j++) {
-            inverso.add((12 - classes.get(j)) % 12);
+            inverso.add(classes.get(j).inverter());
         }
         return inverso;
     }
 
-    protected ArrayList<Integer> getTransposicao(ArrayList<Integer> formaPrima) {
-        ArrayList<Integer> subtraida = new ArrayList<Integer>();
+    protected ArrayList<ClasseDeAltura> getTransposicao(ArrayList<ClasseDeAltura> formaPrima) {
+        ArrayList<ClasseDeAltura> subtraida = new ArrayList<ClasseDeAltura>();
 
-        int primeiro = formaPrima.get(0), subtracao;
-        for (int elem : formaPrima) {
-            subtracao = elem - primeiro;
-            if (subtracao < 0) {
-                subtracao = 12 - Math.abs(subtracao);
-            }
+        ClasseDeAltura primeiro = formaPrima.get(0), subtracao;
+        for (ClasseDeAltura elem : formaPrima) {
+            subtracao = elem.transpor(-primeiro.inteiro());
             subtraida.add(subtracao);
         }
 
         return subtraida;
     }
 
-    public final ArrayList<Integer> retornaForma() {
+    public final ArrayList<ClasseDeAltura> retornaForma() {
         Collections.sort(classes);
         //pega os modulos e rotaciona
         int atual, tamanhoDoPadrao = classes.size(), minimo;
