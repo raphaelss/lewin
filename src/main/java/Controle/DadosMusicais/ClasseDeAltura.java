@@ -17,7 +17,7 @@
 
 package Controle.DadosMusicais;
 
-public class ClasseDeAltura {
+public class ClasseDeAltura implements Comparable<ClasseDeAltura> {
     public static ClasseDeAltura criar(int x) {
         x %= 12;
         if (x < 0) {
@@ -59,6 +59,10 @@ public class ClasseDeAltura {
     @Override
     public int hashCode() {
         return valor;
+    }
+
+    public int compareTo(ClasseDeAltura c) {
+        return Integer.compare(valor, c.inteiro());
     }
 
     private final int valor;
