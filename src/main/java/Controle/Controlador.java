@@ -36,17 +36,17 @@ import java.util.*;
 import javax.swing.JOptionPane;
 
 public class Controlador {
-    private ArrayList<Integer> numeros = new ArrayList<Integer>(),
-                               segundoConjunto = new ArrayList<Integer>(),
+    private ArrayList<ClasseDeAltura> numeros = new ArrayList<ClasseDeAltura>(),
+                               segundoConjunto = new ArrayList<ClasseDeAltura>(),
                                formaCompacta, resultadoMultiplicacao;
     private ArrayList<SerieDodecafonica> listadeFormas;
     private SerieDodecafonica serieEscolhida;
     private MatrizDodecafonica matriz;
     private ArrayList<SegmentoInvariancia> acordesALimpo;
     private ArrayList<String> informacoesAssociada, invarianciaDerivativa, invariancias;
-    private ArrayList<Integer[]> resultadoRotacaoStravinskyana;
-    private ArrayList<ArrayList<Integer[]>> resultadosPaleta;
-    private HashSet<LinkedList<Integer>> subconjuntos;
+    private ArrayList<ClasseDeAltura[]> resultadoRotacaoStravinskyana;
+    private ArrayList<ArrayList<ClasseDeAltura[]>> resultadosPaleta;
+    private HashSet<LinkedList<ClasseDeAltura>> subconjuntos;
     private int[] vetorIntervalar = null;
     private double similaridade;
 
@@ -55,11 +55,11 @@ public class Controlador {
         segundoConjunto.clear();
     }
 
-    public ArrayList<Integer> getConjuntoPrincipal() {
+    public ArrayList<ClasseDeAltura> getConjuntoPrincipal() {
         return numeros;
     }
 
-    public ArrayList<Integer> getSegundoConjunto() {
+    public ArrayList<ClasseDeAltura> getSegundoConjunto() {
         return segundoConjunto;
     }
 
@@ -67,14 +67,10 @@ public class Controlador {
         return matriz;
     }
 
-    public void adicionaEntradaConjuntoPrincipal(int numero) throws DadosProibidos {
-        if (numeros.contains(numero)) {
+    public void adicionaEntradaConjuntoPrincipal(ClasseDeAltura c) throws DadosProibidos {
+        if (numeros.contains(c)) {
             throw new DadosProibidos("Dados repetidos não são permitidos");
         }
-        if (numeros.size() == 12) {
-            throw new DadosProibidos("N\u00e3o s\u00e3o permitidos mais que 12 n\u00fameros");
-        }
-
         numeros.add(numero);
     }
 
@@ -95,7 +91,7 @@ public class Controlador {
 
         numeros.clear();
         for (int i = 0; i < 12; i++) {
-            numeros.add(listadeFormas.get(indice).getDado(i).inteiro());
+            numeros.add(listadeFormas.get(indice).getDado(i));
         }
     }
 
@@ -107,7 +103,7 @@ public class Controlador {
                 >= resultadoRotacaoStravinskyana.size());
 
         numeros.clear();
-        Integer[] escolhido = resultadoRotacaoStravinskyana.get(indice);
+        ClasseDeAltura[] escolhido = resultadoRotacaoStravinskyana.get(indice);
         for (int i = 0; i < escolhido.length; i++) {
             numeros.add(escolhido[i]);
         }
@@ -117,27 +113,22 @@ public class Controlador {
         numeros.remove(numeros.size() - 1);
     }
 
-    public void adicionaEntradaSegundoConjunto(int numero) throws DadosProibidos {
-        if (segundoConjunto.contains(numero)) {
+    public void adicionaEntradaSegundoConjunto(ClasseDeAltura c) throws DadosProibidos {
+        if (segundoConjunto.contains(c)) {
             throw new DadosProibidos("Dados repetidos não são permitidos");
         }
-        if (segundoConjunto.size() == 12) {
-            throw new DadosProibidos("N\u00e3o s\u00e3o permitidos mais que 12 n\u00fameros");
-        }
-
         segundoConjunto.add(numero);
     }
 
     public boolean removerSegundoConjunto() {
         segundoConjunto.remove(segundoConjunto.size() - 1);
-
         return !segundoConjunto.isEmpty();
     }
 
     public void geraDerivacaoSerial() throws DadosProibidos {
         int tamanho = numeros.size();
 
-        if(tamanho == 3 && numeros.get(0) == 0) {
+        if (tamanho == 3 && numeros.get(0) == 0) {
             int primeiro = numeros.get(1), segundo = numeros.get(2);
 
             if ((primeiro == 4 && segundo == 8) || (primeiro == 3 && segundo == 6)) {
@@ -221,22 +212,18 @@ public class Controlador {
     }
 
     private void transpoeParaZero() {
-        int primeiro = formaCompacta.get(0), subtracao;
+        ClasseDeAltura primeiro = formaCompacta.get(0), subtracao;
         for (int i = 0; i < formaCompacta.size(); i++) {
-            subtracao = formaCompacta.get(i) - primeiro;
-            if (subtracao < 0) {
-                subtracao = 12 - Math.abs(subtracao);
-            }
+            subtracao = formaCompacta.get(i).transport(-primeiro.inteiro());
             formaCompacta.set(i, subtracao);
         }
     }
 
     public void geraFormaPrimaStraus() {
-//        formaCompacta = ((FormaCompacta)new ConstrutorFormaPrimaRahn(numeros).retornaForma()).getClasses();
         formaCompacta = new ConstrutorFormaPrimaStraus(numeros).retornaForma();
-        ArrayList<Integer> complemento = new ArrayList<>();
-        for (int i : formaCompacta) {
-            complemento.add((12 - Math.abs(i)) % 12);
+        ArrayList<ClasseDeAltura> complemento = new ArrayList<>();
+        for (ClasseDeAltura i : formaCompacta) {
+            complemento.add(i.inverter());
         }
 
         complemento = new ConstrutorFormaPrimaStraus(complemento).retornaForma();
@@ -256,11 +243,10 @@ public class Controlador {
     }
 
     public void geraFormaPrimaForte() {
-//        formaCompacta = ((FormaCompacta)new ConstrutorFormaPrimaForte(numeros).retornaForma()).getClasses();
         formaCompacta = new ConstrutorFormaPrimaForte(numeros).retornaForma();
-        ArrayList<Integer> complemento = new ArrayList<>();
-        for (int i : formaCompacta) {
-            complemento.add((12 - Math.abs(i)) % 12);
+        ArrayList<ClasseDeAltura> complemento = new ArrayList<>();
+        for (ClasseDeAltura i : formaCompacta) {
+            complemento.add(i.inverter());
         }
 
         complemento = new ConstrutorFormaPrimaStraus(complemento).retornaForma();
@@ -279,12 +265,11 @@ public class Controlador {
         transpoeParaZero();
     }
 
-    public ArrayList<Integer> getFormaCompacta() {
+    public ArrayList<ClasseDeAltura> getFormaCompacta() {
         return formaCompacta;
     }
 
     public void geraFormaNormalStraus() {
-//        formaCompacta = ((FormaCompacta)new ConstrutorFormaNormal(numeros).retornaForma()).getClasses();
         formaCompacta = new ConstrutorFormaNormalStraus(numeros).retornaForma();
     }
 
@@ -293,14 +278,14 @@ public class Controlador {
     }
 
     public void geraRotacaoStravinskyana() {
-        ArrayList<Integer> segundaParte = new ArrayList<Integer>(numeros.subList(6, 12)),
-                           subtraido = new ArrayList<Integer>();
-        final int primeiro = segundaParte.get(0);
+        ArrayList<ClasseDeAltura> segundaParte = new ArrayList<ClasseDeAltura>(numeros.subList(6, 12)),
+            subtraido = new ArrayList<ClasseDeAltura>();
+        final ClasseDeAltura primeiro = segundaParte.get(0);
         int subtrator;
 
-        resultadoRotacaoStravinskyana = new ArrayList<Integer[]>();
-        resultadoRotacaoStravinskyana.add(numeros.subList(0, 6).toArray(new Integer[6]));
-        resultadoRotacaoStravinskyana.add(segundaParte.toArray(new Integer[6]));
+        resultadoRotacaoStravinskyana = new ArrayList<ClasseDeAltura[]>();
+        resultadoRotacaoStravinskyana.add(numeros.subList(0, 6).toArray(new ClasseDeAltura[6]));
+        resultadoRotacaoStravinskyana.add(segundaParte.toArray(new ClasseDeAltura[6]));
 
         for (int i = 0; i < 5; i++) {
             segundaParte.add(segundaParte.remove(0));
@@ -315,15 +300,15 @@ public class Controlador {
         }
     }
 
-    public ArrayList<Integer[]> getRotacaoStravinskyana() {
+    public ArrayList<ClasseDeAltura[]> getRotacaoStravinskyana() {
         return resultadoRotacaoStravinskyana;
     }
 
     public void geraPaleta() {
         int tamanho = numeros.size();
-        ArrayList<ArrayList<Integer>> conjuntosDiretos = new ArrayList<ArrayList<Integer>>(),
-                                      conjuntosInversos = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> conjuntoReferencia = new ArrayList<Integer>(numeros);
+        ArrayList<ArrayList<ClasseDeAltura>> conjuntosDiretos = new ArrayList<ArrayList<ClasseDeAltura>>(),
+                                      conjuntosInversos = new ArrayList<ArrayList<ClasseDeAltura>>();
+        ArrayList<ClasseDeAltura> conjuntoReferencia = new ArrayList<ClasseDeAltura>(numeros);
 
         adicionaTransposicoesDistintas(conjuntosDiretos, conjuntoReferencia);
 
@@ -332,39 +317,39 @@ public class Controlador {
         }
 
         adicionaTransposicoesDistintas(conjuntosInversos, conjuntoReferencia);
-        resultadosPaleta = new ArrayList<ArrayList<Integer[]>>(2);
+        resultadosPaleta = new ArrayList<ArrayList<ClasseDeAltura[]>>(2);
 
-        resultadosPaleta.add(new ArrayList<Integer[]>());
-        for (ArrayList<Integer> conjunto : conjuntosDiretos) {
-            resultadosPaleta.get(0).add(conjunto.toArray(new Integer[tamanho]));
+        resultadosPaleta.add(new ArrayList<ClasseDeAltura[]>());
+        for (ArrayList<ClasseDeAltura> conjunto : conjuntosDiretos) {
+            resultadosPaleta.get(0).add(conjunto.toArray(new ClasseDeAltura[tamanho]));
         }
 
-        resultadosPaleta.add(new ArrayList<Integer[]>());
+        resultadosPaleta.add(new ArrayList<ClasseDeAltura[]>());
         loop:
-        for (ArrayList<Integer> conjunto : conjuntosInversos) {
-            for (ArrayList<Integer> direto : conjuntosDiretos) {
+        for (ArrayList<ClasseDeAltura> conjunto : conjuntosInversos) {
+            for (ArrayList<ClasseDeAltura> direto : conjuntosDiretos) {
                 if (direto.containsAll(conjunto)) {
                     continue loop;
                 }
             }
-            resultadosPaleta.get(1).add(conjunto.toArray(new Integer[tamanho]));
+            resultadosPaleta.get(1).add(conjunto.toArray(new ClasseDeAltura[tamanho]));
         }
     }
 
-    public ArrayList<ArrayList<Integer[]>> getPaleta() {
+    public ArrayList<ArrayList<ClasseDeAltura[]>> getPaleta() {
         return resultadosPaleta;
     }
 
-    private void adicionaTransposicoesDistintas(ArrayList<ArrayList<Integer>> conjuntos,
-                                                ArrayList<Integer> primeiroConjunto) {
-        conjuntos.add(new ArrayList<Integer>(primeiroConjunto));
+    private void adicionaTransposicoesDistintas(ArrayList<ArrayList<ClasseDeAltura>> conjuntos,
+                                                ArrayList<ClasseDeAltura> primeiroConjunto) {
+        conjuntos.add(new ArrayList<ClasseDeAltura>(primeiroConjunto));
         loop:
         for (int i = 1; i < 12; i++) {
-            ArrayList<Integer> atual = new ArrayList<Integer>();
+            ArrayList<ClasseDeAltura> atual = new ArrayList<ClasseDeAltura>();
             for (int j = 0; j < primeiroConjunto.size(); j++) {
                 atual.add((primeiroConjunto.get(j) + i) % 12);
             }
-            for (ArrayList<Integer> c : conjuntos) {
+            for (ArrayList<ClasseDeAltura> c : conjuntos) {
                 if (c.containsAll(atual)) {
                     continue loop;
                 }
@@ -386,7 +371,7 @@ public class Controlador {
     }
 
     public void geraSubconjuntos() {
-        subconjuntos = new HashSet<LinkedList<Integer>>();
+        subconjuntos = new HashSet<LinkedList<ClasseDeAltura>>();
 
         int tamanhoSubconjuntos = 0;
         while((tamanhoSubconjuntos =
@@ -394,18 +379,18 @@ public class Controlador {
                 "Informe o tamanho dos subconjuntos")))
                 >= numeros.size());
 
-        constroi(0, tamanhoSubconjuntos, new LinkedList<Integer>(), subconjuntos);
+        constroi(0, tamanhoSubconjuntos, new LinkedList<ClasseDeAltura>(), subconjuntos);
     }
 
-    public HashSet<LinkedList<Integer>> getSubconjuntos() {
+    public HashSet<LinkedList<ClasseDeAltura>> getSubconjuntos() {
         return subconjuntos;
     }
 
-    private void constroi (int indice, int tamanhoSubconjuntos, LinkedList<Integer> subconjunto, HashSet<LinkedList<Integer>> subconjuntos) {
+    private void constroi(int indice, int tamanhoSubconjuntos, LinkedList<ClasseDeAltura> subconjunto, HashSet<LinkedList<ClasseDeAltura>> subconjuntos) {
         for (; indice < numeros.size(); indice++) {
             subconjunto.add(numeros.get(indice));
             if (subconjunto.size() == tamanhoSubconjuntos) {
-                subconjuntos.add(new LinkedList<Integer>(subconjunto));
+                subconjuntos.add(new LinkedList<ClasseDeAltura>(subconjunto));
                 subconjunto.removeLast();
             }
             else {
@@ -506,9 +491,9 @@ public class Controlador {
     }
 
     public void geraMultiplicacaoBoulez() {
-        resultadoMultiplicacao = new ArrayList<Integer>();
+        resultadoMultiplicacao = new ArrayList<ClasseDeAltura>();
 
-        for (int doSegundoFator : segundoConjunto) {
+        for (ClasseDeAltura doSegundoFator : segundoConjunto) {
             resultadoMultiplicacao.add(doSegundoFator);
 
             for (int i = 1; i < numeros.size(); i++) {
@@ -518,41 +503,41 @@ public class Controlador {
         }
 
         Collections.sort(resultadoMultiplicacao);
-        resultadoMultiplicacao = new ArrayList<Integer>(new HashSet<Integer>(resultadoMultiplicacao));
+        resultadoMultiplicacao = new ArrayList<ClasseDeAltura>(new HashSet<ClasseDeAltura>(resultadoMultiplicacao));
     }
 
     public void geraMultiplicacaoRahn1() {
-        resultadoMultiplicacao = new ArrayList<Integer>();
+        resultadoMultiplicacao = new ArrayList<ClasseDeAltura>();
 
         int doSegundoFator = segundoConjunto.get(0);
 
-        for (int doPrimeiroFator : numeros) {
+        for (ClasseDeAltura doPrimeiroFator : numeros) {
             resultadoMultiplicacao.add((doSegundoFator*doPrimeiroFator) % 12);
         }
     }
 
     public void geraMultiplicacaoRahn2() {
         int tamanho = numeros.size() + segundoConjunto.size() - 1;
-        int[] resultadoParcial = new int [tamanho];
+        ClasseDeAltura[] resultadoParcial = new ClasseDeAltura [tamanho];
         int indiceAPartir = 0, iterandoAPartir;
 
-        for (int doPrimeiroFator : numeros) {
+        for (ClasseDeAltura doPrimeiroFator : numeros) {
             iterandoAPartir = indiceAPartir++;
 
-            for (int doSegundoFator : segundoConjunto) {
+            for (ClasseDeAltura doSegundoFator : segundoConjunto) {
                 resultadoParcial[iterandoAPartir++] += doPrimeiroFator*doSegundoFator;
             }
         }
 
-        HashSet<Integer> resultadoSemRepetidos = new HashSet<Integer>();
-        for (int i : resultadoParcial) {
-            resultadoSemRepetidos.add(i % 12);
+        HashSet<ClasseDeAltura> resultadoSemRepetidos = new HashSet<ClasseDeAltura>();
+        for (ClasseDeAltura i : resultadoParcial) {
+            resultadoSemRepetidos.add(i);
         }
 
-        resultadoMultiplicacao = new ArrayList<Integer>(resultadoSemRepetidos);
+        resultadoMultiplicacao = new ArrayList<ClasseDeAltura>(resultadoSemRepetidos);
     }
 
-    public ArrayList<Integer> getMultiplicacao() {
+    public ArrayList<ClasseDeAltura> getMultiplicacao() {
         return resultadoMultiplicacao;
     }
 

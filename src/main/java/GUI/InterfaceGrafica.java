@@ -20,6 +20,7 @@
 package GUI;
 
 import Controle.Controlador;
+import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.SerieDodecafonica;
 import Excecoes.DadosProibidos;
@@ -563,22 +564,22 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 }
                 break;
             case SAIDA_SUBCONJUNTOS:
-                for (LinkedList<Integer> subconjunto : controlador.getSubconjuntos()) {
+                for (LinkedList<ClasseDeAltura> subconjunto : controlador.getSubconjuntos()) {
                     if (!botaoAlternarNumeroNotas.isSelected()) {
-                        for (int i : subconjunto) {
-                            texto += i + " ";
+                        for (ClasseDeAltura i : subconjunto) {
+                            texto += i.inteiro() + " ";
                         }
                     }
                     else {
-                        for (int i : subconjunto) {
-                            texto += numeroToNota(i) + " ";
+                        for (ClasseDeAltura i : subconjunto) {
+                            texto += i.nome() + " ";
                         }
                     }
 
                     texto += "[";
-                    for (int i : new ConstrutorFormaPrimaStraus(new ArrayList<Integer>(subconjunto)).
+                    for (ClasseDeAltura i : new ConstrutorFormaPrimaStraus(new ArrayList<ClasseDeAltura>(subconjunto)).
                                                                             retornaForma()) {
-                        texto += i + " ";
+                        texto += i.inteiro() + " ";
                     }
 
                     texto += "]\n\n";
@@ -588,13 +589,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 break;
             case SAIDA_FORMA_COMPACTA:
                 if (!botaoAlternarNumeroNotas.isSelected()) {
-                    for (int dado : controlador.getFormaCompacta()) {
-                        texto += dado + "   ";
+                    for (ClasseDeAltura dado : controlador.getFormaCompacta()) {
+                        texto += dado.inteiro() + "   ";
                     }
                 }
                 else {
-                    for (int dado : controlador.getFormaCompacta()) {
-                        texto += numeroToNota(dado) + "   ";
+                    for (ClasseDeAltura dado : controlador.getFormaCompacta()) {
+                        texto += dado.nome() + "   ";
                     }
                 }
                 break;
