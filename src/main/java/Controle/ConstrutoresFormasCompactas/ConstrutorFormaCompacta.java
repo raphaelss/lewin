@@ -42,15 +42,13 @@ public abstract class ConstrutorFormaCompacta {
         return inverso;
     }
 
-    protected ArrayList<ClasseDeAltura> getTransposicao(ArrayList<ClasseDeAltura> formaPrima) {
+    protected static ArrayList<ClasseDeAltura> getTransposicao(ArrayList<ClasseDeAltura> formaPrima) {
         ArrayList<ClasseDeAltura> subtraida = new ArrayList<ClasseDeAltura>();
-
         ClasseDeAltura primeiro = formaPrima.get(0), subtracao;
         for (ClasseDeAltura elem : formaPrima) {
             subtracao = elem.transpor(-primeiro.inteiro());
             subtraida.add(subtracao);
         }
-
         return subtraida;
     }
 

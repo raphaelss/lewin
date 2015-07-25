@@ -18,21 +18,19 @@
 
 package Controle.ConstrutoresFormasCompactas;
 
+import Controle.DadosMusicais.ClasseDeAltura;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
-/**
- *
- * @author Hildegard
- */
 public class FuncionalidadesFormaCompacta {
-    public static ArrayList<Integer> diferencas(ArrayList<Integer> classes) {
+    public static ArrayList<Integer> diferencas(ArrayList<ClasseDeAltura> classes) {
         ArrayList<Integer> resultado = new ArrayList<Integer>();
         int limite = classes.size() - 1;
 
         for (int i = 0; i < limite; i++) {
-            resultado.add(Math.abs(classes.get(i) - classes.get(i + 1)));
+            resultado.add(Math.abs(classes.get(i).diferenca(classes.get(i + 1))));
         }
 
         return resultado;

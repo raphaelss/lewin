@@ -146,7 +146,7 @@ public class Controlador {
         }
         else if (tamanho == 4) {
             if (FuncionalidadesFormaCompacta.diferencas(
-                    new ConstrutorFormaPrimaStraus(numeros).retornaForma()).contains(4)) {
+                    new ConstrutorFormaPrimaStraus(numeros).retornaForma()).contains(ClasseDeAltura.criar(4))) {
                 throw new DadosProibidos();
             }
         }

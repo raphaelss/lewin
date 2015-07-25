@@ -18,19 +18,17 @@
 
 package Controle.ConstrutoresFormasCompactas;
 
+import Controle.DadosMusicais.ClasseDeAltura;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-/**
- *
- * @author Hildegard
- */
 public class ConstrutorFormaNormalForte extends ConstrutorFormaCompactaForte {
-    public ConstrutorFormaNormalForte(ArrayList<Integer> classe) {
+    public ConstrutorFormaNormalForte(ArrayList<ClasseDeAltura> classe) {
         super(classe);
     }
 
-    protected ArrayList<Integer> procedimentoEspecifico(LinkedList<Integer> indicesRotacoes) {
+    protected ArrayList<ClasseDeAltura> procedimentoEspecifico(LinkedList<Integer> indicesRotacoes) {
         mudaMelhorRotacao(indicesRotacoes);
         return classes;
     }

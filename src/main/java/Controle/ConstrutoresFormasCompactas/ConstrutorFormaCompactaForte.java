@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -18,7 +19,7 @@
 
 package Controle.ConstrutoresFormasCompactas;
 
-import Controle.DadosMusicais;
+import Controle.DadosMusicais.ClasseDeAltura;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,23 +32,16 @@ public abstract class ConstrutorFormaCompactaForte extends ConstrutorFormaCompac
 
     protected void mudaMelhorRotacao(LinkedList<Integer> indicesRotacoes) {
         //pega os modulos e rotaciona
-        int atual, tamanhoDoPadrao = classes.size(), indiceComparacao = 1, minimo;
+        ClasseDeAltura atual;
+        int tamanhoDoPadrao = classes.size(), indiceComparacao = 1, minimo;
         ArrayList<ClasseDeAltura> modulos = new ArrayList<ClasseDeAltura>(tamanhoDoPadrao);
 
         do {
             modulos.clear();
             for (int j = 0; j < tamanhoDoPadrao; j++) {
                 if (indicesRotacoes.contains(j)) {
-                    atual = classes.get(indiceComparacao) - classes.get(0);
-
-                    if (atual > 0) {
-                        modulos.add(atual % 12);
-                    }
-                    else {
-                        modulos.add(12 - Math.abs(atual));
-                    }
+                    atual = classes.get(indiceComparacao).transpor(-classes.get(0).inteiro());
                 }
-
                 classes.add(classes.remove(0));
             }
 
