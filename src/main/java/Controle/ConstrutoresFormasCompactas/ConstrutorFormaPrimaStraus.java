@@ -25,7 +25,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class ConstrutorFormaPrimaStraus extends ConstrutorFormaCompactaStraus {
-    public ConstrutorFormaPrimaStraus(ArrayList<Integer> classe) {
+    public ConstrutorFormaPrimaStraus(ArrayList<ClasseDeAltura> classe) {
         super(classe);
     }
 

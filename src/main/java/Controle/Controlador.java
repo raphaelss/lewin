@@ -71,7 +71,7 @@ public class Controlador {
         if (numeros.contains(c)) {
             throw new DadosProibidos("Dados repetidos não são permitidos");
         }
-        numeros.add(numero);
+        numeros.add(c);
     }
 
     public void substitui_FormaCompacta() {
@@ -117,7 +117,7 @@ public class Controlador {
         if (segundoConjunto.contains(c)) {
             throw new DadosProibidos("Dados repetidos não são permitidos");
         }
-        segundoConjunto.add(numero);
+        segundoConjunto.add(c);
     }
 
     public boolean removerSegundoConjunto() {
@@ -128,10 +128,11 @@ public class Controlador {
     public void geraDerivacaoSerial() throws DadosProibidos {
         int tamanho = numeros.size();
 
-        if (tamanho == 3 && numeros.get(0) == 0) {
-            int primeiro = numeros.get(1), segundo = numeros.get(2);
+        if (tamanho == 3 && numeros.get(0) == ClasseDeAltura.criar(0)) {
+            ClasseDeAltura primeiro = numeros.get(1), segundo = numeros.get(2);
 
-            if ((primeiro == 4 && segundo == 8) || (primeiro == 3 && segundo == 6)) {
+            if ((primeiro == ClasseDeAltura.criar(4) && segundo == ClasseDeAltura.criar(8))
+                || (primeiro == ClasseDeAltura.criar(3) && segundo == ClasseDeAltura.criar(6))) {
                 throw new DadosProibidos();
             }
         }
@@ -144,7 +145,7 @@ public class Controlador {
 
         ArrayList<ClasseDeAltura> numerosClasses = new ArrayList<ClasseDeAltura>(numeros.size());
         for (int i = 0; i < tamanho; ++i) {
-          numerosClasses.set(i, ClasseDeAltura.criar(numeros.get(i)));
+          numerosClasses.set(i, numeros.get(i));
         }
         listadeFormas = new GeradorDerivacaoSerial(new Acorde(numerosClasses)).resultado();
         if (listadeFormas.isEmpty()) {
@@ -176,7 +177,7 @@ public class Controlador {
         }
         else {
             for (int i = 0; i < 12; i++) {
-                acorde[i] = ClasseDeAltura.criar(numeros.get(i));
+                acorde[i] = numeros.get(i);
             }
 
             serieEscolhida = new SerieDodecafonica();
@@ -214,7 +215,7 @@ public class Controlador {
     private void transpoeParaZero() {
         ClasseDeAltura primeiro = formaCompacta.get(0), subtracao;
         for (int i = 0; i < formaCompacta.size(); i++) {
-            subtracao = formaCompacta.get(i).transport(-primeiro.inteiro());
+            subtracao = formaCompacta.get(i).transpor(-primeiro.inteiro());
             formaCompacta.set(i, subtracao);
         }
     }
@@ -228,8 +229,8 @@ public class Controlador {
 
         complemento = new ConstrutorFormaPrimaStraus(complemento).retornaForma();
 
-        int intervalo1 = formaCompacta.get(1) - formaCompacta.get(0),
-            intervalo2 = complemento.get(1) - complemento.get(0);
+        int intervalo1 = formaCompacta.get(1).diferenca(formaCompacta.get(0)),
+            intervalo2 = complemento.get(1).diferenca(complemento.get(0));
         if (intervalo1 < 0) {
             intervalo1 = (12 - Math.abs(intervalo1) % 12);
         }
@@ -251,8 +252,8 @@ public class Controlador {
 
         complemento = new ConstrutorFormaPrimaStraus(complemento).retornaForma();
 
-        int intervalo1 = formaCompacta.get(1) - formaCompacta.get(0),
-            intervalo2 = complemento.get(1) - complemento.get(0);
+        int intervalo1 = formaCompacta.get(1).diferenca(formaCompacta.get(0)),
+            intervalo2 = complemento.get(1).diferenca(complemento.get(0));
         if (intervalo1 < 0) {
             intervalo1 = (12 - Math.abs(intervalo1) % 12);
         }
