@@ -290,13 +290,13 @@ public class Controlador {
 
         for (int i = 0; i < 5; i++) {
             segundaParte.add(segundaParte.remove(0));
-            subtrator = segundaParte.get(0) - primeiro;
+            subtrator = -segundaParte.get(0).diferenca(primeiro);
 
-            for (int seg : segundaParte) {
-                subtraido.add(((seg - subtrator) + 12) % 12);
+            for (ClasseDeAltura seg : segundaParte) {
+                subtraido.add(seg.transpor(subtrator));
             }
 
-            resultadoRotacaoStravinskyana.add(subtraido.toArray(new Integer[6]));
+            resultadoRotacaoStravinskyana.add(subtraido.toArray(new ClasseDeAltura[6]));
             subtraido.clear();
         }
     }
@@ -314,7 +314,7 @@ public class Controlador {
         adicionaTransposicoesDistintas(conjuntosDiretos, conjuntoReferencia);
 
         for(int i = 0; i < tamanho; i++) {
-            conjuntoReferencia.set(i, (12 - conjuntoReferencia.get(i)) % 12);
+            conjuntoReferencia.set(i, conjuntoReferencia.get(i).inverter());
         }
 
         adicionaTransposicoesDistintas(conjuntosInversos, conjuntoReferencia);
@@ -348,7 +348,7 @@ public class Controlador {
         for (int i = 1; i < 12; i++) {
             ArrayList<ClasseDeAltura> atual = new ArrayList<ClasseDeAltura>();
             for (int j = 0; j < primeiroConjunto.size(); j++) {
-                atual.add((primeiroConjunto.get(j) + i) % 12);
+                atual.add(primeiroConjunto.get(j).transpor(i));
             }
             for (ArrayList<ClasseDeAltura> c : conjuntos) {
                 if (c.containsAll(atual)) {
@@ -498,8 +498,8 @@ public class Controlador {
             resultadoMultiplicacao.add(doSegundoFator);
 
             for (int i = 1; i < numeros.size(); i++) {
-                doSegundoFator += numeros.get(i) - numeros.get(i - 1);
-                resultadoMultiplicacao.add((doSegundoFator + 12) % 12);
+                doSegundoFator = doSegundoFator.transpor(numeros.get(i).transpor(-(numeros.get(i - 1).inteiro())).inteiro());
+                resultadoMultiplicacao.add(doSegundoFator);
             }
         }
 
@@ -510,10 +510,10 @@ public class Controlador {
     public void geraMultiplicacaoRahn1() {
         resultadoMultiplicacao = new ArrayList<ClasseDeAltura>();
 
-        int doSegundoFator = segundoConjunto.get(0);
+        ClasseDeAltura doSegundoFator = segundoConjunto.get(0);
 
         for (ClasseDeAltura doPrimeiroFator : numeros) {
-            resultadoMultiplicacao.add((doSegundoFator*doPrimeiroFator) % 12);
+            resultadoMultiplicacao.add(ClasseDeAltura.criar(doSegundoFator.inteiro()*doPrimeiroFator.inteiro()));
         }
     }
 
@@ -526,7 +526,7 @@ public class Controlador {
             iterandoAPartir = indiceAPartir++;
 
             for (ClasseDeAltura doSegundoFator : segundoConjunto) {
-                resultadoParcial[iterandoAPartir++] += doPrimeiroFator*doSegundoFator;
+                resultadoParcial[iterandoAPartir++].transpor(doPrimeiroFator.inteiro() * doSegundoFator.inteiro());
             }
         }
 

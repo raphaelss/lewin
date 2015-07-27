@@ -32,8 +32,8 @@ public abstract class ConstrutorFormaCompactaForte extends ConstrutorFormaCompac
 
     protected void mudaMelhorRotacao(LinkedList<Integer> indicesRotacoes) {
         //pega os modulos e rotaciona
-        ClasseDeAltura atual;
-        int tamanhoDoPadrao = classes.size(), indiceComparacao = 1, minimo;
+        ClasseDeAltura atual, minimo;
+        int tamanhoDoPadrao = classes.size(), indiceComparacao = 1;
         ArrayList<ClasseDeAltura> modulos = new ArrayList<ClasseDeAltura>(tamanhoDoPadrao);
 
         do {
@@ -64,7 +64,7 @@ public abstract class ConstrutorFormaCompactaForte extends ConstrutorFormaCompac
             int indiceMinimo = 0;
             minimo = classes.get(indicesRotacoes.get(0));
             for (int j = 1; j < indicesRotacoes.size(); j++) {
-                if (minimo > classes.get(indicesRotacoes.get(j))) {
+                if (minimo.compareTo(classes.get(indicesRotacoes.get(j))) > 0) {
                     minimo = classes.get(indicesRotacoes.get(j));
                     indiceMinimo = j;
                 }

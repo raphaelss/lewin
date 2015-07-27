@@ -2,6 +2,7 @@
  * This file is part of Lewin, a compositional calculator.
  * Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino@gmail.com
  * Copyright (C) 2013 Liduino José Pitombeira de Oliveira, http://www.pitombeira.com
+ * Copyright (C) 2015 Raphael Sousa Santos, http://www.raphaelss.com
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -18,19 +19,17 @@
 
 package Controle;
 
+import Controle.DadosMusicais.ClasseDeAltura;
+
 import java.util.ArrayList;
 
-/**
- *
- * @author Bill's
- */
 public class GeradorVetorIntervalar {
-    public static int[] geraVetor(ArrayList<Integer> entrada) {
+    public static int[] geraVetor(ArrayList<ClasseDeAltura> entrada) {
         ArrayList<Integer> diferencas = new ArrayList<Integer>();
 
         for (int i = 0; i < entrada.size(); i++) {
             for (int j = i + 1; j < entrada.size(); j++) {
-                diferencas.add(Math.abs(entrada.get(i) - entrada.get(j)));
+                diferencas.add(Math.abs(entrada.get(i).diferenca(entrada.get(j))));
             }
         }
         int[] contadores = new int[6];

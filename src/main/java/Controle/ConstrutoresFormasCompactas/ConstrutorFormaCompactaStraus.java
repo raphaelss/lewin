@@ -32,21 +32,16 @@ public abstract class ConstrutorFormaCompactaStraus extends ConstrutorFormaCompa
 
     public void mudaMelhorRotacao(LinkedList<Integer> indicesRotacoes) {
         //pega os modulos e rotaciona
-        int atual, tamanhoDoPadrao = classes.size(), indiceComparacao = tamanhoDoPadrao - 2, minimo;
-        ArrayList<Integer> modulos = new ArrayList<Integer>(tamanhoDoPadrao);
+        ClasseDeAltura atual, minimo;
+        int tamanhoDoPadrao = classes.size(), indiceComparacao = tamanhoDoPadrao - 2;
+        ArrayList<ClasseDeAltura> modulos = new ArrayList<ClasseDeAltura>(tamanhoDoPadrao);
 
         do {
             modulos.clear();
             for (int j = 0; j < tamanhoDoPadrao; j++) {
                 if (indicesRotacoes.contains(j)) {
-                    atual = classes.get(indiceComparacao) - classes.get(0);
-
-                    if (atual > 0) {
-                        modulos.add(atual % 12);
-                    }
-                    else {
-                        modulos.add(12 - Math.abs(atual));
-                    }
+                    atual = classes.get(indiceComparacao).transpor(-classes.get(0).inteiro());
+                    modulos.add(atual);
                 }
 
                 classes.add(classes.remove(0));
@@ -71,7 +66,7 @@ public abstract class ConstrutorFormaCompactaStraus extends ConstrutorFormaCompa
             int indiceMinimo = 0;
             minimo = classes.get(indicesRotacoes.get(0));
             for (int j = 1; j < indicesRotacoes.size(); j++) {
-                if (minimo > classes.get(indicesRotacoes.get(j))) {
+                if (minimo.compareTo(classes.get(indicesRotacoes.get(j))) > 0) {
                     minimo = classes.get(indicesRotacoes.get(j));
                     indiceMinimo = j;
                 }

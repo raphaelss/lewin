@@ -55,8 +55,8 @@ public abstract class ConstrutorFormaCompacta {
     public final ArrayList<ClasseDeAltura> retornaForma() {
         Collections.sort(classes);
         //pega os modulos e rotaciona
-        ClasseDeAltura atual;
-        int tamanhoDoPadrao = classes.size(), minimo;
+        ClasseDeAltura atual, minimo;
+        int tamanhoDoPadrao = classes.size();
         ArrayList<ClasseDeAltura> modulos = new ArrayList<ClasseDeAltura>(tamanhoDoPadrao);
         LinkedList<Integer> indicesRotacoes = new LinkedList<Integer>();
 

@@ -24,13 +24,13 @@ import Controle.DadosMusicais.MatrizDodecafonica;
 import java.util.ArrayList;
 
 public class GeradorTabelaAdicao {
-    public static MatrizDodecafonica geraTabela(ArrayList<Integer> numeros) {
+    public static MatrizDodecafonica geraTabela(ArrayList<ClasseDeAltura> numeros) {
         int i, j, tamanho = numeros.size();
         MatrizDodecafonica matriz = new MatrizDodecafonica();
 
         for (i = 0; i < tamanho; i++) {
             for (j = 0; j < tamanho; j++) {
-                matriz.preenchePosicao(i, j, ClasseDeAltura.criar(numeros.get(i) + numeros.get(j)));
+                matriz.preenchePosicao(i, j, numeros.get(i).transpor(numeros.get(j).inteiro()));
             }
             for (; j < 12; j++) {
                 matriz.preenchePosicao(i, j, null);
