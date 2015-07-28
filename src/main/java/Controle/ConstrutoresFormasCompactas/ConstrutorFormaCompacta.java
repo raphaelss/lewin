@@ -113,6 +113,14 @@ public abstract class ConstrutorFormaCompacta {
         return classes;
     }
 
+    protected void transpoeParaZero() {
+        ClasseDeAltura primeiro = classes.get(0);
+        for (int i = 0; i < classes.size(); i++) {
+            classes.set(i, classes.get(i).transpor(-primeiro.inteiro()));
+        }
+    }
+
+
     protected abstract ArrayList<ClasseDeAltura> procedimentoEspecifico(LinkedList<Integer> indicesRotacoes);
 
     protected abstract void mudaMelhorRotacao(LinkedList<Integer> indicesRotacoes);

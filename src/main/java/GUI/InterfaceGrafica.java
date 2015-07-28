@@ -2307,7 +2307,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             atualizaHabilitacaoBotoesFuncionalidades();
         }
         catch(DadosProibidos dp) {
-            JOptionPane.showMessageDialog(null, "Imposs\u00edvel gerar uma s\u00e9rie dodecaf\u00f4nica a partir deste conjunto");
+            if (dp.getMessage() != null) {
+                JOptionPane.showMessageDialog(null, dp.getMessage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Imposs\u00edvel gerar uma s\u00e9rie dodecaf\u00f4nica a partir deste conjunto");
+            }
         }
 }//GEN-LAST:event_botaoGerarDerivacaoSerialActionPerformed
 

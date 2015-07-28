@@ -30,7 +30,6 @@ import Controle.ConstrutoresFormasCompactas.ConstrutorFormaNormalForte;
 import Controle.ConstrutoresFormasCompactas.ConstrutorFormaNormalStraus;
 import Controle.ConstrutoresFormasCompactas.ConstrutorFormaPrimaForte;
 import Controle.ConstrutoresFormasCompactas.ConstrutorFormaPrimaStraus;
-import Controle.ConstrutoresFormasCompactas.FuncionalidadesFormaCompacta;
 import java.awt.Point;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -128,18 +127,20 @@ public class Controlador {
     public void geraDerivacaoSerial() throws DadosProibidos {
         int tamanho = numeros.size();
 
-        if (tamanho == 3 && numeros.get(0) == ClasseDeAltura.criar(0)) {
-            ClasseDeAltura primeiro = numeros.get(1), segundo = numeros.get(2);
-
-            if ((primeiro == ClasseDeAltura.criar(4) && segundo == ClasseDeAltura.criar(8))
-                || (primeiro == ClasseDeAltura.criar(3) && segundo == ClasseDeAltura.criar(6))) {
-                throw new DadosProibidos();
+        if (tamanho == 3) {
+            ArrayList<ClasseDeAltura> formaPrima = new ConstrutorFormaPrimaStraus(numeros).retornaForma();
+            ClasseDeAltura segundo = formaPrima.get(1),
+                           terceiro = formaPrima.get(2);
+            System.out.print("Derivacao: ");
+            System.out.println(formaPrima.toString());
+            if ((segundo == ClasseDeAltura.criar(4) && terceiro == ClasseDeAltura.criar(8))
+                || (segundo == ClasseDeAltura.criar(3) && terceiro == ClasseDeAltura.criar(6))) {
+                throw new DadosProibidos("Impossível gerar uma série derivada deste tricorde.");
             }
-        }
-        else if (tamanho == 4) {
-            if (FuncionalidadesFormaCompacta.diferencas(
-                    new ConstrutorFormaPrimaStraus(numeros).retornaForma()).contains(ClasseDeAltura.criar(4))) {
-                throw new DadosProibidos();
+        } else if (tamanho == 4) {
+            int[] vetor = GeradorVetorIntervalar.geraVetor(numeros);
+            if (vetor[3] > 0) {
+                throw new DadosProibidos("Impossível gerar uma série derivada de um tetracorde contendo a classe intervalar 4.");
             }
         }
 
@@ -222,7 +223,7 @@ public class Controlador {
 
     public void geraFormaPrimaStraus() {
         formaCompacta = new ConstrutorFormaPrimaStraus(numeros).retornaForma();
-        ArrayList<ClasseDeAltura> complemento = new ArrayList<>();
+        ArrayList<ClasseDeAltura> complemento = new ArrayList<ClasseDeAltura>();
         for (ClasseDeAltura i : formaCompacta) {
             complemento.add(i.inverter());
         }
