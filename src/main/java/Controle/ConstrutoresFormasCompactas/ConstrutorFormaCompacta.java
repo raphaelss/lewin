@@ -124,4 +124,21 @@ public abstract class ConstrutorFormaCompacta {
     protected abstract ArrayList<ClasseDeAltura> procedimentoEspecifico(LinkedList<Integer> indicesRotacoes);
 
     protected abstract void mudaMelhorRotacao(LinkedList<Integer> indicesRotacoes);
+
+    //TODO
+    static ArrayList<ClasseDeAltura> formaNormalStraus(ArrayList<ClasseDeAltura> classes) {
+        return classes;
+    }
+
+    static ArrayList<ClasseDeAltura> formaNormalForte(ArrayList<ClasseDeAltura> classes) {
+        return classes;
+    }
+
+    static ArrayList<ClasseDeAltura> formaPrimaStraus(ArrayList<ClasseDeAltura> classes) {
+        return classes;
+    }
+
+    static ArrayList<ClasseDeAltura> formaPrimaForte(ArrayList<ClasseDeAltura> classes) {
+        return classes;
+    }
 }

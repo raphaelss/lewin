@@ -19,11 +19,7 @@ package Controle.DadosMusicais;
 
 public class ClasseDeAltura implements Comparable<ClasseDeAltura> {
     public static ClasseDeAltura criar(int x) {
-        x %= 12;
-        if (x < 0) {
-            x += 12;
-        }
-        return memo[x];
+        return memo[mod12(x)];
     }
 
     public int inteiro() {
@@ -36,6 +32,14 @@ public class ClasseDeAltura implements Comparable<ClasseDeAltura> {
 
     public ClasseDeAltura inverter() {
         return criar(12 - valor);
+    }
+
+    public int intervalo_ord(ClasseDeAltura outra) {
+        return mod12(outra.valor - valor);
+    }
+
+    public int intervalo_desord(ClasseDeAltura outra) {
+        return Math.min(this.intervalo_ord(outra), outra.intervalo_ord(this));
     }
 
     public int diferenca(ClasseDeAltura outra) {
@@ -74,6 +78,14 @@ public class ClasseDeAltura implements Comparable<ClasseDeAltura> {
         new ClasseDeAltura(6), new ClasseDeAltura(7), new ClasseDeAltura(8),
         new ClasseDeAltura(9), new ClasseDeAltura(10), new ClasseDeAltura(11)
     };
+
+    private static int mod12(int x) {
+        x %= 12;
+        if (x < 0) {
+            x += 12;
+        }
+        return x;
+    }
 
     //Não deve ser utilizado diretamente. Usar o método estático criar.
     private ClasseDeAltura(int x) {
