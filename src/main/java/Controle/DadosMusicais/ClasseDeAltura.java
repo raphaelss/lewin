@@ -42,10 +42,6 @@ public class ClasseDeAltura implements Comparable<ClasseDeAltura> {
         return Math.min(this.intervalo_ord(outra), outra.intervalo_ord(this));
     }
 
-    public int diferenca(ClasseDeAltura outra) {
-        return valor - outra.valor;
-    }
-
     @Override
     public String toString() {
         return Integer.toString(valor);

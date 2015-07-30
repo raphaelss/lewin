@@ -133,8 +133,7 @@ public class Controlador {
                            terceiro = formaPrima.get(2);
             System.out.print("Derivacao: ");
             System.out.println(formaPrima.toString());
-            if ((segundo == ClasseDeAltura.criar(4) && terceiro == ClasseDeAltura.criar(8))
-                || (segundo == ClasseDeAltura.criar(3) && terceiro == ClasseDeAltura.criar(6))) {
+            if (segundo == ClasseDeAltura.criar(3) && terceiro == ClasseDeAltura.criar(6)) {
                 throw new DadosProibidos("Impossível gerar uma série derivada deste tricorde.");
             }
         } else if (tamanho == 4) {
@@ -194,17 +193,17 @@ public class Controlador {
                 inversoProvisorio[i] = serieEscolhida.getDado(i).inverter();
             }
 
-            int diferenca = inversoProvisorio[0].diferenca(serieEscolhida.getDado(0));
+            int intervalo = inversoProvisorio[0].intervalo_ord(serieEscolhida.getDado(0));
 
             for (int i = 0; i < 12; i++) {
-                matriz.preenchePosicao(i, 0, inversoProvisorio[i].transpor(-diferenca));
+                matriz.preenchePosicao(i, 0, inversoProvisorio[i].transpor(-intervalo));
             }
 
             for (int i = 1; i < 12; i++) {
-                diferenca = matriz.getValor(i, 0).diferenca(matriz.getValor(i - 1, 0));
+                intervalo = matriz.getValor(i, 0).intervalo_ord(matriz.getValor(i - 1, 0));
 
                 for (int j = 1; j < 12; j++) {
-                    matriz.preenchePosicao(i, j, (matriz.getValor(i - 1, j).transpor(diferenca)));
+                    matriz.preenchePosicao(i, j, (matriz.getValor(i - 1, j).transpor(-intervalo)));
                 }
             }
         }
@@ -230,14 +229,8 @@ public class Controlador {
 
         complemento = new ConstrutorFormaPrimaStraus(complemento).retornaForma();
 
-        int intervalo1 = formaCompacta.get(1).diferenca(formaCompacta.get(0)),
-            intervalo2 = complemento.get(1).diferenca(complemento.get(0));
-        if (intervalo1 < 0) {
-            intervalo1 = (12 - Math.abs(intervalo1) % 12);
-        }
-        if (intervalo2 < 0) {
-            intervalo2 = (12 - Math.abs(intervalo2) % 12);
-        }
+        int intervalo1 = formaCompacta.get(1).intervalo_ord(formaCompacta.get(0)),
+            intervalo2 = complemento.get(1).intervalo_ord(complemento.get(0));
         if (intervalo1 > intervalo2) {
             formaCompacta = complemento;
         }
@@ -253,14 +246,8 @@ public class Controlador {
 
         complemento = new ConstrutorFormaPrimaStraus(complemento).retornaForma();
 
-        int intervalo1 = formaCompacta.get(1).diferenca(formaCompacta.get(0)),
-            intervalo2 = complemento.get(1).diferenca(complemento.get(0));
-        if (intervalo1 < 0) {
-            intervalo1 = (12 - Math.abs(intervalo1) % 12);
-        }
-        if (intervalo2 < 0) {
-            intervalo2 = (12 - Math.abs(intervalo2) % 12);
-        }
+        int intervalo1 = formaCompacta.get(1).intervalo_ord(formaCompacta.get(0)),
+            intervalo2 = complemento.get(1).intervalo_ord(complemento.get(0));
         if (intervalo1 > intervalo2) {
             formaCompacta = complemento;
         }
@@ -291,7 +278,7 @@ public class Controlador {
 
         for (int i = 0; i < 5; i++) {
             segundaParte.add(segundaParte.remove(0));
-            subtrator = -segundaParte.get(0).diferenca(primeiro);
+            subtrator = -segundaParte.get(0).intervalo_ord(primeiro);
 
             for (ClasseDeAltura seg : segundaParte) {
                 subtraido.add(seg.transpor(subtrator));

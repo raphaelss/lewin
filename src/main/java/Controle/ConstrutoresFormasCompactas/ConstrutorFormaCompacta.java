@@ -93,15 +93,8 @@ public abstract class ConstrutorFormaCompacta {
     protected ArrayList<ClasseDeAltura> maisCompacto(ArrayList<ClasseDeAltura> forma) {
         int tamanhoPadrao = classes.size(), sub1, sub2;
         for (int i = 1; i < tamanhoPadrao; i++) {
-            sub1 = classes.get(i).diferenca(classes.get(0));
-            if (sub1 < 0) {
-                sub1 = 12 - Math.abs(sub1);
-            }
-
-            sub2 = forma.get(i).diferenca(forma.get(0));
-            if (sub2 < 0) {
-                sub2 = 12 - Math.abs(sub2);
-            }
+            sub1 = classes.get(i).intervalo_ord(classes.get(0));
+            sub2 = forma.get(i).intervalo_ord(forma.get(0));
 
             if (sub1 > sub2) {
                 return getTransposicao(forma);
