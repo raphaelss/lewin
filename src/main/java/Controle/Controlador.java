@@ -25,11 +25,8 @@ import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.MatrizDeAcordes;
 import Controle.DadosMusicais.SerieDodecafonica;
 import Controle.DadosMusicais.SegmentoInvariancia;
+import Controle.FormasCompactas;
 import Excecoes.DadosProibidos;
-import Controle.ConstrutoresFormasCompactas.ConstrutorFormaNormalForte;
-import Controle.ConstrutoresFormasCompactas.ConstrutorFormaNormalStraus;
-import Controle.ConstrutoresFormasCompactas.ConstrutorFormaPrimaForte;
-import Controle.ConstrutoresFormasCompactas.ConstrutorFormaPrimaStraus;
 import java.awt.Point;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -128,7 +125,7 @@ public class Controlador {
         int tamanho = numeros.size();
 
         if (tamanho == 3) {
-            ArrayList<ClasseDeAltura> formaPrima = new ConstrutorFormaPrimaStraus(numeros).retornaForma();
+            ArrayList<ClasseDeAltura> formaPrima = FormasCompactas.formaPrimaStraus(numeros);
             ClasseDeAltura segundo = formaPrima.get(1),
                            terceiro = formaPrima.get(2);
             System.out.print("Derivacao: ");
@@ -212,46 +209,12 @@ public class Controlador {
         }
     }
 
-    private void transpoeParaZero() {
-        ClasseDeAltura primeiro = formaCompacta.get(0), subtracao;
-        for (int i = 0; i < formaCompacta.size(); i++) {
-            subtracao = formaCompacta.get(i).transpor(-primeiro.inteiro());
-            formaCompacta.set(i, subtracao);
-        }
-    }
-
     public void geraFormaPrimaStraus() {
-        formaCompacta = new ConstrutorFormaPrimaStraus(numeros).retornaForma();
-        ArrayList<ClasseDeAltura> complemento = new ArrayList<ClasseDeAltura>();
-        for (ClasseDeAltura i : formaCompacta) {
-            complemento.add(i.inverter());
-        }
-
-        complemento = new ConstrutorFormaPrimaStraus(complemento).retornaForma();
-
-        int intervalo1 = formaCompacta.get(1).intervalo_ord(formaCompacta.get(0)),
-            intervalo2 = complemento.get(1).intervalo_ord(complemento.get(0));
-        if (intervalo1 > intervalo2) {
-            formaCompacta = complemento;
-        }
-        transpoeParaZero();
+        formaCompacta = FormasCompactas.formaPrimaStraus(numeros);
     }
 
     public void geraFormaPrimaForte() {
-        formaCompacta = new ConstrutorFormaPrimaForte(numeros).retornaForma();
-        ArrayList<ClasseDeAltura> complemento = new ArrayList<>();
-        for (ClasseDeAltura i : formaCompacta) {
-            complemento.add(i.inverter());
-        }
-
-        complemento = new ConstrutorFormaPrimaStraus(complemento).retornaForma();
-
-        int intervalo1 = formaCompacta.get(1).intervalo_ord(formaCompacta.get(0)),
-            intervalo2 = complemento.get(1).intervalo_ord(complemento.get(0));
-        if (intervalo1 > intervalo2) {
-            formaCompacta = complemento;
-        }
-        transpoeParaZero();
+        formaCompacta = FormasCompactas.formaPrimaForte(numeros);
     }
 
     public ArrayList<ClasseDeAltura> getFormaCompacta() {
@@ -259,16 +222,16 @@ public class Controlador {
     }
 
     public void geraFormaNormalStraus() {
-        formaCompacta = new ConstrutorFormaNormalStraus(numeros).retornaForma();
+        formaCompacta = FormasCompactas.formaNormalStraus(numeros);
     }
 
     public void geraFormaNormalForte() {
-        formaCompacta = new ConstrutorFormaNormalForte(numeros).retornaForma();
+        formaCompacta = FormasCompactas.formaNormalForte(numeros);
     }
 
     public void geraRotacaoStravinskyana() {
         ArrayList<ClasseDeAltura> segundaParte = new ArrayList<ClasseDeAltura>(numeros.subList(6, 12)),
-            subtraido = new ArrayList<ClasseDeAltura>();
+                                  subtraido = new ArrayList<ClasseDeAltura>();
         final ClasseDeAltura primeiro = segundaParte.get(0);
         int subtrator;
 
@@ -278,7 +241,7 @@ public class Controlador {
 
         for (int i = 0; i < 5; i++) {
             segundaParte.add(segundaParte.remove(0));
-            subtrator = -segundaParte.get(0).intervalo_ord(primeiro);
+            subtrator = segundaParte.get(0).intervalo_ord(primeiro);
 
             for (ClasseDeAltura seg : segundaParte) {
                 subtraido.add(seg.transpor(subtrator));

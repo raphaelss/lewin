@@ -23,9 +23,9 @@ import Controle.Controlador;
 import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.SerieDodecafonica;
+import Controle.FormasCompactas;
 import Excecoes.DadosProibidos;
 import Excecoes.SequenciadorNulo;
-import Controle.ConstrutoresFormasCompactas.ConstrutorFormaPrimaStraus;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -43,10 +43,6 @@ import javax.sound.midi.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-/**
- *
- * @author Administrador
- */
 public class InterfaceGrafica extends javax.swing.JFrame {
     private JTextField[][] camposMatriz;
     private JLabel[] rotulosDasLinhas, rotulosDasColunas;
@@ -577,8 +573,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     }
 
                     texto += "[";
-                    for (ClasseDeAltura c : new ConstrutorFormaPrimaStraus(new ArrayList<ClasseDeAltura>(subconjunto)).
-                             retornaForma()) {
+                    for (ClasseDeAltura c : FormasCompactas.formaPrimaStraus(new ArrayList<ClasseDeAltura>(subconjunto))) {
                         texto += c.inteiro() + " ";
                     }
 
