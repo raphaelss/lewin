@@ -18,6 +18,11 @@
 package Controle.DadosMusicais;
 
 public class ClasseDeAltura implements Comparable<ClasseDeAltura> {
+    public enum TipoRepresentacao {
+        Inteiro,
+        NomeSustenido
+    }
+
     public static ClasseDeAltura criar(int x) {
         return memo[mod12(x)];
     }
@@ -49,6 +54,17 @@ public class ClasseDeAltura implements Comparable<ClasseDeAltura> {
 
     public String nome() {
         return nomes[valor];
+    }
+
+    public String representacao(TipoRepresentacao tipo) {
+        switch (tipo) {
+        case Inteiro:
+            return toString();
+        case NomeSustenido:
+            return nome();
+        }
+        //Nunca deve chegar aqui
+        return null;
     }
 
     @Override

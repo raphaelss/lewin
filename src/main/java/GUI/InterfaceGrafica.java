@@ -48,6 +48,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private JLabel[] rotulosDasLinhas, rotulosDasColunas;
     private ArrayList<JButton> botoesEntrada = new ArrayList<JButton>();
     private TipoTabela guiEscolherTabela = new TipoTabela();
+    private ClasseDeAltura.TipoRepresentacao formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.Inteiro;
 
     private Controlador controlador = new Controlador();
 
@@ -405,43 +406,20 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void atualizaEntrada() {
         String texto = "";
         if (!botaoInserirSegundoFator.isSelected()) {
-            if (!botaoAlternarNumeroNotas.isSelected()) {
-                for (ClasseDeAltura c : controlador.getConjuntoPrincipal()) {
-                    texto += c.inteiro() + "  ";
-                }
-            }
-            else {
-                for (ClasseDeAltura c : controlador.getConjuntoPrincipal()) {
-                    texto += c.nome() + "  ";
-                }
+            for (ClasseDeAltura c : controlador.getConjuntoPrincipal()) {
+                texto += c.representacao(formatoRepresentacao) + "  ";
             }
         }
         else {
             texto += "x =  ";
-            if (!botaoAlternarNumeroNotas.isSelected()) {
-                for (ClasseDeAltura c : controlador.getConjuntoPrincipal()) {
-                    texto += c.inteiro() + "  ";
-                }
+            for (ClasseDeAltura c : controlador.getConjuntoPrincipal()) {
+                texto += c.representacao(formatoRepresentacao) + "  ";
             }
-            else {
-                for (ClasseDeAltura c : controlador.getConjuntoPrincipal()) {
-                    texto += c.nome() + "  ";
-                }
-            }
-
             texto += "\n\ny =  ";
-            if (!botaoAlternarNumeroNotas.isSelected()) {
-                for (ClasseDeAltura c : controlador.getSegundoConjunto()) {
-                    texto += c.inteiro() + "  ";
-                }
-            }
-            else {
-                for (ClasseDeAltura c : controlador.getSegundoConjunto()) {
-                    texto += c.nome() + "  ";
-                }
+            for (ClasseDeAltura c : controlador.getSegundoConjunto()) {
+                texto += c.representacao(formatoRepresentacao) + "  ";
             }
         }
-
         areaTextoEntrada.setText(texto);
     }
 
@@ -450,31 +428,17 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
         switch(modosAtuais[0]) {
             case SAIDA_MULTIPLICACAO:
-                if (!botaoAlternarNumeroNotas.isSelected()) {
-                    for (ClasseDeAltura c : controlador.getMultiplicacao()) {
-                        texto += c.inteiro() + "   ";
-                    }
+                for (ClasseDeAltura c : controlador.getMultiplicacao()) {
+                    texto += c.representacao(formatoRepresentacao) + "  ";
                 }
-                else {
-                    for (ClasseDeAltura c : controlador.getMultiplicacao()) {
-                        texto += c.nome() + "   ";
-                    }
-                }
-
                 break;
             case SAIDA_DERIVACAO_SERIAL:
                 ArrayList<SerieDodecafonica> listadeFormas = controlador.getDerivacaoSerial();
 
-                for (int i = 0; i < listadeFormas.size(); i++) {
-                    if (!botaoAlternarNumeroNotas.isSelected()) {
-                        texto += listadeFormas.get(i).toString();
+                for (int i = 0; i < listadeFormas.size(); ++i) {
+                    for (int j = 0; j < 12; ++j) {
+                        texto += listadeFormas.get(i).getDado(j).representacao(formatoRepresentacao) + "  ";
                     }
-                    else {
-                        for (int j = 0; j < 12; j++) {
-                            texto += listadeFormas.get(i).getDado(j).nome() + "   ";
-                        }
-                    }
-
                     texto += "  (" + i + ")\n\n";
                 }
 
@@ -492,66 +456,34 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             case SAIDA_ROTACAO_STRAVINSKYANA:
                 texto += "\u03B1 = ";
                 ArrayList<ClasseDeAltura[]> resultadoRotacaoStravinskyana = controlador.getRotacaoStravinskyana();
-                if (!botaoAlternarNumeroNotas.isSelected()) {
-                    for (ClasseDeAltura c : resultadoRotacaoStravinskyana.get(0)) {
-                        texto += c.inteiro() + " ";
-                    }
-
-                    for (int i = 1; i < 7; i++) {
-                        texto += "\n\n";
-                        texto += "\u03B2" + i + " = ";
-
-                        for (ClasseDeAltura el : resultadoRotacaoStravinskyana.get(i)) {
-                            texto += el.inteiro() + " ";
-                        }
-                    }
+                for (ClasseDeAltura c : resultadoRotacaoStravinskyana.get(0)) {
+                    texto += c.representacao(formatoRepresentacao) + "  ";
                 }
-                else {
-                    for (ClasseDeAltura c : resultadoRotacaoStravinskyana.get(0)) {
-                        texto += c.nome() + " ";
-                    }
+                for (int i = 1; i < 7; i++) {
+                    texto += "\n\n";
+                    texto += "\u03B2" + i + " = ";
 
-                    for (int i = 1; i < 7; i++) {
-                        texto += "\n\n";
-                        texto += "\u03B2" + i + " = ";
-
-                        for (ClasseDeAltura el : resultadoRotacaoStravinskyana.get(i)) {
-                            texto += el.nome() + " ";
-                        }
+                    for (ClasseDeAltura c : resultadoRotacaoStravinskyana.get(i)) {
+                        texto += c.representacao(formatoRepresentacao) + "  ";
                     }
                 }
                 break;
             case SAIDA_PALETA:
                 ArrayList<ArrayList<ClasseDeAltura[]>> resultadoPaleta = controlador.getPaleta();
                 int max = resultadoPaleta.get(0).size();
-                if (!botaoAlternarNumeroNotas.isSelected()) {
-                    for (int i = 0; i < max; i++) {
-                        for (ClasseDeAltura j : resultadoPaleta.get(0).get(i)) {
-                            texto += j.inteiro() + " ";
-                        }
-                        texto += "    ";
-                        try {
-                            for (ClasseDeAltura j : resultadoPaleta.get(1).get(i)) {
-                                texto += j.inteiro() + " ";
-                            }
-                        }
-                        catch(IndexOutOfBoundsException aioobe) {}
-                        texto += "\n\n";
+                for (int i = 0; i < max; ++i) {
+                    for (ClasseDeAltura j : resultadoPaleta.get(0).get(i)) {
+                        texto += j.representacao(formatoRepresentacao) + "  ";
                     }
-                }
-                else {
-                    for (int i = 0; i < max; i++) {
-                        for (ClasseDeAltura j : resultadoPaleta.get(0).get(i)) {
-                            texto += j.nome() + " ";
-                        }
-                        texto += "    ";
+                    texto += "    ";
+                    try {
                         for (ClasseDeAltura j : resultadoPaleta.get(1).get(i)) {
-                            texto += j.nome() + " ";
+                            texto += j.representacao(formatoRepresentacao) + "  ";
                         }
-                        texto += "\n\n";
                     }
+                    catch(IndexOutOfBoundsException aioobe) {}
+                    texto += "\n\n";
                 }
-
                 texto = texto.substring(0, texto.length() - 1);
                 break;
             case SAIDA_INVARIANCIA:
@@ -561,42 +493,26 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 break;
             case SAIDA_SUBCONJUNTOS:
                 for (LinkedList<ClasseDeAltura> subconjunto : controlador.getSubconjuntos()) {
-                    if (!botaoAlternarNumeroNotas.isSelected()) {
-                        for (ClasseDeAltura c : subconjunto) {
-                            texto += c.inteiro() + " ";
-                        }
+                    for (ClasseDeAltura c : subconjunto) {
+                        texto += c.representacao(formatoRepresentacao) + "  ";
                     }
-                    else {
-                        for (ClasseDeAltura c : subconjunto) {
-                            texto += c.nome() + " ";
-                        }
-                    }
-
                     texto += "[";
                     for (ClasseDeAltura c : FormasCompactas.formaPrimaStraus(new ArrayList<ClasseDeAltura>(subconjunto))) {
-                        texto += c.inteiro() + " ";
+                        texto += c.inteiro() + "  ";
                     }
-
+                    texto = texto.substring(0, texto.length() - 2);
                     texto += "]\n\n";
                 }
-
                 texto = texto.substring(0, texto.length() - 2);
                 break;
             case SAIDA_FORMA_COMPACTA:
-                if (!botaoAlternarNumeroNotas.isSelected()) {
-                    for (ClasseDeAltura c : controlador.getFormaCompacta()) {
-                        texto += c.inteiro() + "   ";
-                    }
-                }
-                else {
-                    for (ClasseDeAltura c : controlador.getFormaCompacta()) {
-                        texto += c.nome() + "   ";
-                    }
+                for (ClasseDeAltura c : controlador.getFormaCompacta()) {
+                    texto += c.representacao(formatoRepresentacao) + "  ";
                 }
                 break;
             case SAIDA_VETOR_INTERVALAR:
                 for (int dado : controlador.getVetorIntervalar()) {
-                    texto += dado + "   ";
+                    texto += dado + "  ";
                 }
                 break;
             case SAIDA_INVARIANCIA_DERIVATIVA:
@@ -2331,32 +2247,19 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 ArrayList<ArrayList<ClasseDeAltura[]>> resultadoPaleta = controlador.getPaleta();
                 int quantLinhas = resultadoPaleta.get(0).size();
                 pagina.append("<table border = 3>");
-                if (!botaoAlternarNumeroNotas.isSelected()) {
-                    for (int i = 0; i < quantLinhas; i++) {
-                        pagina.append("<tr>");
-                        for (ClasseDeAltura j : resultadoPaleta.get(0).get(i)) {
-                            pagina.append("<td>" + j.inteiro() + "</td>");
-                        }
-                        pagina.append("<td>    </td>");
-                        try {
-                            for (ClasseDeAltura j : resultadoPaleta.get(1).get(i)) {
-                                pagina.append("<td>" + j.inteiro() + "</td>");
-                            }
-                        }
-                        catch(IndexOutOfBoundsException aioobe) {}
-                        pagina.append("</tr>");
+                for (int i = 0; i < quantLinhas; i++) {
+                    pagina.append("<tr>");
+                    for (ClasseDeAltura c : resultadoPaleta.get(0).get(i)) {
+                        pagina.append("<td>" + c.representacao(formatoRepresentacao) + "</td>");
                     }
-                }
-                else {
-                    for (int i = 0; i < quantLinhas; i++) {
-                        for (ClasseDeAltura j : resultadoPaleta.get(0).get(i)) {
-                            pagina.append("<td>" + j.nome() + "</td>");
-                        }
-                        pagina.append("<td>    </td>");
-                        for (ClasseDeAltura j : resultadoPaleta.get(1).get(i)) {
-                            pagina.append("<td>" + j.nome() + "</td>");
+                    pagina.append("<td>    </td>"); //TODO: corrigir esse elemento de separação
+                    try {
+                        for (ClasseDeAltura c : resultadoPaleta.get(1).get(i)) {
+                            pagina.append("<td>" + c.representacao(formatoRepresentacao) + "</td>");
                         }
                     }
+                    catch(IndexOutOfBoundsException aioobe) {}
+                    pagina.append("</tr>");
                 }
                 pagina.append("</table>");
             }
@@ -2574,8 +2477,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoAlternarNumeroNotasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_botaoAlternarNumeroNotasItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
+            formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.NomeSustenido;
             for (int i = 0; i < 12; i++) {
-                botoesEntrada.get(i).setText(ClasseDeAltura.criar(i).toString());
+                botoesEntrada.get(i).setText(ClasseDeAltura.criar(i).nome());
             }
 
             if (modosAtuais[1] != -1) {
@@ -2601,6 +2505,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             atualizaEntrada();
         }
         else {
+            formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.Inteiro;
             try {
                 for (int i = 0; i < 12; i++) {
                     botoesEntrada.get(i).setText(String.valueOf(notaToNumero(botoesEntrada.get(i).getText())));
@@ -2767,34 +2672,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void preencheMatrizInterfaceGrafica(int tamanho) {
         int valor;
         MatrizDodecafonica matriz = controlador.getMatriz();
-
-        if (!botaoAlternarNumeroNotas.isSelected()) {
-            for(int i = 0; i < tamanho; i++) {
-                for(int j = 0; j < tamanho; j++) {
-                    valor = matriz.getValor(i, j).inteiro();
-                    if (valor >= 0) {
-                        camposMatriz[i][j].setText(String.valueOf(valor));
-                    }
-                    else {
-                        camposMatriz[i][j].setText(" ");
-                    }
-                }
+        for (int i = 0; i < tamanho; ++i) {
+            for (int j = 0; j < tamanho; ++j) {
+                camposMatriz[i][j].setText(matriz.getValor(i, j).representacao(formatoRepresentacao));
             }
         }
-        else {
-            for(int i = 0; i < tamanho; i++) {
-                for(int j = 0; j < tamanho; j++) {
-                    valor = matriz.getValor(i, j).inteiro();
-                    if (valor >= 0) {
-                        camposMatriz[i][j].setText(numeroToNota(valor));
-                    }
-                    else {
-                        camposMatriz[i][j].setText(" ");
-                    }
-                }
-            }
-        }
-
         botaoExportarHTML.setEnabled(true);
     }
 
@@ -2837,37 +2719,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         }
 
         throw new DadosProibidos("Nota inexistente");
-    }
-
-    private String numeroToNota(int numero) {
-        switch(numero) {
-            case 0:
-                return "C";
-            case 1:
-                return "C#";
-            case 2:
-                return "D";
-            case 3:
-                return "D#";
-            case 4:
-                return "E";
-            case 5:
-                return "F";
-            case 6:
-                return "F#";
-            case 7:
-                return "G";
-            case 8:
-                return "G#";
-            case 9:
-                return "A";
-            case 10:
-                return "A#";
-            case 11:
-                return "B";
-            default:
-                return " ";
-        }
     }
 
     public void fechaMIDI() {
