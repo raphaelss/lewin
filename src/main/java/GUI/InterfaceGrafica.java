@@ -2302,11 +2302,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             atualizaHabilitacaoBotoesFuncionalidades();
         }
         catch(DadosProibidos dp) {
-            if (dp.getMessage() != null) {
-                JOptionPane.showMessageDialog(null, dp.getMessage());
-            } else {
-                JOptionPane.showMessageDialog(null, "Imposs\u00edvel gerar uma s\u00e9rie dodecaf\u00f4nica a partir deste conjunto");
-            }
+            JOptionPane.showMessageDialog(null, dp.getMessage());
         }
 }//GEN-LAST:event_botaoGerarDerivacaoSerialActionPerformed
 
@@ -2840,7 +2836,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             return 11;
         }
 
-        throw new DadosProibidos();
+        throw new DadosProibidos("Nota inexistente");
     }
 
     private String numeroToNota(int numero) {

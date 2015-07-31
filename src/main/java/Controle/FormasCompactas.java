@@ -27,9 +27,9 @@ import java.util.Collections;
 public abstract class FormasCompactas {
     //Altera o dado de entrada
     private static ArrayList<ClasseDeAltura> transpoeParaZero(ArrayList<ClasseDeAltura> classes) {
-        ClasseDeAltura primeiro = classes.get(0);
+        int fatorTransposicao = -classes.get(0).inteiro();
         for (int i = 0; i < classes.size(); i++) {
-            classes.set(i, classes.get(i).transpor(-primeiro.inteiro()));
+            classes.set(i, classes.get(i).transpor(fatorTransposicao));
         }
         return classes;
     }
@@ -116,10 +116,14 @@ public abstract class FormasCompactas {
     }
 
     public static ArrayList<ClasseDeAltura> formaPrimaStraus(ArrayList<ClasseDeAltura> classes) {
-        return transpoeParaZero(maisCompacto(formaNormalStraus(classes), formaNormalStraus(inverter(classes)), comparadorStraus));
+        return transpoeParaZero(maisCompacto(formaNormalStraus(classes),
+                                             formaNormalStraus(inverter(classes)),
+                                             comparadorStraus));
     }
 
     public static ArrayList<ClasseDeAltura> formaPrimaForte(ArrayList<ClasseDeAltura> classes) {
-        return transpoeParaZero(maisCompacto(formaNormalStraus(classes), formaNormalStraus(inverter(classes)), comparadorForte));
+        return transpoeParaZero(maisCompacto(formaNormalStraus(classes),
+                                             formaNormalStraus(inverter(classes)),
+                                             comparadorForte));
     }
 }

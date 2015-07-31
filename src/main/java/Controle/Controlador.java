@@ -128,8 +128,6 @@ public class Controlador {
             ArrayList<ClasseDeAltura> formaPrima = FormasCompactas.formaPrimaStraus(numeros);
             ClasseDeAltura segundo = formaPrima.get(1),
                            terceiro = formaPrima.get(2);
-            System.out.print("Derivacao: ");
-            System.out.println(formaPrima.toString());
             if (segundo == ClasseDeAltura.criar(3) && terceiro == ClasseDeAltura.criar(6)) {
                 throw new DadosProibidos("Impossível gerar uma série derivada deste tricorde.");
             }
@@ -139,15 +137,7 @@ public class Controlador {
                 throw new DadosProibidos("Impossível gerar uma série derivada de um tetracorde contendo a classe intervalar 4.");
             }
         }
-
-        ArrayList<ClasseDeAltura> numerosClasses = new ArrayList<ClasseDeAltura>(numeros.size());
-        for (int i = 0; i < tamanho; ++i) {
-          numerosClasses.set(i, numeros.get(i));
-        }
-        listadeFormas = new GeradorDerivacaoSerial(new Acorde(numerosClasses)).resultado();
-        if (listadeFormas.isEmpty()) {
-            throw new DadosProibidos();
-        }
+        listadeFormas = new GeradorDerivacaoSerial(new Acorde(numeros)).resultado();
     }
 
     public ArrayList<SerieDodecafonica> getDerivacaoSerial() {
