@@ -49,8 +49,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private ArrayList<JButton> botoesEntrada = new ArrayList<JButton>();
     private TipoTabela guiEscolherTabela = new TipoTabela();
     private ClasseDeAltura.TipoRepresentacao formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.Inteiro;
-
+    private StringBuilder stringBuilder = new StringBuilder();
     private Controlador controlador = new Controlador();
+    private static final String espacamento = "  ";
 
     public static final int SAIDA_DERIVACAO_SERIAL = 1, MATRIZ_DODECAFONICA = 2,
                             SAIDA_FORMA_COMPACTA = 3, SAIDA_PALETA = 4,
@@ -62,6 +63,41 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private Sequencer sequenciador = null;
     private Synthesizer sintetizador = null;
+
+    private void adicionarAlturaBuilder(ClasseDeAltura c) {
+        stringBuilder.append(c.representacao(formatoRepresentacao));
+    }
+
+    private void adicionarAlturasBuilder(ArrayList<ClasseDeAltura> classes) {
+        for (ClasseDeAltura c : classes) {
+            adicionarAlturaBuilder(c);
+            stringBuilder.append(espacamento);
+        }
+        stringBuilder.setLength(stringBuilder.length() - espacamento.length());
+    }
+
+    private void adicionarAlturasBuilder(ClasseDeAltura[] classes) {
+        for (ClasseDeAltura c : classes) {
+            adicionarAlturaBuilder(c);
+            stringBuilder.append(espacamento);
+        }
+        stringBuilder.setLength(stringBuilder.length() - espacamento.length());
+    }
+
+    private void adicionarAlturasBuilder(LinkedList<ClasseDeAltura> classes) {
+        for (ClasseDeAltura c : classes) {
+            adicionarAlturaBuilder(c);
+            stringBuilder.append(espacamento);
+        }
+        stringBuilder.setLength(stringBuilder.length() - espacamento.length());
+    }
+
+
+    private String extrairResultadoBuilder() {
+        String resultado = stringBuilder.toString();
+        stringBuilder.setLength(0);
+        return resultado;
+    }
 
     /** Creates new form InterfaceGrafica */
     public InterfaceGrafica() {
@@ -404,127 +440,100 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     };
 
     private void atualizaEntrada() {
-        String texto = "";
         if (!botaoInserirSegundoFator.isSelected()) {
-            for (ClasseDeAltura c : controlador.getConjuntoPrincipal()) {
-                texto += c.representacao(formatoRepresentacao) + "  ";
-            }
+            adicionarAlturasBuilder(controlador.getConjuntoPrincipal());
         }
         else {
-            texto += "x =  ";
-            for (ClasseDeAltura c : controlador.getConjuntoPrincipal()) {
-                texto += c.representacao(formatoRepresentacao) + "  ";
-            }
-            texto += "\n\ny =  ";
-            for (ClasseDeAltura c : controlador.getSegundoConjunto()) {
-                texto += c.representacao(formatoRepresentacao) + "  ";
-            }
+            stringBuilder.append("x =  ");
+            adicionarAlturasBuilder(controlador.getConjuntoPrincipal());
+            stringBuilder.append("\n\ny =  ");
+            adicionarAlturasBuilder(controlador.getSegundoConjunto());
         }
-        areaTextoEntrada.setText(texto);
+        areaTextoEntrada.setText(extrairResultadoBuilder());
     }
 
     private void atualizaSaida() {
-        String texto = "";
-
         switch(modosAtuais[0]) {
             case SAIDA_MULTIPLICACAO:
-                for (ClasseDeAltura c : controlador.getMultiplicacao()) {
-                    texto += c.representacao(formatoRepresentacao) + "  ";
-                }
+                adicionarAlturasBuilder(controlador.getMultiplicacao());
                 break;
             case SAIDA_DERIVACAO_SERIAL:
                 ArrayList<SerieDodecafonica> listadeFormas = controlador.getDerivacaoSerial();
 
                 for (int i = 0; i < listadeFormas.size(); ++i) {
                     for (int j = 0; j < 12; ++j) {
-                        texto += listadeFormas.get(i).getDado(j).representacao(formatoRepresentacao) + "  ";
+                        adicionarAlturaBuilder(listadeFormas.get(i).getDado(j));
+                        stringBuilder.append(espacamento);
                     }
-                    texto += "  (" + i + ")\n\n";
+                    stringBuilder.append("  (").append(i).append(")\n\n");
                 }
 
                 switch(listadeFormas.get(0).getTamanho()) {
                     case 4:
-                        texto += "\nAcrescentem-se permuta\u00e7\u00f5es tricordais internas";
+                        stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tricordais internas");
                         break;
                     case 3:
-                        texto += "\nAcrescentem-se permuta\u00e7\u00f5es tetracordais internas";
+                        stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tetracordais internas");
                         break;
                     default:
-                        texto += "\nAcrescentem-se permuta\u00e7\u00f5es hexacordais internas";
+                        stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es hexacordais internas");
                 }
                 break;
             case SAIDA_ROTACAO_STRAVINSKYANA:
-                texto += "\u03B1 = ";
+                stringBuilder.append("\u03B1 = ");
                 ArrayList<ClasseDeAltura[]> resultadoRotacaoStravinskyana = controlador.getRotacaoStravinskyana();
-                for (ClasseDeAltura c : resultadoRotacaoStravinskyana.get(0)) {
-                    texto += c.representacao(formatoRepresentacao) + "  ";
-                }
+                adicionarAlturasBuilder(resultadoRotacaoStravinskyana.get(0));
                 for (int i = 1; i < 7; i++) {
-                    texto += "\n\n";
-                    texto += "\u03B2" + i + " = ";
-
-                    for (ClasseDeAltura c : resultadoRotacaoStravinskyana.get(i)) {
-                        texto += c.representacao(formatoRepresentacao) + "  ";
-                    }
+                    stringBuilder.append("\n\n\u03B2").append(i).append(" = ");
+                    adicionarAlturasBuilder(resultadoRotacaoStravinskyana.get(i));
                 }
                 break;
             case SAIDA_PALETA:
                 ArrayList<ArrayList<ClasseDeAltura[]>> resultadoPaleta = controlador.getPaleta();
                 int max = resultadoPaleta.get(0).size();
                 for (int i = 0; i < max; ++i) {
-                    for (ClasseDeAltura j : resultadoPaleta.get(0).get(i)) {
-                        texto += j.representacao(formatoRepresentacao) + "  ";
-                    }
-                    texto += "    ";
+                    adicionarAlturasBuilder(resultadoPaleta.get(0).get(i));
+                    stringBuilder.append("    ");
                     try {
-                        for (ClasseDeAltura j : resultadoPaleta.get(1).get(i)) {
-                            texto += j.representacao(formatoRepresentacao) + "  ";
-                        }
+                        adicionarAlturasBuilder(resultadoPaleta.get(1).get(i));
                     }
                     catch(IndexOutOfBoundsException aioobe) {}
-                    texto += "\n\n";
+                    stringBuilder.append("\n\n");
                 }
-                texto = texto.substring(0, texto.length() - 1);
+                stringBuilder.setLength(stringBuilder.length() - 1);
                 break;
             case SAIDA_INVARIANCIA:
                 for (String s : controlador.getInvariancia()) {
-                    texto += s;
+                    stringBuilder.append(s);
                 }
                 break;
             case SAIDA_SUBCONJUNTOS:
                 for (LinkedList<ClasseDeAltura> subconjunto : controlador.getSubconjuntos()) {
-                    for (ClasseDeAltura c : subconjunto) {
-                        texto += c.representacao(formatoRepresentacao) + "  ";
-                    }
-                    texto += "[";
-                    for (ClasseDeAltura c : FormasCompactas.formaPrimaStraus(new ArrayList<ClasseDeAltura>(subconjunto))) {
-                        texto += c.inteiro() + "  ";
-                    }
-                    texto = texto.substring(0, texto.length() - 2);
-                    texto += "]\n\n";
+                    adicionarAlturasBuilder(subconjunto);
+                    stringBuilder.append("  [");
+                    adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(new ArrayList<ClasseDeAltura>(subconjunto)));
+                    stringBuilder.append("]\n\n");
                 }
-                texto = texto.substring(0, texto.length() - 2);
+                stringBuilder.setLength(stringBuilder.length() - 2);
                 break;
             case SAIDA_FORMA_COMPACTA:
-                for (ClasseDeAltura c : controlador.getFormaCompacta()) {
-                    texto += c.representacao(formatoRepresentacao) + "  ";
-                }
+                adicionarAlturasBuilder(controlador.getFormaCompacta());
                 break;
             case SAIDA_VETOR_INTERVALAR:
                 for (int dado : controlador.getVetorIntervalar()) {
-                    texto += dado + "  ";
+                    stringBuilder.append(dado).append(espacamento);
                 }
                 break;
             case SAIDA_INVARIANCIA_DERIVATIVA:
                 for (String s : controlador.getInvarianciaDerivativa()) {
-                    texto += s + "  ";
+                    stringBuilder.append(s).append(espacamento);
                 }
                 break;
             case SAIDA_SIMILARIDADE:
-                texto += controlador.getSimilaridade();
+                stringBuilder.append(controlador.getSimilaridade());
         }
 
-        areaTextoResultados.setText(texto);
+        areaTextoResultados.setText(extrairResultadoBuilder());
     }
 
     private void atualizaHabilitacaoBotoesFuncionalidades() {
