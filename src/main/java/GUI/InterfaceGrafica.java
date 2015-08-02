@@ -44,7 +44,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 public class InterfaceGrafica extends javax.swing.JFrame {
-    private JTextField[][] camposMatriz;
+    private JTextField[][] camposMatriz = new JTextField[12][12];
     private JLabel[] rotulosDasLinhas, rotulosDasColunas;
     private ArrayList<JButton> botoesEntrada = new ArrayList<JButton>();
     private TipoTabela guiEscolherTabela = new TipoTabela();
@@ -52,6 +52,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private StringBuilder stringBuilder = new StringBuilder();
     private Controlador controlador = new Controlador();
     private static final String espacamento = "  ";
+    private static final java.awt.Font fonte = new java.awt.Font("Tahoma", 0, 10);
 
     public static final int SAIDA_DERIVACAO_SERIAL = 1, MATRIZ_DODECAFONICA = 2,
                             SAIDA_FORMA_COMPACTA = 3, SAIDA_PALETA = 4,
@@ -828,722 +829,722 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         painelMatriz.setLayout(null);
 
         campoTexto_0_5_Matriz.setEditable(false);
-        campoTexto_0_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_5_Matriz);
         campoTexto_0_5_Matriz.setBounds(205, 40, 25, 15);
 
         campoTexto_0_6_Matriz.setEditable(false);
-        campoTexto_0_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_6_Matriz);
         campoTexto_0_6_Matriz.setBounds(240, 40, 25, 15);
 
         campoTexto_0_7_Matriz.setEditable(false);
-        campoTexto_0_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_7_Matriz);
         campoTexto_0_7_Matriz.setBounds(275, 40, 25, 15);
 
         campoTexto_0_11_Matriz.setEditable(false);
-        campoTexto_0_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_11_Matriz);
         campoTexto_0_11_Matriz.setBounds(415, 40, 25, 15);
 
         campoTexto_0_3_Matriz.setEditable(false);
-        campoTexto_0_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_3_Matriz);
         campoTexto_0_3_Matriz.setBounds(135, 40, 25, 15);
 
         campoTexto_0_8_Matriz.setEditable(false);
-        campoTexto_0_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_8_Matriz);
         campoTexto_0_8_Matriz.setBounds(310, 40, 25, 15);
 
         campoTexto_0_10_Matriz.setEditable(false);
-        campoTexto_0_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_10_Matriz);
         campoTexto_0_10_Matriz.setBounds(380, 40, 25, 15);
 
         campoTexto_0_9_Matriz.setEditable(false);
-        campoTexto_0_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_9_Matriz);
         campoTexto_0_9_Matriz.setBounds(345, 40, 25, 15);
 
         campoTexto_0_4_Matriz.setEditable(false);
-        campoTexto_0_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_4_Matriz);
         campoTexto_0_4_Matriz.setBounds(170, 40, 25, 15);
 
         campoTexto_0_2_Matriz.setEditable(false);
-        campoTexto_0_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_2_Matriz);
         campoTexto_0_2_Matriz.setBounds(100, 40, 25, 15);
 
         campoTexto_0_1_Matriz.setEditable(false);
-        campoTexto_0_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_1_Matriz);
         campoTexto_0_1_Matriz.setBounds(65, 40, 25, 15);
 
         campoTexto_1_0_Matriz.setEditable(false);
-        campoTexto_1_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_0_Matriz);
         campoTexto_1_0_Matriz.setBounds(30, 65, 25, 15);
 
         campoTexto_1_1_Matriz.setEditable(false);
-        campoTexto_1_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_1_Matriz);
         campoTexto_1_1_Matriz.setBounds(65, 65, 25, 15);
 
         campoTexto_1_2_Matriz.setEditable(false);
-        campoTexto_1_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_2_Matriz);
         campoTexto_1_2_Matriz.setBounds(100, 65, 25, 15);
 
         campoTexto_1_3_Matriz.setEditable(false);
-        campoTexto_1_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_3_Matriz);
         campoTexto_1_3_Matriz.setBounds(135, 65, 25, 15);
 
         campoTexto_1_4_Matriz.setEditable(false);
-        campoTexto_1_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_4_Matriz);
         campoTexto_1_4_Matriz.setBounds(170, 65, 25, 15);
 
         campoTexto_1_5_Matriz.setEditable(false);
-        campoTexto_1_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_5_Matriz);
         campoTexto_1_5_Matriz.setBounds(205, 65, 25, 15);
 
         campoTexto_1_6_Matriz.setEditable(false);
-        campoTexto_1_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_6_Matriz);
         campoTexto_1_6_Matriz.setBounds(240, 65, 25, 15);
 
         campoTexto_1_7_Matriz.setEditable(false);
-        campoTexto_1_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_7_Matriz);
         campoTexto_1_7_Matriz.setBounds(275, 65, 25, 15);
 
         campoTexto_1_8_Matriz.setEditable(false);
-        campoTexto_1_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_8_Matriz);
         campoTexto_1_8_Matriz.setBounds(310, 65, 25, 15);
 
         campoTexto_1_9_Matriz.setEditable(false);
-        campoTexto_1_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_9_Matriz);
         campoTexto_1_9_Matriz.setBounds(345, 65, 25, 15);
 
         campoTexto_1_10_Matriz.setEditable(false);
-        campoTexto_1_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_10_Matriz);
         campoTexto_1_10_Matriz.setBounds(380, 65, 25, 15);
 
         campoTexto_1_11_Matriz.setEditable(false);
-        campoTexto_1_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_1_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_1_11_Matriz);
         campoTexto_1_11_Matriz.setBounds(415, 65, 25, 15);
 
         campoTexto_2_0_Matriz.setEditable(false);
-        campoTexto_2_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_0_Matriz);
         campoTexto_2_0_Matriz.setBounds(30, 90, 25, 15);
 
         campoTexto_2_1_Matriz.setEditable(false);
-        campoTexto_2_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_1_Matriz);
         campoTexto_2_1_Matriz.setBounds(65, 90, 25, 15);
 
         campoTexto_2_2_Matriz.setEditable(false);
-        campoTexto_2_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_2_Matriz);
         campoTexto_2_2_Matriz.setBounds(100, 90, 25, 15);
 
         campoTexto_2_3_Matriz.setEditable(false);
-        campoTexto_2_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_3_Matriz);
         campoTexto_2_3_Matriz.setBounds(135, 90, 25, 15);
 
         campoTexto_2_4_Matriz.setEditable(false);
-        campoTexto_2_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_4_Matriz);
         campoTexto_2_4_Matriz.setBounds(170, 90, 25, 15);
 
         campoTexto_2_5_Matriz.setEditable(false);
-        campoTexto_2_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_5_Matriz);
         campoTexto_2_5_Matriz.setBounds(205, 90, 25, 15);
 
         campoTexto_2_6_Matriz.setEditable(false);
-        campoTexto_2_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_6_Matriz);
         campoTexto_2_6_Matriz.setBounds(240, 90, 25, 15);
 
         campoTexto_2_7_Matriz.setEditable(false);
-        campoTexto_2_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_7_Matriz);
         campoTexto_2_7_Matriz.setBounds(275, 90, 25, 15);
 
         campoTexto_2_8_Matriz.setEditable(false);
-        campoTexto_2_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_8_Matriz);
         campoTexto_2_8_Matriz.setBounds(310, 90, 25, 15);
 
         campoTexto_2_9_Matriz.setEditable(false);
-        campoTexto_2_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_9_Matriz);
         campoTexto_2_9_Matriz.setBounds(345, 90, 25, 15);
 
         campoTexto_2_10_Matriz.setEditable(false);
-        campoTexto_2_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_10_Matriz);
         campoTexto_2_10_Matriz.setBounds(380, 90, 25, 15);
 
         campoTexto_2_11_Matriz.setEditable(false);
-        campoTexto_2_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_2_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_2_11_Matriz);
         campoTexto_2_11_Matriz.setBounds(415, 90, 25, 15);
 
         campoTexto_3_0_Matriz.setEditable(false);
-        campoTexto_3_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_0_Matriz);
         campoTexto_3_0_Matriz.setBounds(30, 115, 25, 15);
 
         campoTexto_3_1_Matriz.setEditable(false);
-        campoTexto_3_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_1_Matriz);
         campoTexto_3_1_Matriz.setBounds(65, 115, 25, 15);
 
         campoTexto_3_2_Matriz.setEditable(false);
-        campoTexto_3_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_2_Matriz);
         campoTexto_3_2_Matriz.setBounds(100, 115, 25, 15);
 
         campoTexto_3_3_Matriz.setEditable(false);
-        campoTexto_3_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_3_Matriz);
         campoTexto_3_3_Matriz.setBounds(135, 115, 25, 15);
 
         campoTexto_3_4_Matriz.setEditable(false);
-        campoTexto_3_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_4_Matriz);
         campoTexto_3_4_Matriz.setBounds(170, 115, 25, 15);
 
         campoTexto_3_5_Matriz.setEditable(false);
-        campoTexto_3_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_5_Matriz);
         campoTexto_3_5_Matriz.setBounds(205, 115, 25, 15);
 
         campoTexto_3_6_Matriz.setEditable(false);
-        campoTexto_3_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_6_Matriz);
         campoTexto_3_6_Matriz.setBounds(240, 115, 25, 15);
 
         campoTexto_3_7_Matriz.setEditable(false);
-        campoTexto_3_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_7_Matriz);
         campoTexto_3_7_Matriz.setBounds(275, 115, 25, 15);
 
         campoTexto_3_8_Matriz.setEditable(false);
-        campoTexto_3_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_8_Matriz);
         campoTexto_3_8_Matriz.setBounds(310, 115, 25, 15);
 
         campoTexto_3_9_Matriz.setEditable(false);
-        campoTexto_3_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_9_Matriz);
         campoTexto_3_9_Matriz.setBounds(345, 115, 25, 15);
 
         campoTexto_3_10_Matriz.setEditable(false);
-        campoTexto_3_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_10_Matriz);
         campoTexto_3_10_Matriz.setBounds(380, 115, 25, 15);
 
         campoTexto_3_11_Matriz.setEditable(false);
-        campoTexto_3_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_3_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_3_11_Matriz);
         campoTexto_3_11_Matriz.setBounds(415, 115, 25, 15);
 
         campoTexto_4_0_Matriz.setEditable(false);
-        campoTexto_4_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_0_Matriz);
         campoTexto_4_0_Matriz.setBounds(30, 140, 25, 15);
 
         campoTexto_4_1_Matriz.setEditable(false);
-        campoTexto_4_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_1_Matriz);
         campoTexto_4_1_Matriz.setBounds(65, 140, 25, 15);
 
         campoTexto_4_2_Matriz.setEditable(false);
-        campoTexto_4_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_2_Matriz);
         campoTexto_4_2_Matriz.setBounds(100, 140, 25, 15);
 
         campoTexto_4_3_Matriz.setEditable(false);
-        campoTexto_4_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_3_Matriz);
         campoTexto_4_3_Matriz.setBounds(135, 140, 25, 15);
 
         campoTexto_4_4_Matriz.setEditable(false);
-        campoTexto_4_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_4_Matriz);
         campoTexto_4_4_Matriz.setBounds(170, 140, 25, 15);
 
         campoTexto_4_5_Matriz.setEditable(false);
-        campoTexto_4_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_5_Matriz);
         campoTexto_4_5_Matriz.setBounds(205, 140, 25, 15);
 
         campoTexto_4_6_Matriz.setEditable(false);
-        campoTexto_4_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_6_Matriz);
         campoTexto_4_6_Matriz.setBounds(240, 140, 25, 15);
 
         campoTexto_4_7_Matriz.setEditable(false);
-        campoTexto_4_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_7_Matriz);
         campoTexto_4_7_Matriz.setBounds(275, 140, 25, 15);
 
         campoTexto_4_8_Matriz.setEditable(false);
-        campoTexto_4_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_8_Matriz);
         campoTexto_4_8_Matriz.setBounds(310, 140, 25, 15);
 
         campoTexto_4_9_Matriz.setEditable(false);
-        campoTexto_4_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_9_Matriz);
         campoTexto_4_9_Matriz.setBounds(345, 140, 25, 15);
 
         campoTexto_4_10_Matriz.setEditable(false);
-        campoTexto_4_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_10_Matriz);
         campoTexto_4_10_Matriz.setBounds(380, 140, 25, 15);
 
         campoTexto_4_11_Matriz.setEditable(false);
-        campoTexto_4_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_4_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_4_11_Matriz);
         campoTexto_4_11_Matriz.setBounds(415, 140, 25, 15);
 
         campoTexto_5_0_Matriz.setEditable(false);
-        campoTexto_5_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_0_Matriz);
         campoTexto_5_0_Matriz.setBounds(30, 165, 25, 15);
 
         campoTexto_5_1_Matriz.setEditable(false);
-        campoTexto_5_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_1_Matriz);
         campoTexto_5_1_Matriz.setBounds(65, 165, 25, 15);
 
         campoTexto_5_2_Matriz.setEditable(false);
-        campoTexto_5_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_2_Matriz);
         campoTexto_5_2_Matriz.setBounds(100, 165, 25, 15);
 
         campoTexto_5_3_Matriz.setEditable(false);
-        campoTexto_5_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_3_Matriz);
         campoTexto_5_3_Matriz.setBounds(135, 165, 25, 15);
 
         campoTexto_5_4_Matriz.setEditable(false);
-        campoTexto_5_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_4_Matriz);
         campoTexto_5_4_Matriz.setBounds(170, 165, 25, 15);
 
         campoTexto_5_5_Matriz.setEditable(false);
-        campoTexto_5_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_5_Matriz);
         campoTexto_5_5_Matriz.setBounds(205, 165, 25, 15);
 
         campoTexto_5_6_Matriz.setEditable(false);
-        campoTexto_5_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_6_Matriz);
         campoTexto_5_6_Matriz.setBounds(240, 165, 25, 15);
 
         campoTexto_5_7_Matriz.setEditable(false);
-        campoTexto_5_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_7_Matriz);
         campoTexto_5_7_Matriz.setBounds(275, 165, 25, 15);
 
         campoTexto_5_8_Matriz.setEditable(false);
-        campoTexto_5_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_8_Matriz);
         campoTexto_5_8_Matriz.setBounds(310, 165, 25, 15);
 
         campoTexto_5_9_Matriz.setEditable(false);
-        campoTexto_5_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_9_Matriz);
         campoTexto_5_9_Matriz.setBounds(345, 165, 25, 15);
 
         campoTexto_5_10_Matriz.setEditable(false);
-        campoTexto_5_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_10_Matriz);
         campoTexto_5_10_Matriz.setBounds(380, 165, 25, 15);
 
         campoTexto_5_11_Matriz.setEditable(false);
-        campoTexto_5_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_5_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_5_11_Matriz);
         campoTexto_5_11_Matriz.setBounds(415, 165, 25, 15);
 
         campoTexto_6_0_Matriz.setEditable(false);
-        campoTexto_6_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_0_Matriz);
         campoTexto_6_0_Matriz.setBounds(30, 190, 25, 15);
 
         campoTexto_6_1_Matriz.setEditable(false);
-        campoTexto_6_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_1_Matriz);
         campoTexto_6_1_Matriz.setBounds(65, 190, 25, 15);
 
         campoTexto_6_2_Matriz.setEditable(false);
-        campoTexto_6_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_2_Matriz);
         campoTexto_6_2_Matriz.setBounds(100, 190, 25, 15);
 
         campoTexto_6_3_Matriz.setEditable(false);
-        campoTexto_6_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_3_Matriz);
         campoTexto_6_3_Matriz.setBounds(135, 190, 25, 15);
 
         campoTexto_6_4_Matriz.setEditable(false);
-        campoTexto_6_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_4_Matriz);
         campoTexto_6_4_Matriz.setBounds(170, 190, 25, 15);
 
         campoTexto_6_5_Matriz.setEditable(false);
-        campoTexto_6_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_5_Matriz);
         campoTexto_6_5_Matriz.setBounds(205, 190, 25, 15);
 
         campoTexto_6_6_Matriz.setEditable(false);
-        campoTexto_6_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_6_Matriz);
         campoTexto_6_6_Matriz.setBounds(240, 190, 25, 15);
 
         campoTexto_6_7_Matriz.setEditable(false);
-        campoTexto_6_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_7_Matriz);
         campoTexto_6_7_Matriz.setBounds(275, 190, 25, 15);
 
         campoTexto_6_8_Matriz.setEditable(false);
-        campoTexto_6_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_8_Matriz);
         campoTexto_6_8_Matriz.setBounds(310, 190, 25, 15);
 
         campoTexto_6_9_Matriz.setEditable(false);
-        campoTexto_6_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_9_Matriz);
         campoTexto_6_9_Matriz.setBounds(345, 190, 25, 15);
 
         campoTexto_6_10_Matriz.setEditable(false);
-        campoTexto_6_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_10_Matriz);
         campoTexto_6_10_Matriz.setBounds(380, 190, 25, 15);
 
         campoTexto_0_0_Matriz.setEditable(false);
-        campoTexto_0_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_0_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_0_0_Matriz);
         campoTexto_0_0_Matriz.setBounds(30, 40, 25, 15);
 
         campoTexto_6_11_Matriz.setEditable(false);
-        campoTexto_6_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_6_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_6_11_Matriz);
         campoTexto_6_11_Matriz.setBounds(415, 190, 25, 15);
 
         campoTexto_7_7_Matriz.setEditable(false);
-        campoTexto_7_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_7_Matriz);
         campoTexto_7_7_Matriz.setBounds(275, 215, 25, 15);
 
         campoTexto_7_4_Matriz.setEditable(false);
-        campoTexto_7_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_4_Matriz);
         campoTexto_7_4_Matriz.setBounds(170, 215, 25, 15);
 
         campoTexto_7_9_Matriz.setEditable(false);
-        campoTexto_7_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_9_Matriz);
         campoTexto_7_9_Matriz.setBounds(345, 215, 25, 15);
 
         campoTexto_8_8_Matriz.setEditable(false);
-        campoTexto_8_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_8_Matriz);
         campoTexto_8_8_Matriz.setBounds(310, 240, 25, 15);
 
         campoTexto_8_9_Matriz.setEditable(false);
-        campoTexto_8_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_9_Matriz);
         campoTexto_8_9_Matriz.setBounds(345, 240, 25, 15);
 
         campoTexto_7_10_Matriz.setEditable(false);
-        campoTexto_7_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_10_Matriz);
         campoTexto_7_10_Matriz.setBounds(380, 215, 25, 15);
 
         campoTexto_7_8_Matriz.setEditable(false);
-        campoTexto_7_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_8_Matriz);
         campoTexto_7_8_Matriz.setBounds(310, 215, 25, 15);
 
         campoTexto_8_6_Matriz.setEditable(false);
-        campoTexto_8_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_6_Matriz);
         campoTexto_8_6_Matriz.setBounds(240, 240, 25, 15);
 
         campoTexto_9_5_Matriz.setEditable(false);
-        campoTexto_9_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_5_Matriz);
         campoTexto_9_5_Matriz.setBounds(205, 265, 25, 15);
 
         campoTexto_8_7_Matriz.setEditable(false);
-        campoTexto_8_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_7_Matriz);
         campoTexto_8_7_Matriz.setBounds(275, 240, 25, 15);
 
         campoTexto_8_4_Matriz.setEditable(false);
-        campoTexto_8_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_4_Matriz);
         campoTexto_8_4_Matriz.setBounds(170, 240, 25, 15);
 
         campoTexto_7_6_Matriz.setEditable(false);
-        campoTexto_7_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_6_Matriz);
         campoTexto_7_6_Matriz.setBounds(240, 215, 25, 15);
 
         campoTexto_8_10_Matriz.setEditable(false);
-        campoTexto_8_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_10_Matriz);
         campoTexto_8_10_Matriz.setBounds(380, 240, 25, 15);
 
         campoTexto_9_3_Matriz.setEditable(false);
-        campoTexto_9_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_3_Matriz);
         campoTexto_9_3_Matriz.setBounds(135, 265, 25, 15);
 
         campoTexto_8_3_Matriz.setEditable(false);
-        campoTexto_8_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_3_Matriz);
         campoTexto_8_3_Matriz.setBounds(135, 240, 25, 15);
 
         campoTexto_7_2_Matriz.setEditable(false);
-        campoTexto_7_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_2_Matriz);
         campoTexto_7_2_Matriz.setBounds(100, 215, 25, 15);
 
         campoTexto_7_3_Matriz.setEditable(false);
-        campoTexto_7_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_3_Matriz);
         campoTexto_7_3_Matriz.setBounds(135, 215, 25, 15);
 
         campoTexto_7_5_Matriz.setEditable(false);
-        campoTexto_7_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_5_Matriz);
         campoTexto_7_5_Matriz.setBounds(205, 215, 25, 15);
 
         campoTexto_8_11_Matriz.setEditable(false);
-        campoTexto_8_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_11_Matriz);
         campoTexto_8_11_Matriz.setBounds(415, 240, 25, 15);
 
         campoTexto_9_2_Matriz.setEditable(false);
-        campoTexto_9_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_2_Matriz);
         campoTexto_9_2_Matriz.setBounds(100, 265, 25, 15);
 
         campoTexto_8_2_Matriz.setEditable(false);
-        campoTexto_8_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_2_Matriz);
         campoTexto_8_2_Matriz.setBounds(100, 240, 25, 15);
 
         campoTexto_8_1_Matriz.setEditable(false);
-        campoTexto_8_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_1_Matriz);
         campoTexto_8_1_Matriz.setBounds(65, 240, 25, 15);
 
         campoTexto_9_0_Matriz.setEditable(false);
-        campoTexto_9_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_0_Matriz);
         campoTexto_9_0_Matriz.setBounds(30, 265, 25, 15);
 
         campoTexto_8_0_Matriz.setEditable(false);
-        campoTexto_8_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_0_Matriz);
         campoTexto_8_0_Matriz.setBounds(30, 240, 25, 15);
 
         campoTexto_7_1_Matriz.setEditable(false);
-        campoTexto_7_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_1_Matriz);
         campoTexto_7_1_Matriz.setBounds(65, 215, 25, 15);
 
         campoTexto_7_0_Matriz.setEditable(false);
-        campoTexto_7_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_0_Matriz);
         campoTexto_7_0_Matriz.setBounds(30, 215, 25, 15);
 
         campoTexto_7_11_Matriz.setEditable(false);
-        campoTexto_7_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_7_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_7_11_Matriz);
         campoTexto_7_11_Matriz.setBounds(415, 215, 25, 15);
 
         campoTexto_9_4_Matriz.setEditable(false);
-        campoTexto_9_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_4_Matriz);
         campoTexto_9_4_Matriz.setBounds(170, 265, 25, 15);
 
         campoTexto_8_5_Matriz.setEditable(false);
-        campoTexto_8_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_8_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_8_5_Matriz);
         campoTexto_8_5_Matriz.setBounds(205, 240, 25, 15);
 
         campoTexto_9_1_Matriz.setEditable(false);
-        campoTexto_9_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_1_Matriz);
         campoTexto_9_1_Matriz.setBounds(65, 265, 25, 15);
 
         campoTexto_9_10_Matriz.setEditable(false);
-        campoTexto_9_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_10_Matriz);
         campoTexto_9_10_Matriz.setBounds(380, 265, 25, 15);
 
         campoTexto_9_11_Matriz.setEditable(false);
-        campoTexto_9_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_11_Matriz);
         campoTexto_9_11_Matriz.setBounds(415, 265, 25, 15);
 
         campoTexto_10_9_Matriz.setEditable(false);
-        campoTexto_10_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_9_Matriz);
         campoTexto_10_9_Matriz.setBounds(345, 290, 25, 15);
 
         campoTexto_10_10_Matriz.setEditable(false);
-        campoTexto_10_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_10_Matriz);
         campoTexto_10_10_Matriz.setBounds(380, 290, 25, 15);
 
         campoTexto_11_9_Matriz.setEditable(false);
-        campoTexto_11_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_9_Matriz);
         campoTexto_11_9_Matriz.setBounds(345, 315, 25, 15);
 
         campoTexto_9_9_Matriz.setEditable(false);
-        campoTexto_9_9_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_9_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_9_Matriz);
         campoTexto_9_9_Matriz.setBounds(345, 265, 25, 15);
 
         campoTexto_10_0_Matriz.setEditable(false);
-        campoTexto_10_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_0_Matriz);
         campoTexto_10_0_Matriz.setBounds(30, 290, 25, 15);
 
         campoTexto_10_8_Matriz.setEditable(false);
-        campoTexto_10_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_8_Matriz);
         campoTexto_10_8_Matriz.setBounds(310, 290, 25, 15);
 
         campoTexto_10_11_Matriz.setEditable(false);
-        campoTexto_10_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_11_Matriz);
         campoTexto_10_11_Matriz.setBounds(415, 290, 25, 15);
 
         campoTexto_11_8_Matriz.setEditable(false);
-        campoTexto_11_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_8_Matriz);
         campoTexto_11_8_Matriz.setBounds(310, 315, 25, 15);
 
         campoTexto_9_8_Matriz.setEditable(false);
-        campoTexto_9_8_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_8_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_8_Matriz);
         campoTexto_9_8_Matriz.setBounds(310, 265, 25, 15);
 
         campoTexto_10_6_Matriz.setEditable(false);
-        campoTexto_10_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_6_Matriz);
         campoTexto_10_6_Matriz.setBounds(240, 290, 25, 15);
 
         campoTexto_10_7_Matriz.setEditable(false);
-        campoTexto_10_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_7_Matriz);
         campoTexto_10_7_Matriz.setBounds(275, 290, 25, 15);
 
         campoTexto_11_6_Matriz.setEditable(false);
-        campoTexto_11_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_6_Matriz);
         campoTexto_11_6_Matriz.setBounds(240, 315, 25, 15);
 
         campoTexto_11_7_Matriz.setEditable(false);
-        campoTexto_11_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_7_Matriz);
         campoTexto_11_7_Matriz.setBounds(275, 315, 25, 15);
 
         campoTexto_11_5_Matriz.setEditable(false);
-        campoTexto_11_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_5_Matriz);
         campoTexto_11_5_Matriz.setBounds(205, 315, 25, 15);
 
         campoTexto_11_10_Matriz.setEditable(false);
-        campoTexto_11_10_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_10_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_10_Matriz);
         campoTexto_11_10_Matriz.setBounds(380, 315, 25, 15);
 
         campoTexto_11_0_Matriz.setEditable(false);
-        campoTexto_11_0_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_0_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_0_Matriz);
         campoTexto_11_0_Matriz.setBounds(30, 315, 25, 15);
 
         campoTexto_10_5_Matriz.setEditable(false);
-        campoTexto_10_5_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_5_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_5_Matriz);
         campoTexto_10_5_Matriz.setBounds(205, 290, 25, 15);
 
         campoTexto_9_7_Matriz.setEditable(false);
-        campoTexto_9_7_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_7_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_7_Matriz);
         campoTexto_9_7_Matriz.setBounds(275, 265, 25, 15);
 
         campoTexto_10_4_Matriz.setEditable(false);
-        campoTexto_10_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_4_Matriz);
         campoTexto_10_4_Matriz.setBounds(170, 290, 25, 15);
 
         campoTexto_9_6_Matriz.setEditable(false);
-        campoTexto_9_6_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_9_6_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_9_6_Matriz);
         campoTexto_9_6_Matriz.setBounds(240, 265, 25, 15);
 
         campoTexto_10_3_Matriz.setEditable(false);
-        campoTexto_10_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_3_Matriz);
         campoTexto_10_3_Matriz.setBounds(135, 290, 25, 15);
 
         campoTexto_11_4_Matriz.setEditable(false);
-        campoTexto_11_4_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_4_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_4_Matriz);
         campoTexto_11_4_Matriz.setBounds(170, 315, 25, 15);
 
         campoTexto_11_11_Matriz.setEditable(false);
-        campoTexto_11_11_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_11_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_11_Matriz);
         campoTexto_11_11_Matriz.setBounds(415, 315, 25, 15);
 
         campoTexto_11_3_Matriz.setEditable(false);
-        campoTexto_11_3_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_3_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_3_Matriz);
         campoTexto_11_3_Matriz.setBounds(135, 315, 25, 15);
 
         campoTexto_10_2_Matriz.setEditable(false);
-        campoTexto_10_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_2_Matriz);
         campoTexto_10_2_Matriz.setBounds(100, 290, 25, 15);
 
         campoTexto_11_2_Matriz.setEditable(false);
-        campoTexto_11_2_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_2_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_2_Matriz);
         campoTexto_11_2_Matriz.setBounds(100, 315, 25, 15);
 
         campoTexto_10_1_Matriz.setEditable(false);
-        campoTexto_10_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_10_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_10_1_Matriz);
         campoTexto_10_1_Matriz.setBounds(65, 290, 25, 15);
 
         campoTexto_11_1_Matriz.setEditable(false);
-        campoTexto_11_1_Matriz.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        campoTexto_11_1_Matriz.setFont(fonte); // NOI18N
         painelMatriz.add(campoTexto_11_1_Matriz);
         campoTexto_11_1_Matriz.setBounds(65, 315, 25, 15);
 
@@ -1551,7 +1552,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         painelMatriz.add(rotuloP);
         rotuloP.setBounds(10, 175, 10, 13);
 
-        rotuloColuna_6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_6.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_6);
         rotuloColuna_6.setBounds(245, 20, 15, 13);
 
@@ -1563,95 +1564,95 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         painelMatriz.add(rotuloRI);
         rotuloRI.setBounds(230, 340, 30, 13);
 
-        rotuloLinha_11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_11.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_11);
         rotuloLinha_11.setBounds(10, 315, 15, 13);
 
-        rotuloLinha_10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_10.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_10);
         rotuloLinha_10.setBounds(10, 290, 15, 13);
 
-        rotuloLinha_9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_9.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_9);
         rotuloLinha_9.setBounds(10, 265, 15, 13);
 
-        rotuloLinha_8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_8.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_8);
         rotuloLinha_8.setBounds(10, 240, 15, 13);
 
-        rotuloLinha_7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_7.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_7);
         rotuloLinha_7.setBounds(10, 215, 15, 13);
 
-        rotuloLinha_6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_6.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_6);
         rotuloLinha_6.setBounds(10, 190, 15, 13);
 
-        rotuloLinha_5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_5.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_5);
         rotuloLinha_5.setBounds(10, 165, 15, 13);
 
-        rotuloLinha_4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_4.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_4);
         rotuloLinha_4.setBounds(10, 140, 15, 13);
 
-        rotuloLinha_3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_3.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_3);
         rotuloLinha_3.setBounds(10, 115, 15, 13);
 
-        rotuloLinha_2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_2.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_2);
         rotuloLinha_2.setBounds(10, 90, 15, 13);
 
-        rotuloLinha_1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_1.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_1);
         rotuloLinha_1.setBounds(10, 65, 15, 13);
 
-        rotuloLinha_0.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloLinha_0.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_0);
         rotuloLinha_0.setBounds(10, 40, 15, 13);
 
-        rotuloColuna_0.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_0.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_0);
         rotuloColuna_0.setBounds(35, 20, 15, 13);
 
-        rotuloColuna_1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_1.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_1);
         rotuloColuna_1.setBounds(70, 20, 15, 13);
 
-        rotuloColuna_2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_2.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_2);
         rotuloColuna_2.setBounds(105, 20, 15, 13);
 
-        rotuloColuna_3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_3.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_3);
         rotuloColuna_3.setBounds(140, 20, 15, 13);
 
-        rotuloColuna_4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_4.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_4);
         rotuloColuna_4.setBounds(175, 20, 15, 13);
 
-        rotuloColuna_5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_5.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_5);
         rotuloColuna_5.setBounds(210, 20, 15, 13);
 
-        rotuloColuna_7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_7.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_7);
         rotuloColuna_7.setBounds(280, 20, 15, 13);
 
-        rotuloColuna_8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_8.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_8);
         rotuloColuna_8.setBounds(315, 20, 15, 13);
 
-        rotuloColuna_9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_9.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_9);
         rotuloColuna_9.setBounds(350, 20, 15, 13);
 
-        rotuloColuna_10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_10.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_10);
         rotuloColuna_10.setBounds(385, 20, 15, 13);
 
-        rotuloColuna_11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        rotuloColuna_11.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_11);
         rotuloColuna_11.setBounds(420, 20, 15, 13);
         painelMatriz.add(rotuloI);
@@ -1671,62 +1672,62 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         painelEntrada.setBorder(javax.swing.BorderFactory.createTitledBorder("Entrada"));
         painelEntrada.setLayout(null);
 
-        botaoValor9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor9.setFont(fonte); // NOI18N
         botaoValor9.setText("9");
         painelEntrada.add(botaoValor9);
         botaoValor9.setBounds(20, 150, 50, 20);
 
-        botaoValor10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor10.setFont(fonte); // NOI18N
         botaoValor10.setText("10");
         painelEntrada.add(botaoValor10);
         botaoValor10.setBounds(110, 150, 50, 20);
 
-        botaoValor11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor11.setFont(fonte); // NOI18N
         botaoValor11.setText("11");
         painelEntrada.add(botaoValor11);
         botaoValor11.setBounds(200, 150, 50, 20);
 
-        botaoValor8.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor8.setFont(fonte); // NOI18N
         botaoValor8.setText("8");
         painelEntrada.add(botaoValor8);
         botaoValor8.setBounds(200, 190, 50, 20);
 
-        botaoValor7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor7.setFont(fonte); // NOI18N
         botaoValor7.setText("7");
         painelEntrada.add(botaoValor7);
         botaoValor7.setBounds(110, 190, 50, 20);
 
-        botaoValor6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor6.setFont(fonte); // NOI18N
         botaoValor6.setText("6");
         painelEntrada.add(botaoValor6);
         botaoValor6.setBounds(20, 190, 50, 20);
 
-        botaoValor3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor3.setFont(fonte); // NOI18N
         botaoValor3.setText("3");
         painelEntrada.add(botaoValor3);
         botaoValor3.setBounds(20, 230, 50, 20);
 
-        botaoValor4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor4.setFont(fonte); // NOI18N
         botaoValor4.setText("4");
         painelEntrada.add(botaoValor4);
         botaoValor4.setBounds(110, 230, 50, 20);
 
-        botaoValor5.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor5.setFont(fonte); // NOI18N
         botaoValor5.setText("5");
         painelEntrada.add(botaoValor5);
         botaoValor5.setBounds(200, 230, 50, 20);
 
-        botaoValor2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor2.setFont(fonte); // NOI18N
         botaoValor2.setText("2");
         painelEntrada.add(botaoValor2);
         botaoValor2.setBounds(200, 270, 50, 20);
 
-        botaoValor1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor1.setFont(fonte); // NOI18N
         botaoValor1.setText("1");
         painelEntrada.add(botaoValor1);
         botaoValor1.setBounds(110, 270, 50, 20);
 
-        botaoValor0.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoValor0.setFont(fonte); // NOI18N
         botaoValor0.setText("0");
         painelEntrada.add(botaoValor0);
         botaoValor0.setBounds(20, 270, 50, 20);
@@ -1742,7 +1743,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         painelEntrada.add(botaoRemover);
         botaoRemover.setBounds(20, 310, 50, 20);
 
-        botaoSubstituirEntrada.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoSubstituirEntrada.setFont(fonte); // NOI18N
         botaoSubstituirEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SetaCima.png"))); // NOI18N
         botaoSubstituirEntrada.setToolTipText("Substitui entrada atual pelo resultado");
         botaoSubstituirEntrada.setEnabled(false);
@@ -1765,7 +1766,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         painelEntrada.add(scrollPaneEntrada);
         scrollPaneEntrada.setBounds(20, 35, 230, 70);
 
-        botaoReproduzir.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoReproduzir.setFont(fonte); // NOI18N
         botaoReproduzir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ClaveFaTransparente.png"))); // NOI18N
         botaoReproduzir.setToolTipText("Reproduzir conjunto da entrada");
         botaoReproduzir.setEnabled(false);
@@ -1795,7 +1796,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         barraDeFerramentas.add(botaoLimpar);
         barraDeFerramentas.add(jSeparator3);
 
-        botaoAlternarNumeroNotas.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoAlternarNumeroNotas.setFont(fonte); // NOI18N
         botaoAlternarNumeroNotas.setText("C#");
         botaoAlternarNumeroNotas.setToolTipText("Selecionar modo Notas");
         botaoAlternarNumeroNotas.setFocusable(false);
@@ -1809,7 +1810,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         barraDeFerramentas.add(botaoAlternarNumeroNotas);
         barraDeFerramentas.add(jSeparator8);
 
-        botaoGerarFormaNormalStraus.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarFormaNormalStraus.setFont(fonte); // NOI18N
         botaoGerarFormaNormalStraus.setText("FNS");
         botaoGerarFormaNormalStraus.setToolTipText("Forma Normal segundo Straus");
         botaoGerarFormaNormalStraus.setEnabled(false);
@@ -1820,7 +1821,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarFormaNormalStraus);
 
-        botaoGerarFormaNormalForte.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarFormaNormalForte.setFont(fonte); // NOI18N
         botaoGerarFormaNormalForte.setText("FNF");
         botaoGerarFormaNormalForte.setToolTipText("Forma Normal segundo Forte");
         botaoGerarFormaNormalForte.setEnabled(false);
@@ -1834,7 +1835,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarFormaNormalForte);
 
-        botaoGerarFormaPrimaStraus.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarFormaPrimaStraus.setFont(fonte); // NOI18N
         botaoGerarFormaPrimaStraus.setText("FPS");
         botaoGerarFormaPrimaStraus.setToolTipText("Forma Prima segundo Straus");
         botaoGerarFormaPrimaStraus.setEnabled(false);
@@ -1845,7 +1846,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarFormaPrimaStraus);
 
-        botaoGerarFormaPrimaForte.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarFormaPrimaForte.setFont(fonte); // NOI18N
         botaoGerarFormaPrimaForte.setText("FPF");
         botaoGerarFormaPrimaForte.setToolTipText("Forma Prima segundo Forte");
         botaoGerarFormaPrimaForte.setEnabled(false);
@@ -1859,7 +1860,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarFormaPrimaForte);
 
-        botaoGerarSubconjuntos.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarSubconjuntos.setFont(fonte); // NOI18N
         botaoGerarSubconjuntos.setText("sn");
         botaoGerarSubconjuntos.setToolTipText("Subconjuntos de n classes");
         botaoGerarSubconjuntos.setEnabled(false);
@@ -1873,7 +1874,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarSubconjuntos);
 
-        botaoGerarRotacaoStravinskyana.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarRotacaoStravinskyana.setFont(fonte); // NOI18N
         botaoGerarRotacaoStravinskyana.setText("RS");
         botaoGerarRotacaoStravinskyana.setToolTipText("Rotação Stravinskyana");
         botaoGerarRotacaoStravinskyana.setEnabled(false);
@@ -1884,7 +1885,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarRotacaoStravinskyana);
 
-        botaoGerarTabelaAdicao.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarTabelaAdicao.setFont(fonte); // NOI18N
         botaoGerarTabelaAdicao.setText("TA");
         botaoGerarTabelaAdicao.setToolTipText("Tabela de Adição");
         botaoGerarTabelaAdicao.setEnabled(false);
@@ -1895,7 +1896,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarTabelaAdicao);
 
-        botaoGerarVetorIntervalar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarVetorIntervalar.setFont(fonte); // NOI18N
         botaoGerarVetorIntervalar.setText("VI");
         botaoGerarVetorIntervalar.setToolTipText("Vetor Intervalar");
         botaoGerarVetorIntervalar.setEnabled(false);
@@ -1906,7 +1907,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarVetorIntervalar);
 
-        botaoInvarianciaTranspositiva.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoInvarianciaTranspositiva.setFont(fonte); // NOI18N
         botaoInvarianciaTranspositiva.setText("IT");
         botaoInvarianciaTranspositiva.setToolTipText("Invariância Transpositiva");
         botaoInvarianciaTranspositiva.setEnabled(false);
@@ -1920,7 +1921,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoInvarianciaTranspositiva);
 
-        botaoInvarianciaInversiva.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoInvarianciaInversiva.setFont(fonte); // NOI18N
         botaoInvarianciaInversiva.setText("II");
         botaoInvarianciaInversiva.setToolTipText("Invariância Inversiva");
         botaoInvarianciaInversiva.setEnabled(false);
@@ -1934,7 +1935,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoInvarianciaInversiva);
 
-        botaoPaleta.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoPaleta.setFont(fonte); // NOI18N
         botaoPaleta.setText("Pal");
         botaoPaleta.setToolTipText("Paleta de classes de conjuntos");
         botaoPaleta.setEnabled(false);
@@ -1949,7 +1950,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         barraDeFerramentas.add(botaoPaleta);
         barraDeFerramentas.add(jSeparator7);
 
-        botaoInserirSegundoFator.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoInserirSegundoFator.setFont(fonte); // NOI18N
         botaoInserirSegundoFator.setText("y");
         botaoInserirSegundoFator.setToolTipText("Manipular segundo conjunto");
         botaoInserirSegundoFator.setEnabled(false);
@@ -1963,7 +1964,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoInserirSegundoFator);
 
-        botaoMultiplicacaoBoulez.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoMultiplicacaoBoulez.setFont(fonte); // NOI18N
         botaoMultiplicacaoBoulez.setText("Boulez");
         botaoMultiplicacaoBoulez.setToolTipText("Multiplicação segundo Boulez");
         botaoMultiplicacaoBoulez.setEnabled(false);
@@ -1974,7 +1975,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoMultiplicacaoBoulez);
 
-        botaoMultiplicacaoRahn.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoMultiplicacaoRahn.setFont(fonte); // NOI18N
         botaoMultiplicacaoRahn.setText("Rahn 1");
         botaoMultiplicacaoRahn.setToolTipText("Multiplicação segundo Rahn");
         botaoMultiplicacaoRahn.setEnabled(false);
@@ -1985,7 +1986,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoMultiplicacaoRahn);
 
-        botaoMultiplicacaoRahnEstendido.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoMultiplicacaoRahnEstendido.setFont(fonte); // NOI18N
         botaoMultiplicacaoRahnEstendido.setText("Rahn 2");
         botaoMultiplicacaoRahnEstendido.setToolTipText("Multiplicação Rahn expandida");
         botaoMultiplicacaoRahnEstendido.setEnabled(false);
@@ -1996,7 +1997,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoMultiplicacaoRahnEstendido);
 
-        botaoGerarSimilaridade.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarSimilaridade.setFont(fonte); // NOI18N
         botaoGerarSimilaridade.setText("Si");
         botaoGerarSimilaridade.setToolTipText("Similaridade");
         botaoGerarSimilaridade.setEnabled(false);
@@ -2011,7 +2012,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         barraDeFerramentas.add(botaoGerarSimilaridade);
         barraDeFerramentas.add(jSeparator6);
 
-        botaoGerarDerivacaoSerial.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarDerivacaoSerial.setFont(fonte); // NOI18N
         botaoGerarDerivacaoSerial.setText("DS");
         botaoGerarDerivacaoSerial.setToolTipText("Derivação Serial");
         botaoGerarDerivacaoSerial.setEnabled(false);
@@ -2022,7 +2023,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarDerivacaoSerial);
 
-        botaoGerarMatrizDodecafonica.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoGerarMatrizDodecafonica.setFont(fonte); // NOI18N
         botaoGerarMatrizDodecafonica.setText("MD");
         botaoGerarMatrizDodecafonica.setToolTipText("Matriz Dodecafônica");
         botaoGerarMatrizDodecafonica.setEnabled(false);
@@ -2033,7 +2034,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoGerarMatrizDodecafonica);
 
-        botaoCombinatoriedade.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoCombinatoriedade.setFont(fonte); // NOI18N
         botaoCombinatoriedade.setText("Comb.");
         botaoCombinatoriedade.setToolTipText("Combinatoriedade");
         botaoCombinatoriedade.setEnabled(false);
@@ -2044,7 +2045,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         });
         barraDeFerramentas.add(botaoCombinatoriedade);
 
-        botaoInvariancia.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoInvariancia.setFont(fonte); // NOI18N
         botaoInvariancia.setText("Inv.");
         botaoInvariancia.setToolTipText("Invariância");
         botaoInvariancia.setEnabled(false);
@@ -2056,7 +2057,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         barraDeFerramentas.add(botaoInvariancia);
         barraDeFerramentas.add(jSeparator1);
 
-        botaoExportarHTML.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoExportarHTML.setFont(fonte); // NOI18N
         botaoExportarHTML.setText("Ex");
         botaoExportarHTML.setToolTipText("Exportar para HTML");
         botaoExportarHTML.setEnabled(false);
@@ -2071,7 +2072,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         barraDeFerramentas.add(botaoExportarHTML);
         barraDeFerramentas.add(jSeparator4);
 
-        botaoTabelasCordais.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        botaoTabelasCordais.setFont(fonte); // NOI18N
         botaoTabelasCordais.setText("Tab.");
         botaoTabelasCordais.setToolTipText("Tabelas Cordais");
         botaoTabelasCordais.setFocusable(false);
