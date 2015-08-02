@@ -53,6 +53,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private Controlador controlador = new Controlador();
     private static final String espacamento = "  ";
     private static final java.awt.Font fonte = new java.awt.Font("Tahoma", 0, 10);
+    private static final java.awt.Font fonteNegrito = new java.awt.Font("Tahoma", 1, 11);
 
     public static final int SAIDA_DERIVACAO_SERIAL = 1, MATRIZ_DODECAFONICA = 2,
                             SAIDA_FORMA_COMPACTA = 3, SAIDA_PALETA = 4,
@@ -646,21 +647,26 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        rotuloP.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        rotuloP.setFont(fonteNegrito);
         painelMatriz.add(rotuloP);
         rotuloP.setBounds(10, 175, 10, 13);
+
+        rotuloR.setFont(fonteNegrito);
+        painelMatriz.add(rotuloR);
+        rotuloR.setBounds(450, 175, 10, 13);
+
+        rotuloRI.setFont(fonteNegrito);
+        painelMatriz.add(rotuloRI);
+        rotuloRI.setBounds(230, 340, 30, 13);
+
+        rotuloI.setFont(fonteNegrito);
+        painelMatriz.add(rotuloI);
+        rotuloI.setBounds(230, 10, 10, 13);
 
         rotuloColuna_6.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_6);
         rotuloColuna_6.setBounds(245, 20, 15, 13);
 
-        rotuloR.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        painelMatriz.add(rotuloR);
-        rotuloR.setBounds(450, 175, 10, 13);
-
-        rotuloRI.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        painelMatriz.add(rotuloRI);
-        rotuloRI.setBounds(230, 340, 30, 13);
 
         rotuloLinha_11.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloLinha_11);
@@ -753,8 +759,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         rotuloColuna_11.setFont(fonte); // NOI18N
         painelMatriz.add(rotuloColuna_11);
         rotuloColuna_11.setBounds(420, 20, 15, 13);
-        painelMatriz.add(rotuloI);
-        rotuloI.setBounds(230, 10, 10, 13);
 
 
         areaTextoResultados.setColumns(20);
