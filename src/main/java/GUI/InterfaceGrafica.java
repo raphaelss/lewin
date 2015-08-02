@@ -45,7 +45,7 @@ import javax.swing.border.TitledBorder;
 
 public class InterfaceGrafica extends javax.swing.JFrame {
     private JTextField[][] camposMatriz = new JTextField[12][12];
-    private JLabel[] rotulosDasLinhas, rotulosDasColunas;
+    private JLabel[] rotulosDasLinhas = new JLabel[12], rotulosDasColunas = new JLabel[12];
     private ArrayList<JButton> botoesEntrada = new ArrayList<JButton>();
     private TipoTabela guiEscolherTabela = new TipoTabela();
     private ClasseDeAltura.TipoRepresentacao formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.Inteiro;
@@ -122,15 +122,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         for (JButton botao : botoesEntrada) {
             botao.addActionListener(buttonListenerEntrada);
         }
-
-        rotulosDasLinhas = new JLabel[] {rotuloLinha_0, rotuloLinha_1, rotuloLinha_2,
-                                         rotuloLinha_3, rotuloLinha_4, rotuloLinha_5,
-                                         rotuloLinha_6, rotuloLinha_7, rotuloLinha_8,
-                                         rotuloLinha_9, rotuloLinha_10, rotuloLinha_11};
-        rotulosDasColunas = new JLabel[] {rotuloColuna_0, rotuloColuna_1, rotuloColuna_2,
-                                         rotuloColuna_3, rotuloColuna_4, rotuloColuna_5,
-                                         rotuloColuna_6, rotuloColuna_7, rotuloColuna_8,
-                                         rotuloColuna_9, rotuloColuna_10, rotuloColuna_11};
 
         try {
             if ((sequenciador = MidiSystem.getSequencer()) == null) {
@@ -554,44 +545,31 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         jPanel2.add(painelMatriz);
 
         for (int linha = 0; linha < 12; ++linha) {
-            int y = 40 + linha * 25;
+            int campoY = 40 + linha * 25;
+            javax.swing.JLabel rotuloLinha = new javax.swing.JLabel();
+            rotulosDasLinhas[linha] = rotuloLinha;
+            rotuloLinha.setFont(fonte);
+            rotuloLinha.setBounds(10, 40 + 25 * linha, 18, 13);
+            painelMatriz.add(rotuloLinha);
             for (int coluna = 0; coluna < 12; ++coluna) {
-                javax.swing.JTextField atual = new javax.swing.JTextField();
-                camposMatriz[linha][coluna] = atual;
-                atual.setEditable(false);
-                atual.setFont(fonte);
-                painelMatriz.add(atual);
-                atual.setBounds(30 + coluna * 35, y, 25, 15);
+                javax.swing.JLabel rotuloColuna = new javax.swing.JLabel();
+                rotulosDasColunas[coluna] = rotuloColuna;
+                rotuloColuna.setFont(fonte);
+                rotuloColuna.setBounds(35 + 35 * coluna, 20, 18, 13);
+                painelMatriz.add(rotuloColuna);
+
+                javax.swing.JTextField campo = new javax.swing.JTextField();
+                camposMatriz[linha][coluna] = campo;
+                campo.setEditable(false);
+                campo.setFont(fonte);
+                painelMatriz.add(campo);
+                campo.setBounds(30 + coluna * 35, campoY, 25, 15);
             }
         }
         rotuloP = new javax.swing.JLabel();
         rotuloI = new javax.swing.JLabel();
         rotuloR = new javax.swing.JLabel();
         rotuloRI = new javax.swing.JLabel();
-        rotuloColuna_6 = new javax.swing.JLabel();
-        rotuloLinha_11 = new javax.swing.JLabel();
-        rotuloLinha_10 = new javax.swing.JLabel();
-        rotuloLinha_9 = new javax.swing.JLabel();
-        rotuloLinha_8 = new javax.swing.JLabel();
-        rotuloLinha_7 = new javax.swing.JLabel();
-        rotuloLinha_6 = new javax.swing.JLabel();
-        rotuloLinha_5 = new javax.swing.JLabel();
-        rotuloLinha_4 = new javax.swing.JLabel();
-        rotuloLinha_3 = new javax.swing.JLabel();
-        rotuloLinha_2 = new javax.swing.JLabel();
-        rotuloLinha_1 = new javax.swing.JLabel();
-        rotuloLinha_0 = new javax.swing.JLabel();
-        rotuloColuna_0 = new javax.swing.JLabel();
-        rotuloColuna_1 = new javax.swing.JLabel();
-        rotuloColuna_2 = new javax.swing.JLabel();
-        rotuloColuna_3 = new javax.swing.JLabel();
-        rotuloColuna_4 = new javax.swing.JLabel();
-        rotuloColuna_5 = new javax.swing.JLabel();
-        rotuloColuna_7 = new javax.swing.JLabel();
-        rotuloColuna_8 = new javax.swing.JLabel();
-        rotuloColuna_9 = new javax.swing.JLabel();
-        rotuloColuna_10 = new javax.swing.JLabel();
-        rotuloColuna_11 = new javax.swing.JLabel();
         scrollPaneInvariancia = new javax.swing.JScrollPane();
         areaTextoResultados = new javax.swing.JTextArea();
         painelEntrada = new javax.swing.JPanel();
@@ -662,104 +640,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         rotuloI.setFont(fonteNegrito);
         painelMatriz.add(rotuloI);
         rotuloI.setBounds(230, 10, 10, 13);
-
-        rotuloColuna_6.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_6);
-        rotuloColuna_6.setBounds(245, 20, 15, 13);
-
-
-        rotuloLinha_11.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_11);
-        rotuloLinha_11.setBounds(10, 315, 15, 13);
-
-        rotuloLinha_10.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_10);
-        rotuloLinha_10.setBounds(10, 290, 15, 13);
-
-        rotuloLinha_9.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_9);
-        rotuloLinha_9.setBounds(10, 265, 15, 13);
-
-        rotuloLinha_8.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_8);
-        rotuloLinha_8.setBounds(10, 240, 15, 13);
-
-        rotuloLinha_7.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_7);
-        rotuloLinha_7.setBounds(10, 215, 15, 13);
-
-        rotuloLinha_6.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_6);
-        rotuloLinha_6.setBounds(10, 190, 15, 13);
-
-        rotuloLinha_5.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_5);
-        rotuloLinha_5.setBounds(10, 165, 15, 13);
-
-        rotuloLinha_4.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_4);
-        rotuloLinha_4.setBounds(10, 140, 15, 13);
-
-        rotuloLinha_3.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_3);
-        rotuloLinha_3.setBounds(10, 115, 15, 13);
-
-        rotuloLinha_2.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_2);
-        rotuloLinha_2.setBounds(10, 90, 15, 13);
-
-        rotuloLinha_1.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_1);
-        rotuloLinha_1.setBounds(10, 65, 15, 13);
-
-        rotuloLinha_0.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloLinha_0);
-        rotuloLinha_0.setBounds(10, 40, 15, 13);
-
-        rotuloColuna_0.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_0);
-        rotuloColuna_0.setBounds(35, 20, 15, 13);
-
-        rotuloColuna_1.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_1);
-        rotuloColuna_1.setBounds(70, 20, 15, 13);
-
-        rotuloColuna_2.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_2);
-        rotuloColuna_2.setBounds(105, 20, 15, 13);
-
-        rotuloColuna_3.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_3);
-        rotuloColuna_3.setBounds(140, 20, 15, 13);
-
-        rotuloColuna_4.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_4);
-        rotuloColuna_4.setBounds(175, 20, 15, 13);
-
-        rotuloColuna_5.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_5);
-        rotuloColuna_5.setBounds(210, 20, 15, 13);
-
-        rotuloColuna_7.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_7);
-        rotuloColuna_7.setBounds(280, 20, 15, 13);
-
-        rotuloColuna_8.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_8);
-        rotuloColuna_8.setBounds(315, 20, 15, 13);
-
-        rotuloColuna_9.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_9);
-        rotuloColuna_9.setBounds(350, 20, 15, 13);
-
-        rotuloColuna_10.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_10);
-        rotuloColuna_10.setBounds(385, 20, 15, 13);
-
-        rotuloColuna_11.setFont(fonte); // NOI18N
-        painelMatriz.add(rotuloColuna_11);
-        rotuloColuna_11.setBounds(420, 20, 15, 13);
-
 
         areaTextoResultados.setColumns(20);
         areaTextoResultados.setEditable(false);
@@ -1834,150 +1714,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     protected javax.swing.JButton botaoValor7;
     protected javax.swing.JButton botaoValor8;
     protected javax.swing.JButton botaoValor9;
-    protected javax.swing.JTextField campoTexto_0_0_Matriz;
-    protected javax.swing.JTextField campoTexto_0_10_Matriz;
-    protected javax.swing.JTextField campoTexto_0_11_Matriz;
-    protected javax.swing.JTextField campoTexto_0_1_Matriz;
-    protected javax.swing.JTextField campoTexto_0_2_Matriz;
-    protected javax.swing.JTextField campoTexto_0_3_Matriz;
-    protected javax.swing.JTextField campoTexto_0_4_Matriz;
-    protected javax.swing.JTextField campoTexto_0_5_Matriz;
-    protected javax.swing.JTextField campoTexto_0_6_Matriz;
-    protected javax.swing.JTextField campoTexto_0_7_Matriz;
-    protected javax.swing.JTextField campoTexto_0_8_Matriz;
-    protected javax.swing.JTextField campoTexto_0_9_Matriz;
-    protected javax.swing.JTextField campoTexto_10_0_Matriz;
-    protected javax.swing.JTextField campoTexto_10_10_Matriz;
-    protected javax.swing.JTextField campoTexto_10_11_Matriz;
-    protected javax.swing.JTextField campoTexto_10_1_Matriz;
-    protected javax.swing.JTextField campoTexto_10_2_Matriz;
-    protected javax.swing.JTextField campoTexto_10_3_Matriz;
-    protected javax.swing.JTextField campoTexto_10_4_Matriz;
-    protected javax.swing.JTextField campoTexto_10_5_Matriz;
-    protected javax.swing.JTextField campoTexto_10_6_Matriz;
-    protected javax.swing.JTextField campoTexto_10_7_Matriz;
-    protected javax.swing.JTextField campoTexto_10_8_Matriz;
-    protected javax.swing.JTextField campoTexto_10_9_Matriz;
-    protected javax.swing.JTextField campoTexto_11_0_Matriz;
-    protected javax.swing.JTextField campoTexto_11_10_Matriz;
-    protected javax.swing.JTextField campoTexto_11_11_Matriz;
-    protected javax.swing.JTextField campoTexto_11_1_Matriz;
-    protected javax.swing.JTextField campoTexto_11_2_Matriz;
-    protected javax.swing.JTextField campoTexto_11_3_Matriz;
-    protected javax.swing.JTextField campoTexto_11_4_Matriz;
-    protected javax.swing.JTextField campoTexto_11_5_Matriz;
-    protected javax.swing.JTextField campoTexto_11_6_Matriz;
-    protected javax.swing.JTextField campoTexto_11_7_Matriz;
-    protected javax.swing.JTextField campoTexto_11_8_Matriz;
-    protected javax.swing.JTextField campoTexto_11_9_Matriz;
-    protected javax.swing.JTextField campoTexto_1_0_Matriz;
-    protected javax.swing.JTextField campoTexto_1_10_Matriz;
-    protected javax.swing.JTextField campoTexto_1_11_Matriz;
-    protected javax.swing.JTextField campoTexto_1_1_Matriz;
-    protected javax.swing.JTextField campoTexto_1_2_Matriz;
-    protected javax.swing.JTextField campoTexto_1_3_Matriz;
-    protected javax.swing.JTextField campoTexto_1_4_Matriz;
-    protected javax.swing.JTextField campoTexto_1_5_Matriz;
-    protected javax.swing.JTextField campoTexto_1_6_Matriz;
-    protected javax.swing.JTextField campoTexto_1_7_Matriz;
-    protected javax.swing.JTextField campoTexto_1_8_Matriz;
-    protected javax.swing.JTextField campoTexto_1_9_Matriz;
-    protected javax.swing.JTextField campoTexto_2_0_Matriz;
-    protected javax.swing.JTextField campoTexto_2_10_Matriz;
-    protected javax.swing.JTextField campoTexto_2_11_Matriz;
-    protected javax.swing.JTextField campoTexto_2_1_Matriz;
-    protected javax.swing.JTextField campoTexto_2_2_Matriz;
-    protected javax.swing.JTextField campoTexto_2_3_Matriz;
-    protected javax.swing.JTextField campoTexto_2_4_Matriz;
-    protected javax.swing.JTextField campoTexto_2_5_Matriz;
-    protected javax.swing.JTextField campoTexto_2_6_Matriz;
-    protected javax.swing.JTextField campoTexto_2_7_Matriz;
-    protected javax.swing.JTextField campoTexto_2_8_Matriz;
-    protected javax.swing.JTextField campoTexto_2_9_Matriz;
-    protected javax.swing.JTextField campoTexto_3_0_Matriz;
-    protected javax.swing.JTextField campoTexto_3_10_Matriz;
-    protected javax.swing.JTextField campoTexto_3_11_Matriz;
-    protected javax.swing.JTextField campoTexto_3_1_Matriz;
-    protected javax.swing.JTextField campoTexto_3_2_Matriz;
-    protected javax.swing.JTextField campoTexto_3_3_Matriz;
-    protected javax.swing.JTextField campoTexto_3_4_Matriz;
-    protected javax.swing.JTextField campoTexto_3_5_Matriz;
-    protected javax.swing.JTextField campoTexto_3_6_Matriz;
-    protected javax.swing.JTextField campoTexto_3_7_Matriz;
-    protected javax.swing.JTextField campoTexto_3_8_Matriz;
-    protected javax.swing.JTextField campoTexto_3_9_Matriz;
-    protected javax.swing.JTextField campoTexto_4_0_Matriz;
-    protected javax.swing.JTextField campoTexto_4_10_Matriz;
-    protected javax.swing.JTextField campoTexto_4_11_Matriz;
-    protected javax.swing.JTextField campoTexto_4_1_Matriz;
-    protected javax.swing.JTextField campoTexto_4_2_Matriz;
-    protected javax.swing.JTextField campoTexto_4_3_Matriz;
-    protected javax.swing.JTextField campoTexto_4_4_Matriz;
-    protected javax.swing.JTextField campoTexto_4_5_Matriz;
-    protected javax.swing.JTextField campoTexto_4_6_Matriz;
-    protected javax.swing.JTextField campoTexto_4_7_Matriz;
-    protected javax.swing.JTextField campoTexto_4_8_Matriz;
-    protected javax.swing.JTextField campoTexto_4_9_Matriz;
-    protected javax.swing.JTextField campoTexto_5_0_Matriz;
-    protected javax.swing.JTextField campoTexto_5_10_Matriz;
-    protected javax.swing.JTextField campoTexto_5_11_Matriz;
-    protected javax.swing.JTextField campoTexto_5_1_Matriz;
-    protected javax.swing.JTextField campoTexto_5_2_Matriz;
-    protected javax.swing.JTextField campoTexto_5_3_Matriz;
-    protected javax.swing.JTextField campoTexto_5_4_Matriz;
-    protected javax.swing.JTextField campoTexto_5_5_Matriz;
-    protected javax.swing.JTextField campoTexto_5_6_Matriz;
-    protected javax.swing.JTextField campoTexto_5_7_Matriz;
-    protected javax.swing.JTextField campoTexto_5_8_Matriz;
-    protected javax.swing.JTextField campoTexto_5_9_Matriz;
-    protected javax.swing.JTextField campoTexto_6_0_Matriz;
-    protected javax.swing.JTextField campoTexto_6_10_Matriz;
-    protected javax.swing.JTextField campoTexto_6_11_Matriz;
-    protected javax.swing.JTextField campoTexto_6_1_Matriz;
-    protected javax.swing.JTextField campoTexto_6_2_Matriz;
-    protected javax.swing.JTextField campoTexto_6_3_Matriz;
-    protected javax.swing.JTextField campoTexto_6_4_Matriz;
-    protected javax.swing.JTextField campoTexto_6_5_Matriz;
-    protected javax.swing.JTextField campoTexto_6_6_Matriz;
-    protected javax.swing.JTextField campoTexto_6_7_Matriz;
-    protected javax.swing.JTextField campoTexto_6_8_Matriz;
-    protected javax.swing.JTextField campoTexto_6_9_Matriz;
-    protected javax.swing.JTextField campoTexto_7_0_Matriz;
-    protected javax.swing.JTextField campoTexto_7_10_Matriz;
-    protected javax.swing.JTextField campoTexto_7_11_Matriz;
-    protected javax.swing.JTextField campoTexto_7_1_Matriz;
-    protected javax.swing.JTextField campoTexto_7_2_Matriz;
-    protected javax.swing.JTextField campoTexto_7_3_Matriz;
-    protected javax.swing.JTextField campoTexto_7_4_Matriz;
-    protected javax.swing.JTextField campoTexto_7_5_Matriz;
-    protected javax.swing.JTextField campoTexto_7_6_Matriz;
-    protected javax.swing.JTextField campoTexto_7_7_Matriz;
-    protected javax.swing.JTextField campoTexto_7_8_Matriz;
-    protected javax.swing.JTextField campoTexto_7_9_Matriz;
-    protected javax.swing.JTextField campoTexto_8_0_Matriz;
-    protected javax.swing.JTextField campoTexto_8_10_Matriz;
-    protected javax.swing.JTextField campoTexto_8_11_Matriz;
-    protected javax.swing.JTextField campoTexto_8_1_Matriz;
-    protected javax.swing.JTextField campoTexto_8_2_Matriz;
-    protected javax.swing.JTextField campoTexto_8_3_Matriz;
-    protected javax.swing.JTextField campoTexto_8_4_Matriz;
-    protected javax.swing.JTextField campoTexto_8_5_Matriz;
-    protected javax.swing.JTextField campoTexto_8_6_Matriz;
-    protected javax.swing.JTextField campoTexto_8_7_Matriz;
-    protected javax.swing.JTextField campoTexto_8_8_Matriz;
-    protected javax.swing.JTextField campoTexto_8_9_Matriz;
-    protected javax.swing.JTextField campoTexto_9_0_Matriz;
-    protected javax.swing.JTextField campoTexto_9_10_Matriz;
-    protected javax.swing.JTextField campoTexto_9_11_Matriz;
-    protected javax.swing.JTextField campoTexto_9_1_Matriz;
-    protected javax.swing.JTextField campoTexto_9_2_Matriz;
-    protected javax.swing.JTextField campoTexto_9_3_Matriz;
-    protected javax.swing.JTextField campoTexto_9_4_Matriz;
-    protected javax.swing.JTextField campoTexto_9_5_Matriz;
-    protected javax.swing.JTextField campoTexto_9_6_Matriz;
-    protected javax.swing.JTextField campoTexto_9_7_Matriz;
-    protected javax.swing.JTextField campoTexto_9_8_Matriz;
-    protected javax.swing.JTextField campoTexto_9_9_Matriz;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -1987,32 +1723,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JPanel painelEntrada;
     private javax.swing.JPanel painelMatriz;
-    private javax.swing.JLabel rotuloColuna_0;
-    private javax.swing.JLabel rotuloColuna_1;
-    private javax.swing.JLabel rotuloColuna_10;
-    private javax.swing.JLabel rotuloColuna_11;
-    private javax.swing.JLabel rotuloColuna_2;
-    private javax.swing.JLabel rotuloColuna_3;
-    private javax.swing.JLabel rotuloColuna_4;
-    private javax.swing.JLabel rotuloColuna_5;
-    private javax.swing.JLabel rotuloColuna_6;
-    private javax.swing.JLabel rotuloColuna_7;
-    private javax.swing.JLabel rotuloColuna_8;
-    private javax.swing.JLabel rotuloColuna_9;
-    private javax.swing.JLabel rotuloI;
-    private javax.swing.JLabel rotuloLinha_0;
-    private javax.swing.JLabel rotuloLinha_1;
-    private javax.swing.JLabel rotuloLinha_10;
-    private javax.swing.JLabel rotuloLinha_11;
-    private javax.swing.JLabel rotuloLinha_2;
-    private javax.swing.JLabel rotuloLinha_3;
-    private javax.swing.JLabel rotuloLinha_4;
-    private javax.swing.JLabel rotuloLinha_5;
-    private javax.swing.JLabel rotuloLinha_6;
-    private javax.swing.JLabel rotuloLinha_7;
-    private javax.swing.JLabel rotuloLinha_8;
-    private javax.swing.JLabel rotuloLinha_9;
     private javax.swing.JLabel rotuloP;
+    private javax.swing.JLabel rotuloI;
     private javax.swing.JLabel rotuloR;
     private javax.swing.JLabel rotuloRI;
     private javax.swing.JScrollPane scrollPaneEntrada;
