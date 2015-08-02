@@ -2414,18 +2414,12 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
         ArrayList<ClasseDeAltura> numeros = controlador.getConjuntoPrincipal();
         int tamanho = numeros.size(), i = 0, j;
-        ClasseDeAltura numeroCorrente;
+        String repr;
 
         for (; i < tamanho; i++) {
-            numeroCorrente = numeros.get(i);
-            if (!botaoAlternarNumeroNotas.isSelected()) {
-                rotulosDasLinhas[i].setText(String.valueOf(numeroCorrente));
-                rotulosDasColunas[i].setText(String.valueOf(numeroCorrente));
-            }
-            else {
-                rotulosDasLinhas[i].setText(numeroCorrente.nome());
-                rotulosDasColunas[i].setText(numeroCorrente.nome());
-            }
+            repr = numeros.get(i).representacao(formatoRepresentacao);
+            rotulosDasLinhas[i].setText(repr);
+            rotulosDasColunas[i].setText(repr);
         }
 
         for (; i < 12; i++) {
