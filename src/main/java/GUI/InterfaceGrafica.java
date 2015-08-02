@@ -92,6 +92,16 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         stringBuilder.setLength(stringBuilder.length() - espacamento.length());
     }
 
+    private void inserirNovaClasse(int inteiro) {
+        ActionEvent ev = new ActionEvent(botoesEntrada.get(inteiro), 0, null);
+        if (!botaoInserirSegundoFator.isSelected()) {
+            buttonListenerEntrada.actionPerformed(ev);
+        }
+        else {
+            buttonListenerEntradaSegundoConjunto.actionPerformed(ev);
+        }
+    }
+
 
     private String extrairResultadoBuilder() {
         String resultado = stringBuilder.toString();
@@ -99,14 +109,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         return resultado;
     }
 
-    /** Creates new form InterfaceGrafica */
     public InterfaceGrafica() {
         initComponents();
 
         botoesEntrada.addAll(new CopyOnWriteArrayList<JButton>(
                new JButton[] {botaoValor0, botaoValor1, botaoValor2, botaoValor3,
-                                       botaoValor4, botaoValor5, botaoValor6, botaoValor7,
-                                       botaoValor8, botaoValor9, botaoValor10, botaoValor11}));
+                              botaoValor4, botaoValor5, botaoValor6, botaoValor7,
+                              botaoValor8, botaoValor9, botaoValor10, botaoValor11}));
 
         for (JButton botao : botoesEntrada) {
             botao.addActionListener(buttonListenerEntrada);
@@ -208,111 +217,35 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             @Override
             public void keyTyped(KeyEvent e) {
                 try {
-                    switch((int)e.getKeyChar()) {
-                        case 48:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(0), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(0), 0, null));
-                            }
+                    char char_valor = e.getKeyChar();
+                    switch(char_valor) {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                            inserirNovaClasse(char_valor - '0');
                             break;
-                        case 49:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(1), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(1), 0, null));
-                            }
+                        case 'a':
+                        case 'A':
+                            inserirNovaClasse(10);
                             break;
-                        case 50:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(2), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(2), 0, null));
-                            }
-                            break;
-                        case 51:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(3), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(3), 0, null));
-                            }
-                            break;
-                        case 52:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(4), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(4), 0, null));
-                            }
-                            break;
-                        case 53:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(5), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(5), 0, null));
-                            }
-                            break;
-                        case 54:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(6), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(6), 0, null));
-                            }
-                            break;
-                        case 55:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(7), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(7), 0, null));
-                            }
-                            break;
-                        case 56:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(8), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(8), 0, null));
-                            }
-                            break;
-                        case 57:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(9), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(9), 0, null));
-                            }
-                            break;
-                        case 65:
-                        case 97:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(10), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(10), 0, null));
-                            }
-                            break;
-                        case 66:
-                        case 98:
-                            if (!botaoInserirSegundoFator.isSelected()) {
-                                buttonListenerEntrada.actionPerformed(new ActionEvent(botoesEntrada.get(11), 0, null));
-                            }
-                            else {
-                                buttonListenerEntradaSegundoConjunto.actionPerformed(new ActionEvent(botoesEntrada.get(11), 0, null));
-                            }
+                        case 'b':
+                        case 'B':
+                            inserirNovaClasse(11);
                             break;
                         case 8:
                             botaoRemoverActionPerformed(null);
                     }
                 }
                 catch(NumberFormatException nfe) {
-                    System.err.println("Erro");
+                    System.err.println("Erro na inserção de nova classe");
+                    System.err.println(nfe.getMessage());
                 }
             }
 
