@@ -36,7 +36,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.midi.*;
@@ -46,7 +45,7 @@ import javax.swing.border.TitledBorder;
 public class InterfaceGrafica extends javax.swing.JFrame {
     private JTextField[][] camposMatriz = new JTextField[12][12];
     private JLabel[] rotulosDasLinhas = new JLabel[12], rotulosDasColunas = new JLabel[12];
-    private ArrayList<JButton> botoesEntrada = new ArrayList<JButton>();
+    private ArrayList<JButton> botoesEntrada = new ArrayList<JButton>(12);
     private TipoTabela guiEscolherTabela = new TipoTabela();
     private ClasseDeAltura.TipoRepresentacao formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.Inteiro;
     private StringBuilder stringBuilder = new StringBuilder();
@@ -71,11 +70,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }
 
     private void adicionarAlturasBuilder(ArrayList<ClasseDeAltura> classes) {
-        for (ClasseDeAltura c : classes) {
-            adicionarAlturaBuilder(c);
-            stringBuilder.append(espacamento);
+        if (!classes.isEmpty()) {
+            for (ClasseDeAltura c : classes) {
+                adicionarAlturaBuilder(c);
+                stringBuilder.append(espacamento);
+            }
+            stringBuilder.setLength(stringBuilder.length() - espacamento.length());
         }
-        stringBuilder.setLength(stringBuilder.length() - espacamento.length());
     }
 
     private void adicionarAlturasBuilder(ClasseDeAltura[] classes) {
@@ -113,15 +114,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     public InterfaceGrafica() {
         initComponents();
-
-        botoesEntrada.addAll(new CopyOnWriteArrayList<JButton>(
-               new JButton[] {botaoValor0, botaoValor1, botaoValor2, botaoValor3,
-                              botaoValor4, botaoValor5, botaoValor6, botaoValor7,
-                              botaoValor8, botaoValor9, botaoValor10, botaoValor11}));
-
-        for (JButton botao : botoesEntrada) {
-            botao.addActionListener(buttonListenerEntrada);
-        }
 
         try {
             if ((sequenciador = MidiSystem.getSequencer()) == null) {
@@ -230,18 +222,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoExportarHTML.addKeyListener(listener);
         botaoTabelasCordais.addKeyListener(listener);
 
-        botaoValor0.addKeyListener(listener);
-        botaoValor1.addKeyListener(listener);
-        botaoValor2.addKeyListener(listener);
-        botaoValor3.addKeyListener(listener);
-        botaoValor4.addKeyListener(listener);
-        botaoValor5.addKeyListener(listener);
-        botaoValor6.addKeyListener(listener);
-        botaoValor7.addKeyListener(listener);
-        botaoValor8.addKeyListener(listener);
-        botaoValor9.addKeyListener(listener);
-        botaoValor10.addKeyListener(listener);
-        botaoValor11.addKeyListener(listener);
+        for (JButton botao : botoesEntrada) {
+            botao.addKeyListener(listener);
+        }
 
         botaoRemover.addKeyListener(listener);
         botaoReproduzir.addKeyListener(listener);
@@ -566,25 +549,28 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 campo.setBounds(30 + coluna * 35, campoY, 25, 15);
             }
         }
+
         rotuloP = new javax.swing.JLabel();
         rotuloI = new javax.swing.JLabel();
         rotuloR = new javax.swing.JLabel();
         rotuloRI = new javax.swing.JLabel();
         scrollPaneInvariancia = new javax.swing.JScrollPane();
         areaTextoResultados = new javax.swing.JTextArea();
+
         painelEntrada = new javax.swing.JPanel();
-        botaoValor9 = new javax.swing.JButton();
-        botaoValor10 = new javax.swing.JButton();
-        botaoValor11 = new javax.swing.JButton();
-        botaoValor8 = new javax.swing.JButton();
-        botaoValor7 = new javax.swing.JButton();
-        botaoValor6 = new javax.swing.JButton();
-        botaoValor3 = new javax.swing.JButton();
-        botaoValor4 = new javax.swing.JButton();
-        botaoValor5 = new javax.swing.JButton();
-        botaoValor2 = new javax.swing.JButton();
-        botaoValor1 = new javax.swing.JButton();
-        botaoValor0 = new javax.swing.JButton();
+        painelEntrada.setBorder(javax.swing.BorderFactory.createTitledBorder("Entrada"));
+        painelEntrada.setLayout(null);
+
+        for (int i = 0; i < 12; ++i) {
+            JButton botao = new JButton();
+            botoesEntrada.add(botao);
+            botao.setFont(fonte);
+            botao.setText(String.valueOf(i));
+            botao.setBounds(20 + 90 * (i % 3), 270 - 40 * (i / 3), 50, 20);
+            painelEntrada.add(botao);
+            botao.addActionListener(buttonListenerEntrada);
+        }
+
         botaoRemover = new javax.swing.JButton();
         botaoSubstituirEntrada = new javax.swing.JButton();
         scrollPaneEntrada = new javax.swing.JScrollPane();
@@ -648,69 +634,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
         jPanel2.add(scrollPaneInvariancia);
         scrollPaneInvariancia.setBounds(290, 17, 300, 353);
-
-        painelEntrada.setBorder(javax.swing.BorderFactory.createTitledBorder("Entrada"));
-        painelEntrada.setLayout(null);
-
-        botaoValor9.setFont(fonte); // NOI18N
-        botaoValor9.setText("9");
-        painelEntrada.add(botaoValor9);
-        botaoValor9.setBounds(20, 150, 50, 20);
-
-        botaoValor10.setFont(fonte); // NOI18N
-        botaoValor10.setText("10");
-        painelEntrada.add(botaoValor10);
-        botaoValor10.setBounds(110, 150, 50, 20);
-
-        botaoValor11.setFont(fonte); // NOI18N
-        botaoValor11.setText("11");
-        painelEntrada.add(botaoValor11);
-        botaoValor11.setBounds(200, 150, 50, 20);
-
-        botaoValor8.setFont(fonte); // NOI18N
-        botaoValor8.setText("8");
-        painelEntrada.add(botaoValor8);
-        botaoValor8.setBounds(200, 190, 50, 20);
-
-        botaoValor7.setFont(fonte); // NOI18N
-        botaoValor7.setText("7");
-        painelEntrada.add(botaoValor7);
-        botaoValor7.setBounds(110, 190, 50, 20);
-
-        botaoValor6.setFont(fonte); // NOI18N
-        botaoValor6.setText("6");
-        painelEntrada.add(botaoValor6);
-        botaoValor6.setBounds(20, 190, 50, 20);
-
-        botaoValor3.setFont(fonte); // NOI18N
-        botaoValor3.setText("3");
-        painelEntrada.add(botaoValor3);
-        botaoValor3.setBounds(20, 230, 50, 20);
-
-        botaoValor4.setFont(fonte); // NOI18N
-        botaoValor4.setText("4");
-        painelEntrada.add(botaoValor4);
-        botaoValor4.setBounds(110, 230, 50, 20);
-
-        botaoValor5.setFont(fonte); // NOI18N
-        botaoValor5.setText("5");
-        painelEntrada.add(botaoValor5);
-        botaoValor5.setBounds(200, 230, 50, 20);
-
-        botaoValor2.setFont(fonte); // NOI18N
-        botaoValor2.setText("2");
-        painelEntrada.add(botaoValor2);
-        botaoValor2.setBounds(200, 270, 50, 20);
-
-        botaoValor1.setFont(fonte); // NOI18N
-        botaoValor1.setText("1");
-        painelEntrada.add(botaoValor1);
-        botaoValor1.setBounds(110, 270, 50, 20);
-
-        botaoValor0.setFont(fonte); // NOI18N
-        botaoValor0.setText("0");
-        painelEntrada.add(botaoValor0);
-        botaoValor0.setBounds(20, 270, 50, 20);
 
         botaoRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SetaBackspace.png"))); // NOI18N
         botaoRemover.setToolTipText("Remover Elemento");
@@ -1702,18 +1625,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private javax.swing.JButton botaoReproduzir;
     private javax.swing.JButton botaoSubstituirEntrada;
     private javax.swing.JButton botaoTabelasCordais;
-    protected javax.swing.JButton botaoValor0;
-    protected javax.swing.JButton botaoValor1;
-    protected javax.swing.JButton botaoValor10;
-    protected javax.swing.JButton botaoValor11;
-    protected javax.swing.JButton botaoValor2;
-    protected javax.swing.JButton botaoValor3;
-    protected javax.swing.JButton botaoValor4;
-    protected javax.swing.JButton botaoValor5;
-    protected javax.swing.JButton botaoValor6;
-    protected javax.swing.JButton botaoValor7;
-    protected javax.swing.JButton botaoValor8;
-    protected javax.swing.JButton botaoValor9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator3;
