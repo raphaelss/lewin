@@ -18,15 +18,7 @@
 
 package Excecoes;
 
-/**
- *
- * @author Administrador
- */
 public class SequenciadorNulo extends Exception {
-    /**
-     * Constructs an instance of <code>SequenciadorNulo</code> with the specified detail message.
-     * @param msg the detail message.
-     */
     public SequenciadorNulo(String msg) {
         super(msg);
     }
