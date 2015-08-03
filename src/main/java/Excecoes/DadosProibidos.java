@@ -22,4 +22,6 @@ public class DadosProibidos extends Exception {
     public DadosProibidos(String msg) {
         super(msg);
     }
+
+    private final static long serialVersionUID = 1L;
 }

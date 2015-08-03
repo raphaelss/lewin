@@ -1083,6 +1083,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_botaoCombinatoriedadeActionPerformed
 
+    @SuppressWarnings("fallthrough")
     private void botaoExportarHTMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExportarHTMLActionPerformed
         String nomeArquivo = "saida.html";
         try {
@@ -1157,9 +1158,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             String osName = System.getProperty("os.name");
             Process abrirBrowser;
             if (osName.startsWith("Mac OS")) {
-                Class fileMgr = Class.forName("com.apple.eio.FileManager");
+                Class<?> fileMgr = Class.forName("com.apple.eio.FileManager");
                 Method openURL = fileMgr.getDeclaredMethod("openURL",
-                    new Class[] {String.class});
+                    new Class<?>[] {String.class});
                 openURL.invoke(null, new Object[] {nomeArquivo});
             }
             else if (osName.startsWith("Windows")) {
@@ -1593,6 +1594,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             }
         });
     }
+
+    private final static long serialVersionUID = 1L;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaTextoEntrada;

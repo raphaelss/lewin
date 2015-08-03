@@ -22,4 +22,6 @@ public class SequenciadorNulo extends Exception {
     public SequenciadorNulo(String msg) {
         super(msg);
     }
+
+    private final static long serialVersionUID = 1L;
 }

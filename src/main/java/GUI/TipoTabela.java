@@ -129,6 +129,8 @@ public class TipoTabela extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_botaoExibirTabelaActionPerformed
 
+    private final static long serialVersionUID = 1L;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoExibirTabela;
     private javax.swing.JCheckBox checkBoxHexacordes;

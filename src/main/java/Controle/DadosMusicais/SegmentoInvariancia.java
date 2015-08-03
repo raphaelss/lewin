@@ -20,6 +20,7 @@
 package Controle.DadosMusicais;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SegmentoInvariancia {
     private ArrayList<ClasseDeAltura> segmento = new ArrayList<ClasseDeAltura>();
@@ -32,6 +33,11 @@ public class SegmentoInvariancia {
     public boolean equals(Object o) {
         return (o instanceof SegmentoInvariancia) &&
                 segmento.equals(((SegmentoInvariancia)o).segmento);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(segmento);
     }
 
     public String toString() {
