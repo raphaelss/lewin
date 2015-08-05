@@ -1319,9 +1319,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoAlternarNumeroNotasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_botaoAlternarNumeroNotasItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.NomeSustenido;
-            for (int i = 0; i < 12; i++) {
-                botoesEntrada.get(i).setText(ClasseDeAltura.criar(i).nome());
-            }
 
             if (modosAtuais[1] != -1) {
                 for (JTextField[] array : camposMatriz) {
@@ -1341,18 +1338,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     }
                 }
             }
-
-            atualizaSaida();
-            atualizaEntrada();
-        }
-        else {
+        } else {
             formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.Inteiro;
-            try {
-                for (int i = 0; i < 12; i++) {
-                    botoesEntrada.get(i).setText(String.valueOf(notaToNumero(botoesEntrada.get(i).getText())));
-                }
-            }
-            catch(DadosProibidos dp) {}
 
             if (modosAtuais[1] != -1) {
                 for (JTextField[] array : camposMatriz) {
@@ -1375,10 +1362,12 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     catch(DadosProibidos dp) {}
                 }
             }
-
-            atualizaSaida();
-            atualizaEntrada();
         }
+        for (int i = 0; i < 12; i++) {
+            botoesEntrada.get(i).setText(ClasseDeAltura.criar(i).representacao(formatoRepresentacao));
+        }
+        atualizaSaida();
+        atualizaEntrada();
     }//GEN-LAST:event_botaoAlternarNumeroNotasItemStateChanged
 
     private void botaoSubstituirEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSubstituirEntradaActionPerformed
