@@ -1319,52 +1319,40 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoAlternarNumeroNotasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_botaoAlternarNumeroNotasItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.NomeSustenido;
-
-            if (modosAtuais[1] != -1) {
-                for (JTextField[] array : camposMatriz) {
-                    for (JTextField campo : array) {
-                        try {
-                            campo.setText(ClasseDeAltura.criar(Integer.parseInt(campo.getText())).toString());
-                        }
-                        catch(NumberFormatException nfe) {}
-                    }
-                }
-
-                if (modosAtuais[1] == MATRIZ_TABELA_ADICAO) {
-                    ArrayList<ClasseDeAltura> entrada = controlador.getConjuntoPrincipal();
-                    for (int i = 0; i < entrada.size(); i++) {
-                        rotulosDasLinhas[i].setText(entrada.get(i).nome());
-                        rotulosDasColunas[i].setText(entrada.get(i).nome());
-                    }
-                }
-            }
         } else {
             formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.Inteiro;
-
-            if (modosAtuais[1] != -1) {
-                for (JTextField[] array : camposMatriz) {
-                    for (JTextField campo : array) {
-                        try {
-                            campo.setText(String.valueOf(notaToNumero(campo.getText())));
-                        }
-                        catch(DadosProibidos dp) {}
-                    }
-                }
-
-                if (modosAtuais[1] == MATRIZ_TABELA_ADICAO) {
-                    ArrayList<ClasseDeAltura> entrada = controlador.getConjuntoPrincipal();
-                    try {
-                        for (int i = 0; i < entrada.size(); i++) {
-                            rotulosDasLinhas[i].setText(String.valueOf(notaToNumero(rotulosDasLinhas[i].getText())));
-                            rotulosDasColunas[i].setText(String.valueOf(notaToNumero(rotulosDasColunas[i].getText())));
-                        }
-                    }
-                    catch(DadosProibidos dp) {}
-                }
-            }
         }
         for (int i = 0; i < 12; i++) {
             botoesEntrada.get(i).setText(ClasseDeAltura.criar(i).representacao(formatoRepresentacao));
+        }
+
+        if (modosAtuais[1] != -1) {
+            for (JTextField[] array : camposMatriz) {
+                for (JTextField campo : array) {
+                    int i = -1;
+                    try {
+                        switch (formatoRepresentacao) { //TODO: remover dependência de interpretar strings
+                        case NomeSustenido:
+                            i = Integer.parseInt(campo.getText());
+                            break;
+                        case Inteiro:
+                            i = notaToNumero(campo.getText());
+                            break;
+                        }
+                    }
+                    catch(NumberFormatException nfe) {continue;}
+                    catch (DadosProibidos dp) {continue;}
+                    campo.setText(ClasseDeAltura.criar(i).representacao(formatoRepresentacao));
+                }
+            }
+
+            if (modosAtuais[1] == MATRIZ_TABELA_ADICAO) {
+                ArrayList<ClasseDeAltura> entrada = controlador.getConjuntoPrincipal();
+                for (int i = 0; i < entrada.size(); i++) {
+                    rotulosDasLinhas[i].setText(entrada.get(i).representacao(formatoRepresentacao));
+                    rotulosDasColunas[i].setText(entrada.get(i).representacao(formatoRepresentacao));
+                }
+            }
         }
         atualizaSaida();
         atualizaEntrada();
