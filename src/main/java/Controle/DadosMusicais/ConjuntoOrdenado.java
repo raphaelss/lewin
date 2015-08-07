@@ -21,27 +21,27 @@ package Controle.DadosMusicais;
 
 import java.util.ArrayList;
 
-public class Acorde {
+public class ConjuntoOrdenado {
     private final ClasseDeAltura[] classes;
 
-    public Acorde(ClasseDeAltura[] forma) {
+    public ConjuntoOrdenado(ClasseDeAltura[] forma) {
         classes = new ClasseDeAltura[forma.length];
         for (int i = 0; i < forma.length; ++i) {
             classes[i] = forma[i];
         }
     }
 
-    public Acorde(ArrayList<ClasseDeAltura> forma) {
+    public ConjuntoOrdenado(ArrayList<ClasseDeAltura> forma) {
         classes = new ClasseDeAltura[forma.size()];
         forma.toArray(classes);
     }
 
-    public Acorde transpor(int n) {
+    public ConjuntoOrdenado transpor(int n) {
         ClasseDeAltura[] classesTranspostas = new ClasseDeAltura[classes.length];
         for (int i = 0; i < classes.length; ++i) {
             classesTranspostas[i] = classes[i].transpor(n);
         }
-        return new Acorde(classesTranspostas);
+        return new ConjuntoOrdenado(classesTranspostas);
     }
 
     public ClasseDeAltura getDado(int indice) {
@@ -61,7 +61,7 @@ public class Acorde {
         return false;
     }
 
-    public boolean equals(Acorde forma) {
+    public boolean equals(ConjuntoOrdenado forma) {
         for (int i = 0; i < classes.length; i++) {
             if (classes[i] != forma.classes[i]) {
                 return false;
@@ -79,11 +79,11 @@ public class Acorde {
         return resultado.substring(0, resultado.length() - 1) + "]";
     }
 
-    public Acorde espelhada() {
+    public ConjuntoOrdenado inverter() {
         ClasseDeAltura[] classesInvertidas = new ClasseDeAltura[classes.length];
         for (int i = 0; i < classes.length; ++i) {
             classesInvertidas[i] = classes[i].inverter();
         }
-        return new Acorde(classesInvertidas);
+        return new ConjuntoOrdenado(classesInvertidas);
     }
 }

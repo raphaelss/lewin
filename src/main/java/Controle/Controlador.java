@@ -19,7 +19,7 @@
 
 package Controle;
 
-import Controle.DadosMusicais.Acorde;
+import Controle.DadosMusicais.ConjuntoOrdenado;
 import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.MatrizDeAcordes;
@@ -137,7 +137,7 @@ public class Controlador {
                 throw new DadosProibidos("Impossível gerar uma série derivada de um tetracorde contendo a classe intervalar 4.");
             }
         }
-        listadeFormas = new GeradorDerivacaoSerial(new Acorde(numeros)).resultado();
+        listadeFormas = new GeradorDerivacaoSerial(new ConjuntoOrdenado(numeros)).resultado();
     }
 
     public ArrayList<SerieDodecafonica> getDerivacaoSerial() {
@@ -168,7 +168,7 @@ public class Controlador {
             }
 
             serieEscolhida = new SerieDodecafonica();
-            serieEscolhida.adiciona(new Acorde(acorde));
+            serieEscolhida.adiciona(new ConjuntoOrdenado(acorde));
         }
 
         try {

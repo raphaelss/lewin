@@ -19,17 +19,17 @@
 
 package Controle;
 
-import Controle.DadosMusicais.Acorde;
+import Controle.DadosMusicais.ConjuntoOrdenado;
 import Controle.DadosMusicais.SerieDodecafonica;
 import java.util.ArrayList;
 
 public class GeradorDerivacaoSerial {
-    private Acorde formaOriginal;
-    private ArrayList<Acorde> tabelaDeGrupos = new ArrayList<Acorde>();
+    private ConjuntoOrdenado formaOriginal;
+    private ArrayList<ConjuntoOrdenado> tabelaDeGrupos = new ArrayList<ConjuntoOrdenado>();
     private ArrayList<SerieDodecafonica> listadeFormas = new ArrayList<SerieDodecafonica>();
     private final int TAMANHO_TABELA_GRUPOS = 23;
 
-    public GeradorDerivacaoSerial(Acorde form) {
+    public GeradorDerivacaoSerial(ConjuntoOrdenado form) {
         formaOriginal = form;
     }
 
@@ -37,7 +37,7 @@ public class GeradorDerivacaoSerial {
         for (int i = 1; i < 12; ++i) {
             tabelaDeGrupos.add(formaOriginal.transpor(i));
         }
-        Acorde espelhada = formaOriginal.espelhada();
+        ConjuntoOrdenado espelhada = formaOriginal.inverter();
         tabelaDeGrupos.add(espelhada);
         for (int i = 1; i < 12; ++i) {
             tabelaDeGrupos.add(espelhada.transpor(i));
@@ -55,7 +55,7 @@ public class GeradorDerivacaoSerial {
     }
 
     private void encontraGruposCompativeis(SerieDodecafonica formas) {
-        Acorde atual = null;
+        ConjuntoOrdenado atual = null;
 
         for (int i = 0; i < TAMANHO_TABELA_GRUPOS; i++) {
             atual = tabelaDeGrupos.get(i);

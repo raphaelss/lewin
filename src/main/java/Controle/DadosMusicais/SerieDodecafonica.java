@@ -22,12 +22,12 @@ package Controle.DadosMusicais;
 import java.util.ArrayList;
 
 public class SerieDodecafonica {
-    private ArrayList<Acorde> formasPrimas = new ArrayList<Acorde>();
+    private ArrayList<ConjuntoOrdenado> formasPrimas = new ArrayList<ConjuntoOrdenado>();
 
-    public boolean eCompativel(Acorde forma) {
+    public boolean eCompativel(ConjuntoOrdenado forma) {
         int tamanho = forma.tamanho();
 
-        for (Acorde f : formasPrimas) {
+        for (ConjuntoOrdenado f : formasPrimas) {
             for (int i = 0; i < tamanho; i++) {
                 if (f.contem(forma.getDado(i))) {
                     return false;
@@ -38,7 +38,7 @@ public class SerieDodecafonica {
         return true;
     }
 
-    public void adiciona(Acorde forma) {
+    public void adiciona(ConjuntoOrdenado forma) {
         formasPrimas.add(forma);
     }
 
@@ -50,7 +50,7 @@ public class SerieDodecafonica {
         String resultado = "";
         int tamanhoAtual;
 
-        for (Acorde f : formasPrimas) {
+        for (ConjuntoOrdenado f : formasPrimas) {
             tamanhoAtual = f.tamanho();
 
             for (int i = 0; i < tamanhoAtual; i++) {
@@ -67,12 +67,12 @@ public class SerieDodecafonica {
 
     public SerieDodecafonica copia() {
         SerieDodecafonica retorno = new SerieDodecafonica();
-        retorno.formasPrimas = new ArrayList<Acorde>(this.formasPrimas);
+        retorno.formasPrimas = new ArrayList<ConjuntoOrdenado>(this.formasPrimas);
 
         return retorno;
     }
 
-    public Acorde getAcorde(int indice) {
+    public ConjuntoOrdenado getConjuntoOrdenado(int indice) {
         return formasPrimas.get(indice);
     }
 
@@ -84,7 +84,7 @@ public class SerieDodecafonica {
 
     public ArrayList<ClasseDeAltura> toClasseDeAlturaList(int subTamanho) {
         ArrayList<ClasseDeAltura> integerList = new ArrayList<ClasseDeAltura>();
-        Acorde corrente = null;
+        ConjuntoOrdenado corrente = null;
         int tamanho = formasPrimas.size(), indiceReal = 0;
 
         for (int i = 0; i < tamanho && indiceReal < subTamanho; i++) {
