@@ -71,7 +71,7 @@ public class GeradorDerivacaoSerial {
             }
         }
 
-        if (formas.getTamanho() == 12/formaOriginal.tamanho()) {
+        if (formas.getTamanho() == 12/formaOriginal.size()) {
             listadeFormas.add(formas.copia());
         }
         formas.remove();

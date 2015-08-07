@@ -20,11 +20,12 @@
 package Controle;
 
 import Controle.DadosMusicais.ClasseDeAltura;
+import Controle.DadosMusicais.ConjuntoOrdenado;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import java.util.ArrayList;
 
 public class GeradorTabelaAdicao {
-    public static MatrizDodecafonica geraTabela(ArrayList<ClasseDeAltura> numeros) {
+    public static MatrizDodecafonica geraTabela(ConjuntoOrdenado numeros) {
         int i, j, tamanho = numeros.size();
         MatrizDodecafonica matriz = new MatrizDodecafonica();
 

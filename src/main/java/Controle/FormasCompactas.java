@@ -20,38 +20,14 @@
 package Controle;
 
 import Controle.DadosMusicais.ClasseDeAltura;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import Controle.DadosMusicais.ConjuntoOrdenado;
 
 public abstract class FormasCompactas {
-    //Altera o dado de entrada
-    private static ArrayList<ClasseDeAltura> transpoeParaZero(ArrayList<ClasseDeAltura> classes) {
-        int fatorTransposicao = -classes.get(0).inteiro();
-        for (int i = 0; i < classes.size(); i++) {
-            classes.set(i, classes.get(i).transpor(fatorTransposicao));
-        }
-        return classes;
-    }
-
-    //Altera o dado de entrada
-    private static void rotacionar(ArrayList<ClasseDeAltura> classes) {
-        classes.add(classes.remove(0));
-    }
-
-    private static ArrayList<ClasseDeAltura> inverter(ArrayList<ClasseDeAltura> classes) {
-        ArrayList<ClasseDeAltura> inverso = new ArrayList<ClasseDeAltura>(classes);
-        for (int i = 0; i < inverso.size(); ++i) {
-            inverso.set(i, inverso.get(i).inverter());
-        }
-        return inverso;
-    }
-
     private interface IndiceComparador {
         public int indiceComparacao(int i, int ultimoAComparar);
     }
 
-    private static ArrayList<ClasseDeAltura> maisCompacto(ArrayList<ClasseDeAltura> a, ArrayList<ClasseDeAltura> b, IndiceComparador ic) {
+    private static ConjuntoOrdenado maisCompacto(ConjuntoOrdenado a, ConjuntoOrdenado b, IndiceComparador ic) {
         ClasseDeAltura primeiroA = a.get(0);
         ClasseDeAltura primeiroB = b.get(0);
         int ultimo = a.size() - 1;
@@ -89,41 +65,47 @@ public abstract class FormasCompactas {
         }
     };
 
-    private static ArrayList<ClasseDeAltura> algoritmoBase(ArrayList<ClasseDeAltura> classes, IndiceComparador ic) {
-        ArrayList<ClasseDeAltura> rot = new ArrayList<ClasseDeAltura>(classes);
-        Collections.sort(rot);
-        ArrayList<ClasseDeAltura> melhor = new ArrayList<ClasseDeAltura>(rot);
-        rotacionar(rot);
+    private static ConjuntoOrdenado algoritmoBase(ConjuntoOrdenado classes, IndiceComparador ic) {
+        ConjuntoOrdenado rot = new ConjuntoOrdenado(classes);
+        rot.sort();
+        ConjuntoOrdenado melhor = new ConjuntoOrdenado(rot);
+        rot.rotacionar();
         int tamanho = rot.size();
-        for (int i = 1; i < rot.size(); ++i) {
-            ArrayList<ClasseDeAltura> tmp = maisCompacto(melhor, rot, ic);
+        for (int i = 1; i < tamanho; ++i) {
+            ConjuntoOrdenado tmp = maisCompacto(melhor, rot, ic);
             if (tmp != melhor) {
-                for (int j = 0; j < tamanho; ++j) {
-                    melhor.set(j, tmp.get(j));
-                }
+                melhor = new ConjuntoOrdenado(tmp);
             }
-            rotacionar(rot);
+            rot.rotacionar();
         }
         return melhor;
     }
 
-    public static ArrayList<ClasseDeAltura> formaNormalStraus(ArrayList<ClasseDeAltura> classes) {
+    public static ConjuntoOrdenado formaNormalStraus(ConjuntoOrdenado classes) {
         return algoritmoBase(classes, comparadorStraus);
     }
 
-    public static ArrayList<ClasseDeAltura> formaNormalForte(ArrayList<ClasseDeAltura> classes) {
+    public static ConjuntoOrdenado formaNormalForte(ConjuntoOrdenado classes) {
         return algoritmoBase(classes, comparadorForte);
     }
 
-    public static ArrayList<ClasseDeAltura> formaPrimaStraus(ArrayList<ClasseDeAltura> classes) {
-        return transpoeParaZero(maisCompacto(formaNormalStraus(classes),
-                                             formaNormalStraus(inverter(classes)),
-                                             comparadorStraus));
+    public static ConjuntoOrdenado formaPrimaStraus(ConjuntoOrdenado classes) {
+        ConjuntoOrdenado tmp = new ConjuntoOrdenado(classes);
+        tmp.inverter();
+        tmp = maisCompacto(formaNormalStraus(classes),
+                           formaNormalStraus(tmp),
+                           comparadorStraus);
+        tmp.transporParaZero();
+        return tmp;
     }
 
-    public static ArrayList<ClasseDeAltura> formaPrimaForte(ArrayList<ClasseDeAltura> classes) {
-        return transpoeParaZero(maisCompacto(formaNormalStraus(classes),
-                                             formaNormalStraus(inverter(classes)),
-                                             comparadorForte));
+    public static ConjuntoOrdenado formaPrimaForte(ConjuntoOrdenado classes) {
+        ConjuntoOrdenado tmp = new ConjuntoOrdenado(classes);
+        tmp.inverter();
+        tmp = maisCompacto(formaNormalForte(classes),
+                           formaNormalForte(tmp),
+                           comparadorForte);
+        tmp.transporParaZero();
+        return tmp;
     }
 }

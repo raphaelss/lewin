@@ -21,6 +21,7 @@ package GUI;
 
 import Controle.Controlador;
 import Controle.DadosMusicais.ClasseDeAltura;
+import Controle.DadosMusicais.ConjuntoOrdenado;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.SerieDodecafonica;
 import Controle.FormasCompactas;
@@ -69,7 +70,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         stringBuilder.append(c.representacao(formatoRepresentacao));
     }
 
-    private void adicionarAlturasBuilder(ArrayList<ClasseDeAltura> classes) {
+    private void adicionarAlturasBuilder(ConjuntoOrdenado classes) {
         if (!classes.isEmpty()) {
             for (ClasseDeAltura c : classes) {
                 adicionarAlturaBuilder(c);
@@ -320,7 +321,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
                 for (int i = 0; i < listadeFormas.size(); ++i) {
                     for (int j = 0; j < 12; ++j) {
-                        adicionarAlturaBuilder(listadeFormas.get(i).getDado(j));
+                        adicionarAlturaBuilder(listadeFormas.get(i).get(j));
                         stringBuilder.append(espacamento);
                     }
                     stringBuilder.append("  (").append(i).append(")\n\n");
@@ -369,7 +370,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 for (LinkedList<ClasseDeAltura> subconjunto : controlador.getSubconjuntos()) {
                     adicionarAlturasBuilder(subconjunto);
                     stringBuilder.append("  [");
-                    adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(new ArrayList<ClasseDeAltura>(subconjunto)));
+                    adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(new ConjuntoOrdenado(subconjunto)));
                     stringBuilder.append("]\n\n");
                 }
                 stringBuilder.setLength(stringBuilder.length() - 2);
@@ -450,7 +451,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }
 
     private void setBotoesDoisFatores(boolean value) {
-        ArrayList<ClasseDeAltura> segundoConjunto = controlador.getSegundoConjunto();
+        ConjuntoOrdenado segundoConjunto = controlador.getSegundoConjunto();
 
         botaoMultiplicacaoRahn.setEnabled(value && segundoConjunto.size() == 1);
 
@@ -1250,7 +1251,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoGerarTabelaAdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarTabelaAdicaoActionPerformed
         limpaMatriz();
 
-        ArrayList<ClasseDeAltura> numeros = controlador.getConjuntoPrincipal();
+        ConjuntoOrdenado numeros = controlador.getConjuntoPrincipal();
         int tamanho = numeros.size(), i = 0, j;
         String repr;
 
@@ -1347,7 +1348,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             }
 
             if (modosAtuais[1] == MATRIZ_TABELA_ADICAO) {
-                ArrayList<ClasseDeAltura> entrada = controlador.getConjuntoPrincipal();
+                ConjuntoOrdenado entrada = controlador.getConjuntoPrincipal();
                 for (int i = 0; i < entrada.size(); i++) {
                     rotulosDasLinhas[i].setText(entrada.get(i).representacao(formatoRepresentacao));
                     rotulosDasColunas[i].setText(entrada.get(i).representacao(formatoRepresentacao));
@@ -1396,7 +1397,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoInserirSegundoFatorItemStateChanged
 
     private void botaoReproduzirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoReproduzirActionPerformed
-        ArrayList<ClasseDeAltura> escolhido;
+        ConjuntoOrdenado escolhido;
 
         if (!botaoInserirSegundoFator.isSelected() || controlador.getSegundoConjunto().isEmpty()) {
             escolhido = controlador.getConjuntoPrincipal();

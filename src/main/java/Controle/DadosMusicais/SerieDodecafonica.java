@@ -25,11 +25,11 @@ public class SerieDodecafonica {
     private ArrayList<ConjuntoOrdenado> formasPrimas = new ArrayList<ConjuntoOrdenado>();
 
     public boolean eCompativel(ConjuntoOrdenado forma) {
-        int tamanho = forma.tamanho();
+        int tamanho = forma.size();
 
         for (ConjuntoOrdenado f : formasPrimas) {
             for (int i = 0; i < tamanho; i++) {
-                if (f.contem(forma.getDado(i))) {
+                if (f.contains(forma.get(i))) {
                     return false;
                 }
             }
@@ -51,10 +51,10 @@ public class SerieDodecafonica {
         int tamanhoAtual;
 
         for (ConjuntoOrdenado f : formasPrimas) {
-            tamanhoAtual = f.tamanho();
+            tamanhoAtual = f.size();
 
             for (int i = 0; i < tamanhoAtual; i++) {
-                resultado += f.getDado(i) + "   ";
+                resultado += f.get(i) + "   ";
             }
         }
 
@@ -76,10 +76,10 @@ public class SerieDodecafonica {
         return formasPrimas.get(indice);
     }
 
-    public ClasseDeAltura getDado(int indice) {
-        int tamanho = formasPrimas.get(0).tamanho();
+    public ClasseDeAltura get(int indice) {
+        int tamanho = formasPrimas.get(0).size();
 
-        return formasPrimas.get(indice/tamanho).getDado(indice%tamanho);
+        return formasPrimas.get(indice/tamanho).get(indice%tamanho);
     }
 
     public ArrayList<ClasseDeAltura> toClasseDeAlturaList(int subTamanho) {
@@ -90,9 +90,9 @@ public class SerieDodecafonica {
         for (int i = 0; i < tamanho && indiceReal < subTamanho; i++) {
             corrente = formasPrimas.get(i);
 
-            for (int j = 0; j < corrente.tamanho() && indiceReal < subTamanho;
+            for (int j = 0; j < corrente.size() && indiceReal < subTamanho;
                     j++, indiceReal++) {
-                integerList.add(corrente.getDado(j));
+                integerList.add(corrente.get(j));
             }
         }
 

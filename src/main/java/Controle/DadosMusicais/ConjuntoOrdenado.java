@@ -20,14 +20,17 @@
 package Controle.DadosMusicais;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
-public class ConjuntoOrdenado {
+public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
     private final ArrayList<ClasseDeAltura> classes;
 
     public ConjuntoOrdenado() {
         classes = new ArrayList<ClasseDeAltura>();
     }
 
+    //TODO: Remover este construtor e o próximo ou garantir que eles não gerem alturas duplicadas
     public ConjuntoOrdenado(ClasseDeAltura[] forma) {
         classes = new ArrayList<ClasseDeAltura>(forma.length);
         for (int i = 0; i < forma.length; ++i) {
@@ -43,27 +46,67 @@ public class ConjuntoOrdenado {
         classes = new ArrayList<ClasseDeAltura>(co.classes);
     }
 
+    public Iterator<ClasseDeAltura> iterator() {
+         return classes.iterator();
+    }
+
+    public boolean add(ClasseDeAltura c) {
+        if (classes.contains(c)) {
+            return false;
+        }
+        classes.add(c);
+        return true;
+    }
+
+    public ClasseDeAltura remove(int i) {
+        return classes.remove(i);
+    }
+
+    public void clear() {
+        classes.clear();
+    }
+
+    public boolean isEmpty() {
+        return classes.isEmpty();
+    }
+
     public void transpor(int n) {
         for (int i = 0; i < classes.size(); ++i) {
              classes.set(i, classes.get(i).transpor(n));
         }
     }
 
-    public ClasseDeAltura getDado(int indice) {
+    public void transporParaZero() {
+        transpor(-classes.get(0).inteiro());
+    }
+
+    public void rotacionar() {
+        classes.add(classes.remove(0));
+    }
+
+    public void sort() {
+        Collections.sort(classes);
+    }
+
+    public ClasseDeAltura get(int indice) {
         return classes.get(indice);
     }
 
-    public int tamanho() {
+    public int size() {
         return classes.size();
     }
 
-    public boolean contem(ClasseDeAltura x) {
+    public boolean contains(ClasseDeAltura x) {
         return classes.contains(x);
+    }
+
+    public boolean containsAll(ConjuntoOrdenado co) {
+        return classes.containsAll(co.classes);
     }
 
     public boolean equals(ConjuntoOrdenado forma) {
         for (int i = 0; i < classes.size(); i++) {
-            if (classes.get(i) != forma.getDado(i)) {
+            if (classes.get(i) != forma.get(i)) {
                 return false;
             }
         }
