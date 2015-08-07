@@ -43,7 +43,7 @@ public class Controlador {
     private ArrayList<ClasseDeAltura[]> resultadoRotacaoStravinskyana;
     private ArrayList<ArrayList<ClasseDeAltura[]>> resultadosPaleta;
     private HashSet<LinkedList<ClasseDeAltura>> subconjuntos;
-    private int[] vetorIntervalar = null;
+    private int[] vetorIntervalar = new int[6];
     private double similaridade;
 
     public void limparDados() {
@@ -305,7 +305,7 @@ public class Controlador {
     }
 
     public void gerarVetorIntervalar() {
-        vetorIntervalar = new ConjuntoOrdenado(numeros).vetorIntervalar();
+        new ConjuntoOrdenado(numeros).vetorIntervalar(vetorIntervalar);
     }
 
     public int[] getVetorIntervalar() {
