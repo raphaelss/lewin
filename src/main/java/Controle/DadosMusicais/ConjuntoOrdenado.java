@@ -70,13 +70,15 @@ public class ConjuntoOrdenado {
         return true;
     }
 
+    @Override
     public String toString() {
-        String resultado = "[";
+        StringBuilder builder = new StringBuilder("[");
 
         for (int i = 0; i < classes.length; i++) {
-            resultado += classes[i].toString() + " ";
+            builder.append(classes[i].toString()).append(" ");
         }
-        return resultado.substring(0, resultado.length() - 1) + "]";
+        builder.setLength(builder.length() - 1);
+        return builder.append("]").toString();
     }
 
     public ConjuntoOrdenado inverter() {
@@ -88,12 +90,19 @@ public class ConjuntoOrdenado {
     }
 
     public int[] vetorIntervalar() {
-        int[] contadores = new int[6];
+        int[] vetor = new int[6];
+        vetorIntervalar(vetor);
+        return vetor;
+    }
+
+    public void vetorIntervalar(int[] vetor) {
+        for (int i = 0; i < 6; ++i) {
+            vetor[i] = 0;
+        }
         for (int i = 0; i < classes.length; ++i) {
             for (int j = i + 1; j < classes.length; ++j) {
-                ++contadores[classes[i].intervalo_desord(classes[j]) - 1];
+                ++vetor[classes[i].intervalo_desord(classes[j]) - 1];
             }
         }
-        return contadores;
     }
 }
