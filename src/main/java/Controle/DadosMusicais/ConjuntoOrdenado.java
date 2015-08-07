@@ -22,48 +22,48 @@ package Controle.DadosMusicais;
 import java.util.ArrayList;
 
 public class ConjuntoOrdenado {
-    private final ClasseDeAltura[] classes;
+    private final ArrayList<ClasseDeAltura> classes;
+
+    public ConjuntoOrdenado() {
+        classes = new ArrayList<ClasseDeAltura>();
+    }
 
     public ConjuntoOrdenado(ClasseDeAltura[] forma) {
-        classes = new ClasseDeAltura[forma.length];
+        classes = new ArrayList<ClasseDeAltura>(forma.length);
         for (int i = 0; i < forma.length; ++i) {
-            classes[i] = forma[i];
+            classes.add(forma[i]);
         }
     }
 
     public ConjuntoOrdenado(ArrayList<ClasseDeAltura> forma) {
-        classes = new ClasseDeAltura[forma.size()];
-        forma.toArray(classes);
+        classes = new ArrayList<ClasseDeAltura>();
     }
 
-    public ConjuntoOrdenado transpor(int n) {
-        ClasseDeAltura[] classesTranspostas = new ClasseDeAltura[classes.length];
-        for (int i = 0; i < classes.length; ++i) {
-            classesTranspostas[i] = classes[i].transpor(n);
+    public ConjuntoOrdenado(ConjuntoOrdenado co) {
+        classes = new ArrayList<ClasseDeAltura>(co.classes);
+    }
+
+    public void transpor(int n) {
+        for (int i = 0; i < classes.size(); ++i) {
+             classes.set(i, classes.get(i).transpor(n));
         }
-        return new ConjuntoOrdenado(classesTranspostas);
     }
 
     public ClasseDeAltura getDado(int indice) {
-        return classes[indice];
+        return classes.get(indice);
     }
 
     public int tamanho() {
-        return classes.length;
+        return classes.size();
     }
 
     public boolean contem(ClasseDeAltura x) {
-        for (int i = 0; i < classes.length; i++) {
-            if (classes[i] == x) {
-                return true;
-            }
-        }
-        return false;
+        return classes.contains(x);
     }
 
     public boolean equals(ConjuntoOrdenado forma) {
-        for (int i = 0; i < classes.length; i++) {
-            if (classes[i] != forma.classes[i]) {
+        for (int i = 0; i < classes.size(); i++) {
+            if (classes.get(i) != forma.getDado(i)) {
                 return false;
             }
         }
@@ -74,19 +74,17 @@ public class ConjuntoOrdenado {
     public String toString() {
         StringBuilder builder = new StringBuilder("[");
 
-        for (int i = 0; i < classes.length; i++) {
-            builder.append(classes[i].toString()).append(" ");
+        for (int i = 0; i < classes.size(); i++) {
+            builder.append(classes.get(i).toString()).append(" ");
         }
         builder.setLength(builder.length() - 1);
         return builder.append("]").toString();
     }
 
-    public ConjuntoOrdenado inverter() {
-        ClasseDeAltura[] classesInvertidas = new ClasseDeAltura[classes.length];
-        for (int i = 0; i < classes.length; ++i) {
-            classesInvertidas[i] = classes[i].inverter();
+    public void inverter() {
+        for (int i = 0; i < classes.size(); ++i) {
+            classes.set(i, classes.get(i).inverter());
         }
-        return new ConjuntoOrdenado(classesInvertidas);
     }
 
     public int[] vetorIntervalar() {
@@ -99,9 +97,9 @@ public class ConjuntoOrdenado {
         for (int i = 0; i < 6; ++i) {
             vetor[i] = 0;
         }
-        for (int i = 0; i < classes.length; ++i) {
-            for (int j = i + 1; j < classes.length; ++j) {
-                ++vetor[classes[i].intervalo_desord(classes[j]) - 1];
+        for (int i = 0; i < classes.size(); ++i) {
+            for (int j = i + 1; j < classes.size(); ++j) {
+                ++vetor[classes.get(i).intervalo_desord(classes.get(j)) - 1];
             }
         }
     }

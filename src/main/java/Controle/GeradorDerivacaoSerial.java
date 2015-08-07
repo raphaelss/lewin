@@ -35,12 +35,17 @@ public class GeradorDerivacaoSerial {
 
     public ArrayList<SerieDodecafonica> resultado() {
         for (int i = 1; i < 12; ++i) {
-            tabelaDeGrupos.add(formaOriginal.transpor(i));
+            ConjuntoOrdenado co = new ConjuntoOrdenado(formaOriginal);
+            co.transpor(i);
+            tabelaDeGrupos.add(co);
         }
-        ConjuntoOrdenado espelhada = formaOriginal.inverter();
+        ConjuntoOrdenado espelhada = new ConjuntoOrdenado(formaOriginal);
+        espelhada.inverter();
         tabelaDeGrupos.add(espelhada);
         for (int i = 1; i < 12; ++i) {
-            tabelaDeGrupos.add(espelhada.transpor(i));
+            ConjuntoOrdenado co = new ConjuntoOrdenado(espelhada);
+            co.transpor(i);
+            tabelaDeGrupos.add(co);
         }
         return encontraGruposCompativeis();
     }
@@ -55,6 +60,7 @@ public class GeradorDerivacaoSerial {
     }
 
     private void encontraGruposCompativeis(SerieDodecafonica formas) {
+        try {
         ConjuntoOrdenado atual = null;
 
         for (int i = 0; i < TAMANHO_TABELA_GRUPOS; i++) {
@@ -69,5 +75,6 @@ public class GeradorDerivacaoSerial {
             listadeFormas.add(formas.copia());
         }
         formas.remove();
+        } catch (Exception e) { System.out.println(e.getMessage());}
     }
 }
