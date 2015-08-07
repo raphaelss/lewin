@@ -86,4 +86,14 @@ public class ConjuntoOrdenado {
         }
         return new ConjuntoOrdenado(classesInvertidas);
     }
+
+    public int[] vetorIntervalar() {
+        int[] contadores = new int[6];
+        for (int i = 0; i < classes.length; ++i) {
+            for (int j = i + 1; j < classes.length; ++j) {
+                ++contadores[classes[i].intervalo_desord(classes[j]) - 1];
+            }
+        }
+        return contadores;
+    }
 }
