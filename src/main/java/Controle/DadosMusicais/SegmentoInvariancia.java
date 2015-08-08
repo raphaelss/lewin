@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class SegmentoInvariancia {
-    private ArrayList<ClasseDeAltura> segmento = new ArrayList<ClasseDeAltura>();
+    private ConjuntoOrdenado segmento = new ConjuntoOrdenado();
 
     public void adicionaNumero(ClasseDeAltura classe) {
         segmento.add(classe);

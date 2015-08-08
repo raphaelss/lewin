@@ -42,7 +42,7 @@ public class Controlador {
     private ArrayList<String> informacoesAssociada, invarianciaDerivativa, invariancias;
     private ArrayList<ClasseDeAltura[]> resultadoRotacaoStravinskyana;
     private ArrayList<ArrayList<ClasseDeAltura[]>> resultadosPaleta;
-    private HashSet<LinkedList<ClasseDeAltura>> subconjuntos;
+    private HashSet<ConjuntoOrdenado> subconjuntos;
     private int[] vetorIntervalar = new int[6];
     private double similaridade;
 
@@ -219,13 +219,13 @@ public class Controlador {
     }
 
     public void geraRotacaoStravinskyana() {
-        ConjuntoOrdenado segundaParte = new ConjuntoOrdenado(numeros.subList(6, 12)),
-                                  subtraido = new ConjuntoOrdenado();
+        ConjuntoOrdenado segundaParte = numeros.subSeq(6, 12),
+                         subtraido = new ConjuntoOrdenado();
         final ClasseDeAltura primeiro = segundaParte.get(0);
         int subtrator;
 
         resultadoRotacaoStravinskyana = new ArrayList<ClasseDeAltura[]>();
-        resultadoRotacaoStravinskyana.add(numeros.subList(0, 6).toArray(new ClasseDeAltura[6]));
+        resultadoRotacaoStravinskyana.add(numeros.subSeq(0, 6).toArray(new ClasseDeAltura[6]));
         resultadoRotacaoStravinskyana.add(segundaParte.toArray(new ClasseDeAltura[6]));
 
         for (int i = 0; i < 5; i++) {
@@ -248,14 +248,11 @@ public class Controlador {
     public void geraPaleta() {
         int tamanho = numeros.size();
         ArrayList<ConjuntoOrdenado> conjuntosDiretos = new ArrayList<ConjuntoOrdenado>(),
-                                      conjuntosInversos = new ArrayList<ConjuntoOrdenado>();
+                                    conjuntosInversos = new ArrayList<ConjuntoOrdenado>();
         ConjuntoOrdenado conjuntoReferencia = new ConjuntoOrdenado(numeros);
 
         adicionaTransposicoesDistintas(conjuntosDiretos, conjuntoReferencia);
-
-        for(int i = 0; i < tamanho; i++) {
-            conjuntoReferencia.set(i, conjuntoReferencia.get(i).inverter());
-        }
+        conjuntoReferencia.inverter();
 
         adicionaTransposicoesDistintas(conjuntosInversos, conjuntoReferencia);
         resultadosPaleta = new ArrayList<ArrayList<ClasseDeAltura[]>>(2);
@@ -312,7 +309,7 @@ public class Controlador {
     }
 
     public void geraSubconjuntos() {
-        subconjuntos = new HashSet<LinkedList<ClasseDeAltura>>();
+        subconjuntos = new HashSet<ConjuntoOrdenado>();
 
         int tamanhoSubconjuntos = 0;
         while((tamanhoSubconjuntos =
@@ -320,19 +317,19 @@ public class Controlador {
                 "Informe o tamanho dos subconjuntos")))
                 >= numeros.size());
 
-        constroi(0, tamanhoSubconjuntos, new LinkedList<ClasseDeAltura>(), subconjuntos);
+        constroi(0, tamanhoSubconjuntos, new ConjuntoOrdenado(), subconjuntos);
     }
 
-    public HashSet<LinkedList<ClasseDeAltura>> getSubconjuntos() {
+    public HashSet<ConjuntoOrdenado> getSubconjuntos() {
         return subconjuntos;
     }
 
-    private void constroi(int indice, int tamanhoSubconjuntos, LinkedList<ClasseDeAltura> subconjunto, HashSet<LinkedList<ClasseDeAltura>> subconjuntos) {
+    private void constroi(int indice, int tamanhoSubconjuntos, ConjuntoOrdenado subconjunto, HashSet<ConjuntoOrdenado> subconjuntos) {
         for (; indice < numeros.size(); indice++) {
             subconjunto.add(numeros.get(indice));
             if (subconjunto.size() == tamanhoSubconjuntos) {
-                subconjuntos.add(new LinkedList<ClasseDeAltura>(subconjunto));
-                subconjunto.removeLast();
+                subconjuntos.add(new ConjuntoOrdenado(subconjunto));
+                subconjunto.remove(subconjunto.size() - 1);
             }
             else {
                 constroi(indice + 1, tamanhoSubconjuntos, subconjunto, subconjuntos);
@@ -340,7 +337,7 @@ public class Controlador {
         }
 
         try {
-            subconjunto.removeLast();
+            subconjunto.remove(subconjunto.size() - 1);
         }
         catch(NoSuchElementException nsee) {}
     }
@@ -444,7 +441,6 @@ public class Controlador {
         }
 
         resultadoMultiplicacao.sort();
-        resultadoMultiplicacao = new ConjuntoOrdenado(new HashSet<ClasseDeAltura>(resultadoMultiplicacao));
     }
 
     public void geraMultiplicacaoRahn1() {
@@ -470,12 +466,12 @@ public class Controlador {
             }
         }
 
-        HashSet<ClasseDeAltura> resultadoSemRepetidos = new HashSet<ClasseDeAltura>();
+        ConjuntoOrdenado resultadoSemRepetidos = new ConjuntoOrdenado();
         for (ClasseDeAltura i : resultadoParcial) {
             resultadoSemRepetidos.add(i);
         }
 
-        resultadoMultiplicacao = new ConjuntoOrdenado(resultadoSemRepetidos);
+        resultadoMultiplicacao = resultadoSemRepetidos;
     }
 
     public ConjuntoOrdenado getMultiplicacao() {
@@ -485,7 +481,7 @@ public class Controlador {
     public ArrayList<Point> geraCombinatoriedade() {
         ArrayList<Point> camposColorir = new ArrayList<Point>();
         ConjuntoOrdenado hexacordeCorrente = new ConjuntoOrdenado(),
-                hexacordeRejeitado = serieEscolhida.toClasseDeAlturaList(6);
+                hexacordeRejeitado = serieEscolhida.toConjuntoOrdenado(6);
 
         //procura nas series P
         lacoPrincipal:

@@ -367,7 +367,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 }
                 break;
             case SAIDA_SUBCONJUNTOS:
-                for (LinkedList<ClasseDeAltura> subconjunto : controlador.getSubconjuntos()) {
+                for (ConjuntoOrdenado subconjunto : controlador.getSubconjuntos()) {
                     adicionarAlturasBuilder(subconjunto);
                     stringBuilder.append("  [");
                     adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(new ConjuntoOrdenado(subconjunto)));

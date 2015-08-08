@@ -82,8 +82,8 @@ public class SerieDodecafonica {
         return formasPrimas.get(indice/tamanho).get(indice%tamanho);
     }
 
-    public ArrayList<ClasseDeAltura> toClasseDeAlturaList(int subTamanho) {
-        ArrayList<ClasseDeAltura> integerList = new ArrayList<ClasseDeAltura>();
+    public ConjuntoOrdenado toConjuntoOrdenado(int subTamanho) {
+        ConjuntoOrdenado integerList = new ConjuntoOrdenado();
         ConjuntoOrdenado corrente = null;
         int tamanho = formasPrimas.size(), indiceReal = 0;
 

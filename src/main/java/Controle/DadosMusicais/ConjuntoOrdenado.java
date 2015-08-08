@@ -70,6 +70,15 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         return classes.isEmpty();
     }
 
+    public ClasseDeAltura[] toArray(ClasseDeAltura[] array) {
+        return classes.toArray(array);
+    }
+
+    public ConjuntoOrdenado subSeq(int a, int b) {
+        ClasseDeAltura[] arr = (ClasseDeAltura[]) classes.subList(a,b).toArray();
+        return new ConjuntoOrdenado(arr);
+    }
+
     public void transpor(int n) {
         for (int i = 0; i < classes.size(); ++i) {
              classes.set(i, classes.get(i).transpor(n));
