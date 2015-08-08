@@ -24,7 +24,6 @@ import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.MatrizDeAcordes;
 import Controle.DadosMusicais.SerieDodecafonica;
-import Controle.DadosMusicais.SegmentoInvariancia;
 import Controle.FormasCompactas;
 import Excecoes.DadosProibidos;
 import java.awt.Point;
@@ -38,7 +37,7 @@ public class Controlador {
     private ArrayList<SerieDodecafonica> listadeFormas;
     private SerieDodecafonica serieEscolhida;
     private MatrizDodecafonica matriz;
-    private ArrayList<SegmentoInvariancia> acordesALimpo;
+    private ArrayList<ConjuntoOrdenado> acordesALimpo;
     private ArrayList<String> informacoesAssociada, invarianciaDerivativa, invariancias;
     private ArrayList<ClasseDeAltura[]> resultadoRotacaoStravinskyana;
     private ArrayList<ArrayList<ClasseDeAltura[]>> resultadosPaleta;
@@ -576,7 +575,7 @@ public class Controlador {
 
     public Object geraInvariancia() {
         informacoesAssociada = new ArrayList<String>();
-        acordesALimpo = new ArrayList<SegmentoInvariancia>();
+        acordesALimpo = new ArrayList<ConjuntoOrdenado>();
         invariancias = new ArrayList<String>();
 
         encontraInvariancia(3);
@@ -603,10 +602,10 @@ public class Controlador {
 
     private void encontraInvariancia(int tamanhoSegmentos) {
         MatrizDeAcordes acordes = new MatrizDeAcordes(tamanhoSegmentos, matriz);
-        ArrayList<SegmentoInvariancia> corrente = null;
+        ArrayList<ConjuntoOrdenado> corrente = null;
         int tamanhoLinha;
         String informacaoDoCorrente = "";
-        SegmentoInvariancia procurado = null;
+        ConjuntoOrdenado procurado = null;
 
         do {
             procurado = acordes.getProximoElemento();

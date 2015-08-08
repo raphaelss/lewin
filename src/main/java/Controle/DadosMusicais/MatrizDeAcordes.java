@@ -22,10 +22,10 @@ package Controle.DadosMusicais;
 import java.util.ArrayList;
 
 public class MatrizDeAcordes {
-    private ArrayList<ArrayList<SegmentoInvariancia>> tricordesEmLinhasP = new ArrayList<ArrayList<SegmentoInvariancia>>(),
-                                                  tricordesEmLinhasI = new ArrayList<ArrayList<SegmentoInvariancia>>(),
-                                                  tricordesEmLinhasR = new ArrayList<ArrayList<SegmentoInvariancia>>(),
-                                                  tricordesEmLinhasRI = new ArrayList<ArrayList<SegmentoInvariancia>>();
+    private ArrayList<ArrayList<ConjuntoOrdenado>> tricordesEmLinhasP = new ArrayList<ArrayList<ConjuntoOrdenado>>(),
+                                                  tricordesEmLinhasI = new ArrayList<ArrayList<ConjuntoOrdenado>>(),
+                                                  tricordesEmLinhasR = new ArrayList<ArrayList<ConjuntoOrdenado>>(),
+                                                  tricordesEmLinhasRI = new ArrayList<ArrayList<ConjuntoOrdenado>>();
 
     public MatrizDeAcordes(int chordSize, MatrizDodecafonica matriz) {
         for (int k = 0; k < 12; k++) {
@@ -36,16 +36,16 @@ public class MatrizDeAcordes {
         }
     }
 
-    private void acrescentaLinha(ClasseDeAltura[] serie, ArrayList<ArrayList<SegmentoInvariancia>> matriz, int tamanhoAcorde) {
-        ArrayList<SegmentoInvariancia> corrente = new ArrayList<SegmentoInvariancia>();
-        SegmentoInvariancia passageiro;
+    private void acrescentaLinha(ClasseDeAltura[] serie, ArrayList<ArrayList<ConjuntoOrdenado>> matriz, int tamanhoAcorde) {
+        ArrayList<ConjuntoOrdenado> corrente = new ArrayList<ConjuntoOrdenado>();
+        ConjuntoOrdenado passageiro;
         final int limite = 12 - tamanhoAcorde;
 
         for (int indice = 0; indice <= limite; indice++) {
-            passageiro = new SegmentoInvariancia();
+            passageiro = new ConjuntoOrdenado();
 
             for (int j = indice; j < indice + tamanhoAcorde; j++) {
-                passageiro.adicionaNumero(serie[j]);
+                passageiro.add(serie[j]);
             }
 
             corrente.add(passageiro);
@@ -56,25 +56,25 @@ public class MatrizDeAcordes {
 
     public int getTamanhoTotal() {
         int tamanho = 0;
-        for (ArrayList<SegmentoInvariancia> linha : tricordesEmLinhasP) {
+        for (ArrayList<ConjuntoOrdenado> linha : tricordesEmLinhasP) {
             tamanho += linha.size();
         }
 
-        for (ArrayList<SegmentoInvariancia> linha : tricordesEmLinhasI) {
+        for (ArrayList<ConjuntoOrdenado> linha : tricordesEmLinhasI) {
             tamanho += linha.size();
         }
 
         return tamanho;
     }
 
-    public SegmentoInvariancia getProximoElemento() {
-        for (ArrayList<SegmentoInvariancia> linha : tricordesEmLinhasP) {
+    public ConjuntoOrdenado getProximoElemento() {
+        for (ArrayList<ConjuntoOrdenado> linha : tricordesEmLinhasP) {
             if (linha.size() > 0) {
                 return linha.get(0);
             }
         }
 
-        for (ArrayList<SegmentoInvariancia> linha : tricordesEmLinhasI) {
+        for (ArrayList<ConjuntoOrdenado> linha : tricordesEmLinhasI) {
             if (linha.size() > 0) {
                 return linha.get(0);
             }
@@ -83,19 +83,19 @@ public class MatrizDeAcordes {
         return null;
     }
 
-    public ArrayList<ArrayList<SegmentoInvariancia>> getMatrizP() {
+    public ArrayList<ArrayList<ConjuntoOrdenado>> getMatrizP() {
         return tricordesEmLinhasP;
     }
 
-    public ArrayList<ArrayList<SegmentoInvariancia>> getMatrizI() {
+    public ArrayList<ArrayList<ConjuntoOrdenado>> getMatrizI() {
         return tricordesEmLinhasI;
     }
 
-    public ArrayList<ArrayList<SegmentoInvariancia>> getMatrizR() {
+    public ArrayList<ArrayList<ConjuntoOrdenado>> getMatrizR() {
         return tricordesEmLinhasR;
     }
 
-    public ArrayList<ArrayList<SegmentoInvariancia>> getMatrizRI() {
+    public ArrayList<ArrayList<ConjuntoOrdenado>> getMatrizRI() {
         return tricordesEmLinhasRI;
     }
 }
