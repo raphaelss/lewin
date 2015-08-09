@@ -42,9 +42,11 @@ public class SerieDodecafonica {
         formasPrimas.add(forma);
     }
 
+/*
     public void remove() {
         formasPrimas.remove(formasPrimas.size() - 1);
     }
+*/
 
     public String toString() {
         String resultado = "";
@@ -70,10 +72,6 @@ public class SerieDodecafonica {
         retorno.formasPrimas = new ArrayList<ConjuntoOrdenado>(this.formasPrimas);
 
         return retorno;
-    }
-
-    public ConjuntoOrdenado getConjuntoOrdenado(int indice) {
-        return formasPrimas.get(indice);
     }
 
     public ClasseDeAltura get(int indice) {

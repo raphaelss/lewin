@@ -58,6 +58,16 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         return true;
     }
 
+    public int add(ConjuntoOrdenado co) {
+        int n = 0;
+        for (ClasseDeAltura x : co) {
+            if (add(x)) {
+                ++n;
+            }
+        }
+        return n;
+    }
+
     public ClasseDeAltura remove(int i) {
         return classes.remove(i);
     }
@@ -68,6 +78,10 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
 
     public boolean isEmpty() {
         return classes.isEmpty();
+    }
+
+    public boolean disjuntos(ConjuntoOrdenado co) {
+        return Collections.disjoint(classes, co.classes);
     }
 
     public ClasseDeAltura[] toArray(ClasseDeAltura[] array) {
