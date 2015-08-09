@@ -20,20 +20,19 @@
 package Controle;
 
 import Controle.DadosMusicais.ConjuntoOrdenado;
-import Controle.DadosMusicais.SerieDodecafonica;
 import java.util.ArrayList;
 
 public class GeradorDerivacaoSerial {
     private ConjuntoOrdenado formaOriginal;
     private ArrayList<ConjuntoOrdenado> tabelaDeGrupos = new ArrayList<ConjuntoOrdenado>();
-    private ArrayList<SerieDodecafonica> listadeFormas = new ArrayList<SerieDodecafonica>();
+    private ArrayList<ConjuntoOrdenado> listadeFormas = new ArrayList<ConjuntoOrdenado>();
     private final int TAMANHO_TABELA_GRUPOS = 23;
 
     public GeradorDerivacaoSerial(ConjuntoOrdenado form) {
         formaOriginal = form;
     }
 
-    public ArrayList<SerieDodecafonica> resultado() {
+    public ArrayList<ConjuntoOrdenado> resultado() {
         for (int i = 1; i < 12; ++i) {
             ConjuntoOrdenado co = new ConjuntoOrdenado(formaOriginal);
             co.transpor(i);
@@ -50,31 +49,33 @@ public class GeradorDerivacaoSerial {
         return encontraGruposCompativeis();
     }
 
-    private ArrayList<SerieDodecafonica> encontraGruposCompativeis() {
-        SerieDodecafonica formas = new SerieDodecafonica();
-        formas.adiciona(formaOriginal);
+    private ArrayList<ConjuntoOrdenado> encontraGruposCompativeis() {
+        ConjuntoOrdenado formas = new ConjuntoOrdenado();
+        formas.add(formaOriginal);
 
         encontraGruposCompativeis(formas);
 
         return listadeFormas;
     }
 
-    private void encontraGruposCompativeis(SerieDodecafonica formas) {
+    private void encontraGruposCompativeis(ConjuntoOrdenado formas) {
         try {
         ConjuntoOrdenado atual = null;
 
         for (int i = 0; i < TAMANHO_TABELA_GRUPOS; i++) {
             atual = tabelaDeGrupos.get(i);
-            if (formas.eCompativel(atual)) {
-                formas.adiciona(atual);
+            if (formas.disjuntos(atual)) {
+                formas.add(atual);
                 encontraGruposCompativeis(formas);
             }
         }
 
-        if (formas.getTamanho() == 12/formaOriginal.size()) {
-            listadeFormas.add(formas.copia());
+        if (formas.size() == 12/formaOriginal.size()) {
+            listadeFormas.add(new ConjuntoOrdenado(formas));
         }
-        formas.remove();
+        for (int i = 0; i < formaOriginal.size(); ++i) {
+            formas.remove(formas.size() - 1);
+        }
         } catch (Exception e) { System.out.println(e.getMessage());}
     }
 }

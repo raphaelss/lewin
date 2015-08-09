@@ -23,7 +23,6 @@ import Controle.Controlador;
 import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.ConjuntoOrdenado;
 import Controle.DadosMusicais.MatrizDodecafonica;
-import Controle.DadosMusicais.SerieDodecafonica;
 import Controle.FormasCompactas;
 import Excecoes.DadosProibidos;
 import Excecoes.SequenciadorNulo;
@@ -317,7 +316,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 adicionarAlturasBuilder(controlador.getMultiplicacao());
                 break;
             case SAIDA_DERIVACAO_SERIAL:
-                ArrayList<SerieDodecafonica> listadeFormas = controlador.getDerivacaoSerial();
+                ArrayList<ConjuntoOrdenado> listadeFormas = controlador.getDerivacaoSerial();
 
                 for (int i = 0; i < listadeFormas.size(); ++i) {
                     for (int j = 0; j < 12; ++j) {
@@ -327,7 +326,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     stringBuilder.append("  (").append(i).append(")\n\n");
                 }
 
-                switch(listadeFormas.get(0).getTamanho()) {
+                switch(listadeFormas.get(0).size()) {
                     case 4:
                         stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tricordais internas");
                         break;

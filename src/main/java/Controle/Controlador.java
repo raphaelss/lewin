@@ -23,7 +23,6 @@ import Controle.DadosMusicais.ConjuntoOrdenado;
 import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.MatrizDeAcordes;
-import Controle.DadosMusicais.SerieDodecafonica;
 import Controle.FormasCompactas;
 import Excecoes.DadosProibidos;
 import java.awt.Point;
@@ -34,8 +33,8 @@ public class Controlador {
     private ConjuntoOrdenado numeros = new ConjuntoOrdenado(),
                              segundoConjunto = new ConjuntoOrdenado(),
                              formaCompacta, resultadoMultiplicacao;
-    private ArrayList<SerieDodecafonica> listadeFormas;
-    private SerieDodecafonica serieEscolhida;
+    private ArrayList<ConjuntoOrdenado> listadeFormas;
+    private ConjuntoOrdenado serieEscolhida;
     private MatrizDodecafonica matriz;
     private ArrayList<ConjuntoOrdenado> acordesALimpo;
     private ArrayList<String> informacoesAssociada, invarianciaDerivativa, invariancias;
@@ -138,7 +137,7 @@ public class Controlador {
         listadeFormas = new GeradorDerivacaoSerial(new ConjuntoOrdenado(numeros)).resultado();
     }
 
-    public ArrayList<SerieDodecafonica> getDerivacaoSerial() {
+    public ArrayList<ConjuntoOrdenado> getDerivacaoSerial() {
         return listadeFormas;
     }
 
@@ -165,8 +164,8 @@ public class Controlador {
                 acorde[i] = numeros.get(i);
             }
 
-            serieEscolhida = new SerieDodecafonica();
-            serieEscolhida.adiciona(new ConjuntoOrdenado(acorde));
+            serieEscolhida = new ConjuntoOrdenado();
+            serieEscolhida.add(new ConjuntoOrdenado(acorde));
         }
 
         try {
@@ -480,7 +479,7 @@ public class Controlador {
     public ArrayList<Point> geraCombinatoriedade() {
         ArrayList<Point> camposColorir = new ArrayList<Point>();
         ConjuntoOrdenado hexacordeCorrente = new ConjuntoOrdenado(),
-                hexacordeRejeitado = serieEscolhida.toConjuntoOrdenado(6);
+                hexacordeRejeitado = serieEscolhida.subSeq(0, 6);
 
         //procura nas series P
         lacoPrincipal:
