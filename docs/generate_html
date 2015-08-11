@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-mandoc lewin.1 -Thtml -Ostyle=style.css > lewin.html
+mandoc lewin.1 -Thtml -Ostyle=style.css > index.html
