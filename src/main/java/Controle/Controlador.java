@@ -134,7 +134,7 @@ public class Controlador {
                 throw new DadosProibidos("Impossível gerar uma série derivada de um tetracorde contendo a classe intervalar 4.");
             }
         }
-        listadeFormas = new GeradorDerivacaoSerial(new ConjuntoOrdenado(numeros)).resultado();
+        listadeFormas = GeradorDerivacaoSerial.gerar(new ConjuntoOrdenado(numeros));
     }
 
     public ArrayList<ConjuntoOrdenado> getDerivacaoSerial() {

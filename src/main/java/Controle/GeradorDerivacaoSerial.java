@@ -23,16 +23,10 @@ import Controle.DadosMusicais.ConjuntoOrdenado;
 import java.util.ArrayList;
 
 public class GeradorDerivacaoSerial {
-    private ConjuntoOrdenado formaOriginal;
-    private ArrayList<ConjuntoOrdenado> tabelaDeGrupos = new ArrayList<ConjuntoOrdenado>();
-    private ArrayList<ConjuntoOrdenado> listadeFormas = new ArrayList<ConjuntoOrdenado>();
-    private final int TAMANHO_TABELA_GRUPOS = 23;
+    private static final int TAMANHO_TABELA_GRUPOS = 23;
 
-    public GeradorDerivacaoSerial(ConjuntoOrdenado form) {
-        formaOriginal = form;
-    }
-
-    public ArrayList<ConjuntoOrdenado> resultado() {
+    public static ArrayList<ConjuntoOrdenado> gerar(ConjuntoOrdenado formaOriginal) {
+        ArrayList<ConjuntoOrdenado> tabelaDeGrupos = new ArrayList<ConjuntoOrdenado>();
         for (int i = 1; i < 12; ++i) {
             ConjuntoOrdenado co = new ConjuntoOrdenado(formaOriginal);
             co.transpor(i);
@@ -46,19 +40,22 @@ public class GeradorDerivacaoSerial {
             co.transpor(i);
             tabelaDeGrupos.add(co);
         }
-        return encontraGruposCompativeis();
+        return encontraGruposCompativeis(formaOriginal, tabelaDeGrupos);
     }
 
-    private ArrayList<ConjuntoOrdenado> encontraGruposCompativeis() {
+    private static ArrayList<ConjuntoOrdenado> encontraGruposCompativeis(ConjuntoOrdenado formaOriginal, ArrayList<ConjuntoOrdenado> tabelaDeGrupos) {
+        ArrayList<ConjuntoOrdenado> listaDeFormas = new ArrayList<ConjuntoOrdenado>();
         ConjuntoOrdenado formas = new ConjuntoOrdenado();
         formas.add(formaOriginal);
 
-        encontraGruposCompativeis(formas);
+        encontraGruposCompativeis(formaOriginal, formas, listaDeFormas, tabelaDeGrupos);
 
-        return listadeFormas;
+        return listaDeFormas;
     }
 
-    private void encontraGruposCompativeis(ConjuntoOrdenado formas) {
+    private static void encontraGruposCompativeis(ConjuntoOrdenado formaOriginal,
+            ConjuntoOrdenado formas, ArrayList<ConjuntoOrdenado> listaDeFormas,
+            ArrayList<ConjuntoOrdenado> tabelaDeGrupos) {
         try {
         ConjuntoOrdenado atual = null;
 
@@ -66,12 +63,12 @@ public class GeradorDerivacaoSerial {
             atual = tabelaDeGrupos.get(i);
             if (formas.disjuntos(atual)) {
                 formas.add(atual);
-                encontraGruposCompativeis(formas);
+                encontraGruposCompativeis(formaOriginal, formas, listaDeFormas, tabelaDeGrupos);
             }
         }
 
         if (formas.size() == 12/formaOriginal.size()) {
-            listadeFormas.add(new ConjuntoOrdenado(formas));
+            listaDeFormas.add(new ConjuntoOrdenado(formas));
         }
         for (int i = 0; i < formaOriginal.size(); ++i) {
             formas.remove(formas.size() - 1);
