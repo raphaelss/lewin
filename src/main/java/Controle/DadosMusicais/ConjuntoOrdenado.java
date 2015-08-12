@@ -30,18 +30,6 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         classes = new ArrayList<ClasseDeAltura>();
     }
 
-    //TODO: Remover este construtor e o próximo ou garantir que eles não gerem alturas duplicadas
-    public ConjuntoOrdenado(ClasseDeAltura[] forma) {
-        classes = new ArrayList<ClasseDeAltura>(forma.length);
-        for (int i = 0; i < forma.length; ++i) {
-            classes.add(forma[i]);
-        }
-    }
-
-    public ConjuntoOrdenado(ArrayList<ClasseDeAltura> forma) {
-        classes = new ArrayList<ClasseDeAltura>();
-    }
-
     public ConjuntoOrdenado(ConjuntoOrdenado co) {
         classes = new ArrayList<ClasseDeAltura>(co.classes);
     }
@@ -89,8 +77,11 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
     }
 
     public ConjuntoOrdenado subSeq(int a, int b) {
-        ClasseDeAltura[] arr = (ClasseDeAltura[]) classes.subList(a,b).toArray();
-        return new ConjuntoOrdenado(arr);
+        ConjuntoOrdenado resultado = new ConjuntoOrdenado();
+        for (ClasseDeAltura c : classes.subList(a,b)) {
+            resultado.add(c);
+        }
+        return resultado;
     }
 
     public void transpor(int n) {

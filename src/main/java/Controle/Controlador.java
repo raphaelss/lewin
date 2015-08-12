@@ -33,7 +33,7 @@ public class Controlador {
                              segundoConjunto = new ConjuntoOrdenado(),
                              formaCompacta, resultadoMultiplicacao;
     private ArrayList<ConjuntoOrdenado> listadeFormas;
-    private ConjuntoOrdenado serieEscolhida;
+    private ConjuntoOrdenado serieEscolhida = new ConjuntoOrdenado();
     private MatrizDodecafonica matriz;
     private ArrayList<ConjuntoOrdenado> acordesALimpo;
     private ArrayList<String> informacoesAssociada, invarianciaDerivativa, invariancias;
@@ -127,55 +127,26 @@ public class Controlador {
     public void geraMatrizDodecafonica() {
         matriz = new MatrizDodecafonica();
 
-        ClasseDeAltura[] acorde = new ClasseDeAltura[12];
-
+        serieEscolhida.clear();
         if (numeros.size() < 12) {
             int indice = 0;
             while((indice =
                     Integer.parseInt(JOptionPane.showInputDialog(null,
                     "Selecione o \u00edndice da s\u00e9rie de entrada da matriz")))
                     >= listadeFormas.size());
-
-            serieEscolhida = listadeFormas.get(indice);
-
-            for (int i = 0; i < 12; i++) {
-                acorde[i] = serieEscolhida.get(i);
-            }
+            //TODO: O ConjuntoOrdenado escolhido tem o tamanho certo?
+            serieEscolhida.add(listadeFormas.get(indice));
         }
         else {
-            for (int i = 0; i < 12; i++) {
-                acorde[i] = numeros.get(i);
-            }
-
-            serieEscolhida = new ConjuntoOrdenado();
-            serieEscolhida.add(new ConjuntoOrdenado(acorde));
+            serieEscolhida.add(numeros);
         }
 
-        try {
-            matriz.setLinha(0, acorde);
-
-            ClasseDeAltura[] inversoProvisorio = new ClasseDeAltura[12];
-
-            for (int i = 0; i < 12; i++) {
-                inversoProvisorio[i] = serieEscolhida.get(i).inverter();
-            }
-
-            int intervalo = inversoProvisorio[0].intervalo_ord(serieEscolhida.get(0));
-
-            for (int i = 0; i < 12; i++) {
-                matriz.preenchePosicao(i, 0, inversoProvisorio[i].transpor(-intervalo));
-            }
-
-            for (int i = 1; i < 12; i++) {
-                intervalo = matriz.getValor(i, 0).intervalo_ord(matriz.getValor(i - 1, 0));
-
-                for (int j = 1; j < 12; j++) {
-                    matriz.preenchePosicao(i, j, (matriz.getValor(i - 1, j).transpor(-intervalo)));
-                }
-            }
-        }
-        catch(NumberFormatException dp) {
-            JOptionPane.showMessageDialog(null, "H\u00e1 dados n\u00e3o permitidos. Preencha corretamente");
+        ConjuntoOrdenado inverso = new ConjuntoOrdenado(serieEscolhida);
+        inverso.inverter();
+        matriz.setColuna(0, inverso);
+        for (int i = 1; i < 12; ++i) {
+            inverso.transpor(-serieEscolhida.get(i).intervalo_ord(serieEscolhida.get(i - 1)));
+            matriz.setColuna(i, inverso);
         }
     }
 

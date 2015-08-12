@@ -30,13 +30,15 @@ public class MatrizDodecafonica {
         matriz[linha][coluna] = valor;
     }
 
-    public void setLinha(int linha, ClasseDeAltura[] serie) {
-        matriz[linha] = serie;
+    public void setLinha(int linha, ConjuntoOrdenado serie) {
+        for (int i = 0; i < 12; ++i) {
+            matriz[linha][i] = serie.get(i);
+        }
     }
 
-    public void setColuna(int coluna, ClasseDeAltura[] serie) {
+    public void setColuna(int coluna, ConjuntoOrdenado serie) {
         for (int i = 0; i < 12; i++) {
-            matriz[i][coluna] = serie[i];
+            matriz[i][coluna] = serie.get(i);
         }
     }
 
