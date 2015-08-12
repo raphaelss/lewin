@@ -32,7 +32,7 @@ public class Controlador {
     private ConjuntoOrdenado numeros = new ConjuntoOrdenado(),
                              segundoConjunto = new ConjuntoOrdenado(),
                              formaCompacta, resultadoMultiplicacao;
-    private ArrayList<ConjuntoOrdenado> listadeFormas;
+    private ArrayList<ConjuntoOrdenado> listaDeFormas;
     private ConjuntoOrdenado serieEscolhida = new ConjuntoOrdenado();
     private MatrizDodecafonica matriz;
     private ArrayList<ConjuntoOrdenado> acordesALimpo;
@@ -79,11 +79,11 @@ public class Controlador {
         while((indice =
                 Integer.parseInt(JOptionPane.showInputDialog(null,
                 "Selecione o \u00edndice da s\u00e9rie a ser usada")))
-                >= listadeFormas.size());
+                >= listaDeFormas.size());
 
         numeros.clear();
         for (int i = 0; i < 12; i++) {
-            numeros.add(listadeFormas.get(indice).get(i));
+            numeros.add(listaDeFormas.get(indice).get(i));
         }
     }
 
@@ -117,11 +117,11 @@ public class Controlador {
     }
 
     public void geraDerivacaoSerial() throws DadosProibidos {
-        listadeFormas = GeradorDerivacaoSerial.gerar(numeros);
+        listaDeFormas = GeradorDerivacaoSerial.gerar(numeros);
     }
 
     public ArrayList<ConjuntoOrdenado> getDerivacaoSerial() {
-        return listadeFormas;
+        return listaDeFormas;
     }
 
     public void geraMatrizDodecafonica() {
@@ -133,9 +133,8 @@ public class Controlador {
             while((indice =
                     Integer.parseInt(JOptionPane.showInputDialog(null,
                     "Selecione o \u00edndice da s\u00e9rie de entrada da matriz")))
-                    >= listadeFormas.size());
-            //TODO: O ConjuntoOrdenado escolhido tem o tamanho certo?
-            serieEscolhida.add(listadeFormas.get(indice));
+                    >= listaDeFormas.size());
+            serieEscolhida.add(listaDeFormas.get(indice));
         }
         else {
             serieEscolhida.add(numeros);
@@ -145,7 +144,7 @@ public class Controlador {
         inverso.inverter();
         matriz.setColuna(0, inverso);
         for (int i = 1; i < 12; ++i) {
-            inverso.transpor(-serieEscolhida.get(i).intervalo_ord(serieEscolhida.get(i - 1)));
+            inverso.transpor(-serieEscolhida.get(i).intervaloOrd(serieEscolhida.get(i - 1)));
             matriz.setColuna(i, inverso);
         }
     }
@@ -182,7 +181,7 @@ public class Controlador {
 
         for (int i = 0; i < 5; i++) {
             segundaParte.add(segundaParte.remove(0));
-            subtrator = segundaParte.get(0).intervalo_ord(primeiro);
+            subtrator = segundaParte.get(0).intervaloOrd(primeiro);
 
             for (ClasseDeAltura seg : segundaParte) {
                 subtraido.add(seg.transpor(subtrator));

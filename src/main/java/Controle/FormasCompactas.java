@@ -31,8 +31,8 @@ public abstract class FormasCompactas {
         ClasseDeAltura primeiroA = a.get(0);
         ClasseDeAltura primeiroB = b.get(0);
         int ultimo = a.size() - 1;
-        int intervaloA = primeiroA.intervalo_ord(a.get(ultimo));
-        int intervaloB = primeiroB.intervalo_ord(b.get(ultimo));
+        int intervaloA = primeiroA.intervaloOrd(a.get(ultimo));
+        int intervaloB = primeiroB.intervaloOrd(b.get(ultimo));
         if (intervaloA < intervaloB) {
             return a;
         } else if (intervaloA > intervaloB) {
@@ -41,8 +41,8 @@ public abstract class FormasCompactas {
         --ultimo;
         for (int i = 0; i < ultimo; ++i) {
             int indice = ic.indiceComparacao(i, ultimo);
-            intervaloA = primeiroA.intervalo_ord(a.get(indice));
-            intervaloB = primeiroB.intervalo_ord(b.get(indice));
+            intervaloA = primeiroA.intervaloOrd(a.get(indice));
+            intervaloB = primeiroB.intervaloOrd(b.get(indice));
             if (intervaloA < intervaloB) {
                 return a;
             } else if (intervaloA > intervaloB) {

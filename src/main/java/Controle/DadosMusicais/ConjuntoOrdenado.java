@@ -132,17 +132,6 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         return classes.hashCode();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder("[");
-
-        for (int i = 0; i < classes.size(); i++) {
-            builder.append(classes.get(i).toString()).append(" ");
-        }
-        builder.setLength(builder.length() - 1);
-        return builder.append("]").toString();
-    }
-
     public void inverter() {
         for (int i = 0; i < classes.size(); ++i) {
             classes.set(i, classes.get(i).inverter());
@@ -161,7 +150,7 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         }
         for (int i = 0; i < classes.size(); ++i) {
             for (int j = i + 1; j < classes.size(); ++j) {
-                ++vetor[classes.get(i).intervalo_desord(classes.get(j)) - 1];
+                ++vetor[classes.get(i).intervaloDesord(classes.get(j)) - 1];
             }
         }
     }

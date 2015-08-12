@@ -39,12 +39,12 @@ public class ClasseDeAltura implements Comparable<ClasseDeAltura> {
         return criar(12 - valor);
     }
 
-    public int intervalo_ord(ClasseDeAltura outra) {
+    public int intervaloOrd(ClasseDeAltura outra) {
         return mod12(outra.valor - valor);
     }
 
-    public int intervalo_desord(ClasseDeAltura outra) {
-        return Math.min(this.intervalo_ord(outra), outra.intervalo_ord(this));
+    public int intervaloDesord(ClasseDeAltura outra) {
+        return Math.min(this.intervaloOrd(outra), outra.intervaloOrd(this));
     }
 
     @Override
