@@ -118,13 +118,18 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         return classes.containsAll(co.classes);
     }
 
-    public boolean equals(ConjuntoOrdenado forma) {
-        for (int i = 0; i < classes.size(); i++) {
-            if (classes.get(i) != forma.get(i)) {
-                return false;
-            }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ConjuntoOrdenado) {
+            ConjuntoOrdenado co = (ConjuntoOrdenado) obj;
+            return classes.equals(co.classes);
         }
-        return true;
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return classes.hashCode();
     }
 
     @Override
