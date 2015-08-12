@@ -19,13 +19,31 @@
 
 package Controle;
 
+import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.ConjuntoOrdenado;
+import Excecoes.DadosProibidos;
 import java.util.ArrayList;
 
 public class GeradorDerivacaoSerial {
     private static final int TAMANHO_TABELA_GRUPOS = 23;
 
-    public static ArrayList<ConjuntoOrdenado> gerar(ConjuntoOrdenado formaOriginal) {
+    public static ArrayList<ConjuntoOrdenado> gerar(ConjuntoOrdenado formaOriginal) throws DadosProibidos {
+        int tamanho = formaOriginal.size();
+
+        if (tamanho == 3) {
+            ConjuntoOrdenado formaPrima = FormasCompactas.formaPrimaStraus(formaOriginal);
+            ClasseDeAltura segundo = formaPrima.get(1),
+                           terceiro = formaPrima.get(2);
+            if (segundo == ClasseDeAltura.criar(3) && terceiro == ClasseDeAltura.criar(6)) {
+                throw new DadosProibidos("Impossível gerar uma série derivada deste tricorde.");
+            }
+        } else if (tamanho == 4) {
+            int[] vetor = formaOriginal.vetorIntervalar();
+            if (vetor[3] > 0) {
+                throw new DadosProibidos("Impossível gerar uma série derivada de um tetracorde contendo a classe intervalar 4.");
+            }
+        }
+
         ArrayList<ConjuntoOrdenado> tabelaDeGrupos = new ArrayList<ConjuntoOrdenado>();
         for (int i = 1; i < 12; ++i) {
             ConjuntoOrdenado co = new ConjuntoOrdenado(formaOriginal);

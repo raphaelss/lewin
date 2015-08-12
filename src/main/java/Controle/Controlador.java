@@ -106,10 +106,9 @@ public class Controlador {
     }
 
     public void adicionaEntradaSegundoConjunto(ClasseDeAltura c) throws DadosProibidos {
-        if (segundoConjunto.contains(c)) {
+        if (!segundoConjunto.add(c)) {
             throw new DadosProibidos("Dados repetidos não são permitidos");
         }
-        segundoConjunto.add(c);
     }
 
     public boolean removerSegundoConjunto() {
@@ -118,22 +117,7 @@ public class Controlador {
     }
 
     public void geraDerivacaoSerial() throws DadosProibidos {
-        int tamanho = numeros.size();
-
-        if (tamanho == 3) {
-            ConjuntoOrdenado formaPrima = FormasCompactas.formaPrimaStraus(numeros);
-            ClasseDeAltura segundo = formaPrima.get(1),
-                           terceiro = formaPrima.get(2);
-            if (segundo == ClasseDeAltura.criar(3) && terceiro == ClasseDeAltura.criar(6)) {
-                throw new DadosProibidos("Impossível gerar uma série derivada deste tricorde.");
-            }
-        } else if (tamanho == 4) {
-            int[] vetor = new ConjuntoOrdenado(numeros).vetorIntervalar();
-            if (vetor[3] > 0) {
-                throw new DadosProibidos("Impossível gerar uma série derivada de um tetracorde contendo a classe intervalar 4.");
-            }
-        }
-        listadeFormas = GeradorDerivacaoSerial.gerar(new ConjuntoOrdenado(numeros));
+        listadeFormas = GeradorDerivacaoSerial.gerar(numeros);
     }
 
     public ArrayList<ConjuntoOrdenado> getDerivacaoSerial() {
@@ -298,7 +282,7 @@ public class Controlador {
     }
 
     public void gerarVetorIntervalar() {
-        new ConjuntoOrdenado(numeros).vetorIntervalar(vetorIntervalar);
+        numeros.vetorIntervalar(vetorIntervalar);
     }
 
     public int[] getVetorIntervalar() {
@@ -343,10 +327,10 @@ public class Controlador {
         int tamanhoPrimeiro = numeros.size(), tamanhoSegundo = segundoConjunto.size();
 
         if (vetorIntervalar == null) {
-            vetorIntervalar = new ConjuntoOrdenado(numeros).vetorIntervalar();
+            vetorIntervalar = numeros.vetorIntervalar();
         }
 
-        int[] vetorIntervalarSegundoConjunto = new ConjuntoOrdenado(segundoConjunto).vetorIntervalar();
+        int[] vetorIntervalarSegundoConjunto = segundoConjunto.vetorIntervalar();
         double resultado = 0;
 
         for (int i = 0; i < 6; i++) {
@@ -374,7 +358,7 @@ public class Controlador {
             JOptionPane.showMessageDialog(null, "N\u00e3o \u00e9 poss\u00edvel retornar este resultado");
         }
         else {
-            int [] vetInt = new ConjuntoOrdenado(numeros).vetorIntervalar();
+            int [] vetInt = numeros.vetorIntervalar();
             for (int i = 0; i < 5; i++) {
                 if (vetInt[i] == quantidadeRepeticoes) {
                     invarianciaDerivativa.add("T" + (i + 1) + "  ");
