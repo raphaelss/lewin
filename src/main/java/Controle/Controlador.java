@@ -23,7 +23,6 @@ import Controle.DadosMusicais.ConjuntoOrdenado;
 import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
 import Controle.DadosMusicais.MatrizDeAcordes;
-import Controle.FormasCompactas;
 import Excecoes.DadosProibidos;
 import java.awt.Point;
 import java.util.*;
@@ -427,49 +426,15 @@ public class Controlador {
     }
 
     public void geraMultiplicacaoBoulez() {
-        resultadoMultiplicacao = new ConjuntoOrdenado();
-
-        for (ClasseDeAltura doSegundoFator : segundoConjunto) {
-            resultadoMultiplicacao.add(doSegundoFator);
-
-            for (int i = 1; i < numeros.size(); i++) {
-                doSegundoFator = doSegundoFator.transpor(numeros.get(i).transpor(-(numeros.get(i - 1).inteiro())).inteiro());
-                resultadoMultiplicacao.add(doSegundoFator);
-            }
-        }
-
-        resultadoMultiplicacao.sort();
+        resultadoMultiplicacao = Multiplicacao.boulez(numeros, segundoConjunto);
     }
 
     public void geraMultiplicacaoRahn1() {
-        resultadoMultiplicacao = new ConjuntoOrdenado();
-
-        ClasseDeAltura doSegundoFator = segundoConjunto.get(0);
-
-        for (ClasseDeAltura doPrimeiroFator : numeros) {
-            resultadoMultiplicacao.add(ClasseDeAltura.criar(doSegundoFator.inteiro()*doPrimeiroFator.inteiro()));
-        }
+        resultadoMultiplicacao = Multiplicacao.rahn(numeros, segundoConjunto.get(0).inteiro());
     }
 
     public void geraMultiplicacaoRahn2() {
-        int tamanho = numeros.size() + segundoConjunto.size() - 1;
-        ClasseDeAltura[] resultadoParcial = new ClasseDeAltura [tamanho];
-        int indiceAPartir = 0, iterandoAPartir;
-
-        for (ClasseDeAltura doPrimeiroFator : numeros) {
-            iterandoAPartir = indiceAPartir++;
-
-            for (ClasseDeAltura doSegundoFator : segundoConjunto) {
-                resultadoParcial[iterandoAPartir++].transpor(doPrimeiroFator.inteiro() * doSegundoFator.inteiro());
-            }
-        }
-
-        ConjuntoOrdenado resultadoSemRepetidos = new ConjuntoOrdenado();
-        for (ClasseDeAltura i : resultadoParcial) {
-            resultadoSemRepetidos.add(i);
-        }
-
-        resultadoMultiplicacao = resultadoSemRepetidos;
+        resultadoMultiplicacao = Multiplicacao.rahn(numeros, segundoConjunto);
     }
 
     public ConjuntoOrdenado getMultiplicacao() {
