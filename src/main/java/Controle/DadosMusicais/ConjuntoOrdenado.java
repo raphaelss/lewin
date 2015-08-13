@@ -84,18 +84,20 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         return resultado;
     }
 
-    public void transpor(int n) {
+    public ConjuntoOrdenado transpor(int n) {
         for (int i = 0; i < classes.size(); ++i) {
              classes.set(i, classes.get(i).transpor(n));
         }
+        return this;
     }
 
-    public void transporParaZero() {
-        transpor(-classes.get(0).inteiro());
+    public ConjuntoOrdenado transporPara(ClasseDeAltura c) {
+        return transpor(classes.get(0).intervaloOrd(c));
     }
 
-    public void rotacionar() {
+    public ConjuntoOrdenado rotacionar() {
         classes.add(classes.remove(0));
+        return this;
     }
 
     public void sort() {
@@ -132,10 +134,11 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         return classes.hashCode();
     }
 
-    public void inverter() {
+    public ConjuntoOrdenado inverter() {
         for (int i = 0; i < classes.size(); ++i) {
             classes.set(i, classes.get(i).inverter());
         }
+        return this;
     }
 
     public int[] vetorIntervalar() {

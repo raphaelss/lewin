@@ -339,7 +339,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 break;
             case SAIDA_ROTACAO_STRAVINSKYANA:
                 stringBuilder.append("\u03B1 = ");
-                ArrayList<ClasseDeAltura[]> resultadoRotacaoStravinskyana = controlador.getRotacaoStravinskyana();
+                ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana = controlador.getRotacaoStravinskyana();
                 adicionarAlturasBuilder(resultadoRotacaoStravinskyana.get(0));
                 for (int i = 1; i < 7; i++) {
                     stringBuilder.append("\n\n\u03B2").append(i).append(" = ");

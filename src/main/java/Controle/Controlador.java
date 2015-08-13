@@ -37,7 +37,7 @@ public class Controlador {
     private MatrizDodecafonica matriz;
     private ArrayList<ConjuntoOrdenado> acordesALimpo;
     private ArrayList<String> informacoesAssociada, invarianciaDerivativa, invariancias;
-    private ArrayList<ClasseDeAltura[]> resultadoRotacaoStravinskyana;
+    private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana;
     private ArrayList<ArrayList<ClasseDeAltura[]>> resultadosPaleta;
     private HashSet<ConjuntoOrdenado> subconjuntos;
     private int[] vetorIntervalar = new int[6];
@@ -82,9 +82,7 @@ public class Controlador {
                 >= listaDeFormas.size());
 
         numeros.clear();
-        for (int i = 0; i < 12; i++) {
-            numeros.add(listaDeFormas.get(indice).get(i));
-        }
+        numeros.add(listaDeFormas.get(indice));
     }
 
     public void substitui_Paleta() {
@@ -95,10 +93,7 @@ public class Controlador {
                 >= resultadoRotacaoStravinskyana.size());
 
         numeros.clear();
-        ClasseDeAltura[] escolhido = resultadoRotacaoStravinskyana.get(indice);
-        for (int i = 0; i < escolhido.length; i++) {
-            numeros.add(escolhido[i]);
-        }
+        numeros.add(resultadoRotacaoStravinskyana.get(indice));
     }
 
     public void removerConjuntoPrincipal() {
@@ -170,29 +165,10 @@ public class Controlador {
     }
 
     public void geraRotacaoStravinskyana() {
-        ConjuntoOrdenado segundaParte = numeros.subSeq(6, 12),
-                         subtraido = new ConjuntoOrdenado();
-        final ClasseDeAltura primeiro = segundaParte.get(0);
-        int subtrator;
-
-        resultadoRotacaoStravinskyana = new ArrayList<ClasseDeAltura[]>();
-        resultadoRotacaoStravinskyana.add(numeros.subSeq(0, 6).toArray(new ClasseDeAltura[6]));
-        resultadoRotacaoStravinskyana.add(segundaParte.toArray(new ClasseDeAltura[6]));
-
-        for (int i = 0; i < 5; i++) {
-            segundaParte.add(segundaParte.remove(0));
-            subtrator = segundaParte.get(0).intervaloOrd(primeiro);
-
-            for (ClasseDeAltura seg : segundaParte) {
-                subtraido.add(seg.transpor(subtrator));
-            }
-
-            resultadoRotacaoStravinskyana.add(subtraido.toArray(new ClasseDeAltura[6]));
-            subtraido.clear();
-        }
+        resultadoRotacaoStravinskyana = RotacaoStravinsky.gerar(numeros);
     }
 
-    public ArrayList<ClasseDeAltura[]> getRotacaoStravinskyana() {
+    public ArrayList<ConjuntoOrdenado> getRotacaoStravinskyana() {
         return resultadoRotacaoStravinskyana;
     }
 

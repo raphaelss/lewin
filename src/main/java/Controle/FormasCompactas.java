@@ -90,22 +90,14 @@ public abstract class FormasCompactas {
     }
 
     public static ConjuntoOrdenado formaPrimaStraus(ConjuntoOrdenado classes) {
-        ConjuntoOrdenado tmp = new ConjuntoOrdenado(classes);
-        tmp.inverter();
-        tmp = maisCompacto(formaNormalStraus(classes),
-                           formaNormalStraus(tmp),
-                           comparadorStraus);
-        tmp.transporParaZero();
-        return tmp;
+        return maisCompacto(formaNormalStraus(classes),
+                            formaNormalStraus((new ConjuntoOrdenado(classes)).inverter()),
+                            comparadorStraus).transporPara(ClasseDeAltura.criar(0));
     }
 
     public static ConjuntoOrdenado formaPrimaForte(ConjuntoOrdenado classes) {
-        ConjuntoOrdenado tmp = new ConjuntoOrdenado(classes);
-        tmp.inverter();
-        tmp = maisCompacto(formaNormalForte(classes),
-                           formaNormalForte(tmp),
-                           comparadorForte);
-        tmp.transporParaZero();
-        return tmp;
+        return maisCompacto(formaNormalForte(classes),
+                            formaNormalForte((new ConjuntoOrdenado(classes)).inverter()),
+                            comparadorForte).transporPara(ClasseDeAltura.criar(0));
     }
 }
