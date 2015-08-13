@@ -38,10 +38,16 @@ public class Controlador {
     private ArrayList<ConjuntoOrdenado> acordesALimpo;
     private ArrayList<String> informacoesAssociada, invarianciaDerivativa, invariancias;
     private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana;
-    private ArrayList<ArrayList<ClasseDeAltura[]>> resultadosPaleta;
+    private ArrayList<ArrayList<ConjuntoOrdenado>> resultadosPaleta
+        = new ArrayList<ArrayList<ConjuntoOrdenado>>(2);
     private HashSet<ConjuntoOrdenado> subconjuntos;
     private int[] vetorIntervalar = new int[6];
     private double similaridade;
+
+    public Controlador() {
+        resultadosPaleta.add(new ArrayList<ConjuntoOrdenado>(12));
+        resultadosPaleta.add(new ArrayList<ConjuntoOrdenado>(12));
+    }
 
     public void limparDados() {
         numeros.clear();
@@ -135,12 +141,9 @@ public class Controlador {
             serieEscolhida.add(numeros);
         }
 
-        ConjuntoOrdenado inverso = new ConjuntoOrdenado(serieEscolhida);
-        inverso.inverter();
-        matriz.setColuna(0, inverso);
-        for (int i = 1; i < 12; ++i) {
-            inverso.transpor(-serieEscolhida.get(i).intervaloOrd(serieEscolhida.get(i - 1)));
-            matriz.setColuna(i, inverso);
+        ConjuntoOrdenado inverso = (new ConjuntoOrdenado(serieEscolhida)).inverter();
+        for (int i = 11; i >= 0; --i) {
+            matriz.setLinha(i, serieEscolhida.transporPara(inverso.get(i)));
         }
     }
 
@@ -173,54 +176,27 @@ public class Controlador {
     }
 
     public void geraPaleta() {
-        int tamanho = numeros.size();
-        ArrayList<ConjuntoOrdenado> conjuntosDiretos = new ArrayList<ConjuntoOrdenado>(),
-                                    conjuntosInversos = new ArrayList<ConjuntoOrdenado>();
-        ConjuntoOrdenado conjuntoReferencia = new ConjuntoOrdenado(numeros);
-
-        adicionaTransposicoesDistintas(conjuntosDiretos, conjuntoReferencia);
-        conjuntoReferencia.inverter();
-
-        adicionaTransposicoesDistintas(conjuntosInversos, conjuntoReferencia);
-        resultadosPaleta = new ArrayList<ArrayList<ClasseDeAltura[]>>(2);
-
-        resultadosPaleta.add(new ArrayList<ClasseDeAltura[]>());
-        for (ConjuntoOrdenado conjunto : conjuntosDiretos) {
-            resultadosPaleta.get(0).add(conjunto.toArray(new ClasseDeAltura[tamanho]));
-        }
-
-        resultadosPaleta.add(new ArrayList<ClasseDeAltura[]>());
-        loop:
-        for (ConjuntoOrdenado conjunto : conjuntosInversos) {
-            for (ConjuntoOrdenado direto : conjuntosDiretos) {
-                if (direto.containsAll(conjunto)) {
-                    continue loop;
+        resultadosPaleta.get(0).clear();
+        resultadosPaleta.get(1).clear();
+        for (ArrayList<ConjuntoOrdenado> conjuntos : resultadosPaleta) {
+            loop:
+            for (int i = 0; i < 12; ++i) {
+                ConjuntoOrdenado atual = new ConjuntoOrdenado(numeros).transpor(i);
+                for (ArrayList<ConjuntoOrdenado> conjuntos2 : resultadosPaleta) {
+                    for (ConjuntoOrdenado co : conjuntos2) {
+                        if (co.containsAll(atual)) {
+                           continue loop;
+                        }
+                    }
                 }
+                conjuntos.add(atual);
             }
-            resultadosPaleta.get(1).add(conjunto.toArray(new ClasseDeAltura[tamanho]));
+            numeros.inverter();
         }
     }
 
-    public ArrayList<ArrayList<ClasseDeAltura[]>> getPaleta() {
+    public ArrayList<ArrayList<ConjuntoOrdenado>> getPaleta() {
         return resultadosPaleta;
-    }
-
-    private void adicionaTransposicoesDistintas(ArrayList<ConjuntoOrdenado> conjuntos,
-                                                ConjuntoOrdenado primeiroConjunto) {
-        conjuntos.add(new ConjuntoOrdenado(primeiroConjunto));
-        loop:
-        for (int i = 1; i < 12; i++) {
-            ConjuntoOrdenado atual = new ConjuntoOrdenado();
-            for (int j = 0; j < primeiroConjunto.size(); j++) {
-                atual.add(primeiroConjunto.get(j).transpor(i));
-            }
-            for (ConjuntoOrdenado c : conjuntos) {
-                if (c.containsAll(atual)) {
-                    continue loop;
-                }
-            }
-            conjuntos.add(atual);
-        }
     }
 
     public void geraTabelaAdicao() {

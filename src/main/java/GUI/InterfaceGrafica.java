@@ -347,7 +347,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 }
                 break;
             case SAIDA_PALETA:
-                ArrayList<ArrayList<ClasseDeAltura[]>> resultadoPaleta = controlador.getPaleta();
+                ArrayList<ArrayList<ConjuntoOrdenado>> resultadoPaleta = controlador.getPaleta();
                 int max = resultadoPaleta.get(0).size();
                 for (int i = 0; i < max; ++i) {
                     adicionarAlturasBuilder(resultadoPaleta.get(0).get(i));
@@ -1091,7 +1091,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             pagina.append("<html><head><title>Resultado</title></head><body>");
             JTextField campoAtual;
             if (modosAtuais[0] == SAIDA_PALETA) {
-                ArrayList<ArrayList<ClasseDeAltura[]>> resultadoPaleta = controlador.getPaleta();
+                ArrayList<ArrayList<ConjuntoOrdenado>> resultadoPaleta = controlador.getPaleta();
                 int quantLinhas = resultadoPaleta.get(0).size();
                 pagina.append("<table border = 3>");
                 for (int i = 0; i < quantLinhas; i++) {

@@ -32,7 +32,7 @@ public class RotacaoStravinsky {
         resultado.add(hexacordeBase);
         ClasseDeAltura c = hexacordeBase.get(0);
         for (int i = 0; i < 5; ++i) {
-            hexacordeBase = (new ConjuntoOrdenado(hexacordeBase)).rotacionar().transporPara(c);
+            hexacordeBase = new ConjuntoOrdenado(hexacordeBase).rotacionar().transporPara(c);
             resultado.add(hexacordeBase);
         }
         return resultado;
