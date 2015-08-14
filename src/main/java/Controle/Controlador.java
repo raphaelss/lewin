@@ -141,7 +141,7 @@ public class Controlador {
             serieEscolhida.add(numeros);
         }
 
-        ConjuntoOrdenado inverso = (new ConjuntoOrdenado(serieEscolhida)).inverter();
+        ConjuntoOrdenado inverso = new ConjuntoOrdenado(serieEscolhida).inverter();
         for (int i = 11; i >= 0; --i) {
             matriz.setLinha(i, serieEscolhida.transporPara(inverso.get(i)));
         }
@@ -246,23 +246,7 @@ public class Controlador {
     }
 
     public void geraSimilaridade() {
-        int tamanhoPrimeiro = numeros.size(), tamanhoSegundo = segundoConjunto.size();
-
-        if (vetorIntervalar == null) {
-            vetorIntervalar = numeros.vetorIntervalar();
-        }
-
-        int[] vetorIntervalarSegundoConjunto = segundoConjunto.vetorIntervalar();
-        double resultado = 0;
-
-        for (int i = 0; i < 6; i++) {
-            resultado += Math.sqrt(vetorIntervalar[i]*vetorIntervalarSegundoConjunto[i]);
-        }
-        resultado *= 2;
-        resultado /= Math.sqrt(tamanhoPrimeiro*(tamanhoPrimeiro - 1)*
-                                tamanhoSegundo*(tamanhoSegundo - 1));
-
-        similaridade = resultado;
+        similaridade = Similaridade.calcular(numeros, segundoConjunto);
     }
 
     public double getSimilaridade() {

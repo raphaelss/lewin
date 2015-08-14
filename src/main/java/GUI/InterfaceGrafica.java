@@ -369,7 +369,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 for (ConjuntoOrdenado subconjunto : controlador.getSubconjuntos()) {
                     adicionarAlturasBuilder(subconjunto);
                     stringBuilder.append("  [");
-                    adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(new ConjuntoOrdenado(subconjunto)));
+                    adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(subconjunto));
                     stringBuilder.append("]\n\n");
                 }
                 stringBuilder.setLength(stringBuilder.length() - 2);
