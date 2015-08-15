@@ -1286,8 +1286,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoGerarVetorIntervalarActionPerformed
 
     private void botaoGerarSimilaridadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarSimilaridadeActionPerformed
-        controlador.geraSimilaridade();
-
         modosAtuais[0] = SAIDA_SIMILARIDADE;
         atualizaSaida();
         botaoExportarHTML.setEnabled(false);

@@ -42,7 +42,6 @@ public class Controlador {
         = new ArrayList<ArrayList<ConjuntoOrdenado>>(2);
     private HashSet<ConjuntoOrdenado> subconjuntos;
     private int[] vetorIntervalar = new int[6];
-    private double similaridade;
 
     public Controlador() {
         resultadosPaleta.add(new ArrayList<ConjuntoOrdenado>(12));
@@ -245,12 +244,8 @@ public class Controlador {
         catch(NoSuchElementException nsee) {}
     }
 
-    public void geraSimilaridade() {
-        similaridade = Similaridade.calcular(numeros, segundoConjunto);
-    }
-
     public double getSimilaridade() {
-        return similaridade;
+        return Similaridade.calcular(numeros, segundoConjunto);
     }
 
     public void geraInvarianciaTranspositiva() {
