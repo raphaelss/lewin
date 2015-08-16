@@ -36,11 +36,11 @@ public class Controlador {
     private ConjuntoOrdenado serieEscolhida = new ConjuntoOrdenado();
     private MatrizDodecafonica matriz;
     private ArrayList<ConjuntoOrdenado> acordesALimpo;
-    private ArrayList<String> informacoesAssociada, invarianciaDerivativa, invariancias;
+    private ArrayList<String> invarianciaDerivativa, invariancias;
     private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana;
     private ArrayList<ArrayList<ConjuntoOrdenado>> resultadosPaleta
         = new ArrayList<ArrayList<ConjuntoOrdenado>>(2);
-    private HashSet<ConjuntoOrdenado> subconjuntos;
+    private ArrayList<ConjuntoOrdenado> subconjuntos;
     private int[] vetorIntervalar = new int[6];
 
     public Controlador() {
@@ -211,7 +211,7 @@ public class Controlador {
     }
 
     public void geraSubconjuntos() {
-        subconjuntos = new HashSet<ConjuntoOrdenado>();
+        HashSet<ConjuntoOrdenado> tmp = new HashSet<ConjuntoOrdenado>();
 
         int tamanhoSubconjuntos = 0;
         while((tamanhoSubconjuntos =
@@ -219,10 +219,11 @@ public class Controlador {
                 "Informe o tamanho dos subconjuntos")))
                 >= numeros.size());
 
-        constroi(0, tamanhoSubconjuntos, new ConjuntoOrdenado(), subconjuntos);
+        constroi(0, tamanhoSubconjuntos, new ConjuntoOrdenado(), tmp);
+        subconjuntos = new ArrayList<ConjuntoOrdenado>(tmp);
     }
 
-    public HashSet<ConjuntoOrdenado> getSubconjuntos() {
+    public ArrayList<ConjuntoOrdenado> getSubconjuntos() {
         return subconjuntos;
     }
 
@@ -423,13 +424,13 @@ public class Controlador {
     }
 
     public Object geraInvariancia() {
-        informacoesAssociada = new ArrayList<String>();
+        ArrayList<String> informacoesAssociada = new ArrayList<String>();
         acordesALimpo = new ArrayList<ConjuntoOrdenado>();
         invariancias = new ArrayList<String>();
 
-        encontraInvariancia(3);
-        encontraInvariancia(4);
-        encontraInvariancia(6);
+        encontraInvariancia(informacoesAssociada, 3);
+        encontraInvariancia(informacoesAssociada, 4);
+        encontraInvariancia(informacoesAssociada, 6);
 
         int segmentos = acordesALimpo.size();
         String informacaoCorrente, finalLinha, inicio = "";
@@ -449,7 +450,7 @@ public class Controlador {
         return invariancias;
     }
 
-    private void encontraInvariancia(int tamanhoSegmentos) {
+    private void encontraInvariancia(ArrayList<String> informacoesAssociada, int tamanhoSegmentos) {
         MatrizDeAcordes acordes = new MatrizDeAcordes(tamanhoSegmentos, matriz);
         ArrayList<ConjuntoOrdenado> corrente = null;
         int tamanhoLinha;
