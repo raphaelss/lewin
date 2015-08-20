@@ -177,21 +177,7 @@ public class Controlador {
     public void geraPaleta() {
         resultadosPaleta.get(0).clear();
         resultadosPaleta.get(1).clear();
-        for (ArrayList<ConjuntoOrdenado> conjuntos : resultadosPaleta) {
-            loop:
-            for (int i = 0; i < 12; ++i) {
-                ConjuntoOrdenado atual = new ConjuntoOrdenado(numeros).transpor(i);
-                for (ArrayList<ConjuntoOrdenado> conjuntos2 : resultadosPaleta) {
-                    for (ConjuntoOrdenado co : conjuntos2) {
-                        if (co.containsAll(atual)) {
-                           continue loop;
-                        }
-                    }
-                }
-                conjuntos.add(atual);
-            }
-            numeros.inverter();
-        }
+        GeradorPaleta.gerar(resultadosPaleta, numeros);
     }
 
     public ArrayList<ArrayList<ConjuntoOrdenado>> getPaleta() {

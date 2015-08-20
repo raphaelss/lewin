@@ -25,72 +25,53 @@ import Excecoes.DadosProibidos;
 import java.util.ArrayList;
 
 public class GeradorDerivacaoSerial {
-    private static final int TAMANHO_TABELA_GRUPOS = 23;
-
-    public static ArrayList<ConjuntoOrdenado> gerar(ConjuntoOrdenado formaOriginal) throws DadosProibidos {
-        int tamanho = formaOriginal.size();
+    public static ArrayList<ConjuntoOrdenado> gerar(ConjuntoOrdenado original) throws DadosProibidos {
+        int tamanho = original.size();
 
         if (tamanho == 3) {
-            ConjuntoOrdenado formaPrima = FormasCompactas.formaPrimaStraus(formaOriginal);
+            ConjuntoOrdenado formaPrima = FormasCompactas.formaPrimaStraus(original);
             ClasseDeAltura segundo = formaPrima.get(1),
                            terceiro = formaPrima.get(2);
             if (segundo == ClasseDeAltura.criar(3) && terceiro == ClasseDeAltura.criar(6)) {
                 throw new DadosProibidos("Impossível gerar uma série derivada deste tricorde.");
             }
         } else if (tamanho == 4) {
-            int[] vetor = formaOriginal.vetorIntervalar();
+            int[] vetor = original.vetorIntervalar();
             if (vetor[3] > 0) {
                 throw new DadosProibidos("Impossível gerar uma série derivada de um tetracorde contendo a classe intervalar 4.");
             }
+        } else if (tamanho != 6) {
+                throw new DadosProibidos("Só é possível derivar séries dodecafônicas a partir de tricordes, tetracordes e hexacordes.");
         }
 
-        ArrayList<ConjuntoOrdenado> tabelaDeGrupos = new ArrayList<ConjuntoOrdenado>();
-        for (int i = 1; i < 12; ++i) {
-            ConjuntoOrdenado co = new ConjuntoOrdenado(formaOriginal);
-            co.transpor(i);
-            tabelaDeGrupos.add(co);
-        }
-        ConjuntoOrdenado espelhada = new ConjuntoOrdenado(formaOriginal);
-        espelhada.inverter();
-        tabelaDeGrupos.add(espelhada);
-        for (int i = 1; i < 12; ++i) {
-            ConjuntoOrdenado co = new ConjuntoOrdenado(espelhada);
-            co.transpor(i);
-            tabelaDeGrupos.add(co);
-        }
-        return encontraGruposCompativeis(formaOriginal, tabelaDeGrupos);
+        ArrayList<ArrayList<ConjuntoOrdenado>> paleta = GeradorPaleta.gerar(original);
+        ArrayList<ConjuntoOrdenado> resultado = new ArrayList<ConjuntoOrdenado>();
+        ConjuntoOrdenado[] parts = new ConjuntoOrdenado [12 / original.size()];
+        encontraGruposCompativeis(resultado, 0, parts, paleta);
+        return resultado;
     }
 
-    private static ArrayList<ConjuntoOrdenado> encontraGruposCompativeis(ConjuntoOrdenado formaOriginal, ArrayList<ConjuntoOrdenado> tabelaDeGrupos) {
-        ArrayList<ConjuntoOrdenado> listaDeFormas = new ArrayList<ConjuntoOrdenado>();
-        ConjuntoOrdenado formas = new ConjuntoOrdenado();
-        formas.add(formaOriginal);
-
-        encontraGruposCompativeis(formaOriginal, formas, listaDeFormas, tabelaDeGrupos);
-
-        return listaDeFormas;
-    }
-
-    private static void encontraGruposCompativeis(ConjuntoOrdenado formaOriginal,
-            ConjuntoOrdenado formas, ArrayList<ConjuntoOrdenado> listaDeFormas,
-            ArrayList<ConjuntoOrdenado> tabelaDeGrupos) {
-        try {
-        ConjuntoOrdenado atual = null;
-
-        for (int i = 0; i < TAMANHO_TABELA_GRUPOS; i++) {
-            atual = tabelaDeGrupos.get(i);
-            if (formas.disjuntos(atual)) {
-                formas.add(atual);
-                encontraGruposCompativeis(formaOriginal, formas, listaDeFormas, tabelaDeGrupos);
+    private static void encontraGruposCompativeis(ArrayList<ConjuntoOrdenado> resultado, int pos,
+            ConjuntoOrdenado[] parts, ArrayList<ArrayList<ConjuntoOrdenado>> paleta) {
+        if (pos == parts.length) {
+            ConjuntoOrdenado serie = new ConjuntoOrdenado();
+            for (ConjuntoOrdenado co : parts) {
+                serie.add(co);
+            }
+            resultado.add(serie);
+        } else {
+            for (ArrayList<ConjuntoOrdenado> subPaleta : paleta) {
+                proximoPaleta:
+                for (ConjuntoOrdenado co : subPaleta) {
+                    for (int i = 0; i < pos; ++i) {
+                        if (!co.disjuntos(parts[i])) {
+                            continue proximoPaleta;
+                        }
+                    }
+                    parts[pos] = co;
+                    encontraGruposCompativeis(resultado, pos + 1, parts, paleta);
+                }
             }
         }
-
-        if (formas.size() == 12/formaOriginal.size()) {
-            listaDeFormas.add(new ConjuntoOrdenado(formas));
-        }
-        for (int i = 0; i < formaOriginal.size(); ++i) {
-            formas.remove(formas.size() - 1);
-        }
-        } catch (Exception e) { System.out.println(e.getMessage());}
     }
 }
