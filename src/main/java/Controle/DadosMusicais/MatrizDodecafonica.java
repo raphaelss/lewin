@@ -20,11 +20,7 @@
 package Controle.DadosMusicais;
 
 public class MatrizDodecafonica {
-    private ClasseDeAltura[][] matriz;
-
-    public MatrizDodecafonica() {
-        matriz = new ClasseDeAltura[12][12];
-    }
+    private ClasseDeAltura[][] matriz = new ClasseDeAltura[12][12];
 
     public void preenchePosicao(int linha, int coluna, ClasseDeAltura valor) {
         matriz[linha][coluna] = valor;
@@ -46,37 +42,27 @@ public class MatrizDodecafonica {
         return matriz[linha][coluna];
     }
 
-    public ClasseDeAltura[] getP(int indice) {
-        return matriz[indice];
+    public ConjuntoOrdenado getP(int indice) {
+        ConjuntoOrdenado co = new ConjuntoOrdenado();
+        for (int i = 0; i < 12; ++i) {
+            co.add(matriz[indice][i]);
+        }
+        return co;
     }
 
-    public ClasseDeAltura[] getR(int indice) {
-        ClasseDeAltura[] serie = new ClasseDeAltura[12];
-
-        for (int i = 11; i >= 0; i--) {
-            serie[11 - i] = matriz[indice][i];
-        }
-
-        return serie;
+    public ConjuntoOrdenado getR(int indice) {
+        return getP(indice).retrogradar();
     }
 
-    public ClasseDeAltura[] getI(int indice) {
-        ClasseDeAltura[] serie = new ClasseDeAltura[12];
-
-        for (int i = 0; i < 12; i++) {
-            serie[i] = matriz[i][indice];
+    public ConjuntoOrdenado getI(int indice) {
+        ConjuntoOrdenado co = new ConjuntoOrdenado();
+        for (int i = 0; i < 12; ++i) {
+            co.add(matriz[i][indice]);
         }
-
-        return serie;
+        return co;
     }
 
-    public ClasseDeAltura[] getRI(int indice) {
-        ClasseDeAltura[] serie = new ClasseDeAltura[12];
-
-        for (int i = 11; i >= 0; i--) {
-            serie[11 - i] = matriz[i][indice];
-        }
-
-        return serie;
+    public ConjuntoOrdenado getRI(int indice) {
+        return getI(indice).retrogradar();
     }
 }

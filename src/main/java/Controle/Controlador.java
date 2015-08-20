@@ -315,97 +315,40 @@ public class Controlador {
 
     public ArrayList<Point> geraCombinatoriedade() {
         ArrayList<Point> camposColorir = new ArrayList<Point>();
-        ConjuntoOrdenado hexacordeCorrente = new ConjuntoOrdenado(),
-                hexacordeRejeitado = serieEscolhida.subSeq(0, 6);
+        ConjuntoOrdenado hexacordeCorrente, hexacordeRejeitado = serieEscolhida.subSeq(0, 6);
 
-        //procura nas series P
-        lacoPrincipal:
         for (int i = 1; i < 12; i++) {
-            hexacordeCorrente.clear();
-
-            ClasseDeAltura[] r = matriz.getP(i);
-            for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j]);
-            }
-
-            for (int j = 0; j < 6; j++) {
-                if (hexacordeCorrente.contains(hexacordeRejeitado.get(j)) ||
-                        hexacordeRejeitado.contains(hexacordeCorrente.get(j))) {
-                    continue lacoPrincipal;
+            hexacordeCorrente = matriz.getP(i).subSeq(0, 6);
+            if (hexacordeCorrente.disjuntos(hexacordeRejeitado)) {
+                for (int j = 0; j < 6; j++) {
+                    camposColorir.add(new Point(i, j));
                 }
             }
-
-            for (int j = 0; j < 6; j++) {
-                camposColorir.add(new Point(i, j));
-            }
         }
-
-        //procura nas series R
-        lacoPrincipal:
         for (int i = 0; i < 12; i++) {
-            hexacordeCorrente.clear();
-
-            ClasseDeAltura[] r = matriz.getR(i);
-            for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j]);
-            }
-
-            for (int j = 0; j < 6; j++) {
-                if (hexacordeCorrente.contains(hexacordeRejeitado.get(j)) ||
-                        hexacordeRejeitado.contains(hexacordeCorrente.get(j))) {
-                    continue lacoPrincipal;
+            hexacordeCorrente = matriz.getR(i).subSeq(0, 6);
+            if (hexacordeCorrente.disjuntos(hexacordeRejeitado)) {
+                for (int j = 0; j < 6; j++) {
+                    camposColorir.add(new Point(i, 11 - j));
                 }
             }
-
-            for (int j = 6; j < 12; j++) {
-                camposColorir.add(new Point(i, j));
-            }
         }
-
-        //procura nas series I
-        lacoPrincipal:
         for (int i = 0; i < 12; i++) {
-            hexacordeCorrente.clear();
-
-            ClasseDeAltura[] r = matriz.getI(i);
-            for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j]);
-            }
-
-            for (int j = 0; j < 6; j++) {
-                if (hexacordeCorrente.contains(hexacordeRejeitado.get(j)) ||
-                        hexacordeRejeitado.contains(hexacordeCorrente.get(j))) {
-                    continue lacoPrincipal;
+            hexacordeCorrente = matriz.getI(i).subSeq(0, 6);
+            if (hexacordeCorrente.disjuntos(hexacordeRejeitado)) {
+                for (int j = 0; j < 6; j++) {
+                    camposColorir.add(new Point(j, i));
                 }
             }
-
-            for (int j = 0; j < 6; j++) {
-                camposColorir.add(new Point(j, i));
-            }
         }
-
-        //procura nas series RI
-        lacoPrincipal:
         for (int i = 0; i < 12; i++) {
-            hexacordeCorrente.clear();
-
-            ClasseDeAltura[] r = matriz.getRI(i);
-            for (int j = 0; j < 6; j++) {
-                hexacordeCorrente.add(r[j]);
-            }
-
-            for (int j = 0; j < 6; j++) {
-                if (hexacordeCorrente.contains(hexacordeRejeitado.get(j)) ||
-                        hexacordeRejeitado.contains(hexacordeCorrente.get(j))) {
-                    continue lacoPrincipal;
+            hexacordeCorrente = matriz.getRI(i).subSeq(0, 6);
+            if (hexacordeCorrente.disjuntos(hexacordeRejeitado)) {
+                for (int j = 0; j < 6; j++) {
+                    camposColorir.add(new Point(11 - j, i));
                 }
             }
-
-            for (int j = 6; j < 12; j++) {
-                camposColorir.add(new Point(j, i));
-            }
         }
-
         return camposColorir;
     }
 
@@ -450,7 +393,7 @@ public class Controlador {
             for (int j = 0; j < tamanhoLinha; j++) {
                 corrente = acordes.getMatrizP().get(j);
                 if (corrente.remove(procurado)) {
-                    informacaoDoCorrente += "P" + matriz.getP(j)[0] + " ";
+                    informacaoDoCorrente += "P" + matriz.getP(j).get(0) + " ";
                 }
             }
 
@@ -458,7 +401,7 @@ public class Controlador {
             for (int j = 0; j < tamanhoLinha; j++) {
                 corrente = acordes.getMatrizI().get(j);
                 if (corrente.remove(procurado)) {
-                    informacaoDoCorrente += "I" + matriz.getI(j)[0] + " ";
+                    informacaoDoCorrente += "I" + matriz.getI(j).get(0) + " ";
                 }
             }
 
@@ -466,7 +409,7 @@ public class Controlador {
             for (int j = 0; j < tamanhoLinha; j++) {
                 corrente = acordes.getMatrizR().get(j);
                 if (corrente.remove(procurado)) {
-                    informacaoDoCorrente += "R" + matriz.getP(j)[0] + " ";
+                    informacaoDoCorrente += "R" + matriz.getP(j).get(0) + " ";
                 }
             }
 
@@ -474,7 +417,7 @@ public class Controlador {
             for (int j = 0; j < tamanhoLinha; j++) {
                 corrente = acordes.getMatrizRI().get(j);
                 if (corrente.remove(procurado)) {
-                    informacaoDoCorrente += "RI" + matriz.getI(j)[0] + " ";
+                    informacaoDoCorrente += "RI" + matriz.getI(j).get(0) + " ";
                 }
             }
 

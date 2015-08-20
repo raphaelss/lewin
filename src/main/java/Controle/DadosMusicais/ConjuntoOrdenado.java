@@ -72,10 +72,6 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         return Collections.disjoint(classes, co.classes);
     }
 
-    public ClasseDeAltura[] toArray(ClasseDeAltura[] array) {
-        return classes.toArray(array);
-    }
-
     public ConjuntoOrdenado subSeq(int a, int b) {
         ConjuntoOrdenado resultado = new ConjuntoOrdenado();
         for (ClasseDeAltura c : classes.subList(a,b)) {
@@ -93,6 +89,15 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
 
     public ConjuntoOrdenado transporPara(ClasseDeAltura c) {
         return transpor(classes.get(0).intervaloOrd(c));
+    }
+
+    public ConjuntoOrdenado retrogradar() {
+        for (int i = 0, j = classes.size() - 1; i < j; ++i, --j) {
+            ClasseDeAltura tmp = classes.get(j);
+            classes.set(j, classes.get(i));
+            classes.set(i, tmp);
+        }
+        return this;
     }
 
     public ConjuntoOrdenado rotacionar() {

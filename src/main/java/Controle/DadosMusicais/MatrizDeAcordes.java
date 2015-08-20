@@ -23,9 +23,9 @@ import java.util.ArrayList;
 
 public class MatrizDeAcordes {
     private ArrayList<ArrayList<ConjuntoOrdenado>> tricordesEmLinhasP = new ArrayList<ArrayList<ConjuntoOrdenado>>(),
-                                                  tricordesEmLinhasI = new ArrayList<ArrayList<ConjuntoOrdenado>>(),
-                                                  tricordesEmLinhasR = new ArrayList<ArrayList<ConjuntoOrdenado>>(),
-                                                  tricordesEmLinhasRI = new ArrayList<ArrayList<ConjuntoOrdenado>>();
+                                                   tricordesEmLinhasI = new ArrayList<ArrayList<ConjuntoOrdenado>>(),
+                                                   tricordesEmLinhasR = new ArrayList<ArrayList<ConjuntoOrdenado>>(),
+                                                   tricordesEmLinhasRI = new ArrayList<ArrayList<ConjuntoOrdenado>>();
 
     public MatrizDeAcordes(int chordSize, MatrizDodecafonica matriz) {
         for (int k = 0; k < 12; k++) {
@@ -36,16 +36,15 @@ public class MatrizDeAcordes {
         }
     }
 
-    private void acrescentaLinha(ClasseDeAltura[] serie, ArrayList<ArrayList<ConjuntoOrdenado>> matriz, int tamanhoAcorde) {
+    private void acrescentaLinha(ConjuntoOrdenado serie, ArrayList<ArrayList<ConjuntoOrdenado>> matriz, int tamanhoAcorde) {
         ArrayList<ConjuntoOrdenado> corrente = new ArrayList<ConjuntoOrdenado>();
         ConjuntoOrdenado passageiro;
         final int limite = 12 - tamanhoAcorde;
 
         for (int indice = 0; indice <= limite; indice++) {
             passageiro = new ConjuntoOrdenado();
-
             for (int j = indice; j < indice + tamanhoAcorde; j++) {
-                passageiro.add(serie[j]);
+                passageiro.add(serie.get(j));
             }
 
             corrente.add(passageiro);
