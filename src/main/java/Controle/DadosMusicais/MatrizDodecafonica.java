@@ -42,7 +42,7 @@ public class MatrizDodecafonica {
         }
     }
 
-    public ClasseDeAltura getValor(int linha, int coluna) {
+    public ClasseDeAltura get(int linha, int coluna) {
         return matriz[linha][coluna];
     }
 

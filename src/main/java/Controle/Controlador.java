@@ -285,7 +285,7 @@ public class Controlador {
 
             for (int i = 0; i < tamanhoEntrada; i++) {
                 for (int j = 0; j < tamanhoEntrada; j++) {
-                    contadores[tabela.getValor(i, j).inteiro()]++;
+                    contadores[tabela.get(i, j).inteiro()]++;
                 }
             }
 

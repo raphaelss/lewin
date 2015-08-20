@@ -1008,7 +1008,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             ((TitledBorder)painelMatriz.getBorder()).setTitle("Matriz Dodecafônica");
             painelMatriz.repaint();
 
-            preencheMatrizInterfaceGrafica(12);
+            preencheMatrizInterfaceGrafica();
 
             botaoCombinatoriedade.setEnabled(true);
             botaoInvariancia.setEnabled(true);
@@ -1272,7 +1272,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         controlador.geraTabelaAdicao();
         modosAtuais[1] = MATRIZ_TABELA_ADICAO;
 
-        preencheMatrizInterfaceGrafica(tamanho);
+        preencheMatrizInterfaceGrafica();
         botaoExportarHTML.setEnabled(true);
     }//GEN-LAST:event_botaoGerarTabelaAdicaoActionPerformed
 
@@ -1325,30 +1325,16 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         }
 
         if (modosAtuais[1] != -1) {
-            for (JTextField[] array : camposMatriz) {
-                for (JTextField campo : array) {
-                    int i = -1;
-                    try {
-                        switch (formatoRepresentacao) { //TODO: remover dependência de interpretar strings
-                        case NomeSustenido:
-                            i = Integer.parseInt(campo.getText());
-                            break;
-                        case Inteiro:
-                            i = notaToNumero(campo.getText());
-                            break;
-                        }
-                    }
-                    catch(NumberFormatException nfe) {continue;}
-                    catch (DadosProibidos dp) {continue;}
-                    campo.setText(ClasseDeAltura.criar(i).representacao(formatoRepresentacao));
-                }
-            }
-
+            preencheMatrizInterfaceGrafica();
             if (modosAtuais[1] == MATRIZ_TABELA_ADICAO) {
-                ConjuntoOrdenado entrada = controlador.getConjuntoPrincipal();
-                for (int i = 0; i < entrada.size(); i++) {
-                    rotulosDasLinhas[i].setText(entrada.get(i).representacao(formatoRepresentacao));
-                    rotulosDasColunas[i].setText(entrada.get(i).representacao(formatoRepresentacao));
+                MatrizDodecafonica matriz = controlador.getMatriz();
+                for (int i = 0; i < 12; ++i) {
+                    ClasseDeAltura c = matriz.get(i, i);
+                    if (c != null) {
+                        c = ClasseDeAltura.criar(c.inteiro() / 2);
+                        rotulosDasLinhas[i].setText(c.representacao(formatoRepresentacao));
+                        rotulosDasColunas[i].setText(c.representacao(formatoRepresentacao));
+                    }
                 }
             }
         }
@@ -1485,56 +1471,19 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botao.addActionListener(buttonListenerEntrada);
     }
 
-    private void preencheMatrizInterfaceGrafica(int tamanho) {
-        int valor;
+    private void preencheMatrizInterfaceGrafica() {
         MatrizDodecafonica matriz = controlador.getMatriz();
-        for (int i = 0; i < tamanho; ++i) {
-            for (int j = 0; j < tamanho; ++j) {
-                camposMatriz[i][j].setText(matriz.getValor(i, j).representacao(formatoRepresentacao));
+        for (int i = 0; i < 12; ++i) {
+            for (int j = 0; j < 12; ++j) {
+                ClasseDeAltura c = matriz.get(i, j);
+                if (c != null) {
+                  camposMatriz[i][j].setText(matriz.get(i, j).representacao(formatoRepresentacao));
+                } else {
+                  camposMatriz[i][j].setText("");
+                }
             }
         }
         botaoExportarHTML.setEnabled(true);
-    }
-
-    private int notaToNumero(String simboloNota) throws DadosProibidos {
-        if (simboloNota.equals("C")) {
-            return 0;
-        }
-        else if (simboloNota.equals("C#") || simboloNota.equals("Db")) {
-            return 1;
-        }
-        else if (simboloNota.equals("D")) {
-            return 2;
-        }
-        else if (simboloNota.equals("Eb") || simboloNota.equals("D#")) {
-            return 3;
-        }
-        else if (simboloNota.equals("E")) {
-            return 4;
-        }
-        else if (simboloNota.equals("F")) {
-            return 5;
-        }
-        else if (simboloNota.equals("Gb") || simboloNota.equals("F#")) {
-            return 6;
-        }
-        else if (simboloNota.equals("G")) {
-            return 7;
-        }
-        else if (simboloNota.equals("Ab") || simboloNota.equals("G#")) {
-            return 8;
-        }
-        else if (simboloNota.equals("A")) {
-            return 9;
-        }
-        else if (simboloNota.equals("Bb") || simboloNota.equals("A#")) {
-            return 10;
-        }
-        else if (simboloNota.equals("B")) {
-            return 11;
-        }
-
-        throw new DadosProibidos("Nota inexistente");
     }
 
     public void fechaMIDI() {
