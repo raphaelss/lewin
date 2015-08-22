@@ -1206,8 +1206,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoGerarFormaNormalStrausActionPerformed
 
     private void botaoGerarRotacaoStravinskyanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarRotacaoStravinskyanaActionPerformed
-        controlador.geraRotacaoStravinskyana();
-
         modosAtuais[0] = SAIDA_ROTACAO_STRAVINSKYANA;
         atualizaSaida();
 
@@ -1274,8 +1272,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoGerarTabelaAdicaoActionPerformed
 
     private void botaoGerarVetorIntervalarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarVetorIntervalarActionPerformed
-        controlador.gerarVetorIntervalar();
-
         modosAtuais[0] = SAIDA_VETOR_INTERVALAR;
         atualizaSaida();
         botaoExportarHTML.setEnabled(true);
@@ -1290,8 +1286,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoGerarSimilaridadeActionPerformed
 
     private void botaoGerarSubconjuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarSubconjuntosActionPerformed
-        controlador.geraSubconjuntos();
-
         modosAtuais[0] = SAIDA_SUBCONJUNTOS;
         atualizaSaida();
         botaoExportarHTML.setEnabled(true);

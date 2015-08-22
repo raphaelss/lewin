@@ -39,7 +39,6 @@ public class Controlador {
     private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana;
     private ArrayList<ArrayList<ConjuntoOrdenado>> resultadosPaleta
         = new ArrayList<ArrayList<ConjuntoOrdenado>>(2);
-    private ArrayList<ConjuntoOrdenado> subconjuntos;
     private int[] vetorIntervalar = new int[6];
 
     public Controlador() {
@@ -165,11 +164,8 @@ public class Controlador {
         formaCompacta = FormasCompactas.formaNormalForte(numeros);
     }
 
-    public void geraRotacaoStravinskyana() {
-        resultadoRotacaoStravinskyana = RotacaoStravinsky.gerar(numeros);
-    }
-
     public ArrayList<ConjuntoOrdenado> getRotacaoStravinskyana() {
+        resultadoRotacaoStravinskyana = RotacaoStravinsky.gerar(numeros);
         return resultadoRotacaoStravinskyana;
     }
 
@@ -187,15 +183,12 @@ public class Controlador {
         matriz = GeradorTabelaAdicao.geraTabela(numeros);
     }
 
-    public void gerarVetorIntervalar() {
-        numeros.vetorIntervalar(vetorIntervalar);
-    }
-
     public int[] getVetorIntervalar() {
+        numeros.vetorIntervalar(vetorIntervalar);
         return vetorIntervalar;
     }
 
-    public void geraSubconjuntos() {
+    public ArrayList<ConjuntoOrdenado> getSubconjuntos() {
         HashSet<ConjuntoOrdenado> tmp = new HashSet<ConjuntoOrdenado>();
 
         int tamanhoSubconjuntos = 0;
@@ -205,11 +198,7 @@ public class Controlador {
                 >= numeros.size());
 
         constroi(0, tamanhoSubconjuntos, new ConjuntoOrdenado(), tmp);
-        subconjuntos = new ArrayList<ConjuntoOrdenado>(tmp);
-    }
-
-    public ArrayList<ConjuntoOrdenado> getSubconjuntos() {
-        return subconjuntos;
+        return new ArrayList<ConjuntoOrdenado>(tmp);
     }
 
     private void constroi(int indice, int tamanhoSubconjuntos, ConjuntoOrdenado subconjunto, HashSet<ConjuntoOrdenado> subconjuntos) {
