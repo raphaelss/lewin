@@ -361,7 +361,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 stringBuilder.setLength(stringBuilder.length() - 1);
                 break;
             case SAIDA_INVARIANCIA:
-                for (String s : controlador.getInvariancia()) {
+                for (String s : controlador.getInvariancia(formatoRepresentacao)) {
                     stringBuilder.append(s);
                 }
                 break;
@@ -1069,11 +1069,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 }//GEN-LAST:event_botaoGerarDerivacaoSerialActionPerformed
 
     private void botaoInvarianciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInvarianciaActionPerformed
-        controlador.geraInvariancia();
-
         modosAtuais[0] = SAIDA_INVARIANCIA;
         atualizaSaida();
-
         botaoSubstituirEntrada.setEnabled(false);
 }//GEN-LAST:event_botaoInvarianciaActionPerformed
 

@@ -35,8 +35,7 @@ public class Controlador {
     private ArrayList<ConjuntoOrdenado> listaDeFormas;
     private ConjuntoOrdenado serieEscolhida = new ConjuntoOrdenado();
     private MatrizDodecafonica matriz;
-    private ArrayList<ConjuntoOrdenado> acordesALimpo;
-    private ArrayList<String> invarianciaDerivativa, invariancias;
+    private ArrayList<String> invarianciaDerivativa;
     private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana;
     private ArrayList<ArrayList<ConjuntoOrdenado>> resultadosPaleta
         = new ArrayList<ArrayList<ConjuntoOrdenado>>(2);
@@ -352,14 +351,14 @@ public class Controlador {
         return camposColorir;
     }
 
-    public Object geraInvariancia() {
+    public ArrayList<String> getInvariancia(ClasseDeAltura.TipoRepresentacao formato) {
         ArrayList<String> informacoesAssociada = new ArrayList<String>();
-        acordesALimpo = new ArrayList<ConjuntoOrdenado>();
-        invariancias = new ArrayList<String>();
+        ArrayList<ConjuntoOrdenado> acordesALimpo = new ArrayList<ConjuntoOrdenado>();
+        ArrayList<String> invariancias = new ArrayList<String>();
 
-        encontraInvariancia(informacoesAssociada, 3);
-        encontraInvariancia(informacoesAssociada, 4);
-        encontraInvariancia(informacoesAssociada, 6);
+        encontraInvariancia(acordesALimpo, informacoesAssociada, 3);
+        encontraInvariancia(acordesALimpo, informacoesAssociada, 4);
+        encontraInvariancia(acordesALimpo, informacoesAssociada, 6);
 
         int segmentos = acordesALimpo.size();
         String informacaoCorrente, finalLinha, inicio = "";
@@ -369,17 +368,13 @@ public class Controlador {
             finalLinha = informacaoCorrente + "  " + "(" +
                     new StringTokenizer(informacaoCorrente).countTokens() + ")\n\n";
 
-            invariancias.add(acordesALimpo.get(i).toString() + inicio + finalLinha);
+            invariancias.add(acordesALimpo.get(i).representacao(formato) + "  " + inicio + finalLinha);
         }
 
         return invariancias;
     }
 
-    public ArrayList<String> getInvariancia() {
-        return invariancias;
-    }
-
-    private void encontraInvariancia(ArrayList<String> informacoesAssociada, int tamanhoSegmentos) {
+    private void encontraInvariancia(ArrayList<ConjuntoOrdenado> acordesALimpo, ArrayList<String> informacoesAssociada, int tamanhoSegmentos) {
         MatrizDeAcordes acordes = new MatrizDeAcordes(tamanhoSegmentos, matriz);
         ArrayList<ConjuntoOrdenado> corrente = null;
         int tamanhoLinha;

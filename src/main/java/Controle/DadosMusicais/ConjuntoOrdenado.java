@@ -139,6 +139,15 @@ public class ConjuntoOrdenado implements Iterable<ClasseDeAltura> {
         return classes.hashCode();
     }
 
+    public String representacao(ClasseDeAltura.TipoRepresentacao formato) {
+        StringBuilder builder = new StringBuilder();
+        for (ClasseDeAltura c : classes) {
+            builder.append(c.representacao(formato)).append("  ");
+        }
+        builder.setLength(builder.length() - 2);
+        return builder.toString();
+    }
+
     public ConjuntoOrdenado inverter() {
         for (int i = 0; i < classes.size(); ++i) {
             classes.set(i, classes.get(i).inverter());
