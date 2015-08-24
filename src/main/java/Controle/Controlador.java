@@ -212,11 +212,9 @@ public class Controlador {
                 constroi(indice + 1, tamanhoSubconjuntos, subconjunto, subconjuntos);
             }
         }
-
-        try {
+        if (!subconjunto.isEmpty()) {
             subconjunto.remove(subconjunto.size() - 1);
         }
-        catch(NoSuchElementException nsee) {}
     }
 
     public double getSimilaridade() {
