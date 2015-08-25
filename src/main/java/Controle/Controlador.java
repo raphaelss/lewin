@@ -189,32 +189,12 @@ public class Controlador {
     }
 
     public ArrayList<ConjuntoOrdenado> getSubconjuntos() {
-        HashSet<ConjuntoOrdenado> tmp = new HashSet<ConjuntoOrdenado>();
-
         int tamanhoSubconjuntos = 0;
         while((tamanhoSubconjuntos =
                 Integer.parseInt(JOptionPane.showInputDialog(null,
                 "Informe o tamanho dos subconjuntos")))
                 >= numeros.size());
-
-        constroi(0, tamanhoSubconjuntos, new ConjuntoOrdenado(), tmp);
-        return new ArrayList<ConjuntoOrdenado>(tmp);
-    }
-
-    private void constroi(int indice, int tamanhoSubconjuntos, ConjuntoOrdenado subconjunto, HashSet<ConjuntoOrdenado> subconjuntos) {
-        for (; indice < numeros.size(); indice++) {
-            subconjunto.add(numeros.get(indice));
-            if (subconjunto.size() == tamanhoSubconjuntos) {
-                subconjuntos.add(new ConjuntoOrdenado(subconjunto));
-                subconjunto.remove(subconjunto.size() - 1);
-            }
-            else {
-                constroi(indice + 1, tamanhoSubconjuntos, subconjunto, subconjuntos);
-            }
-        }
-        if (!subconjunto.isEmpty()) {
-            subconjunto.remove(subconjunto.size() - 1);
-        }
+        return GeradorSubconjuntos.gerar(numeros, tamanhoSubconjuntos);
     }
 
     public double getSimilaridade() {
@@ -222,32 +202,13 @@ public class Controlador {
     }
 
     public void geraInvarianciaTranspositiva() {
-        invarianciaDerivativa = new ArrayList<String>();
-
-        int tamanhoEntrada = numeros.size(),
-            quantidadeRepeticoes = Integer.parseInt(JOptionPane.showInputDialog(null,
+        int quantidadeRepeticoes = Integer.parseInt(JOptionPane.showInputDialog(null,
                 "Informe quantidade de repeti\u00e7\u00f5es desejada"));
-
-        if (quantidadeRepeticoes > tamanhoEntrada) {
+        if (quantidadeRepeticoes > numeros.size()) {
             JOptionPane.showMessageDialog(null, "N\u00e3o \u00e9 poss\u00edvel retornar este resultado");
         }
         else {
-            int [] vetInt = numeros.vetorIntervalar();
-            for (int i = 0; i < 5; i++) {
-                if (vetInt[i] == quantidadeRepeticoes) {
-                    invarianciaDerivativa.add("T" + (i + 1) + "  ");
-                    invarianciaDerivativa.add("T" + (11 - i) + "  ");
-                }
-
-            }
-
-            if (quantidadeRepeticoes == 2*vetInt[5]) {
-                invarianciaDerivativa.add("T6");
-            }
-
-            if (quantidadeRepeticoes == tamanhoEntrada) {
-                invarianciaDerivativa.add("T0");
-            }
+            invarianciaDerivativa = GeradorInvarianciaTranspositiva.gerar(numeros, quantidadeRepeticoes);
         }
     }
 
