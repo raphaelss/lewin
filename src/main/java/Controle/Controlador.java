@@ -217,8 +217,6 @@ public class Controlador {
     }
 
     public void geraInvarianciaInversiva() {
-        invarianciaDerivativa = new ArrayList<String>();
-
         int tamanhoEntrada = numeros.size(),
             quantidadeRepeticoes = Integer.parseInt(JOptionPane.showInputDialog(null,
                 "Informe quantidade de repeti\u00e7\u00f5es desejada"));
@@ -227,20 +225,7 @@ public class Controlador {
             JOptionPane.showMessageDialog(null, "N\u00e3o \u00e9 poss\u00edvel retornar este resultado");
         }
         else {
-            MatrizDodecafonica tabela = GeradorTabelaAdicao.geraTabela(numeros);
-            int[] contadores = new int[12];
-
-            for (int i = 0; i < tamanhoEntrada; i++) {
-                for (int j = 0; j < tamanhoEntrada; j++) {
-                    contadores[tabela.get(i, j).inteiro()]++;
-                }
-            }
-
-            for (int i = 0; i < 12; i++) {
-                if (contadores[i] == quantidadeRepeticoes) {
-                    invarianciaDerivativa.add("T" + i + "I  ");
-                }
-            }
+            invarianciaDerivativa = GeradorInvarianciaInversiva.gerar(numeros, tamanhoEntrada);
         }
     }
 
