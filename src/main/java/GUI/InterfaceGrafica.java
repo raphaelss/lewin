@@ -1207,6 +1207,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarRotacaoStravinskyanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarRotacaoStravinskyanaActionPerformed
         modosAtuais[0] = SAIDA_ROTACAO_STRAVINSKYANA;
+        controlador.geraRotacaoStravinskyana();
         atualizaSaida();
 
         botaoExportarHTML.setEnabled(true);
@@ -1273,6 +1274,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarVetorIntervalarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarVetorIntervalarActionPerformed
         modosAtuais[0] = SAIDA_VETOR_INTERVALAR;
+        controlador.geraVetorIntervalar();
         atualizaSaida();
         botaoExportarHTML.setEnabled(true);
         botaoSubstituirEntrada.setEnabled(false);
@@ -1280,6 +1282,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarSimilaridadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarSimilaridadeActionPerformed
         modosAtuais[0] = SAIDA_SIMILARIDADE;
+        controlador.geraSimilaridade();
         atualizaSaida();
         botaoExportarHTML.setEnabled(false);
         botaoSubstituirEntrada.setEnabled(false);
@@ -1287,6 +1290,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoGerarSubconjuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGerarSubconjuntosActionPerformed
         modosAtuais[0] = SAIDA_SUBCONJUNTOS;
+        controlador.geraSubconjuntos();
         atualizaSaida();
         botaoExportarHTML.setEnabled(true);
         botaoSubstituirEntrada.setEnabled(false);

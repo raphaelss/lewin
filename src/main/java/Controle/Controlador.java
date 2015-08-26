@@ -34,10 +34,12 @@ public class Controlador {
     private ArrayList<ConjuntoOrdenado> listaDeFormas;
     private MatrizDodecafonica matriz;
     private ArrayList<String> invarianciaDerivativa;
-    private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana;
+    private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana,
+                                        subconjuntos;
     private ArrayList<ArrayList<ConjuntoOrdenado>> resultadosPaleta
         = new ArrayList<ArrayList<ConjuntoOrdenado>>(2);
     private int[] vetorIntervalar = new int[6];
+    private double similaridade;
 
     public Controlador() {
         resultadosPaleta.add(new ArrayList<ConjuntoOrdenado>(12));
@@ -144,8 +146,11 @@ public class Controlador {
         formaCompacta = FormasCompactas.formaNormalForte(numeros);
     }
 
-    public ArrayList<ConjuntoOrdenado> getRotacaoStravinskyana() {
+    public void geraRotacaoStravinskyana() {
         resultadoRotacaoStravinskyana = RotacaoStravinsky.gerar(numeros);
+    }
+
+    public ArrayList<ConjuntoOrdenado> getRotacaoStravinskyana() {
         return resultadoRotacaoStravinskyana;
     }
 
@@ -163,22 +168,33 @@ public class Controlador {
         matriz = GeradorTabelaAdicao.geraTabela(numeros);
     }
 
-    public int[] getVetorIntervalar() {
+    public void geraVetorIntervalar() {
         numeros.vetorIntervalar(vetorIntervalar);
+    }
+
+    public int[] getVetorIntervalar() {
         return vetorIntervalar;
     }
 
-    public ArrayList<ConjuntoOrdenado> getSubconjuntos() {
+    public void geraSubconjuntos() {
         int tamanhoSubconjuntos = 0;
         while((tamanhoSubconjuntos =
                 Integer.parseInt(JOptionPane.showInputDialog(null,
                 "Informe o tamanho dos subconjuntos")))
                 >= numeros.size());
-        return GeradorSubconjuntos.gerar(numeros, tamanhoSubconjuntos);
+        subconjuntos = GeradorSubconjuntos.gerar(numeros, tamanhoSubconjuntos);
+    }
+
+    public ArrayList<ConjuntoOrdenado> getSubconjuntos() {
+        return subconjuntos;
+    }
+
+    public void geraSimilaridade() {
+        similaridade = Similaridade.calcular(numeros, segundoConjunto);
     }
 
     public double getSimilaridade() {
-        return Similaridade.calcular(numeros, segundoConjunto);
+        return similaridade;
     }
 
     public void geraInvarianciaTranspositiva() {
