@@ -33,7 +33,6 @@ public class Controlador {
                              segundoConjunto = new ConjuntoOrdenado(),
                              formaCompacta, resultadoMultiplicacao;
     private ArrayList<ConjuntoOrdenado> listaDeFormas;
-    private ConjuntoOrdenado serieEscolhida = new ConjuntoOrdenado();
     private MatrizDodecafonica matriz;
     private ArrayList<String> invarianciaDerivativa;
     private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana;
@@ -123,25 +122,7 @@ public class Controlador {
     }
 
     public void geraMatrizDodecafonica() {
-        matriz = new MatrizDodecafonica();
-
-        serieEscolhida.clear();
-        if (numeros.size() < 12) {
-            int indice = 0;
-            while((indice =
-                    Integer.parseInt(JOptionPane.showInputDialog(null,
-                    "Selecione o \u00edndice da s\u00e9rie de entrada da matriz")))
-                    >= listaDeFormas.size());
-            serieEscolhida.add(listaDeFormas.get(indice));
-        }
-        else {
-            serieEscolhida.add(numeros);
-        }
-
-        ConjuntoOrdenado inverso = new ConjuntoOrdenado(serieEscolhida).inverter();
-        for (int i = 11; i >= 0; --i) {
-            matriz.setLinha(i, serieEscolhida.transporPara(inverso.get(i)));
-        }
+        matriz = GeradorMatrizDodecafonica.gerar(numeros);
     }
 
     public void geraFormaPrimaStraus() {
@@ -246,118 +227,10 @@ public class Controlador {
     }
 
     public ArrayList<Point> geraCombinatoriedade() {
-        ArrayList<Point> camposColorir = new ArrayList<Point>();
-        ConjuntoOrdenado hexacordeCorrente, hexacordeRejeitado = serieEscolhida.subSeq(0, 6);
-
-        for (int i = 1; i < 12; i++) {
-            hexacordeCorrente = matriz.getP(i).subSeq(0, 6);
-            if (hexacordeCorrente.disjuntos(hexacordeRejeitado)) {
-                for (int j = 0; j < 6; j++) {
-                    camposColorir.add(new Point(i, j));
-                }
-            }
-        }
-        for (int i = 0; i < 12; i++) {
-            hexacordeCorrente = matriz.getR(i).subSeq(0, 6);
-            if (hexacordeCorrente.disjuntos(hexacordeRejeitado)) {
-                for (int j = 0; j < 6; j++) {
-                    camposColorir.add(new Point(i, 11 - j));
-                }
-            }
-        }
-        for (int i = 0; i < 12; i++) {
-            hexacordeCorrente = matriz.getI(i).subSeq(0, 6);
-            if (hexacordeCorrente.disjuntos(hexacordeRejeitado)) {
-                for (int j = 0; j < 6; j++) {
-                    camposColorir.add(new Point(j, i));
-                }
-            }
-        }
-        for (int i = 0; i < 12; i++) {
-            hexacordeCorrente = matriz.getRI(i).subSeq(0, 6);
-            if (hexacordeCorrente.disjuntos(hexacordeRejeitado)) {
-                for (int j = 0; j < 6; j++) {
-                    camposColorir.add(new Point(11 - j, i));
-                }
-            }
-        }
-        return camposColorir;
+        return GeradorCombinatoriedade.gerar(matriz);
     }
 
     public ArrayList<String> getInvariancia(ClasseDeAltura.TipoRepresentacao formato) {
-        ArrayList<String> informacoesAssociada = new ArrayList<String>();
-        ArrayList<ConjuntoOrdenado> acordesALimpo = new ArrayList<ConjuntoOrdenado>();
-        ArrayList<String> invariancias = new ArrayList<String>();
-
-        encontraInvariancia(acordesALimpo, informacoesAssociada, 3);
-        encontraInvariancia(acordesALimpo, informacoesAssociada, 4);
-        encontraInvariancia(acordesALimpo, informacoesAssociada, 6);
-
-        int segmentos = acordesALimpo.size();
-        String informacaoCorrente, finalLinha, inicio = "";
-
-        for (int i = 0; i < segmentos; i++) {
-            informacaoCorrente = informacoesAssociada.get(i);
-            finalLinha = informacaoCorrente + "  " + "(" +
-                    new StringTokenizer(informacaoCorrente).countTokens() + ")\n\n";
-
-            invariancias.add(acordesALimpo.get(i).representacao(formato) + "  " + inicio + finalLinha);
-        }
-
-        return invariancias;
+        return GeradorInvarianciaDodecafonica.gerar(matriz, formato);
     }
-
-    private void encontraInvariancia(ArrayList<ConjuntoOrdenado> acordesALimpo, ArrayList<String> informacoesAssociada, int tamanhoSegmentos) {
-        MatrizDeAcordes acordes = new MatrizDeAcordes(tamanhoSegmentos, matriz);
-        ArrayList<ConjuntoOrdenado> corrente = null;
-        int tamanhoLinha;
-        String informacaoDoCorrente = "";
-        ConjuntoOrdenado procurado = null;
-
-        do {
-            procurado = acordes.getProximoElemento();
-
-            tamanhoLinha = acordes.getMatrizP().size();
-            for (int j = 0; j < tamanhoLinha; j++) {
-                corrente = acordes.getMatrizP().get(j);
-                if (corrente.remove(procurado)) {
-                    informacaoDoCorrente += "P" + matriz.getP(j).get(0) + " ";
-                }
-            }
-
-            tamanhoLinha = acordes.getMatrizI().size();
-            for (int j = 0; j < tamanhoLinha; j++) {
-                corrente = acordes.getMatrizI().get(j);
-                if (corrente.remove(procurado)) {
-                    informacaoDoCorrente += "I" + matriz.getI(j).get(0) + " ";
-                }
-            }
-
-            tamanhoLinha = acordes.getMatrizR().size();
-            for (int j = 0; j < tamanhoLinha; j++) {
-                corrente = acordes.getMatrizR().get(j);
-                if (corrente.remove(procurado)) {
-                    informacaoDoCorrente += "R" + matriz.getP(j).get(0) + " ";
-                }
-            }
-
-            tamanhoLinha = acordes.getMatrizRI().size();
-            for (int j = 0; j < tamanhoLinha; j++) {
-                corrente = acordes.getMatrizRI().get(j);
-                if (corrente.remove(procurado)) {
-                    informacaoDoCorrente += "RI" + matriz.getI(j).get(0) + " ";
-                }
-            }
-
-            if (informacaoDoCorrente.length() >= 6) {
-                acordesALimpo.add(procurado);
-                informacoesAssociada.add(informacaoDoCorrente);
-            }
-
-            informacaoDoCorrente = "";
-        }
-        while (acordes.getTamanhoTotal() > 0);
-    }
-
-
 }
