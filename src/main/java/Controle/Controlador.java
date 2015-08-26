@@ -22,7 +22,6 @@ package Controle;
 import Controle.DadosMusicais.ConjuntoOrdenado;
 import Controle.DadosMusicais.ClasseDeAltura;
 import Controle.DadosMusicais.MatrizDodecafonica;
-import Controle.DadosMusicais.MatrizDeAcordes;
 import Excecoes.DadosProibidos;
 import java.awt.Point;
 import java.util.*;
