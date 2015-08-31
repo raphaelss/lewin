@@ -30,12 +30,10 @@ import javax.swing.JOptionPane;
 public class Controlador {
     private ConjuntoOrdenado numeros = new ConjuntoOrdenado(),
                              segundoConjunto = new ConjuntoOrdenado(),
-                             formaCompacta, resultadoMultiplicacao;
-    private ArrayList<ConjuntoOrdenado> listaDeFormas;
+                             resultadoSimples;
+    private ArrayList<ConjuntoOrdenado> resultadoLista;
     private MatrizDodecafonica matriz;
     private ArrayList<String> invarianciaDerivativa;
-    private ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana,
-                                        subconjuntos;
     private ArrayList<ArrayList<ConjuntoOrdenado>> resultadosPaleta
         = new ArrayList<ArrayList<ConjuntoOrdenado>>(2);
     private int[] vetorIntervalar = new int[6];
@@ -69,23 +67,20 @@ public class Controlador {
         }
     }
 
-    public void substitui_FormaCompacta() {
-        numeros = formaCompacta;
+    public void substituiResultadoSimples() {
+        numeros = resultadoSimples;
     }
 
-    public void substituir_Multiplicacao() {
-        numeros = resultadoMultiplicacao;
-    }
 
     public void substitui_DerivacaoSerial() {
         int indice = 0;
         while((indice =
                 Integer.parseInt(JOptionPane.showInputDialog(null,
                 "Selecione o \u00edndice da s\u00e9rie a ser usada")))
-                >= listaDeFormas.size());
+                >= resultadoLista.size());
 
         numeros.clear();
-        numeros.add(listaDeFormas.get(indice));
+        numeros.add(resultadoLista.get(indice));
     }
 
     public void substitui_Paleta() {
@@ -93,10 +88,10 @@ public class Controlador {
         while((indice =
                 Integer.parseInt(JOptionPane.showInputDialog(null,
                 "Selecione o \u00edndice")))
-                >= resultadoRotacaoStravinskyana.size());
+                >= resultadoLista.size());
 
         numeros.clear();
-        numeros.add(resultadoRotacaoStravinskyana.get(indice));
+        numeros.add(resultadoLista.get(indice));
     }
 
     public void removerConjuntoPrincipal() {
@@ -115,11 +110,11 @@ public class Controlador {
     }
 
     public void geraDerivacaoSerial() throws DadosProibidos {
-        listaDeFormas = GeradorDerivacaoSerial.gerar(numeros);
+        resultadoLista = GeradorDerivacaoSerial.gerar(numeros);
     }
 
-    public ArrayList<ConjuntoOrdenado> getDerivacaoSerial() {
-        return listaDeFormas;
+    public ArrayList<ConjuntoOrdenado> getResultadoLista() {
+        return resultadoLista;
     }
 
     public void geraMatrizDodecafonica() {
@@ -127,31 +122,27 @@ public class Controlador {
     }
 
     public void geraFormaPrimaStraus() {
-        formaCompacta = FormasCompactas.formaPrimaStraus(numeros);
+        resultadoSimples = FormasCompactas.formaPrimaStraus(numeros);
     }
 
     public void geraFormaPrimaForte() {
-        formaCompacta = FormasCompactas.formaPrimaForte(numeros);
+        resultadoSimples = FormasCompactas.formaPrimaForte(numeros);
     }
 
-    public ConjuntoOrdenado getFormaCompacta() {
-        return formaCompacta;
+    public ConjuntoOrdenado getResultadoSimples() {
+        return resultadoSimples;
     }
 
     public void geraFormaNormalStraus() {
-        formaCompacta = FormasCompactas.formaNormalStraus(numeros);
+        resultadoSimples = FormasCompactas.formaNormalStraus(numeros);
     }
 
     public void geraFormaNormalForte() {
-        formaCompacta = FormasCompactas.formaNormalForte(numeros);
+        resultadoSimples = FormasCompactas.formaNormalForte(numeros);
     }
 
     public void geraRotacaoStravinskyana() {
-        resultadoRotacaoStravinskyana = RotacaoStravinsky.gerar(numeros);
-    }
-
-    public ArrayList<ConjuntoOrdenado> getRotacaoStravinskyana() {
-        return resultadoRotacaoStravinskyana;
+        resultadoLista = RotacaoStravinsky.gerar(numeros);
     }
 
     public void geraPaleta() {
@@ -180,13 +171,9 @@ public class Controlador {
         int tamanhoSubconjuntos = 0;
         while((tamanhoSubconjuntos =
                 Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Informe o tamanho dos subconjuntos")))
+                "Informe o tamanho dos resultadoLista")))
                 >= numeros.size());
-        subconjuntos = GeradorSubconjuntos.gerar(numeros, tamanhoSubconjuntos);
-    }
-
-    public ArrayList<ConjuntoOrdenado> getSubconjuntos() {
-        return subconjuntos;
+        resultadoLista = GeradorSubconjuntos.gerar(numeros, tamanhoSubconjuntos);
     }
 
     public void geraSimilaridade() {
@@ -226,19 +213,15 @@ public class Controlador {
     }
 
     public void geraMultiplicacaoBoulez() {
-        resultadoMultiplicacao = Multiplicacao.boulez(numeros, segundoConjunto);
+        resultadoSimples = Multiplicacao.boulez(numeros, segundoConjunto);
     }
 
     public void geraMultiplicacaoRahn1() {
-        resultadoMultiplicacao = Multiplicacao.rahn(numeros, segundoConjunto.get(0).inteiro());
+        resultadoSimples = Multiplicacao.rahn(numeros, segundoConjunto.get(0).inteiro());
     }
 
     public void geraMultiplicacaoRahn2() {
-        resultadoMultiplicacao = Multiplicacao.rahn(numeros, segundoConjunto);
-    }
-
-    public ConjuntoOrdenado getMultiplicacao() {
-        return resultadoMultiplicacao;
+        resultadoSimples = Multiplicacao.rahn(numeros, segundoConjunto);
     }
 
     public ArrayList<Point> geraCombinatoriedade() {

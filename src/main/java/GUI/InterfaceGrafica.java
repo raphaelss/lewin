@@ -313,10 +313,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void atualizaSaida() {
         switch(modosAtuais[0]) {
             case SAIDA_MULTIPLICACAO:
-                adicionarAlturasBuilder(controlador.getMultiplicacao());
+            case SAIDA_FORMA_COMPACTA:
+                adicionarAlturasBuilder(controlador.getResultadoSimples());
                 break;
             case SAIDA_DERIVACAO_SERIAL:
-                ArrayList<ConjuntoOrdenado> listadeFormas = controlador.getDerivacaoSerial();
+                ArrayList<ConjuntoOrdenado> listadeFormas = controlador.getResultadoLista();
 
                 for (int i = 0; i < listadeFormas.size(); ++i) {
                     for (int j = 0; j < 12; ++j) {
@@ -339,7 +340,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 break;
             case SAIDA_ROTACAO_STRAVINSKYANA:
                 stringBuilder.append("\u03B1 = ");
-                ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana = controlador.getRotacaoStravinskyana();
+                ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana = controlador.getResultadoLista();
                 adicionarAlturasBuilder(resultadoRotacaoStravinskyana.get(0));
                 for (int i = 1; i < 7; i++) {
                     stringBuilder.append("\n\n\u03B2").append(i).append(" = ");
@@ -366,16 +367,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 }
                 break;
             case SAIDA_SUBCONJUNTOS:
-                for (ConjuntoOrdenado subconjunto : controlador.getSubconjuntos()) {
+                for (ConjuntoOrdenado subconjunto : controlador.getResultadoLista()) {
                     adicionarAlturasBuilder(subconjunto);
                     stringBuilder.append("  [");
                     adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(subconjunto));
                     stringBuilder.append("]\n\n");
                 }
                 stringBuilder.setLength(stringBuilder.length() - 2);
-                break;
-            case SAIDA_FORMA_COMPACTA:
-                adicionarAlturasBuilder(controlador.getFormaCompacta());
                 break;
             case SAIDA_VETOR_INTERVALAR:
                 for (int dado : controlador.getVetorIntervalar()) {
@@ -1340,10 +1338,8 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoSubstituirEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSubstituirEntradaActionPerformed
         switch(modosAtuais[0]) {
             case SAIDA_FORMA_COMPACTA:
-                controlador.substitui_FormaCompacta();
-                break;
             case SAIDA_MULTIPLICACAO:
-                controlador.substituir_Multiplicacao();
+                controlador.substituiResultadoSimples();
                 break;
             case SAIDA_DERIVACAO_SERIAL:
                 controlador.substitui_DerivacaoSerial();
