@@ -41,13 +41,16 @@ public class GeradorDerivacaoSerial {
                 throw new DadosProibidos("Impossível gerar uma série derivada de um tetracorde contendo a classe intervalar 4.");
             }
         } else if (tamanho != 6) {
-                throw new DadosProibidos("Só é possível derivar séries dodecafônicas a partir de tricordes, tetracordes e hexacordes.");
+            throw new DadosProibidos("Só é possível derivar séries dodecafônicas a partir de tricordes, tetracordes e hexacordes.");
         }
 
         ArrayList<ArrayList<ConjuntoOrdenado>> paleta = GeradorPaleta.gerar(original);
         ArrayList<ConjuntoOrdenado> resultado = new ArrayList<ConjuntoOrdenado>();
         ConjuntoOrdenado[] parts = new ConjuntoOrdenado [12 / original.size()];
         encontraGruposCompativeis(resultado, 0, parts, paleta);
+        if (resultado.size() == 0) {
+            throw new DadosProibidos("Impossível derivar uma série a partir deste hexacorde.");
+        }
         return resultado;
     }
 
