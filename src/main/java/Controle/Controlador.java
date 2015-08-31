@@ -71,7 +71,6 @@ public class Controlador {
         numeros = resultadoSimples;
     }
 
-
     public void substitui_DerivacaoSerial() {
         int indice = 0;
         while((indice =
