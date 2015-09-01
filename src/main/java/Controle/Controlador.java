@@ -175,12 +175,11 @@ public class Controlador {
     }
 
     public void geraInvarianciaInversiva(int quantidadeRepeticoes) throws DadosProibidos {
-        int tamanhoEntrada = numeros.size();
-        if (quantidadeRepeticoes > tamanhoEntrada) {
+        if (quantidadeRepeticoes > numeros.size()) {
             throw new DadosProibidos("Não é possível retornar este resultado.");
         }
         else {
-            invarianciaDerivativa = GeradorInvarianciaInversiva.gerar(numeros, tamanhoEntrada);
+            invarianciaDerivativa = GeradorInvarianciaInversiva.gerar(numeros, quantidadeRepeticoes);
         }
     }
 
