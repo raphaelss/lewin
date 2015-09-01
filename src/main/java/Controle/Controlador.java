@@ -25,7 +25,6 @@ import Controle.DadosMusicais.MatrizDodecafonica;
 import Excecoes.DadosProibidos;
 import java.awt.Point;
 import java.util.*;
-import javax.swing.JOptionPane;
 
 public class Controlador {
     private ConjuntoOrdenado numeros = new ConjuntoOrdenado(),
@@ -67,30 +66,9 @@ public class Controlador {
         }
     }
 
-    public void substituiResultadoSimples() {
-        numeros = resultadoSimples;
-    }
-
-    public void substitui_DerivacaoSerial() {
-        int indice = 0;
-        while((indice =
-                Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Selecione o \u00edndice da s\u00e9rie a ser usada")))
-                >= resultadoLista.size());
-
+    public void substitui(ConjuntoOrdenado co) {
         numeros.clear();
-        numeros.add(resultadoLista.get(indice));
-    }
-
-    public void substitui_Paleta() {
-        int indice = 0;
-        while((indice =
-                Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Selecione o \u00edndice")))
-                >= resultadoLista.size());
-
-        numeros.clear();
-        numeros.add(resultadoLista.get(indice));
+        numeros.add(co);
     }
 
     public void removerConjuntoPrincipal() {
@@ -166,13 +144,13 @@ public class Controlador {
         return vetorIntervalar;
     }
 
-    public void geraSubconjuntos() {
-        int tamanhoSubconjuntos = 0;
-        while((tamanhoSubconjuntos =
-                Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Informe o tamanho dos resultadoLista")))
-                >= numeros.size());
-        resultadoLista = GeradorSubconjuntos.gerar(numeros, tamanhoSubconjuntos);
+    public void geraSubconjuntos(int n) throws DadosProibidos {
+        if (n < 1) {
+            throw new DadosProibidos("Não é possível gerar subconjuntos com zero ou menos elementos.");
+        } else if (n > numeros.size()) {
+            throw new DadosProibidos("Não é possível gerar subconjuntos com um número maior de elementos que o conjunto de origem.");
+        }
+        resultadoLista = GeradorSubconjuntos.gerar(numeros, n);
     }
 
     public void geraSimilaridade() {
@@ -183,11 +161,9 @@ public class Controlador {
         return similaridade;
     }
 
-    public void geraInvarianciaTranspositiva() {
-        int quantidadeRepeticoes = Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Informe quantidade de repeti\u00e7\u00f5es desejada"));
+    public void geraInvarianciaTranspositiva(int quantidadeRepeticoes) throws DadosProibidos {
         if (quantidadeRepeticoes > numeros.size()) {
-            JOptionPane.showMessageDialog(null, "N\u00e3o \u00e9 poss\u00edvel retornar este resultado");
+            throw new DadosProibidos("Não é possível retornar este resultado.");
         }
         else {
             invarianciaDerivativa = GeradorInvarianciaTranspositiva.gerar(numeros, quantidadeRepeticoes);
@@ -198,13 +174,10 @@ public class Controlador {
         return invarianciaDerivativa;
     }
 
-    public void geraInvarianciaInversiva() {
-        int tamanhoEntrada = numeros.size(),
-            quantidadeRepeticoes = Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Informe quantidade de repeti\u00e7\u00f5es desejada"));
-
+    public void geraInvarianciaInversiva(int quantidadeRepeticoes) throws DadosProibidos {
+        int tamanhoEntrada = numeros.size();
         if (quantidadeRepeticoes > tamanhoEntrada) {
-            JOptionPane.showMessageDialog(null, "N\u00e3o \u00e9 poss\u00edvel retornar este resultado");
+            throw new DadosProibidos("Não é possível retornar este resultado.");
         }
         else {
             invarianciaDerivativa = GeradorInvarianciaInversiva.gerar(numeros, tamanhoEntrada);
