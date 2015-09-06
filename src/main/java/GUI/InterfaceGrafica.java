@@ -46,7 +46,6 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private JTextField[][] camposMatriz = new JTextField[12][12];
     private JLabel[] rotulosDasLinhas = new JLabel[12], rotulosDasColunas = new JLabel[12];
     private ArrayList<JButton> botoesEntrada = new ArrayList<JButton>(12);
-    private TipoTabela guiEscolherTabela = new TipoTabela();
     private ClasseDeAltura.TipoRepresentacao formatoRepresentacao = ClasseDeAltura.TipoRepresentacao.Inteiro;
     private StringBuilder stringBuilder = new StringBuilder();
     private Controlador controlador = new Controlador();
@@ -1305,7 +1304,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }
 
     private void botaoTabelasCordaisActionPerformed(java.awt.event.ActionEvent evt) {
-        guiEscolherTabela.setVisible(true);
+        abrirNavegadorPadrao("Tabela.html");
     }
 
     private void botaoInvarianciaTranspositivaActionPerformed(java.awt.event.ActionEvent evt) {
