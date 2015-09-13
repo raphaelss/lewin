@@ -1303,8 +1303,14 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoSubstituirEntrada.setEnabled(false);
     }
 
+    private String getDataFilePath(String file) {
+        String fullPath = getClass().getProtectionDomain().getCodeSource()
+                                    .getLocation().getPath();
+        return fullPath.substring(0, fullPath.lastIndexOf("/")) + "/data/" + file;
+    }
+
     private void botaoTabelasCordaisActionPerformed(java.awt.event.ActionEvent evt) {
-        abrirNavegadorPadrao("Tabela.html");
+        abrirNavegadorPadrao(getDataFilePath("Tabela.html"));
     }
 
     private void botaoInvarianciaTranspositivaActionPerformed(java.awt.event.ActionEvent evt) {

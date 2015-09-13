@@ -28,3 +28,10 @@ jar {
 task wrapper(type: Wrapper) {
   gradleVersion = '2.3'
 }
+
+classes.doLast {
+  copy {
+    from 'src/main/dist/data'
+    into 'build/classes/main/data'
+  }
+}
