@@ -41,6 +41,7 @@ import java.util.logging.Logger;
 import javax.sound.midi.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class InterfaceGrafica extends javax.swing.JFrame {
     private JTextField[][] camposMatriz = new JTextField[12][12];
@@ -1074,10 +1075,15 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         for (Point p : controlador.geraCombinatoriedade()) {
             camposMatriz[p.x][p.y].setBackground(Color.yellow);
         }
+
 }
 
     @SuppressWarnings("fallthrough")
     private void botaoExportarHTMLActionPerformed(java.awt.event.ActionEvent evt) {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Html files", "html", "htm");
+        fileChooser.setFileFilter(filter);
+        fileChooser.showSaveDialog(this);
         String nomeArquivo = "saida.html";
         try {
             PrintWriter pagina = new PrintWriter(nomeArquivo);
@@ -1102,7 +1108,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     pagina.append("</tr>");
                 }
                 pagina.append("</table>");
-            }
+           }
             if (modosAtuais[1] != -1) {
                 pagina.append("<table border = 3>");
                 for (int i = 0; i < 12; i++) {
