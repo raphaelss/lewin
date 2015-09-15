@@ -32,6 +32,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 
 import java.awt.event.*;
+import java.io.File;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -55,10 +56,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private static final java.awt.Font fonteNegrito = new java.awt.Font("Tahoma", 1, 11);
 
     public static final int SAIDA_DERIVACAO_SERIAL = 1, MATRIZ_DODECAFONICA = 2,
-                            SAIDA_FORMA_COMPACTA = 3, SAIDA_PALETA = 4,
-                            SAIDA_ROTACAO_STRAVINSKYANA = 5, MATRIZ_TABELA_ADICAO = 6, SAIDA_VETOR_INTERVALAR = 7,
-                            SAIDA_SUBCONJUNTOS = 8, SAIDA_SIMILARIDADE = 9, SAIDA_INVARIANCIA_DERIVATIVA = 10,
-                            SAIDA_MULTIPLICACAO = 11, SAIDA_INVARIANCIA = 15;
+        SAIDA_FORMA_COMPACTA = 3, SAIDA_PALETA = 4,
+        SAIDA_ROTACAO_STRAVINSKYANA = 5, MATRIZ_TABELA_ADICAO = 6, SAIDA_VETOR_INTERVALAR = 7,
+        SAIDA_SUBCONJUNTOS = 8, SAIDA_SIMILARIDADE = 9, SAIDA_INVARIANCIA_DERIVATIVA = 10,
+        SAIDA_MULTIPLICACAO = 11, SAIDA_INVARIANCIA = 15;
     private int[] modosAtuais = {-1, -1};
     private boolean midiDisponivel = true;
 
@@ -118,7 +119,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         try {
             if ((sequenciador = MidiSystem.getSequencer()) == null) {
                 throw new SequenciadorNulo("N\u00e3o foi poss\u00edvel "
-                        + "obter um sequenciador");
+                                           + "obter um sequenciador");
             }
 
             if (!(sequenciador instanceof Synthesizer)) {
@@ -126,12 +127,12 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             }
 
             sequenciador.addMetaEventListener(new MetaEventListener() {
-                public void meta(MetaMessage event) {
-                    if (event.getType() == 47) {
-                        sequenciador.stop();
+                    public void meta(MetaMessage event) {
+                        if (event.getType() == 47) {
+                            sequenciador.stop();
+                        }
                     }
-                }
-            });
+                });
 
             tocarClasseInformada(78);
         }
@@ -148,11 +149,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
         KeyListener l = new KeyListener() {
 
-            @Override
-            public void keyTyped(KeyEvent e) {
-                try {
-                    char char_valor = e.getKeyChar();
-                    switch(char_valor) {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    try {
+                        char char_valor = e.getKeyChar();
+                        switch(char_valor) {
                         case '0':
                         case '1':
                         case '2':
@@ -175,20 +176,20 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                             break;
                         case 8:
                             botaoRemoverActionPerformed(null);
+                        }
+                    }
+                    catch(NumberFormatException nfe) {
+                        System.err.println("Erro na inserção de nova classe");
+                        System.err.println(nfe.getMessage());
                     }
                 }
-                catch(NumberFormatException nfe) {
-                    System.err.println("Erro na inserção de nova classe");
-                    System.err.println(nfe.getMessage());
-                }
-            }
 
-            @Override
-            public void keyPressed(KeyEvent e) {}
+                @Override
+                public void keyPressed(KeyEvent e) {}
 
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        };
+                @Override
+                public void keyReleased(KeyEvent e) {}
+            };
         areaTextoEntrada.requestFocus();
         relacionarListenerTeclado(l);
     }
@@ -268,34 +269,34 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }
 
     private ActionListener buttonListenerEntrada = new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            try {
-                int valorEscolhido = botoesEntrada.indexOf(e.getSource());
-                controlador.adicionaEntradaConjuntoPrincipal(ClasseDeAltura.criar(valorEscolhido));
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int valorEscolhido = botoesEntrada.indexOf(e.getSource());
+                    controlador.adicionaEntradaConjuntoPrincipal(ClasseDeAltura.criar(valorEscolhido));
 
-                atualizaEntrada();
-                atualizaHabilitacaoBotoesFuncionalidades();
+                    atualizaEntrada();
+                    atualizaHabilitacaoBotoesFuncionalidades();
+                }
+                catch (DadosProibidos ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             }
-            catch (DadosProibidos ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-            }
-        }
-    };
+        };
 
     private ActionListener buttonListenerEntradaSegundoConjunto = new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            try {
-                int valorEscolhido = botoesEntrada.indexOf(e.getSource());
-                controlador.adicionaEntradaSegundoConjunto(ClasseDeAltura.criar(valorEscolhido));
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int valorEscolhido = botoesEntrada.indexOf(e.getSource());
+                    controlador.adicionaEntradaSegundoConjunto(ClasseDeAltura.criar(valorEscolhido));
 
-                atualizaEntrada();
-                atualizaHabilitacaoBotoesFuncionalidades();
+                    atualizaEntrada();
+                    atualizaHabilitacaoBotoesFuncionalidades();
+                }
+                catch (DadosProibidos ex) {
+                    Logger.getLogger(InterfaceGrafica.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            catch (DadosProibidos ex) {
-                Logger.getLogger(InterfaceGrafica.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    };
+        };
 
     private void atualizaEntrada() {
         if (!botaoInserirSegundoFator.isSelected()) {
@@ -312,81 +313,81 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void atualizaSaida() {
         switch(modosAtuais[0]) {
-            case SAIDA_MULTIPLICACAO:
-            case SAIDA_FORMA_COMPACTA:
-                adicionarAlturasBuilder(controlador.getResultadoSimples());
-                break;
-            case SAIDA_DERIVACAO_SERIAL:
-                ArrayList<ConjuntoOrdenado> listadeFormas = controlador.getResultadoLista();
+        case SAIDA_MULTIPLICACAO:
+        case SAIDA_FORMA_COMPACTA:
+            adicionarAlturasBuilder(controlador.getResultadoSimples());
+            break;
+        case SAIDA_DERIVACAO_SERIAL:
+            ArrayList<ConjuntoOrdenado> listadeFormas = controlador.getResultadoLista();
 
-                for (int i = 0; i < listadeFormas.size(); ++i) {
-                    for (int j = 0; j < 12; ++j) {
-                        adicionarAlturaBuilder(listadeFormas.get(i).get(j));
-                        stringBuilder.append(espacamento);
-                    }
-                    stringBuilder.append("  (").append(i).append(")\n\n");
+            for (int i = 0; i < listadeFormas.size(); ++i) {
+                for (int j = 0; j < 12; ++j) {
+                    adicionarAlturaBuilder(listadeFormas.get(i).get(j));
+                    stringBuilder.append(espacamento);
                 }
+                stringBuilder.append("  (").append(i).append(")\n\n");
+            }
 
-                switch(listadeFormas.get(0).size()) {
-                    case 4:
-                        stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tricordais internas");
-                        break;
-                    case 3:
-                        stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tetracordais internas");
-                        break;
-                    default:
-                        stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es hexacordais internas");
-                }
+            switch(listadeFormas.get(0).size()) {
+            case 4:
+                stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tricordais internas");
                 break;
-            case SAIDA_ROTACAO_STRAVINSKYANA:
-                stringBuilder.append("\u03B1 = ");
-                ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana = controlador.getResultadoLista();
-                adicionarAlturasBuilder(resultadoRotacaoStravinskyana.get(0));
-                for (int i = 1; i < 7; i++) {
-                    stringBuilder.append("\n\n\u03B2").append(i).append(" = ");
-                    adicionarAlturasBuilder(resultadoRotacaoStravinskyana.get(i));
-                }
+            case 3:
+                stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tetracordais internas");
                 break;
-            case SAIDA_PALETA:
-                ArrayList<ArrayList<ConjuntoOrdenado>> resultadoPaleta = controlador.getPaleta();
-                int max = resultadoPaleta.get(0).size();
-                for (int i = 0; i < max; ++i) {
-                    adicionarAlturasBuilder(resultadoPaleta.get(0).get(i));
-                    stringBuilder.append("    ");
-                    try {
-                        adicionarAlturasBuilder(resultadoPaleta.get(1).get(i));
-                    }
-                    catch(IndexOutOfBoundsException aioobe) {}
-                    stringBuilder.append("\n\n");
+            default:
+                stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es hexacordais internas");
+            }
+            break;
+        case SAIDA_ROTACAO_STRAVINSKYANA:
+            stringBuilder.append("\u03B1 = ");
+            ArrayList<ConjuntoOrdenado> resultadoRotacaoStravinskyana = controlador.getResultadoLista();
+            adicionarAlturasBuilder(resultadoRotacaoStravinskyana.get(0));
+            for (int i = 1; i < 7; i++) {
+                stringBuilder.append("\n\n\u03B2").append(i).append(" = ");
+                adicionarAlturasBuilder(resultadoRotacaoStravinskyana.get(i));
+            }
+            break;
+        case SAIDA_PALETA:
+            ArrayList<ArrayList<ConjuntoOrdenado>> resultadoPaleta = controlador.getPaleta();
+            int max = resultadoPaleta.get(0).size();
+            for (int i = 0; i < max; ++i) {
+                adicionarAlturasBuilder(resultadoPaleta.get(0).get(i));
+                stringBuilder.append("    ");
+                try {
+                    adicionarAlturasBuilder(resultadoPaleta.get(1).get(i));
                 }
-                stringBuilder.setLength(stringBuilder.length() - 1);
-                break;
-            case SAIDA_INVARIANCIA:
-                for (String s : controlador.getInvariancia(formatoRepresentacao)) {
-                    stringBuilder.append(s);
-                }
-                break;
-            case SAIDA_SUBCONJUNTOS:
-                for (ConjuntoOrdenado subconjunto : controlador.getResultadoLista()) {
-                    adicionarAlturasBuilder(subconjunto);
-                    stringBuilder.append("  [");
-                    adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(subconjunto));
-                    stringBuilder.append("]\n\n");
-                }
-                stringBuilder.setLength(stringBuilder.length() - 2);
-                break;
-            case SAIDA_VETOR_INTERVALAR:
-                for (int dado : controlador.getVetorIntervalar()) {
-                    stringBuilder.append(dado).append(espacamento);
-                }
-                break;
-            case SAIDA_INVARIANCIA_DERIVATIVA:
-                for (String s : controlador.getInvarianciaDerivativa()) {
-                    stringBuilder.append(s).append(espacamento);
-                }
-                break;
-            case SAIDA_SIMILARIDADE:
-                stringBuilder.append(controlador.getSimilaridade());
+                catch(IndexOutOfBoundsException aioobe) {}
+                stringBuilder.append("\n\n");
+            }
+            stringBuilder.setLength(stringBuilder.length() - 1);
+            break;
+        case SAIDA_INVARIANCIA:
+            for (String s : controlador.getInvariancia(formatoRepresentacao)) {
+                stringBuilder.append(s);
+            }
+            break;
+        case SAIDA_SUBCONJUNTOS:
+            for (ConjuntoOrdenado subconjunto : controlador.getResultadoLista()) {
+                adicionarAlturasBuilder(subconjunto);
+                stringBuilder.append("  [");
+                adicionarAlturasBuilder(FormasCompactas.formaPrimaStraus(subconjunto));
+                stringBuilder.append("]\n\n");
+            }
+            stringBuilder.setLength(stringBuilder.length() - 2);
+            break;
+        case SAIDA_VETOR_INTERVALAR:
+            for (int dado : controlador.getVetorIntervalar()) {
+                stringBuilder.append(dado).append(espacamento);
+            }
+            break;
+        case SAIDA_INVARIANCIA_DERIVATIVA:
+            for (String s : controlador.getInvarianciaDerivativa()) {
+                stringBuilder.append(s).append(espacamento);
+            }
+            break;
+        case SAIDA_SIMILARIDADE:
+            stringBuilder.append(controlador.getSimilaridade());
         }
 
         areaTextoResultados.setText(extrairResultadoBuilder());
@@ -399,13 +400,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 botaoRemover.setEnabled(true);
 
                 switch(tamanhoCorrenteEntrada) {
-                    case 3:
-                    case 4:
-                    case 6:
-                        botaoGerarDerivacaoSerial.setEnabled(true);
-                        break;
-                    default:
-                        botaoGerarDerivacaoSerial.setEnabled(false);
+                case 3:
+                case 4:
+                case 6:
+                    botaoGerarDerivacaoSerial.setEnabled(true);
+                    break;
+                default:
+                    botaoGerarDerivacaoSerial.setEnabled(false);
                 }
 
                 botaoReproduzir.setEnabled(midiDisponivel);
@@ -636,10 +637,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoRemover.setToolTipText("Remover Elemento");
         botaoRemover.setEnabled(false);
         botaoRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoRemoverActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoRemoverActionPerformed(evt);
+                }
+            });
         painelEntrada.add(botaoRemover);
         botaoRemover.setBounds(20, 310, 50, 20);
 
@@ -648,10 +649,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoSubstituirEntrada.setToolTipText("Substitui entrada atual pelo resultado");
         botaoSubstituirEntrada.setEnabled(false);
         botaoSubstituirEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoSubstituirEntradaActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoSubstituirEntradaActionPerformed(evt);
+                }
+            });
         painelEntrada.add(botaoSubstituirEntrada);
         botaoSubstituirEntrada.setBounds(200, 310, 50, 20);
 
@@ -671,10 +672,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoReproduzir.setToolTipText("Reproduzir conjunto da entrada");
         botaoReproduzir.setEnabled(false);
         botaoReproduzir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoReproduzirActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoReproduzirActionPerformed(evt);
+                }
+            });
         painelEntrada.add(botaoReproduzir);
         botaoReproduzir.setBounds(110, 310, 50, 20);
 
@@ -689,10 +690,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lixopequeno.png"))); // NOI18N
         botaoLimpar.setToolTipText("Limpar Tela");
         botaoLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoLimparActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoLimparActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoLimpar);
         barraDeFerramentas.add(jSeparator3);
 
@@ -703,10 +704,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoAlternarNumeroNotas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoAlternarNumeroNotas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoAlternarNumeroNotas.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                botaoAlternarNumeroNotasItemStateChanged(evt);
-            }
-        });
+                public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                    botaoAlternarNumeroNotasItemStateChanged(evt);
+                }
+            });
         barraDeFerramentas.add(botaoAlternarNumeroNotas);
         barraDeFerramentas.add(jSeparator8);
 
@@ -715,10 +716,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarFormaNormalStraus.setToolTipText("Forma Normal segundo Straus");
         botaoGerarFormaNormalStraus.setEnabled(false);
         botaoGerarFormaNormalStraus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarFormaNormalStrausActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarFormaNormalStrausActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarFormaNormalStraus);
 
         botaoGerarFormaNormalForte.setFont(fonte); // NOI18N
@@ -729,10 +730,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarFormaNormalForte.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoGerarFormaNormalForte.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoGerarFormaNormalForte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarFormaNormalForteActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarFormaNormalForteActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarFormaNormalForte);
 
         botaoGerarFormaPrimaStraus.setFont(fonte); // NOI18N
@@ -740,10 +741,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarFormaPrimaStraus.setToolTipText("Forma Prima segundo Straus");
         botaoGerarFormaPrimaStraus.setEnabled(false);
         botaoGerarFormaPrimaStraus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarFormaPrimaStrausActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarFormaPrimaStrausActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarFormaPrimaStraus);
 
         botaoGerarFormaPrimaForte.setFont(fonte); // NOI18N
@@ -754,10 +755,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarFormaPrimaForte.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoGerarFormaPrimaForte.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoGerarFormaPrimaForte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarFormaPrimaForteActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarFormaPrimaForteActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarFormaPrimaForte);
 
         botaoGerarSubconjuntos.setFont(fonte); // NOI18N
@@ -768,10 +769,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarSubconjuntos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoGerarSubconjuntos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoGerarSubconjuntos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarSubconjuntosActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarSubconjuntosActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarSubconjuntos);
 
         botaoGerarRotacaoStravinskyana.setFont(fonte); // NOI18N
@@ -779,10 +780,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarRotacaoStravinskyana.setToolTipText("Rotação Stravinskyana");
         botaoGerarRotacaoStravinskyana.setEnabled(false);
         botaoGerarRotacaoStravinskyana.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarRotacaoStravinskyanaActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarRotacaoStravinskyanaActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarRotacaoStravinskyana);
 
         botaoGerarTabelaAdicao.setFont(fonte); // NOI18N
@@ -790,10 +791,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarTabelaAdicao.setToolTipText("Tabela de Adição");
         botaoGerarTabelaAdicao.setEnabled(false);
         botaoGerarTabelaAdicao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarTabelaAdicaoActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarTabelaAdicaoActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarTabelaAdicao);
 
         botaoGerarVetorIntervalar.setFont(fonte); // NOI18N
@@ -801,10 +802,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarVetorIntervalar.setToolTipText("Vetor Intervalar");
         botaoGerarVetorIntervalar.setEnabled(false);
         botaoGerarVetorIntervalar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarVetorIntervalarActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarVetorIntervalarActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarVetorIntervalar);
 
         botaoInvarianciaTranspositiva.setFont(fonte); // NOI18N
@@ -815,10 +816,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoInvarianciaTranspositiva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoInvarianciaTranspositiva.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoInvarianciaTranspositiva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoInvarianciaTranspositivaActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoInvarianciaTranspositivaActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoInvarianciaTranspositiva);
 
         botaoInvarianciaInversiva.setFont(fonte); // NOI18N
@@ -829,10 +830,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoInvarianciaInversiva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoInvarianciaInversiva.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoInvarianciaInversiva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoInvarianciaInversivaActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoInvarianciaInversivaActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoInvarianciaInversiva);
 
         botaoPaleta.setFont(fonte); // NOI18N
@@ -843,10 +844,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoPaleta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoPaleta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoPaleta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoPaletaActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoPaletaActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoPaleta);
         barraDeFerramentas.add(jSeparator7);
 
@@ -858,10 +859,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoInserirSegundoFator.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoInserirSegundoFator.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoInserirSegundoFator.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                botaoInserirSegundoFatorItemStateChanged(evt);
-            }
-        });
+                public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                    botaoInserirSegundoFatorItemStateChanged(evt);
+                }
+            });
         barraDeFerramentas.add(botaoInserirSegundoFator);
 
         botaoMultiplicacaoBoulez.setFont(fonte); // NOI18N
@@ -869,10 +870,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoMultiplicacaoBoulez.setToolTipText("Multiplicação segundo Boulez");
         botaoMultiplicacaoBoulez.setEnabled(false);
         botaoMultiplicacaoBoulez.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoMultiplicacaoBoulezActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoMultiplicacaoBoulezActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoMultiplicacaoBoulez);
 
         botaoMultiplicacaoRahn.setFont(fonte); // NOI18N
@@ -880,10 +881,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoMultiplicacaoRahn.setToolTipText("Multiplicação segundo Rahn");
         botaoMultiplicacaoRahn.setEnabled(false);
         botaoMultiplicacaoRahn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoMultiplicacaoRahnActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoMultiplicacaoRahnActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoMultiplicacaoRahn);
 
         botaoMultiplicacaoRahnEstendido.setFont(fonte); // NOI18N
@@ -891,10 +892,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoMultiplicacaoRahnEstendido.setToolTipText("Multiplicação Rahn expandida");
         botaoMultiplicacaoRahnEstendido.setEnabled(false);
         botaoMultiplicacaoRahnEstendido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoMultiplicacaoRahnEstendidoActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoMultiplicacaoRahnEstendidoActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoMultiplicacaoRahnEstendido);
 
         botaoGerarSimilaridade.setFont(fonte); // NOI18N
@@ -905,10 +906,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarSimilaridade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoGerarSimilaridade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoGerarSimilaridade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarSimilaridadeActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarSimilaridadeActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarSimilaridade);
         barraDeFerramentas.add(jSeparator6);
 
@@ -917,10 +918,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarDerivacaoSerial.setToolTipText("Derivação Serial");
         botaoGerarDerivacaoSerial.setEnabled(false);
         botaoGerarDerivacaoSerial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarDerivacaoSerialActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarDerivacaoSerialActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarDerivacaoSerial);
 
         botaoGerarMatrizDodecafonica.setFont(fonte); // NOI18N
@@ -928,10 +929,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoGerarMatrizDodecafonica.setToolTipText("Matriz Dodecafônica");
         botaoGerarMatrizDodecafonica.setEnabled(false);
         botaoGerarMatrizDodecafonica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGerarMatrizDodecafonicaActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoGerarMatrizDodecafonicaActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoGerarMatrizDodecafonica);
 
         botaoCombinatoriedade.setFont(fonte); // NOI18N
@@ -939,10 +940,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoCombinatoriedade.setToolTipText("Combinatoriedade");
         botaoCombinatoriedade.setEnabled(false);
         botaoCombinatoriedade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCombinatoriedadeActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoCombinatoriedadeActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoCombinatoriedade);
 
         botaoInvariancia.setFont(fonte); // NOI18N
@@ -950,10 +951,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoInvariancia.setToolTipText("Invariância");
         botaoInvariancia.setEnabled(false);
         botaoInvariancia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoInvarianciaActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoInvarianciaActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoInvariancia);
         barraDeFerramentas.add(jSeparator1);
 
@@ -965,10 +966,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoExportarHTML.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoExportarHTML.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoExportarHTML.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoExportarHTMLActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoExportarHTMLActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoExportarHTML);
         barraDeFerramentas.add(jSeparator4);
 
@@ -979,10 +980,10 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         botaoTabelasCordais.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoTabelasCordais.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botaoTabelasCordais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoTabelasCordaisActionPerformed(evt);
-            }
-        });
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    botaoTabelasCordaisActionPerformed(evt);
+                }
+            });
         barraDeFerramentas.add(botaoTabelasCordais);
 
         getContentPane().add(barraDeFerramentas);
@@ -1016,7 +1017,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         catch(NumberFormatException dp) {
             JOptionPane.showMessageDialog(null, "H\u00e1 dados n\u00e3o permitidos. Preencha corretamente");
         }
-}
+    }
 
     private void botaoLimparActionPerformed(java.awt.event.ActionEvent evt) {
         areaTextoResultados.setText("");
@@ -1034,7 +1035,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         for (JButton botao : botoesEntrada) {
             substituiModo1Fator(botao, botao.getActionListeners()[0]);
         }
-}
+    }
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {
         if (!botaoInserirSegundoFator.isSelected()) {
@@ -1046,7 +1047,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
         atualizaEntrada();
         atualizaHabilitacaoBotoesFuncionalidades();
-}
+    }
 
     private void botaoGerarDerivacaoSerialActionPerformed(java.awt.event.ActionEvent evt) {
         try {
@@ -1063,30 +1064,40 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         catch(DadosProibidos dp) {
             JOptionPane.showMessageDialog(null, dp.getMessage());
         }
-}
+    }
 
     private void botaoInvarianciaActionPerformed(java.awt.event.ActionEvent evt) {
         modosAtuais[0] = SAIDA_INVARIANCIA;
         atualizaSaida();
         botaoSubstituirEntrada.setEnabled(false);
-}
+    }
 
     private void botaoCombinatoriedadeActionPerformed(java.awt.event.ActionEvent evt) {
         for (Point p : controlador.geraCombinatoriedade()) {
             camposMatriz[p.x][p.y].setBackground(Color.yellow);
         }
 
-}
+    }
 
     @SuppressWarnings("fallthrough")
     private void botaoExportarHTMLActionPerformed(java.awt.event.ActionEvent evt) {
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Html files", "html", "htm");
         fileChooser.setFileFilter(filter);
-        fileChooser.showSaveDialog(this);
-        String nomeArquivo = "saida.html";
+        File file;
+        switch (fileChooser.showSaveDialog(this)) {
+        case JFileChooser.APPROVE_OPTION:
+            file = fileChooser.getSelectedFile();
+            break;
+        default:
+            return;
+        }
+        if (file.getName().indexOf(".") == -1) {
+            file = new File(file.getAbsolutePath() + ".html");
+        }
         try {
-            PrintWriter pagina = new PrintWriter(nomeArquivo);
+            file.getParentFile().mkdirs();
+            PrintWriter pagina = new PrintWriter(file);
             pagina.append("<html><head><title>Resultado</title></head><body>");
             JTextField campoAtual;
             if (modosAtuais[0] == SAIDA_PALETA) {
@@ -1108,7 +1119,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                     pagina.append("</tr>");
                 }
                 pagina.append("</table>");
-           }
+            }
             if (modosAtuais[1] != -1) {
                 pagina.append("<table border = 3>");
                 for (int i = 0; i < 12; i++) {
@@ -1131,14 +1142,14 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
             String texto = areaTextoResultados.getText();
             switch(modosAtuais[0]) {
-                case InterfaceGrafica.SAIDA_ROTACAO_STRAVINSKYANA:
-                    texto = texto.replace("\u03B1", "A");
-                    texto = texto.replace("\u03B2", "B");
-                case InterfaceGrafica.SAIDA_INVARIANCIA:
-                case InterfaceGrafica.SAIDA_DERIVACAO_SERIAL:
-                case InterfaceGrafica.SAIDA_SUBCONJUNTOS:
-                    texto = texto.replace("\n\n", "<br>");
-                    break;
+            case InterfaceGrafica.SAIDA_ROTACAO_STRAVINSKYANA:
+                texto = texto.replace("\u03B1", "A");
+                texto = texto.replace("\u03B2", "B");
+            case InterfaceGrafica.SAIDA_INVARIANCIA:
+            case InterfaceGrafica.SAIDA_DERIVACAO_SERIAL:
+            case InterfaceGrafica.SAIDA_SUBCONJUNTOS:
+                texto = texto.replace("\n\n", "<br>");
+                break;
             }
 
             if (modosAtuais[0] != SAIDA_PALETA) {
@@ -1149,7 +1160,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         }
         catch(Exception e) {}
 
-        abrirNavegadorPadrao(nomeArquivo);
+        abrirNavegadorPadrao(file.getAbsolutePath());
     }
 
     public static void abrirNavegadorPadrao(String nomeArquivo) {
@@ -1159,7 +1170,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             if (osName.startsWith("Mac OS")) {
                 Class<?> fileMgr = Class.forName("com.apple.eio.FileManager");
                 Method openURL = fileMgr.getDeclaredMethod("openURL",
-                    new Class<?>[] {String.class});
+                                                           new Class<?>[] {String.class});
                 openURL.invoke(null, new Object[] {nomeArquivo});
             }
             else if (osName.startsWith("Windows")) {
@@ -1172,7 +1183,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
                 String browser = null;
                 for (int count = 0; count < browsers.length && browser == null; count++)
                     if (Runtime.getRuntime().exec(
-                    new String[] {"which", browsers[count]}).waitFor() == 0)
+                                                  new String[] {"which", browsers[count]}).waitFor() == 0)
                         browser = browsers[count];
                 if (browser == null) {
                     throw new Exception("Navegador não encontrado!");
@@ -1294,7 +1305,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
         int tamanho;
         try {
             tamanho = Integer.parseInt(JOptionPane.showInputDialog(null,
-                                       "Informe o tamanho dos resultadoLista"));
+                                                                   "Informe o tamanho dos resultadoLista"));
             controlador.geraSubconjuntos(tamanho);
         } catch (NumberFormatException nfe) {
             //TODO: print more subtle error message
@@ -1311,7 +1322,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private String getDataFilePath(String file) {
         String fullPath = getClass().getProtectionDomain().getCodeSource()
-                                    .getLocation().getPath();
+            .getLocation().getPath();
         return fullPath.substring(0, fullPath.lastIndexOf("/")) + "/data/" + file;
     }
 
@@ -1322,7 +1333,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoInvarianciaTranspositivaActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             int quantidadeRepeticoes = Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Informe quantidade de repetições desejada"));
+                                                                                    "Informe quantidade de repetições desejada"));
             controlador.geraInvarianciaTranspositiva(quantidadeRepeticoes);
         } catch (NumberFormatException nfe) {
             //TODO: print more subtle error message
@@ -1368,27 +1379,27 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
     private void botaoSubstituirEntradaActionPerformed(java.awt.event.ActionEvent evt) {
         switch(modosAtuais[0]) {
-            case SAIDA_FORMA_COMPACTA:
-            case SAIDA_MULTIPLICACAO:
-                controlador.substitui(controlador.getResultadoSimples());
-                break;
-            case SAIDA_DERIVACAO_SERIAL:
-            case SAIDA_PALETA:
-                ArrayList<ConjuntoOrdenado> lista = controlador.getResultadoLista();
-                int indice;
-                try {
-                    indice = Integer.parseInt(JOptionPane.showInputDialog(null,
-                                              "Selecione o \u00edndice da s\u00e9rie a ser usada"));
-                } catch (NumberFormatException nfe){
-                    //TODO: print subtle error message
-                    return;
-                }
-                try {
-                    controlador.substitui(lista.get(indice));
-                } catch (IndexOutOfBoundsException exc) {
-                    //TODO: print subtle error message
-                }
-                break;
+        case SAIDA_FORMA_COMPACTA:
+        case SAIDA_MULTIPLICACAO:
+            controlador.substitui(controlador.getResultadoSimples());
+            break;
+        case SAIDA_DERIVACAO_SERIAL:
+        case SAIDA_PALETA:
+            ArrayList<ConjuntoOrdenado> lista = controlador.getResultadoLista();
+            int indice;
+            try {
+                indice = Integer.parseInt(JOptionPane.showInputDialog(null,
+                                                                      "Selecione o \u00edndice da s\u00e9rie a ser usada"));
+            } catch (NumberFormatException nfe){
+                //TODO: print subtle error message
+                return;
+            }
+            try {
+                controlador.substitui(lista.get(indice));
+            } catch (IndexOutOfBoundsException exc) {
+                //TODO: print subtle error message
+            }
+            break;
         }
 
         atualizaEntrada();
@@ -1467,7 +1478,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private void botaoInvarianciaInversivaActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             int quantidadeRepeticoes = Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Informe quantidade de repetições desejada"));
+                                                                                    "Informe quantidade de repetições desejada"));
             controlador.geraInvarianciaInversiva(quantidadeRepeticoes);
         } catch (NumberFormatException nfe) {
             //TODO: print more subtle error message
@@ -1519,9 +1530,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             for (int j = 0; j < 12; ++j) {
                 ClasseDeAltura c = matriz.get(i, j);
                 if (c != null) {
-                  camposMatriz[i][j].setText(matriz.get(i, j).representacao(formatoRepresentacao));
+                    camposMatriz[i][j].setText(matriz.get(i, j).representacao(formatoRepresentacao));
                 } else {
-                  camposMatriz[i][j].setText("");
+                    camposMatriz[i][j].setText("");
                 }
             }
         }
@@ -1536,29 +1547,29 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                final InterfaceGrafica ig = new InterfaceGrafica();
-                ig.setSize(1090, 440);
-                if (!Toolkit.getDefaultToolkit().getScreenSize().equals(new Dimension(800,600))) {
-                    ig.setLocation(125, 125);
-                }
-                else {
-                    ig.setLocation(0, 50);
-                }
-                ig.setTitle("Lewin");
-                ig.setVisible(true);
-
-                ig.addWindowListener(new WindowAdapter() {
-                    public void windowClosing(WindowEvent e) {
-                        ig.fechaMIDI();
+                public void run() {
+                    final InterfaceGrafica ig = new InterfaceGrafica();
+                    ig.setSize(1090, 440);
+                    if (!Toolkit.getDefaultToolkit().getScreenSize().equals(new Dimension(800,600))) {
+                        ig.setLocation(125, 125);
                     }
-                });
-            }
-        });
+                    else {
+                        ig.setLocation(0, 50);
+                    }
+                    ig.setTitle("Lewin");
+                    ig.setVisible(true);
+
+                    ig.addWindowListener(new WindowAdapter() {
+                            public void windowClosing(WindowEvent e) {
+                                ig.fechaMIDI();
+                            }
+                        });
+                }
+            });
     }
 
     private final static long serialVersionUID = 1L;
