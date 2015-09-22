@@ -2,10 +2,13 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Lista de classes de conjuntos</title>
+    <title>Classes de conjuntos</title>
     <style>
+      body {
+        text-align: center;
+      }
       table {
-        margin: 5em auto 5em auto;
+        margin: 3em auto 3em auto;
       }
       tr {
         border-width: 1px;
@@ -13,30 +16,38 @@
         padding: 2em 2em 0.2em 2em;
       }
       tr:nth-child(even) {
-        background: #F7F7F7;
+        background-color: #f7f7f7;
       }
       tr:nth-child(odd) {
-        background: #fcfcfc;
+        background-color: #fcfcfc;
+      }
+      tr:hover {
+        background-color: #e2ffe2;
       }
       th {
         padding: 0.6em;
         background-color: #ddf;
+        font-size: 0.7em;
       }
-      tr:hover {
-        background: #e2ffe2;
+      .tipo-acordes {
+        font-size: 1em;
+      }
+      td {
+        min-width: 4em;
       }
     </style>
   </head>
   <body>
+    <h1>Classes de conjuntos</h1>
     <table>
       <tr>
-        <th>Tricordes</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Nonacordes</th>
+        <th class="tipo-acordes">Tricordes</th>
+        <th>Forte</th>
+        <th>Vet. int.</th>
+        <th>Inv.</th>
+        <th>Vet. int.</th>
+        <th>Forte</th>
+        <th class="tipo-acordes">Nonacordes</th>
       </tr>
       <tr>
         <td>(012)</td>
@@ -149,13 +160,13 @@
     </table>
     <table>
       <tr>
-        <th>Tetracordes</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Octacordes</th>
+        <th class="tipo-acordes">Tetracordes</th>
+        <th>Forte</th>
+        <th>Vet. int.</th>
+        <th>Inv.</th>
+        <th>Vet. int.</th>
+        <th>Forte</th>
+        <th class="tipo-acordes">Octacordes</th>
       </tr>
       <tr>
         <td>(0123)</td>
@@ -421,13 +432,13 @@
     </table>
     <table>
       <tr>
-        <th>Pentacordes</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Septacordes</th>
+        <th class="tipo-acordes">Pentacordes</th>
+        <th>Forte</th>
+        <th>Vet. int.</th>
+        <th>Inv.</th>
+        <th>Vet. int.</th>
+        <th>Forte</th>
+        <th class="tipo-acordes">Septacordes</th>
       </tr>
       <tr>
         <td>(01234)</td>
@@ -774,28 +785,16 @@
     </table>
     <table>
       <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Hexacordes</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
         <th>O</th>
         <th>I</th>
         <th>R</th>
         <th>RI</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th class="tipo-acordes">Hexacordes</th>
+        <th>Forte</th>
+        <th>Vet. int.</th>
+        <th>Inv.</th>
+        <th>Forte</th>
+        <th class="tipo-acordes">Hexacordes</th>
       </tr>
       <tr>
         <td>1</td>
