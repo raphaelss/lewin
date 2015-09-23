@@ -6,6 +6,23 @@
     <style>
       body {
         text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      nav {
+        text-align: left;
+        float: left;
+        margin-right: -20em;
+        padding: 1em;
+      }
+      li {
+        padding-bottom: 1em;
+      }
+      #help-text {
+        float: right;
+        text-align: left;
+        margin-left: -10em;
+        margin-right: 2em;
       }
       table {
         margin: 3em auto 3em auto;
@@ -39,7 +56,15 @@
   </head>
   <body>
     <h1>Classes de conjuntos</h1>
-    <table>
+    <nav>
+      <ul>
+        <li><a href="#tricordes">Tricordes e nonacordes</a></li>
+        <li><a href="#tetracordes">Tetracordes e octacordes</a></li>
+        <li><a href="#pentacordes">Pentacordes e septacordes</a></li>
+        <li><a href="#hexacordes">Hexacordes</a></li>
+      </ul>
+    </nav>
+    <table id="tricordes">
       <tr>
         <th class="tipo-acordes">Tricordes</th>
         <th>Forte</th>
@@ -158,7 +183,7 @@
         <td>(01245689A)</td>
       </tr>
     </table>
-    <table>
+    <table id="tetracordes">
       <tr>
         <th class="tipo-acordes">Tetracordes</th>
         <th>Forte</th>
@@ -430,7 +455,7 @@
         <td>(0134679A)</td>
       </tr>
     </table>
-    <table>
+    <table id="pentacordes">
       <tr>
         <th class="tipo-acordes">Pentacordes</th>
         <th>Forte</th>
@@ -783,7 +808,7 @@
         <td>(0134578)</td>
       </tr>
     </table>
-    <table>
+    <table id="hexacordes">
       <tr>
         <th>O</th>
         <th>I</th>
