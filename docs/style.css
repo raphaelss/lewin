@@ -1,14 +1,36 @@
-html { max-width: 880px; margin-left: 1em; }
-body { font-size: smaller; font-family: Helvetica,Arial,sans-serif; }
-h1 { margin-bottom: 1ex; font-size: 110%; margin-left: -4ex; }
-h2 { margin-bottom: 1ex; font-size: 105%; margin-left: -2ex; }
-blockquote { margin-left: 5ex; margin-top: 0ex; margin-bottom: 0ex; }
-div.section { margin-bottom: 2ex; margin-left: 5ex; }
-
-.list-hyph {
- margin-top:1em;
+html {
+  max-width: 880px; width:auto; margin:auto;
 }
 
-ul.list-hyph { list-style-type: none; padding-left: 0em; }
-li.list-hyph:before { content: "\2013 "; }
+body {
+  font-size: smaller; font-family: Helvetica,Arial,sans-serif;
+}
 
+h1 {
+  margin-bottom: 1ex; font-size: 110%; margin-left: -4ex;
+}
+
+h2 {
+  margin-bottom: 1ex; font-size: 105%; margin-left: -2ex;
+}
+
+div.section {
+  margin-bottom: 2ex; margin-left: 5ex;
+}
+
+ul {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+ul.list-hyph {
+  list-style-type: none; padding-left: 0em;
+}
+
+li.list-hyph:before {
+  content: "\2013 ";
+}
+
+.list-hyph {
+  margin-top:1em;
+}
