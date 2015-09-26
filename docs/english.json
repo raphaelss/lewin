@@ -1,3 +1,34 @@
 {
-  "subtitle": "compositional calculator"
+  "subtitle": "compositional calculator",
+  "description": "The Lewin calculator is a tool for operations with pitch class sets and related concepts that is useful both for musical analysis and composition.",
+  "supported_operations_title": "Supported operations",
+  "supported_operations": [
+    "Normal form according to Straus",
+    "Normal form according to Forte",
+    "Prime form according to Straus",
+    "Prime form according to Forte",
+    "Subsets of n elements of a given set",
+    "Stravinskian rotation",
+    "Addition table",
+    "Interval vector",
+    "Transpositive invariants",
+    "Inversive invariants",
+    "Multiplication according to Boulez",
+    "Multiplication according to Rahn (traditional)",
+    "Multiplication according to Rahn (expanded)",
+    "Similarity between two sets",
+    "Derivation",
+    "Twelve-tone matrix",
+    "Hexachordal combinatoriality",
+    "Serial invariants",
+    "Html export",
+    "Pitch class set tables"
+  ],
+  "download_title": "Download",
+  "download_text": "You will need the java runtime enviroment in order to run lewin. After unzipping, open the bin directory and run lewin.bat if you're on windows or lewin if you're on OSX, GNU/Linux or other UNIX variants.",
+  "contributing_title": "Contributing",
+  "contributing_text": "We are currently refactoring the code to be able to cleanly introduce new features. There is a mirror of the repository at <a class=\"link-ext\" href=\"https://github.com/raphaelss/lewin\">github.com/raphaelss/lewin</a> and you can open issues there for bug reports and feature requests or send patches via pull requests. You are also welcome to send bug reports, feature suggestions and patches via email to one of the authors.",
+  "authors_title": "Authors",
+  "authors_text": "Lewin is developed by Hildegard Paulino, Liduino Pitombeira and Raphael Santos.",
+  "license_title": "License"
 }

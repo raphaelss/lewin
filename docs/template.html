@@ -8,52 +8,34 @@
 <body>
   <div class="section">
     <h1>Lewin</h1>
-    <p>The Lewin calculator is a tool for operations with pitch class sets and
-       related concepts that is useful both for musical analysis and
-       composition.</p>
+    <p>{{description}}</p>
     <div class="subsection">
-      <h2>Supported operations</h2>
+      <h2>{{supported_operations_title</h2>
       <ul style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-hyph">
-        <li class="list-hyph">Normal form according to Straus</li>
-        <li class="list-hyph">Normal form according to Forte</li>
-        <li class="list-hyph">Prime form according to Straus</li>
-        <li class="list-hyph">Prime form according to Forte</li>
-        <li class="list-hyph">Subsets of n elements of a given set</li>
-        <li class="list-hyph">Stravinskian rotation</li>
-        <li class="list-hyph">Addition table</li>
-        <li class="list-hyph">Interval vector</li>
-        <li class="list-hyph">Transpositive invariants</li>
-        <li class="list-hyph">Inversive invariants</li>
-        <li class="list-hyph">Multiplication according to Boulez</li>
-        <li class="list-hyph">Multiplication according to Rahn (traditional)</li>
-        <li class="list-hyph">Multiplication according to Rahn (expanded)</li>
-        <li class="list-hyph">Similarity between two sets</li>
-        <li class="list-hyph">Derivation</li>
-        <li class="list-hyph">Twelve-tone matrix</li>
-        <li class="list-hyph">Hexachordal combinatoriality</li>
-        <li class="list-hyph">Serial invariants</li>
-        <li class="list-hyph">Html export</li>
-        <li class="list-hyph">Pitch class set tables</li>
+        {{#each supported_operations}}
+        <li class="list-hyph">{{this}}</li>
+        {{/each}}
       </ul>
     </div>
   </div>
   <div class="section">
-    <h1>Download</h1>
-    <p>You will need the java runtime enviroment in order to run lewin. After unzipping, open the bin directory and run lewin.bat if you're on windows or lewin if you're on OSX, GNU/Linux or other UNIX variants.</p>
+    <h1>{{download_title}}</h1>
+    <p>{{download_text}}</p>
     <ul style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-hyph">
       <li class="list-hyph"><a class="link-ext" href="http://lewin.raphaelss.com/lewin-1.0.1.zip">Lewin-1.0.1.zip</a></li>
     </ul>
   </div>
   <div class="section">
-    <h1>Contributing</h1>
-    <p>We are currently refactoring the code to be able to cleanly introduce new features. There is a mirror of the repository at <a class="link-ext" href="https://github.com/raphaelss/lewin">github.com/raphaelss/lewin</a> and you can open issues there for bug reports and feature requests or send patches via pull requests. You are also welcome to send bug reports, feature suggestions and patches via email to one of the authors.</p>
+    <h1>{{contributing_title}}</h1>
+    <p>{{contributing_text}}</p>
   </div>
   <div class="section">
-    <h1>Authors</h1>
-    <p>Lewin is developed by Hildegard Paulino, Liduino Pitombeira and Raphael Santos.</p>
+    <h1>{{authors_title}}</h1>
+    <p>{{authors_text}}</p>
   </div>
   <div class="section">
-    <h1>License</h1> Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino {at} gmail {dot} com
+    <h1>{{license_title}}</h1>
+    <p>Copyright (C) 2013 Hildegard Paulino Barbosa, hildegardpaulino {at} gmail {dot} com</p>
     <p>Copyright (C) 2013 Liduino Jos&#233; Pitombeira de Oliveira, <a class="link-ext" href="http://www.pitombeira.com">http://www.pitombeira.com</a><p>
     <p>Copyright (C) 2015 Raphael Sousa Santos, <a class="link-ext" href="http://www.raphaelss.com">http://www.raphaelss.com</a></p>
     <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
