@@ -1,36 +1,43 @@
 html {
-  max-width: 880px; width:auto; margin:auto;
+  max-width: 880px;
+  width:auto;
+  margin:auto;
 }
 
 body {
-  font-size: smaller; font-family: Helvetica,Arial,sans-serif;
+  font-size: smaller;
+  font-family: Helvetica,Arial,sans-serif;
 }
 
 h1 {
-  margin-bottom: 1ex; font-size: 110%; margin-left: -4ex;
+  margin-bottom: 1ex;
+  margin-left: -4ex;
+  font-size: 110%;
 }
 
 h2 {
-  margin-bottom: 1ex; font-size: 105%; margin-left: -2ex;
+  margin-bottom: 1ex;
+  margin-left: -2ex;
+  font-size: 105%;
 }
 
 div.section {
-  margin-bottom: 2ex; margin-left: 5ex;
+  margin-bottom: 2ex;
+  margin-left: 5ex;
 }
 
 ul {
-  margin-top: 0em;
   margin-bottom: 0em;
+  list-style-type: none;
+  padding-left: 0em;
 }
 
-ul.list-hyph {
-  list-style-type: none; padding-left: 0em;
+.list-hyph {
+  margin-top:1em;
 }
 
 li.list-hyph:before {
   content: "\2013 ";
 }
 
-.list-hyph {
-  margin-top:1em;
-}
+

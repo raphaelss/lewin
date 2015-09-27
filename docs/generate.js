@@ -23,4 +23,5 @@ for (var i = 0; i < to_copy.length; ++i) {
   fs.createReadStream(to_copy[i])
     .pipe(fs.createWriteStream(outputDir + to_copy[i]));
 }
-generate('english');
+generate('english', 'EN');
+generate('portugues', 'PT');

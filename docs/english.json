@@ -25,7 +25,7 @@
     "Pitch class set tables"
   ],
   "download_title": "Download",
-  "download_text": "You will need the java runtime enviroment in order to run lewin. After unzipping, open the bin directory and run lewin.bat if you're on windows or lewin if you're on OSX, GNU/Linux or other UNIX variants.",
+  "download_text": "You will need the java runtime environment in order to run lewin. After unzipping, open the bin directory and run lewin.bat if you're on windows or lewin if you're on OSX, GNU/Linux or other UNIX variants.",
   "contributing_title": "Contributing",
   "contributing_text": "We are currently refactoring the code to be able to cleanly introduce new features. There is a mirror of the repository at <a class=\"link-ext\" href=\"https://github.com/raphaelss/lewin\">github.com/raphaelss/lewin</a> and you can open issues there for bug reports and feature requests or send patches via pull requests. You are also welcome to send bug reports, feature suggestions and patches via email to one of the authors.",
   "authors_title": "Authors",
