@@ -1,4 +1,5 @@
 build/
 .gradle
-docs/index.html
-docs/node_modules
+docs/webpage/node_modules
+docs/webpage/build
+docs/webpage/npm-debug.log
