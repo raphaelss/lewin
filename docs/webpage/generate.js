@@ -15,13 +15,6 @@ if (!/\/$/.test(output_dir))
 if (!/\/$/.test(lang_dir))
   lang_dir += '/';
 
-function generate(lang_file) {
-  var context = JSON.parse(fs.readFileSync(lang_dir + lang_file).toString());
-  var lang = lang_file.replace(/\.json$/, "");
-  var output_file = lang === default_lang ? "index.html" : lang + ".html";
-  fs.writeFileSync(output_dir + output_file, template(context));
-}
-
 try {
   fs.mkdirSync(output_dir);
 } catch (e) {
@@ -39,7 +32,19 @@ fs.readdir(lang_dir, function (err, files) {
     console.log(err);
     return;
   }
-  files.forEach(function (file) {
-    generate(file);
+  var lang_links = [];
+  var contexts = files.map(function (x) {
+    var lang = x.replace(/\.json$/, "");
+    var obj = JSON.parse(fs.readFileSync(lang_dir + x).toString());
+    obj.output_file = lang === default_lang ? "index.html" : lang + ".html";
+    obj.lang_links = lang_links;
+    lang_links.push({
+      "link": obj.output_file,
+      "short": obj.short_lang_name
+    });
+    return obj;
+  });
+  contexts.forEach(function (x) {
+    fs.writeFileSync(output_dir + x.output_file, template(x));
   });
 });
