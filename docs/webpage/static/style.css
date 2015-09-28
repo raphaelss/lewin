@@ -27,8 +27,11 @@ div.section {
 }
 
 ul {
-  margin-bottom: 0em;
   list-style-type: none;
+}
+
+ul.list-hyph {
+  margin-bottom: 0em;
   padding-left: 0em;
 }
 
@@ -40,3 +43,10 @@ li.list-hyph:before {
   content: "\2013 ";
 }
 
+header {
+  text-align: right;
+}
+
+.lang-menu {
+  display:inline;
+}
