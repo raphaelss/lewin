@@ -54,6 +54,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     private static final String espacamento = "  ";
     private static final java.awt.Font fonte = new java.awt.Font("Tahoma", 0, 10);
     private static final java.awt.Font fonteNegrito = new java.awt.Font("Tahoma", 1, 11);
+    private static final Color matrizCorBackground = new Color(238, 238, 238);
 
     public static final int SAIDA_DERIVACAO_SERIAL = 1, MATRIZ_DODECAFONICA = 2,
         SAIDA_FORMA_COMPACTA = 3, SAIDA_PALETA = 4,
@@ -137,11 +138,11 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             tocarClasseInformada(78);
         }
         catch(SequenciadorNulo sn) {
-            JOptionPane.showMessageDialog(null, "N\u00e3o ser\u00e1 poss\u00edvel reproduzir os conjuntos");
+            JOptionPane.showMessageDialog(null, "Não será possível reproduzir os conjuntos");
             midiDisponivel = false;
         }
         catch(MidiUnavailableException mue) {
-            JOptionPane.showMessageDialog(null, "N\u00e3o ser\u00e1 poss\u00edvel reproduzir os conjuntos");
+            JOptionPane.showMessageDialog(null, "Não será possível reproduzir os conjuntos");
             midiDisponivel = false;
         }
 
@@ -330,13 +331,13 @@ public class InterfaceGrafica extends javax.swing.JFrame {
 
             switch(listadeFormas.get(0).size()) {
             case 4:
-                stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tricordais internas");
+                stringBuilder.append("\nAcrescentem-se permutações tricordais internas");
                 break;
             case 3:
-                stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es tetracordais internas");
+                stringBuilder.append("\nAcrescentem-se permutações tetracordais internas");
                 break;
             default:
-                stringBuilder.append("\nAcrescentem-se permuta\u00e7\u00f5es hexacordais internas");
+                stringBuilder.append("\nAcrescentem-se permutações hexacordais internas");
             }
             break;
         case SAIDA_ROTACAO_STRAVINSKYANA:
@@ -476,10 +477,9 @@ public class InterfaceGrafica extends javax.swing.JFrame {
     }
 
     private void limpaMatriz() {
-        Color originalBackground = new Color(238, 238, 238);
         for (JTextField[] array : camposMatriz) {
             for (JTextField campo : array) {
-                campo.setBackground(originalBackground);
+                campo.setBackground(matrizCorBackground);
                 campo.setText("");
             }
         }
@@ -1015,7 +1015,7 @@ public class InterfaceGrafica extends javax.swing.JFrame {
             modosAtuais[1] = MATRIZ_DODECAFONICA;
         }
         catch(NumberFormatException dp) {
-            JOptionPane.showMessageDialog(null, "H\u00e1 dados n\u00e3o permitidos. Preencha corretamente");
+            JOptionPane.showMessageDialog(null, "Há dados não permitidos. Preencha corretamente");
         }
     }
 
