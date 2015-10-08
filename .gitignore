@@ -1,5 +1,5 @@
 build/
 .gradle
-docs/webpage/node_modules
+docs/webpage/libs
 docs/webpage/build
-docs/webpage/npm-debug.log
+docs/webpage/tmp
