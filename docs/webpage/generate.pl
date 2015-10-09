@@ -67,7 +67,9 @@ if (not -e $output_dir) {
     die "$output_dir already exists and is not a directory";
 }
 
-`cp -R static/* $output_dir`;
+if (system("cp -R static/* $output_dir")) {
+    die "Error copying static files\n";
+}
 
 my $interp = Mason->new(
     comp_root => '.',
