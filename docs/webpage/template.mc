@@ -45,6 +45,7 @@
     <h1><% $.download_title %></h1>
     <p><% $.download_text %></p>
     <ul class="list-hyph">
+      <li class="list-hyph"><a class="link-ext" href="http://lewin.raphaelss.com/lewin-1.0.2.zip">Lewin-1.0.2.zip</a></li>
       <li class="list-hyph"><a class="link-ext" href="http://lewin.raphaelss.com/lewin-1.0.1.zip">Lewin-1.0.1.zip</a></li>
     </ul>
   </div>
